@@ -80,17 +80,12 @@ const CommentContent = ({card}) => {
         const result = await dispatch(createComment({token, board_id: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            console.log('create comment success');
             await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
             setEditComment('');
         } else {
             console.log('can not create comment');
         }
     };
-
-    useEffect(() => {
-        console.log('before autosize')
-    }, [])
 
     return (
         <Container>

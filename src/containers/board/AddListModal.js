@@ -65,7 +65,6 @@ const AddListModal = ({visible, onCloseModal}) => {
             dispatch(getBoard({token, board_id: board.board_id}));
             onCloseModal();
         } else {
-            console.log(result.data.data);
         }
 
     };

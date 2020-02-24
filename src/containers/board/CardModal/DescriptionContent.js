@@ -26,7 +26,6 @@ const IconStyle = {
 }
 
 const DescriptionContent = ({card}) => {
-    console.log('cardmodal desc ; ' + card.description)
     return (
         <Container>
             <DescHeader>

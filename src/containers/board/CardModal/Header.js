@@ -43,13 +43,10 @@ const Header = ({card}) => {
         
     };
 
-    console.log('title ; ' + title)
-
     useEffect(() => {
         setTitle(card.card_name);
     }, [card, setTitle])
 
-    console.log('header ; ' + title + ' card ; ' + JSON.stringify(card))
     return (
         <HeaderContainer>
             <FontAwesomeIcon icon={faCreditCard} size='xs' style={IconStyle} />

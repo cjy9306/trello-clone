@@ -74,9 +74,6 @@ const ButtonWraper = styled.div`
 `;
 
 const Login = ({onLogin, alertVisible}) => {
-    useEffect(() => {
-        console.log('useEffect in Login.js')
-    });
 
     const [username, onChangeUserename] = useInput('');
     const [password, onChangePassword] = useInput('');

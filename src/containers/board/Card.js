@@ -47,10 +47,6 @@ const getStyle = (style, snapshot) => {
 
 const Card = ({card, board, index}) => {
 
-    useEffect(() => {
-        console.log('card useEffect')
-    }, [card]);
-
     const dispatch = useDispatch();
     const savedCard = useSelector(state => state.board.card);
 
@@ -61,7 +57,6 @@ const Card = ({card, board, index}) => {
             // dispatch(setCardModal(card));
             const token = sessionStorage.getItem('token');
             const result = await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
-            console.log('onShowModal 2')
             if (result.success === true) {
                 dispatch(changeModalVisible(true));
             }

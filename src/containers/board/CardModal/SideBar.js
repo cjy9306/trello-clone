@@ -68,7 +68,6 @@ const SideBar = ({card}) => {
             await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
             onCheckListPopupToggle();
         }
-        else console.log(result.data);
     };
 
     useEffect(() => {

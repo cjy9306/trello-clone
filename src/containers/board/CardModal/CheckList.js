@@ -51,7 +51,6 @@ const CheckList = ({checklist}) => {
         const result = await dispatch(deleteCheckList({token, board_id: board.board_id, card_id: card.card_id, checklist_id: checklist.checklist_id}));
 
         if (result.success) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
-        else console.log(result.data);
     };
 
     const onCreateCheckListItem = async () => {
@@ -59,8 +58,8 @@ const CheckList = ({checklist}) => {
         const data = { item_name: 'new item'};
         const result = await dispatch(createCheckListItem({token, board_id: board.board_id, checklist_id: checklist.checklist_id, data}));
 
-        if (result) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
-        else console.log(result.data);
+        if (result.success) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
+
     };
 
     return (

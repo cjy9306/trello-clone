@@ -54,7 +54,6 @@ const List = ({list, index, board}) => {
         const result = await dispatch(createCard({token, board_id: board.board_id, list_id: list.list_id, data}));
 
         if (result.success === true) {
-            console.log('create card success')
             dispatch(getBoard({token, board_id: board.board_id}))
             return true;
         } else {
@@ -63,10 +62,6 @@ const List = ({list, index, board}) => {
             return false;
         }
     };
-
-    useEffect(() => {
-        console.log('in List useEffect')
-    })
 
     return (
         <Draggable draggableId={'list-' + list.list_id} index={index} >

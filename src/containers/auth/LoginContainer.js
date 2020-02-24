@@ -17,7 +17,6 @@ const LoginContainer = () => {
         if (result && result.success) {
             const token = result.data.data.token;
             const memberId = result.data.data.member_id;
-            console.log('in login, ' + memberId  + ', ' + username)
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('memberId', memberId);
             sessionStorage.setItem('username', username);

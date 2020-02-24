@@ -48,7 +48,6 @@ const GlobalHeader = ({isLogined, backgroundColor}) => {
     }
 
     const onShowBoardModal = () => {
-        console.log('onShowBoardModal');
         setBoardModalVisible(true);
     }
 
