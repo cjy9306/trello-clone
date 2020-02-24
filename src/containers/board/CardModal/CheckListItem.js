@@ -101,7 +101,6 @@ const CheckListItem = ({item}) => {
     };
 
     const onDeleteClick = async () => {
-        console.log('onDeleteClick')
         const token = sessionStorage.getItem('token');
 
         const result = await dispatch(deleteCheckListItem({token, board_id: board.board_id, item_id: item.item_id}));

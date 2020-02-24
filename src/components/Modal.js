@@ -37,7 +37,6 @@ const CloseSpan = styled.span`
 `;
 
 const Modal = ({className, visible = false, onCloseModal, children}) => {
-    console.log('inModal visible ; ' + visible)
     return (
         <ModalContainer visible={visible}>
             <ModalContent className={className} >

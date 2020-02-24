@@ -17,7 +17,6 @@ const CheckListContent = ({card}) => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        console.log('checklist useEffect , ;  ' + JSON.stringify(checklist))
         if (checklist && checklist.length > 0)
             setVisible(true);
         else

@@ -46,7 +46,6 @@ const isInCardLabels = (label, cardLabels) => {
     for (let i=0; i < cardLabels.length; i++) {
         if (label.label_id === cardLabels[i].label_id)
         {
-            console.log('label is contained')
             return true;
         }
     }
@@ -72,7 +71,6 @@ const SideBarLabels = ({onPopupToggle, card}) => {
             await dispatch(getBoard({token, board_id: board.board_id}));
             await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}))
         } else {
-            console.log('update card label fail')
         }
     };
 

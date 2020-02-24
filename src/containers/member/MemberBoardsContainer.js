@@ -63,13 +63,8 @@ const MemberBoardsContainer = () => {
 
     }, [dispatch])
 
-    useEffect(() => {
-        console.log('in member board container useEffect ; ' + isLogined)
-    })
-
     return (
         <>
-        
         <GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
         <Container>
             <PersonalContainer>

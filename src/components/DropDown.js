@@ -62,7 +62,6 @@ const DropDown = ({data, onSelected, className}) => {
     const [selected, setSelected] = useState('');
 
     useEffect(() => {
-        console.log('data; ' + JSON.stringify(data))
         if (data && data.length > 0)
             setSelected(data[0].value);
     }, [data]);

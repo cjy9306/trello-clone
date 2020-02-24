@@ -133,7 +133,6 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
     }, [teams]);
 
     const onTeamSelected = team => {
-        console.log('onTeamSelected ; ' + JSON.stringify(team))
         setTeamId(team.id);
     }
 

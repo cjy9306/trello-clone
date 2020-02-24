@@ -78,8 +78,7 @@ const Description = ({card}) => {
                 updateCardDescription({token, board_id: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            const result = await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
-            console.log('getCard ; ' + result)
+            await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
         } else {
             console.log('update description error');
         }
@@ -87,7 +86,6 @@ const Description = ({card}) => {
     };
 
     useEffect(() => {
-        console.log('in description, ' + card.description)
         setIsEditting(false);
         setDescription(card.description || '')
     }, [card]);

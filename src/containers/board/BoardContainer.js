@@ -170,7 +170,6 @@ const BoardContainer = ({ match: {params}}) => {
 
     const onCloseModal = () => {
         dispatch(changeModalVisible(false));
-        console.log('close modal');
     }
 
     return (
