@@ -6,6 +6,10 @@ const useCheckWhetherIsLogined = () => {
     const [isLogined, setIsLogined] = useState(false);
     
     useEffect(() => {
+        console.log('in check login')
+    })
+
+    useEffect(() => {
         if (sessionStorage.getItem('token') === null) {
             alert('invalid access, please login');
             history.push('/');

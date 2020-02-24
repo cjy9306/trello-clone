@@ -353,7 +353,7 @@ const board = handleActions(
         }),
         [GET_ALL_LABELS_SUCCESS]: (state, action) => ({
             ...state,
-            allLabels: action.payload,
+            allLabels: action.payload.labels,
         }),
         [GET_ALL_LABELS_FAIL]: (state, action) => ({
             ...state,

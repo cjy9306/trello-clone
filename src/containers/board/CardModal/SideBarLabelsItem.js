@@ -54,8 +54,9 @@ const SideBarLabelsItem = ({label, defaultChecked, onLabelsItemClick}) => {
     const [checked, setChecked] = useState(false);
 
     const onItemClick = () => {
-        setChecked(!checked);
-        onLabelsItemClick(label.label_id, checked);
+        const result = !checked;
+        setChecked(result);
+        onLabelsItemClick(label.label_id, result);
     }
 
     useEffect(() => {
