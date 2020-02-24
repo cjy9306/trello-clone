@@ -79,7 +79,7 @@ const AddCard = ({onCreateCard}) => {
                     <EditField type="textarea" name="input" value={newCardName} placeholder="Enter a title for this card..." onChange={onChangeCardName} />
                 </EditWrapper>
                 <ControlWrapper>
-                    <Button type='primary' onClick={onAddClick}>Add Card</Button>
+                    <Button type='primary' onClick={onAddClick}>Add Card</Button>&nbsp;
                     <Button type='default' onClick={onToggle}>Cancel</Button>
                 </ControlWrapper>
             </InputContainer>

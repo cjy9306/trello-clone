@@ -63,6 +63,10 @@ const MemberBoardsContainer = () => {
 
     }, [dispatch])
 
+    useEffect(() => {
+        console.log('in member board container useEffect ; ' + isLogined)
+    })
+
     return (
         <>
         

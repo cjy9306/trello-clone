@@ -18,7 +18,7 @@ const CheckListContent = ({card}) => {
 
     useEffect(() => {
         console.log('checklist useEffect , ;  ' + JSON.stringify(checklist))
-        if (checklist.length > 0)
+        if (checklist && checklist.length > 0)
             setVisible(true);
         else
             setVisible(false);
@@ -27,7 +27,7 @@ const CheckListContent = ({card}) => {
     return (
         <Container visible={visible}>
             { 
-                checklist.length > 0 && 
+                checklist && checklist.length > 0 && 
                 checklist.map(checklist => <CheckList checklist={checklist} key={checklist.checklist_id}/>)
             }
         </Container>

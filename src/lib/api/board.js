@@ -67,6 +67,6 @@ export const deleteComment = ({token, board_id, comment_id}) =>
 export const getAllLabels = ({token, board_id}) => 
             client.get('/api/board/' + board_id + '/labels', {headers: {"x-access-token": token}});
 
-export const updateCardLabel = ({token, board_id, card_id, data}) =>
-            client.put('/api/board/' + board_id + '/card/' + card_id + '/labels', 
+export const updateCardLabel = ({token, board_id, card_id, label_id, data}) =>
+            client.put('/api/board/' + board_id + '/card/' + card_id + '/labels/' + label_id, 
             data, {headers: {"x-access-token": token}});

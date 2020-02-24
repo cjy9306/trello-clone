@@ -60,15 +60,13 @@ const SideBarLabels = ({onPopupToggle, card}) => {
     const board = useSelector(state => state.board.board);
     const dispatch = useDispatch();
 
-
     const onLabelsItemClick = async (label_id, checked) => {
         const token = sessionStorage.getItem('token');
         const data = {
-            label_id,
             checked,
         };
 
-        const result = await dispatch(updateCardLabel({token, board_id: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(updateCardLabel({token, board_id: board.board_id, card_id: card.card_id, label_id, data}));
 
         if (result.success) {
             await dispatch(getBoard({token, board_id: board.board_id}));
@@ -92,10 +90,8 @@ const SideBarLabels = ({onPopupToggle, card}) => {
             </SideBarLabelsHeader>
             <SideBarLabelsContent>
                 <LabelsTitle>LABELS</LabelsTitle>
-                {console.log(JSON.stringify(allLabels))}
-                {console.log(JSON.stringify(card))}
+                {console.warn(JSON.stringify(allLabels))}
                 {
-                    
                     allLabels && card &&
                     allLabels.map(label => 
                         <SideBarLabelsItem label={label} defaultChecked={isInCardLabels(label, card.labels)} 

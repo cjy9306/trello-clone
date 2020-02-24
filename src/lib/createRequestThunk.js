@@ -19,14 +19,15 @@ export default function createRequestThunk(type, request) {
 
             return {success: true, data: response.data};
         } catch (e) {
+            const error = e.response ? e.response.data : 'unknown error';
             dispatch({
                 type: FAIL,
-                payload: e.response.data,
+                payload: error,
                 error: true
             });
 
-            console.log('inCreateRequest , error ; ' + JSON.stringify(e.response.data))
-            return {success: false, data: e.response.data.data}; 
+            console.log('inCreateRequest , error ; ' + JSON.stringify(e.response))
+            return {success: false, data: error}; 
         }
         
     };
