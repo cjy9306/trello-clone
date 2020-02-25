@@ -67,7 +67,6 @@ const DetailsContent = ({card}) => {
         if (result.success) {
             dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
         } else {
-            console.warn('fail to update card duedate');
         }
     }
 

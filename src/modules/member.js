@@ -18,7 +18,7 @@ const member = handleActions(
         }),
         [GET_TEAMS_SUCCESS]: (state, action) => ({
             ...state,
-            teams: action.payload,
+            teams: action.payload.teams,
         }),
         [GET_TEAMS_FAIL]: (state, action) => ({
             ...state,
