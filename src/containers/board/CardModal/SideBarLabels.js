@@ -88,7 +88,6 @@ const SideBarLabels = ({onPopupToggle, card}) => {
             </SideBarLabelsHeader>
             <SideBarLabelsContent>
                 <LabelsTitle>LABELS</LabelsTitle>
-                {console.warn(JSON.stringify(allLabels))}
                 {
                     allLabels && card &&
                     allLabels.map(label => 

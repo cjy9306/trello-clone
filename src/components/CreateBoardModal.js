@@ -89,7 +89,7 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
         const result = await dispatch(createBoard({token, data}));
 
         if (result.success) { 
-            history.push('/board/' + result.data.data.board_id);
+            history.push('/board/' + result.data.data.board.board_id);
         } else {
             console.log('create board fail');
         }
@@ -128,6 +128,7 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
         if (teams && Array.isArray(teams)) {
             datas = teams.map(team => ({id: team.team_id, value: team.team_name}));
         }
+        console.warn('datas ; ' + JSON.stringify(datas));
         datas.unshift({id: 0, value: 'No Team'});
         setDropdownTeams(datas);
     }, [teams]);

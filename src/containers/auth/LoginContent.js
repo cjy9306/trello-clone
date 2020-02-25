@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import Button from '../../components/Button';
 import useInput from '../../components/useInput';
 import Alert from '../../components/Alert';
+import FireBaseLogin from '../../components/FireBaseLogin';
 
 const Container = styled.div`
     display: flex;
@@ -103,6 +104,7 @@ const Login = ({onLogin, alertVisible}) => {
                             <Button block>Sign Up</Button>
                         </ButtonWraper>
                     </ControlContainer>
+                    <FireBaseLogin />
                     Terms of Service
                 </ContentContainer>
             </LoginFormContainer>
