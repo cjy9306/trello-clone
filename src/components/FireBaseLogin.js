@@ -35,13 +35,12 @@ const FireBaseLogin = () => {
             email: socialData.user.email,
             phone: null,
             email_verification: null,
-            social_login_provider: 'google',
+            social_login_provider: 'google.com',
         };
 
         const result = await dispatch(socialLogin({data}));
 
         if (result && result.success) {
-            console.log('result.data ; ' + JSON.stringify(result.data.data))
             const token = result.data.data.token;
             const memberId = result.data.data.member_id;
             sessionStorage.setItem('token', token);
@@ -50,7 +49,6 @@ const FireBaseLogin = () => {
 
             history.push('/' + data.username + '/boards');
         } else {
-            console.log('console')
         }
     };
 
