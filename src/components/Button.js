@@ -105,7 +105,6 @@ const LinkButtonConatiner = styled.a`
     height: ${props => props.height};
     font-size: ${props => props.fontSize};
     color: ${props => props.color};
-    max-width: 300px;
     padding: 6px 12px;
     position: relative;
     text-decoration: none;
@@ -113,13 +112,14 @@ const LinkButtonConatiner = styled.a`
     white-space: nowrap;
     line-height: 1.499;
     font-weight: 400;
+    border-radius: 3px;
 
     &:hover {
         background-color: ${props => props.hoverBackgroundColor};
     }
 `;
 
-export const LinkButton = React.memo( ({type, size, style, children, onClick}) => {
+export const LinkButton = React.memo( ({type, size, className, children, onClick}) => {
     let backgroundColor = DefaultBackgroundColor;
     let hoverBackgroundColor = DefaultHoverBackgroundColor;
     let height = DefaultHeight;
@@ -146,13 +146,13 @@ export const LinkButton = React.memo( ({type, size, style, children, onClick}) =
 
     return (
         <LinkButtonConatiner
+            className={className}
             backgroundColor = {backgroundColor} 
             hoverBackgroundColor = {hoverBackgroundColor}
             height = {height}
             fontSize = {fontSize}
             color = {color}
             onClick = {onClick}
-            style = {style}
         >
             {children}
         </LinkButtonConatiner>

@@ -2,3 +2,6 @@ import client from './client';
 
 export const getTeams = async ({token, memberId}) => 
     client.get('/api/member/' + memberId + '/teams', {headers: {"x-access-token": token}});
+
+export const createTeam = async ({token, memberId, data}) => 
+    client.post('/api/member/' + memberId + '/teams', data, {headers: {"x-access-token": token}});
