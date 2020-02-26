@@ -128,7 +128,7 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
         if (teams && Array.isArray(teams)) {
             datas = teams.map(team => ({id: team.team_id, value: team.team_name}));
         }
-        console.warn('datas ; ' + JSON.stringify(datas));
+        
         datas.unshift({id: 0, value: 'No Team'});
         setDropdownTeams(datas);
     }, [teams]);

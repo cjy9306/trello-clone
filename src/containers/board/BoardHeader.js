@@ -43,7 +43,8 @@ const BoardHeader = ({board}) => {
                     {board.public_scope}
                 </MenuWrapper>
                 <MenuWrapper>
-                    <HeaderButton onClick={onShowModal}>Add another list</HeaderButton>
+                    <HeaderButton onClick={onShowModal}>Add another list</HeaderButton> &nbsp;
+                    <HeaderButton onClick={onShowModal}>Members</HeaderButton>
                 </MenuWrapper>
             </MenuContainer>
             <MenuContainer>
