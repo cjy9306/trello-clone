@@ -65,7 +65,7 @@ const CommentContent = ({card}) => {
     const dispatch = useDispatch();
     const board = useSelector(state => state.board.board);
     const [editComment, onChangeComment, setEditComment] = useInput('');
-    const card_comments = useSelector(state => state.board.card_comments);
+    const cardComments = useSelector(state => state.board.cardComments);
 
     const onCreateComment = async () => {
         if (editComment === '') return;
@@ -101,8 +101,8 @@ const CommentContent = ({card}) => {
             </EditContainer>
             <CommentViewContainer>
                 {
-                    card_comments && 
-                    card_comments.map(comment => <CommentItem comment={comment} card={card} key={comment.comment_id}/>)
+                    cardComments && 
+                    cardComments.map(comment => <CommentItem comment={comment} card={card} key={comment.comment_id}/>)
                 }
             </CommentViewContainer>
         </Container>

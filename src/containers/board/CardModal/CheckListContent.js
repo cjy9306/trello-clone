@@ -13,7 +13,7 @@ const Container = styled.div`
 
 
 const CheckListContent = ({card}) => {
-    const checklist = useSelector(state => state.board.card_checklist);
+    const checklist = useSelector(state => state.board.cardChecklist);
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {

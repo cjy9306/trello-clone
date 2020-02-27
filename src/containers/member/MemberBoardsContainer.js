@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import { getAllBoards } from '../../modules/board';
+import { getAllBoards } from '../../modules/member';
 import { useDispatch, useSelector } from 'react-redux';
 import BoardTitleBox from './BoardTitleBox';
 import GlobalHeader from '../../components/GlobalHeader';
 import useCheckWhetherIsLogined from '../../components/useCheckWhetherIsLogined';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import CreateBoardModal from '../../components/CreateBoardModal';
 
 
 const Container = styled.div`
@@ -38,10 +39,21 @@ const TeamContainer = styled.div`
 
 `;
 
-const TeamContent = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+const CreateBoardBox = styled.div`
+    width: 21.5%;
+    margin: 0 2% 2% 0;
+    box-sizing: border-box;
+    padding: auto 8px;
+    height: 96px;
+    line-height: 96px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(9, 30, 66, .07);
+    &:hover {
+        background-color: rgba(9, 30, 66, .17);
+    }
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
@@ -51,17 +63,27 @@ const CustomIcon = styled(FontAwesomeIcon)`
 
 const MemberBoardsContainer = () => {
     const isLogined = useCheckWhetherIsLogined();
-
     const dispatch = useDispatch();
-    const personalBoards = useSelector(state => state.board.personalBoards);
-    const teamBoards = useSelector(state => state.board.teamBoards);
+    const personalBoards = useSelector(state => state.member.personalBoards);
+    const teamBoards = useSelector(state => state.member.teamBoards);
+
+    const [boardModalVisible, setBoardModalVisible] = useState(false);
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         const member_id = sessionStorage.getItem('memberId');
         dispatch(getAllBoards({token, member_id}));
 
-    }, [dispatch])
+    }, [dispatch]);
+
+    // create board modal
+    const onCloseBoardModal = () => {
+        setBoardModalVisible(false);
+    }
+
+    const onShowBoardModal = () => {
+        setBoardModalVisible(true);
+    }
 
     return (
         <>
@@ -80,6 +102,7 @@ const MemberBoardsContainer = () => {
                 </BoardContent>
             </PersonalContainer>
             <TeamListContainer>
+            <CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
                 {
                     teamBoards &&
                     teamBoards.map(team => {
@@ -91,8 +114,14 @@ const MemberBoardsContainer = () => {
                                 </BoardListHeader>
                                 <BoardContent>
                                 {
-                                    team.boards &&
+                                    team.boards && team.boards.length > 0 &&
                                     team.boards.map(board => <BoardTitleBox board={board} key={board.board_id}/>)
+                                }
+                                {
+                                    team.boards && team.boards.length === 0 &&
+                                    <CreateBoardBox onClick={onShowBoardModal}>
+                                        Create a new board
+                                    </CreateBoardBox>
                                 }
                                 </BoardContent>
                             </TeamContainer>

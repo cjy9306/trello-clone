@@ -2,7 +2,7 @@ import client from './client';
 
 export const createBoard = ({token, data}) => client.post('/api/board', data, {headers: {"x-access-token": token}});
 export const getBoard = ({token, board_id}) => client.get('/api/board/' + board_id, {headers: {"x-access-token": token}});
-export const getAllBoards = ({token, member_id}) => client.get('/api/member/' + member_id + '/boards', {headers: {"x-access-token": token}});
+
 export const updateCardSeq = ({token, board_id, list_id, data}) => 
                 client.put('/api/board/' + board_id  + '/list/' + list_id + '/card/seq', data, 
                 {headers: {"x-access-token": token}}); 
@@ -70,3 +70,12 @@ export const getAllLabels = ({token, board_id}) =>
 export const updateCardLabel = ({token, board_id, card_id, label_id, data}) =>
             client.put('/api/board/' + board_id + '/card/' + card_id + '/labels/' + label_id, 
             data, {headers: {"x-access-token": token}});
+
+export const getBoardMembers = ({token, board_id}) =>
+            client.get('/api/board/' + board_id + '/members', {headers: {"x-access-token": token}});
+
+export const addBoardMember = ({token, board_id, data}) =>
+            client.post('/api/board/' + board_id + '/members', data, {headers: {"x-access-token": token}});
+
+export const deleteBoardMember = ({token, board_id, member_id}) =>
+            client.delete('/api/board/' + board_id + '/members/' + member_id, {headers: {"x-access-token": token}});
