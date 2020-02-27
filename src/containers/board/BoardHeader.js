@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import HeaderButton from '../../components/HeaderButton';
 import AddListModal from './AddListModal';
+import BoardMembersModal from './BoardMembersModal';
+import { getBoardMembers } from '../../modules/board';
+import { useDispatch } from 'react-redux';
 
 const BoardHeaderContainer = styled.div`
     height: 24px;
@@ -22,19 +25,24 @@ const MenuWrapper = styled.div`
 
 const BoardHeader = ({board}) => {
 
+    const dispatch = useDispatch();
     const [listModalVisible, setListModalVisible] = useState(false);
+    const [membersModalVisible, setMembersModalVisible] = useState(false);
 
-    const onCloseModal = () => {
-        setListModalVisible(false);
-    }
+    // list modal
+    const onCloseListModal = () => setListModalVisible(false);
+    const onShowListModal = () => setListModalVisible(true);
 
-    const onShowModal = () => {
-        setListModalVisible(true);
-    }
+    // members modal
+    const onCloseMembersModal = () => setMembersModalVisible(false);
+    const onShowMembersModal = () => setMembersModalVisible(true);
+
+    
 
     return (
         <BoardHeaderContainer>
-            <AddListModal visible={listModalVisible} onCloseModal={onCloseModal} />
+            <BoardMembersModal visible={membersModalVisible} onCloseModal={onCloseMembersModal} />
+            <AddListModal visible={listModalVisible} onCloseModal={onCloseListModal} />
             <MenuContainer>
                 <MenuWrapper >
                     {board.board_name}
@@ -43,8 +51,8 @@ const BoardHeader = ({board}) => {
                     {board.public_scope}
                 </MenuWrapper>
                 <MenuWrapper>
-                    <HeaderButton onClick={onShowModal}>Add another list</HeaderButton> &nbsp;
-                    <HeaderButton onClick={onShowModal}>Members</HeaderButton>
+                    <HeaderButton onClick={onShowListModal}>Add another list</HeaderButton> &nbsp;
+                    <HeaderButton onClick={onShowMembersModal}>Members</HeaderButton>
                 </MenuWrapper>
             </MenuContainer>
             <MenuContainer>

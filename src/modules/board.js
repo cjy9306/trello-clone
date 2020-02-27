@@ -13,11 +13,6 @@ const GET_BOARD_SUCCESS = 'board/GET_BOARD_SUCCESS';
 const GET_BOARD_FAIL = 'board/GET_BOARD_FAIL';
 export const getBoard = createRequestThunk(GET_BOARD, boardAPI.getBoard);
 
-const GET_ALL_BOARDS = 'board/GET_ALL_BOARDS';
-const GET_ALL_BOARDS_SUCCESS = 'board/GET_ALL_BOARDS_SUCCESS';
-const GET_ALL_BOARDS_FAIL = 'board/GET_ALL_BOARDS_FAIL';
-export const getAllBoards = createRequestThunk(GET_ALL_BOARDS, boardAPI.getAllBoards);
-
 const CHANGE_LISTS = 'board/CHANGE_LISTS';
 export const changeLists = createAction(CHANGE_LISTS, lists => ({lists}));
 
@@ -119,16 +114,32 @@ export const addCardLabelInState = createAction(ADD_CARD_LABEL_IN_STATE, label =
 const REMOVE_CARD_LABEL_IN_STATE = 'board/REMOVE_CARD_LABEL_IN_STATE';
 export const removeCardLabelInState = createAction(REMOVE_CARD_LABEL_IN_STATE, label_id => ({label_id}));
 
+// member
+const GET_BOARD_MEMBERS = 'board/GET_BOARD_MEMBERS';
+const GET_BOARD_MEMBERS_SUCCESS = 'board/GET_BOARD_MEMBERS_SUCCESS';
+const GET_BOARD_MEMBERS_FAIL = 'board/GET_BOARD_MEMBERS_FAIL';
+export const getBoardMembers = createRequestThunk(GET_BOARD_MEMBERS, boardAPI.getBoardMembers);
+
+const ADD_BOARD_MEMBER = 'board/ADD_BOARD_MEMBER';
+const ADD_BOARD_MEMBER_SUCCESS = 'board/ADD_BOARD_MEMBER_SUCCESS';
+const ADD_BOARD_MEMBER_FAIL = 'board/ADD_BOARD_MEMBER_FAIL';
+export const addBoardMember = createRequestThunk(ADD_BOARD_MEMBER, boardAPI.addBoardMember);
+
+const DELETE_BOARD_MEMBER = 'board/DELETE_BOARD_MEMBER';
+const DELETE_BOARD_MEMBER_SUCCESS = 'board/DELETE_BOARD_MEMBER_SUCCESS';
+const DELETE_BOARD_MEMBER_FAIL = 'board/DELETE_BOARD_MEMBER_FAIL';
+export const deleteBoardMember = createRequestThunk(DELETE_BOARD_MEMBER, boardAPI.deleteBoardMember);
+
+
 const initState = {
-    personalBoards: [],
-    teamBoards: [],
     board: {},
     lists: [],
     card: {},               // for card modal
-    card_checklist: [],     // for card modal
-    card_comments: [],      // for card modal
+    cardChecklist: [],     // for card modal
+    cardComents: [],      // for card modal
     allLabels: [],          // for card modal, all labels in system
     cardModalVisible: false,   // for card modal
+    boardMembers: [],
 };
 
 const board = handleActions(
@@ -153,17 +164,7 @@ const board = handleActions(
         [GET_BOARD_FAIL]: (state, action) => ({
             ...state,
         }),
-        [GET_ALL_BOARDS]: (state, action) => ({
-            ...state,
-        }),
-        [GET_ALL_BOARDS_SUCCESS]: (state, action) => ({
-            ...state,
-            personalBoards: action.payload.personalBoards,
-            teamBoards: action.payload.teamBoards,
-        }),
-        [GET_ALL_BOARDS_FAIL]: (state, action) => ({
-            ...state,
-        }),
+        
         [CHANGE_LISTS]: (state, {payload : {lists}}) => ({
             ...state,
             lists: lists,
@@ -218,42 +219,9 @@ const board = handleActions(
         [GET_CARD_SUCCESS]: (state, action) => ({
             ...state,
             card: action.payload.card,
-            card_checklist: action.payload.checklist,
-            card_comments: action.payload.comments,
+            cardChecklist: action.payload.checklist,
+            cardComments: action.payload.comments,
         }),
-        // [GET_CARD_SUCCESS]: (state, action) => {
-        //     const card = action.payload.card;
-        //     let list_index = 0;
-        //     let card_index = 0;
-        //     state.lists.forEach((item, index) => {
-        //         if (item.list_id === card.list_id) list_index = index;
-        //     });
-        //     state.lists[list_index].cards.forEach((item, index) => {
-        //         if (item.card_id === card.card_id) card_index = index;
-        //     });
-
-        //     const newCards = [
-        //         state.lists[list_index].cards.slice(0, card_index),
-        //         card,
-        //         state.lists[list_index].cards.slice(card_index+1),
-        //     ];
-        //     const newList = state.lists[list_index];
-        //     newList.cards = newCards;
-
-        //     const newLists = [
-        //         ...state.lists.slice(0, list_index),
-        //         newList,
-        //         ...state.lists.slice(list_index+1),
-        //     ]
-
-        //     return ({
-        //         ...state,
-        //         lists: newLists,
-        //         card: action.payload.card,
-        //         card_checklist: action.payload.checklist,
-        //         card_comments: action.payload.comments,
-        //     });
-        // },
         [GET_CARD_FAIL]: (state, action) => ({
             ...state,
         }),
@@ -298,7 +266,7 @@ const board = handleActions(
         }),
         [GET_CHECKLIST_SUCCESS]: (state, action) => ({
             ...state,
-            card_checklist: action.payload.checklist,
+            cardChecklist: action.payload.checklist,
         }),
         [GET_CHECKLIST_FAIL]: (state, action) => ({
             ...state,
@@ -372,6 +340,34 @@ const board = handleActions(
             card: {
                 ...state.card,
             }
+        }),
+        [GET_BOARD_MEMBERS]: (state, action) => ({
+            ...state,
+        }),
+        [GET_BOARD_MEMBERS_SUCCESS]: (state, action) => ({
+            ...state,
+            boardMembers: action.payload.members,
+        }),
+        [GET_BOARD_MEMBERS_FAIL]: (state, action) => ({
+            ...state,
+        }),
+        [ADD_BOARD_MEMBER]: (state, action) => ({
+            ...state,
+        }),
+        [ADD_BOARD_MEMBER_SUCCESS]: (state, action) => ({
+            ...state,
+        }),
+        [ADD_BOARD_MEMBER_FAIL]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_BOARD_MEMBER]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_BOARD_MEMBER_SUCCESS]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_BOARD_MEMBER_FAIL]: (state, action) => ({
+            ...state,
         }),
     },
     initState
