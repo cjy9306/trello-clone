@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import useInput from './useInput';
-import Button, { LinkButton } from './Button';
+import Button from './Button';
 import Modal from './Modal';
-import { createBoard } from '../modules/board';
 import { createTeam } from '../modules/member';
 import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 const CreateModal = styled(Modal)`
@@ -73,7 +70,7 @@ const CreateTeamModal = ({visible, onCloseModal}) => {
         const result = await dispatch(createTeam({token, memberId, data}));
 
         if (result.success) {
-            console.log('create success')
+            onCloseModal();
         } else{
             console.log('create fail');
         }

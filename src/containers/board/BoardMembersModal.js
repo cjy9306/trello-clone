@@ -5,9 +5,7 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import member from '../../modules/member';
+import MemberListItem from '../../components/MemberListItem';
 
 const MembersModal = styled(Modal)`
     width: 380px;
@@ -105,7 +103,7 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
                 {
                     boardMembers &&
                     boardMembers.map(member => 
-                        <MemberItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id}/>)
+                        <MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id}/>)
                 }
             </MemberListContainer>
         </MembersModal>
@@ -114,33 +112,3 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
 };
 
 export default React.memo(BoardMembersModal);
-
-
-const MemberItemContainer = styled.div`
-    height: 32px;
-    line-height: 32px;
-    padding-left: 8px;
-    margin-bottom: 8px;
-`;
-
-const MemberDeleteButton = styled(Button)`
-    float: right;
-    height: 28px;
-`;
-
-const CustomIcon = styled(FontAwesomeIcon)`
-    font-size: 16px;
-    margin-right: 16px;
-`;
-
-const MemberItem = React.memo(({member, onDeleteClick}) => {
-    return (
-        <MemberItemContainer>
-            <CustomIcon icon={faUser} size='xs'/>
-            {member.email}
-            <MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
-                { member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
-            </MemberDeleteButton>
-        </MemberItemContainer>
-    );
-});

@@ -43,6 +43,10 @@ const CloseSpan = styled.span`
     }
 `;
 
+const LinkButtonWrapper = styled(LinkButton)`
+    margin-bottom: 8px;
+`;
+
 const SideBar = ({card}) => {
 
     const dispatch = useDispatch();
@@ -82,22 +86,22 @@ const SideBar = ({card}) => {
                 ADD TO CARD
             </SideBarHeader>
             <SideBarContent>
-                <LinkButton size='large' onClick={onMembersPopupToggle} style={LinkButtonStyle}>
+                <LinkButtonWrapper size='large' onClick={onMembersPopupToggle} style={LinkButtonStyle}>
                     Members 
-                </LinkButton>
+                </LinkButtonWrapper>
                 <PopupOver visible={membersPopupVisible} >
                     Popup over
                     <CloseSpan onClick={onMembersPopupToggle}>&times;</CloseSpan>
                 </PopupOver>
-                <LinkButton size='large' onClick={onLabelPopupToggle} style={LinkButtonStyle}>
+                <LinkButtonWrapper size='large' onClick={onLabelPopupToggle} style={LinkButtonStyle}>
                     Labels
-                </LinkButton>
+                </LinkButtonWrapper>
                 <PopupOver visible={labelPopupVisible}>
                     <SideBarLabels onPopupToggle={onLabelPopupToggle} card={card}/>
                 </PopupOver>
-                <LinkButton size='large' onClick={onCheckListPopupToggle} style={LinkButtonStyle}>
+                <LinkButtonWrapper size='large' onClick={onCheckListPopupToggle} style={LinkButtonStyle}>
                     Check List
-                </LinkButton>
+                </LinkButtonWrapper>
                 <PopupOver visible={checkListPopupVisible} >
                     <SideBarCheckList onPopupToggle={onCheckListPopupToggle} onCreateCheckList={onCreateCheckList}/>
                 </PopupOver>

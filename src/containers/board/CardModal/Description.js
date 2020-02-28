@@ -58,13 +58,8 @@ const Description = ({card}) => {
     const board = useSelector(state => state.board.board);
     const editRef = useRef();
 
-    const onLabelClick = () => {
-        setIsEditting(true);
-    };
-
-    const onCancelClick = () => {
-        setIsEditting(false);
-    };
+    const onLabelClick = () => setIsEditting(true);
+    const onCancelClick = () => setIsEditting(false);
 
     const onSaveClick = async () => {
         if (card.description === description) return;
