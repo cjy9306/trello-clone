@@ -8,6 +8,8 @@ import useCheckWhetherIsLogined from '../../components/useCheckWhetherIsLogined'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import CreateBoardModal from '../../components/CreateBoardModal';
+import Button from '../../components/Button';
+import { useHistory } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -15,7 +17,7 @@ const Container = styled.div`
     margin: 20px auto;
 `;
 
-const PersonalContainer = styled.div`
+const BoardListContainer = styled.div`
     margin: 20px auto;
 `;
 
@@ -23,16 +25,16 @@ const BoardListHeader = styled.div`
     width: 100%;
     height: 32px;
     line-height: 32px;
-    margin: 0 0 12px 12px;
+    padding: 0 2% 0 2%;
+    margin-bottom: 12px;
+    box-sizing: border-box;
 `;
+
 const BoardContent = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
-`;
-
-const TeamListContainer = styled.div`
-
 `;
 
 const TeamContainer = styled.div`
@@ -61,9 +63,14 @@ const CustomIcon = styled(FontAwesomeIcon)`
     margin-right: 16px;
 `;
 
+const SettingsButton = styled(Button)`
+    float: right;
+`;
+
 const MemberBoardsContainer = () => {
     const isLogined = useCheckWhetherIsLogined();
     const dispatch = useDispatch();
+    const history = useHistory();
     const personalBoards = useSelector(state => state.member.personalBoards);
     const teamBoards = useSelector(state => state.member.teamBoards);
 
@@ -85,11 +92,15 @@ const MemberBoardsContainer = () => {
         setBoardModalVisible(true);
     }
 
+    const onClickSettings = (teamId) => {
+        history.push('/team/' + teamId + '/settings');
+    }
+
     return (
         <>
         <GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
         <Container>
-            <PersonalContainer>
+            <BoardListContainer>
                 <BoardListHeader>
                     <CustomIcon icon={faUser} size='xs'/>
                     Personal Boards
@@ -100,8 +111,8 @@ const MemberBoardsContainer = () => {
                     personalBoards.map(board => <BoardTitleBox board={board} key={board.board_id}/>)
                 }
                 </BoardContent>
-            </PersonalContainer>
-            <TeamListContainer>
+            </BoardListContainer>
+            <BoardListContainer>
             <CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
                 {
                     teamBoards &&
@@ -110,7 +121,8 @@ const MemberBoardsContainer = () => {
                             <TeamContainer key={team.team_id}>
                                 <BoardListHeader>
                                     <CustomIcon icon={faUserFriends} size='xs'/>
-                                    {team.team_name}
+                                    {team.team_name}&nbsp;
+                                    <SettingsButton type='default' onClick={() => onClickSettings(team.team_id)}>Settings</SettingsButton>
                                 </BoardListHeader>
                                 <BoardContent>
                                 {
@@ -129,7 +141,7 @@ const MemberBoardsContainer = () => {
                         );
                     })
                 }
-            </TeamListContainer>
+            </BoardListContainer>
         </Container>
         </>
     )

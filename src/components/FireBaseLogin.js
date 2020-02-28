@@ -47,7 +47,7 @@ const FireBaseLogin = () => {
             sessionStorage.setItem('memberId', memberId);
             sessionStorage.setItem('username', data.username);
 
-            history.push('/' + data.username + '/boards');
+            history.push('/member/' + data.username + '/boards');
         } else {
         }
     };

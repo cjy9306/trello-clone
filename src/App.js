@@ -3,13 +3,15 @@ import { Route } from 'react-router-dom';
 import BoardConatiner from './containers/board/BoardContainer';
 import LoginContainer from './containers/auth/LoginContainer';
 import MemberBoardsContainer from './containers/member/MemberBoardsContainer';
+import TeamSettingsContainer from './containers/Team/TeamSettingsContainer';
 import './main.css'
 
 function App() {
     return (
         <>
             <Route exact component={LoginContainer} path='/' />
-            <Route exact component={MemberBoardsContainer} path='/:memberId/boards' />
+            <Route exact component={MemberBoardsContainer} path='/member/:memberId/boards' />
+            <Route exact component={TeamSettingsContainer} path='/team/:teamId/settings' />
             <Route exact component={BoardConatiner} path='/board/:boardId' />
         </>
     );

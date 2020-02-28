@@ -21,7 +21,7 @@ const LoginContainer = () => {
             sessionStorage.setItem('memberId', memberId);
             sessionStorage.setItem('username', username);
 
-            history.push('/' + username + '/boards');
+            history.push('/member/' + username + '/boards');
             return true;
         } else {
             setAlertVisible(true);

@@ -35,7 +35,7 @@ const GlobalHeader = ({isLogined, backgroundColor}) => {
 
     const onClickHome = () => {
         const username = sessionStorage.getItem('username');
-        history.push('/' + username + '/boards');
+        history.push('/member/' + username + '/boards');
     };
 
     const onClickLogOut = () => {
