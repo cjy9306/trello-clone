@@ -7,6 +7,11 @@ const GET_TEAM_SUCCESS = 'team/GET_TEAM_SUCCESS';
 const GET_TEAM_FAIL = 'team/GET_TEAM_FAIL';
 export const getTeam = createRequestThunk(GET_TEAM, teamAPI.getTeam);
 
+const DELETE_TEAM = 'team/DELETE_TEAM';
+const DELETE_TEAM_SUCCESS = 'team/DELETE_TEAM_SUCCESS';
+const DELETE_TEAM_FAIL = 'team/DELETE_TEAM_FAIL';
+export const deleteTeam = createRequestThunk(DELETE_TEAM, teamAPI.deleteTeam);
+
 const ADD_TEAM_MEMBER = 'team/ADD_TEAM_MEMBER';
 const ADD_TEAM_MEMBER_SUCCESS = 'team/ADD_TEAM_MEMBER_SUCCESS';
 const ADD_TEAM_MEMBER_FAIL = 'team/ADD_TEAM_MEMBER_FAIL';
@@ -33,6 +38,15 @@ const team = handleActions(
             teamMembers: action.payload.teamMembers,
         }),
         [GET_TEAM_FAIL]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_TEAM]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_TEAM_SUCCESS]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_TEAM_FAIL]: (state, action) => ({
             ...state,
         }),
         [ADD_TEAM_MEMBER]: (state, action) => ({

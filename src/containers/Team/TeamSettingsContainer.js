@@ -4,10 +4,12 @@ import GlobalHeader from '../../components/GlobalHeader';
 import useCheckWhetherIsLogined from '../../components/useCheckWhetherIsLogined';
 import useInput from '../../components/useInput';
 import Button from '../../components/Button';
+import { ConfirmModal } from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { getTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { getTeam, deleteTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
 import MemberListItem from '../../components/MemberListItem';
 
 const Container = styled.div`
@@ -21,7 +23,7 @@ const SettingsHeader = styled.div`
 const TeamInfoContent = styled.div`
     width: 768px;
     margin: 0 auto;
-    padding: 48px 32px;
+    padding: 48px 32px 24px 32px;
 `;
 
 const TeamInfoTitle = styled.div`
@@ -31,9 +33,8 @@ const TeamInfoTitle = styled.div`
 `;
 
 const TeamInfoDescription = styled.div`
-
+    margin-bottom: 28px;
 `;
-
 
 const LabelWrapper = styled.div`
     background-color: rgba(9,30,66,.04);
@@ -126,10 +127,12 @@ const TeamSettingsContainer = ({match}) => {
     const teamId = match.params.teamId;
     const isLogined = useCheckWhetherIsLogined();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const team = useSelector(state => state.team.team);
     const teamMembers = useSelector(state => state.team.teamMembers);
     
+    const [confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [isEditting, setIsEditting] = useState(false);
     const [description, onChangeDescription, setDescription] = useInput('');
     const [email, onChangeEmail, setEmail] = useInput('');
@@ -137,6 +140,9 @@ const TeamSettingsContainer = ({match}) => {
 
     const onLabelClick = () => setIsEditting(true);
     const onCancelClick = () => setIsEditting(false);
+
+    const onTeamDeleteClick = () => setConfirmModalVisible(true);
+    const onTeamDeleteCancelClick = () => setConfirmModalVisible(false);
 
     useEffect(() => {
         if (isEditting) editRef.current.focus();
@@ -170,6 +176,18 @@ const TeamSettingsContainer = ({match}) => {
         }
     }
 
+    const onTeamDeleteOk = async () => {
+        const token = sessionStorage.getItem('token');
+        const result = await dispatch(deleteTeam({token, teamId}));
+
+        if (result.success) {
+            const memberId = sessionStorage.getItem('memberId');
+            history.push('/member/' + memberId);
+        } else {
+            console.log('delete team fail');
+        }
+    };
+
     return (
         <>
             <GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
@@ -197,6 +215,13 @@ const TeamSettingsContainer = ({match}) => {
                                 </ControlWrapper>
                             </TextAreaWrapper>
                         </TeamInfoDescription>
+                        <ConfirmModal 
+                            visible={confirmModalVisible} 
+                            message='Are you sure delete this team?' 
+                            onCloseModal={onTeamDeleteCancelClick}
+                            onClickOk={onTeamDeleteOk}
+                            />
+                        <Button type='danger' onClick={onTeamDeleteClick}>Delete this team</Button>
                     </TeamInfoContent>
                 </SettingsHeader>
                 <SettingsContent>

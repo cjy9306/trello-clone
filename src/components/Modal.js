@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import Button from './Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ModalContainer = styled.div`
     display: ${props => props.visible ? 'flex' : 'none'}; 
@@ -48,4 +51,45 @@ const Modal = ({className, visible = false, onCloseModal, children}) => {
 
 };
 
-export default React.memo(Modal)
+export default React.memo(Modal);
+
+
+const ConfirmModalContainer = styled(Modal)`
+    min-width: 320px;
+`;
+
+const ConfirmMessage = styled.div`
+    margin: 32px 32px 16px 32px;
+    font-size: 16px;
+    font-weight: 500;
+`;
+
+const ConfirmControl = styled.div`
+    float: right;
+    margin: 0 32px 16px 32px;
+`;
+
+const CustomIcon = styled(FontAwesomeIcon)`
+    font-size: 16px;
+    margin-right: 16px;
+    color: red;
+`;
+
+export const ConfirmModal = React.memo(({className, visible = false, onCloseModal, onClickOk, message}) => {
+    return (
+        <ConfirmModalContainer 
+            className={className} 
+            visible={visible} 
+            onCloseModal={onCloseModal}
+        >
+            <ConfirmMessage>
+                <CustomIcon icon={faExclamationCircle} size='xs'/>
+                {message}
+            </ConfirmMessage>
+            <ConfirmControl>
+                <Button type='primary' onClick={onClickOk}>YES</Button>&nbsp;
+                <Button type='default' onClick={onCloseModal}>NO</Button>
+            </ConfirmControl>
+        </ConfirmModalContainer>
+    );
+});
