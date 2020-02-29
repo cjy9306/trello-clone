@@ -2,6 +2,12 @@ import { handleActions } from 'redux-actions';
 import * as teamAPI from '../lib/api/team';
 import createRequestThunk from '../lib/createRequestThunk';
 
+
+const CREATE_TEAM = 'member/CREATE_TEAM';
+const CREATE_TEAM_SUCCESS = 'member/CREATE_TEAM_SUCCESS';
+const CREATE_TEAM_FAIL = 'member/CREATE_TEAM_FAIL';
+export const createTeam = createRequestThunk(CREATE_TEAM, teamAPI.createTeam);
+
 const GET_TEAM = 'team/GET_TEAM';
 const GET_TEAM_SUCCESS = 'team/GET_TEAM_SUCCESS';
 const GET_TEAM_FAIL = 'team/GET_TEAM_FAIL';
@@ -29,6 +35,15 @@ const initState = {
 
 const team = handleActions(
     {
+        [CREATE_TEAM]: (state, action) => ({
+            ...state,
+        }),
+        [CREATE_TEAM_SUCCESS]: (state, action) => ({
+            ...state,
+        }),
+        [CREATE_TEAM_FAIL]: (state, action) => ({
+            ...state,
+        }),
         [GET_TEAM]: (state, action) => ({
             ...state,
         }),

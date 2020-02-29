@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Button from '../../components/Button';
 import HeaderButton from '../../components/HeaderButton';
 import AddListModal from './AddListModal';
 import BoardMembersModal from './BoardMembersModal';
-import { getBoardMembers } from '../../modules/board';
 import { useDispatch } from 'react-redux';
+import { ConfirmModal } from '../../components/Modal';
+import { deleteBoard } from '../../modules/board';
+import { useHistory } from 'react-router-dom';
 
 const BoardHeaderContainer = styled.div`
     height: 24px;
@@ -23,11 +26,16 @@ const MenuWrapper = styled.div`
     margin-right: 16px;
 `;
 
-const BoardHeader = ({board}) => {
+const DeleteBoardButton = styled(Button)`
+    float: right;
+`;
 
+const BoardHeader = ({board}) => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [listModalVisible, setListModalVisible] = useState(false);
     const [membersModalVisible, setMembersModalVisible] = useState(false);
+    const [deleteBoardModalVisible, setDeleteBoaordModalVisible] = useState(false);
 
     // list modal
     const onCloseListModal = () => setListModalVisible(false);
@@ -37,7 +45,20 @@ const BoardHeader = ({board}) => {
     const onCloseMembersModal = () => setMembersModalVisible(false);
     const onShowMembersModal = () => setMembersModalVisible(true);
 
-    
+    const onShowDeleteModal = () => setDeleteBoaordModalVisible(true);
+    const onCloseDeleteModal = () => setDeleteBoaordModalVisible(false);
+
+    const onDeleteBoard = async () => {
+        const token = sessionStorage.getItem('token');
+        const result = await dispatch(deleteBoard({token, boardId: board.board_id}));
+
+        if (result.success) {
+            const memberId = sessionStorage.getItem('memberId');
+            history.push('/member/' + memberId + '/boards');
+        } else {
+            console.log('delete board fail');
+        }
+    };
 
     return (
         <BoardHeaderContainer>
@@ -54,9 +75,12 @@ const BoardHeader = ({board}) => {
                     <HeaderButton onClick={onShowListModal}>Add another list</HeaderButton> &nbsp;
                     <HeaderButton onClick={onShowMembersModal}>Members</HeaderButton>
                 </MenuWrapper>
-            </MenuContainer>
-            <MenuContainer>
-                
+                <ConfirmModal 
+                    visible={deleteBoardModalVisible} 
+                    onCloseModal={onCloseDeleteModal} 
+                    message='Are you sure delete this board?' 
+                    onClickOk={onDeleteBoard} />
+                <DeleteBoardButton type='danger' onClick={onShowDeleteModal}>Delete Board</DeleteBoardButton>
             </MenuContainer>
         </BoardHeaderContainer>
     )

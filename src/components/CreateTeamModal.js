@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import useInput from './useInput';
 import Button from './Button';
 import Modal from './Modal';
-import { createTeam } from '../modules/member';
+import { createTeam } from '../modules/team';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -65,13 +65,15 @@ const CreateTeamModal = ({visible, onCloseModal}) => {
         const data = {
             team_name: teamName,
             description,
+            member_id: memberId,
         };
 
-        const result = await dispatch(createTeam({token, memberId, data}));
+        const result = await dispatch(createTeam({token, data}));
 
         if (result.success) {
             onCloseModal();
-        } else{
+            history.push('/team/' + result.data.data.team.team_id + '/settings');
+        } else {
             console.log('create fail');
         }
 
