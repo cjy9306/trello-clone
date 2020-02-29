@@ -146,8 +146,7 @@ const CheckListItem = ({item}) => {
                     <Button type='primary' onClick={onSaveClick}>Save</Button> &nbsp;
                     <Button type='default' onClick={onCancelClick}>Cancel</Button>
                 </EditControl>
-            </EditContainer>
-            
+            </EditContainer>            
         </Container>
     )
 };
