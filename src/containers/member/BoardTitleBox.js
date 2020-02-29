@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { useHistory } from 'react-router-dom';
 
 const BoxContainer = styled.div`
-    width: 21.5%;
+    width: 23.5%;
     margin: 0 2% 2% 0;
     box-sizing: border-box;
     padding: 8px;
@@ -14,6 +14,9 @@ const BoxContainer = styled.div`
     font-size: 16px;
     font-weight: 700;
     color: white;
+    &:nth-of-type(4n) {
+        margin-right: 0;
+    }
 `;
 
 

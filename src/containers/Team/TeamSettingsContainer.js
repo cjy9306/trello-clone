@@ -135,23 +135,34 @@ const TeamSettingsContainer = ({match}) => {
     const [confirmModalVisible, setConfirmModalVisible] = useState(false);
     const [isEditting, setIsEditting] = useState(false);
     const [description, onChangeDescription, setDescription] = useInput('');
-    const [email, onChangeEmail, setEmail] = useInput('');
+    const [email, onChangeEmail] = useInput('');
     const editRef = useRef();
 
     const onLabelClick = () => setIsEditting(true);
     const onCancelClick = () => setIsEditting(false);
 
-    const onTeamDeleteClick = () => setConfirmModalVisible(true);
-    const onTeamDeleteCancelClick = () => setConfirmModalVisible(false);
+    const onShowTeamDeletMoal = () => setConfirmModalVisible(true);
+    const onCloseTeamDeleteModal = () => setConfirmModalVisible(false);
+
 
     useEffect(() => {
         if (isEditting) editRef.current.focus();
     }, [isEditting]);
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
-        dispatch(getTeam({token, teamId}));
+        getTeamInfo();
     }, [match]);
+
+    const getTeamInfo = async () => {
+        const token = sessionStorage.getItem('token');
+        const result = await dispatch(getTeam({token, teamId}));
+
+        if (!result.success) {
+            const memberId = sessionStorage.getItem('memberId');
+            alert('can not find this team');
+            history.push('/member/' + memberId + '/boards');
+        }
+    };
 
     const onAddMember = async () => {
         const token = sessionStorage.getItem('token');
@@ -159,7 +170,7 @@ const TeamSettingsContainer = ({match}) => {
         const result = await dispatch(addTeamMember({token, teamId, data}));
 
         if (result.success) {
-            dispatch(getTeam({token, teamId}));
+            getTeam();
         } else {
             console.log('delete member fail')
         }
@@ -182,7 +193,7 @@ const TeamSettingsContainer = ({match}) => {
 
         if (result.success) {
             const memberId = sessionStorage.getItem('memberId');
-            history.push('/member/' + memberId);
+            history.push('/member/' + memberId + '/boards');
         } else {
             console.log('delete team fail');
         }
@@ -195,8 +206,8 @@ const TeamSettingsContainer = ({match}) => {
                 <SettingsHeader>
                     <TeamInfoContent>
                         <TeamInfoTitle>
-                            <CustomIcon icon={faUserFriends} size='sm'/>
-                            {team.team_name}
+                            <CustomIcon icon={faUserFriends} size='xs'/>
+                            {team && team.team_name}
                         </TeamInfoTitle>
                         <TeamInfoDescription>
                             <LabelWrapper isEditting={isEditting} onClick={onLabelClick} >
@@ -218,10 +229,10 @@ const TeamSettingsContainer = ({match}) => {
                         <ConfirmModal 
                             visible={confirmModalVisible} 
                             message='Are you sure delete this team?' 
-                            onCloseModal={onTeamDeleteCancelClick}
+                            onCloseModal={onCloseTeamDeleteModal}
                             onClickOk={onTeamDeleteOk}
                             />
-                        <Button type='danger' onClick={onTeamDeleteClick}>Delete this team</Button>
+                        <Button type='danger' onClick={onShowTeamDeletMoal}>Delete this team</Button>
                     </TeamInfoContent>
                 </SettingsHeader>
                 <SettingsContent>

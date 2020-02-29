@@ -25,7 +25,7 @@ const BoardListHeader = styled.div`
     width: 100%;
     height: 32px;
     line-height: 32px;
-    padding: 0 2% 0 2%;
+    padding: 0 0 0 2%;
     margin-bottom: 12px;
     box-sizing: border-box;
 `;
@@ -33,7 +33,6 @@ const BoardListHeader = styled.div`
 const BoardContent = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     width: 100%;
 `;
 

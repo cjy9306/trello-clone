@@ -48,7 +48,6 @@ const Modal = ({className, visible = false, onCloseModal, children}) => {
             </ModalContent>
         </ModalContainer>
     )
-
 };
 
 export default React.memo(Modal);
@@ -59,7 +58,7 @@ const ConfirmModalContainer = styled(Modal)`
 `;
 
 const ConfirmMessage = styled.div`
-    margin: 32px 32px 16px 32px;
+    margin: 32px 48px 16px 32px;
     font-size: 16px;
     font-weight: 500;
 `;

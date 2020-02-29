@@ -13,6 +13,11 @@ const GET_BOARD_SUCCESS = 'board/GET_BOARD_SUCCESS';
 const GET_BOARD_FAIL = 'board/GET_BOARD_FAIL';
 export const getBoard = createRequestThunk(GET_BOARD, boardAPI.getBoard);
 
+const DELETE_BOARD = 'board/DELETE_BOARD';
+const DELETE_BOARD_SUCCESS = 'board/DELETE_BOARD_SUCCESS';
+const DELETE_BOARD_FAIL = 'board/DELETE_BOARD_FAIL';
+export const deleteBoard = createRequestThunk(DELETE_BOARD, boardAPI.deleteBoard);
+
 const CHANGE_LISTS = 'board/CHANGE_LISTS';
 export const changeLists = createAction(CHANGE_LISTS, lists => ({lists}));
 
@@ -164,7 +169,15 @@ const board = handleActions(
         [GET_BOARD_FAIL]: (state, action) => ({
             ...state,
         }),
-        
+        [DELETE_BOARD]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_BOARD_SUCCESS]: (state, action) => ({
+            ...state,
+        }),
+        [DELETE_BOARD_FAIL]: (state, action) => ({
+            ...state,
+        }),
         [CHANGE_LISTS]: (state, {payload : {lists}}) => ({
             ...state,
             lists: lists,

@@ -49,7 +49,7 @@ const BoardContainer = ({ match: {params}}) => {
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
-        dispatch(getBoard({token, board_id: boardId}))
+        dispatch(getBoard({token, boardId}))
     }, [boardId, dispatch]);
 
     const onDragEnd = async result => {
@@ -141,7 +141,7 @@ const BoardContainer = ({ match: {params}}) => {
             destListSeq,
         };
 
-        dispatch(updateListSeq({token, board_id: boardId, data}))
+        dispatch(updateListSeq({token, boardId, data}))
         .then((result) => {
             if (result.success === false) {
                 dispatch(changeLists(prevLists));
@@ -160,7 +160,7 @@ const BoardContainer = ({ match: {params}}) => {
             cardId,
         };
 
-        dispatch(updateCardSeq({token, board_id: boardId, list_id: sourceListId, data}))
+        dispatch(updateCardSeq({token, boardId, list_id: sourceListId, data}))
         .then((result) => {
             if (result.success === false) {
                 dispatch(changeLists(prevLists))
