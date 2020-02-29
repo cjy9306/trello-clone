@@ -20,4 +20,3 @@ jobs:
     - run: npm install
     - run: npm run build --if-present
       env:
-        CI: true
