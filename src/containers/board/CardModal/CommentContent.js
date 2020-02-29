@@ -77,10 +77,10 @@ const CommentContent = ({card}) => {
             member_id,
         }
 
-        const result = await dispatch(createComment({token, board_id: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(createComment({token, boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
+            await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
             setEditComment('');
         } else {
             console.log('can not create comment');

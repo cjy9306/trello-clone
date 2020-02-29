@@ -66,10 +66,10 @@ const SideBar = ({card}) => {
         const data = {
             checklist_name: itemName,
         };
-        const result = await dispatch(createCheckList({token, board_id: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(createCheckList({token, boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
+            await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}));
             onCheckListPopupToggle();
         }
     };
