@@ -118,7 +118,7 @@ const CheckListItem = ({item}) => {
         const data = {
             item_name: item.item_name,
             checked,
-        };
+        }; 
 
         const result = await dispatch(updateCheckListItem({token, boardId: board.board_id, item_id: item.item_id, data}));
         if (result.success) {
