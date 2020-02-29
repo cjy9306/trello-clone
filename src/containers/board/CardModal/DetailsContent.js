@@ -62,10 +62,10 @@ const DetailsContent = ({card}) => {
         const token = sessionStorage.getItem('token');
         const data = { due_date: selected }
 
-        const result = await dispatch(updateCardDueDate({token, board_id: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(updateCardDueDate({token, boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}));
+            dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
         } else {
         }
     }

@@ -91,9 +91,9 @@ const CheckListItem = ({item}) => {
             checked: item.checked,
         }
 
-        const result = await dispatch(updateCheckListItem({token, board_id: board.board_id, item_id: item.item_id, data}))
+        const result = await dispatch(updateCheckListItem({token, boardId: board.board_id, item_id: item.item_id, data}))
         if (result.success) {
-            await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}))
+            await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
             onCancelClick();
         } else {
             console.log('update fail');
@@ -103,9 +103,9 @@ const CheckListItem = ({item}) => {
     const onDeleteClick = async () => {
         const token = sessionStorage.getItem('token');
 
-        const result = await dispatch(deleteCheckListItem({token, board_id: board.board_id, item_id: item.item_id}));
+        const result = await dispatch(deleteCheckListItem({token, boardId: board.board_id, item_id: item.item_id}));
 
-        if (result.success) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}))
+        if (result.success) await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
         else console.log('can not delete checklist item');
     }
 
@@ -120,9 +120,9 @@ const CheckListItem = ({item}) => {
             checked,
         };
 
-        const result = await dispatch(updateCheckListItem({token, board_id: board.board_id, item_id: item.item_id, data}));
+        const result = await dispatch(updateCheckListItem({token, boardId: board.board_id, item_id: item.item_id, data}));
         if (result.success) {
-            dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}))
+            dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
         } else {
             console.log('update checklist item fail');
         }

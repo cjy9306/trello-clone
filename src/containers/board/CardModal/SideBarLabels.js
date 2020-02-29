@@ -65,18 +65,18 @@ const SideBarLabels = ({onPopupToggle, card}) => {
             checked,
         };
 
-        const result = await dispatch(updateCardLabel({token, board_id: board.board_id, card_id: card.card_id, label_id, data}));
+        const result = await dispatch(updateCardLabel({token, boardId: board.board_id, card_id: card.card_id, label_id, data}));
 
         if (result.success) {
-            await dispatch(getBoard({token, board_id: board.board_id}));
-            await dispatch(getCard({token, board_id: board.board_id, card_id: card.card_id}))
+            await dispatch(getBoard({token, boardId: board.board_id}));
+            await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}))
         } else {
         }
     };
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
-        dispatch(getAllLabels({token, board_id: board.board_id}));
+        dispatch(getAllLabels({token, boardId: board.board_id}));
     }, [board, dispatch])
 
     return (

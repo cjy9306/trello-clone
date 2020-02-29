@@ -48,17 +48,17 @@ const CheckList = ({checklist}) => {
     const onDeleteClick = async () => {
         const token = sessionStorage.getItem('token');
 
-        const result = await dispatch(deleteCheckList({token, board_id: board.board_id, card_id: card.card_id, checklist_id: checklist.checklist_id}));
+        const result = await dispatch(deleteCheckList({token, boardId: board.board_id, card_id: card.card_id, checklist_id: checklist.checklist_id}));
 
-        if (result.success) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
+        if (result.success) await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}));
     };
 
     const onCreateCheckListItem = async () => {
         const token = sessionStorage.getItem('token');
         const data = { item_name: 'new item'};
-        const result = await dispatch(createCheckListItem({token, board_id: board.board_id, checklist_id: checklist.checklist_id, data}));
+        const result = await dispatch(createCheckListItem({token, boardId: board.board_id, checklist_id: checklist.checklist_id, data}));
 
-        if (result.success) await dispatch(getCheckList({token, board_id: board.board_id, card_id: card.card_id}));
+        if (result.success) await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}));
 
     };
 
