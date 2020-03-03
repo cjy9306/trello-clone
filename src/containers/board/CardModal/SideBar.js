@@ -62,14 +62,13 @@ const SideBar = ({card}) => {
     const onCheckListPopupToggle = () => setCheckListPopupVisible(!checkListPopupVisible);
 
     const onCreateCheckList = async (itemName) => {
-        const token = sessionStorage.getItem('token');
         const data = {
             checklist_name: itemName,
         };
-        const result = await dispatch(createCheckList({token, boardId: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(createCheckList({boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}));
+            await dispatch(getCheckList({boardId: board.board_id, card_id: card.card_id}));
             onCheckListPopupToggle();
         }
     };

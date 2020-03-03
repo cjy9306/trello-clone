@@ -154,8 +154,7 @@ const TeamSettingsContainer = ({match}) => {
     }, [match]);
 
     const getTeamInfo = async () => {
-        const token = sessionStorage.getItem('token');
-        const result = await dispatch(getTeam({token, teamId}));
+        const result = await dispatch(getTeam({teamId}));
 
         if (!result.success) {
             const memberId = sessionStorage.getItem('memberId');
@@ -165,9 +164,8 @@ const TeamSettingsContainer = ({match}) => {
     };
 
     const onAddMember = async () => {
-        const token = sessionStorage.getItem('token');
         const data = { email };
-        const result = await dispatch(addTeamMember({token, teamId, data}));
+        const result = await dispatch(addTeamMember({teamId, data}));
 
         if (result.success) {
             getTeam();
@@ -177,8 +175,7 @@ const TeamSettingsContainer = ({match}) => {
     };
 
     const onMemberDeleteClick = async (memberId) => {
-        const token = sessionStorage.getItem('token');
-        const result = await dispatch(deleteTeamMember({token, teamId, memberId}));
+        const result = await dispatch(deleteTeamMember({teamId, memberId}));
 
         if (result.success) {
             dispatch(getTeam({token, teamId}));
@@ -188,8 +185,7 @@ const TeamSettingsContainer = ({match}) => {
     }
 
     const onTeamDeleteOk = async () => {
-        const token = sessionStorage.getItem('token');
-        const result = await dispatch(deleteTeam({token, teamId}));
+        const result = await dispatch(deleteTeam({teamId}));
 
         if (result.success) {
             const memberId = sessionStorage.getItem('memberId');

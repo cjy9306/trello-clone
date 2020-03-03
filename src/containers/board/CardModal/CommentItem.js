@@ -57,11 +57,9 @@ const CommentItem = ({card, comment}) => {
     const board = useSelector(state => state.board.board);
 
     const onDelete = async () => {
-        const token = sessionStorage.getItem('token');
+        const result = await dispatch(deleteComment({boardId: board.board_id, comment_id: comment.comment_id}));
 
-        const result = await dispatch(deleteComment({token, boardId: board.board_id, comment_id: comment.comment_id}));
-
-        if (result.success) await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
+        if (result.success) await dispatch(getCard({boardId: board.board_id, card_id: card.card_id}));
         else console.log('can not delete comment');
     }
 

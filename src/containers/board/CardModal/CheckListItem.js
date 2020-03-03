@@ -85,15 +85,14 @@ const CheckListItem = ({item}) => {
     const editRef = useRef();
 
     const onSaveClick = async () => {
-        const token = sessionStorage.getItem('token');
         const data = {
             item_name: itemName,
             checked: item.checked,
         }
 
-        const result = await dispatch(updateCheckListItem({token, boardId: board.board_id, item_id: item.item_id, data}))
+        const result = await dispatch(updateCheckListItem({boardId: board.board_id, item_id: item.item_id, data}))
         if (result.success) {
-            await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
+            await dispatch(getCheckList({boardId: board.board_id, card_id: card.card_id}))
             onCancelClick();
         } else {
             console.log('update fail');
@@ -101,11 +100,9 @@ const CheckListItem = ({item}) => {
     };
 
     const onDeleteClick = async () => {
-        const token = sessionStorage.getItem('token');
+        const result = await dispatch(deleteCheckListItem({boardId: board.board_id, item_id: item.item_id}));
 
-        const result = await dispatch(deleteCheckListItem({token, boardId: board.board_id, item_id: item.item_id}));
-
-        if (result.success) await dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
+        if (result.success) await dispatch(getCheckList({boardId: board.board_id, card_id: card.card_id}))
         else console.log('can not delete checklist item');
     }
 
@@ -114,15 +111,14 @@ const CheckListItem = ({item}) => {
     }, [isEditting])
 
     const onClickCheckBox = async (checked) => {
-        const token = sessionStorage.getItem('token');
         const data = {
             item_name: item.item_name,
             checked,
         }; 
 
-        const result = await dispatch(updateCheckListItem({token, boardId: board.board_id, item_id: item.item_id, data}));
+        const result = await dispatch(updateCheckListItem({boardId: board.board_id, item_id: item.item_id, data}));
         if (result.success) {
-            dispatch(getCheckList({token, boardId: board.board_id, card_id: card.card_id}))
+            dispatch(getCheckList({boardId: board.board_id, card_id: card.card_id}))
         } else {
             console.log('update checklist item fail');
         }

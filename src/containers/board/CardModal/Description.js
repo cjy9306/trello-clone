@@ -64,16 +64,15 @@ const Description = ({card}) => {
     const onSaveClick = async () => {
         if (card.description === description) return;
 
-        const token = sessionStorage.getItem('token');
         const data = {
             description: description,
         };
 
         const result = await dispatch(
-                updateCardDescription({token, boardId: board.board_id, card_id: card.card_id, data}));
+                updateCardDescription({boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
+            await dispatch(getCard({boardId: board.board_id, card_id: card.card_id}));
         } else {
             console.log('update description error');
         }

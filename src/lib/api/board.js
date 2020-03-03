@@ -1,82 +1,35 @@
 import client from './client';
 
-export const createBoard = ({token, data}) => client.post('/api/board', data, {headers: {"x-access-token": token}});
-export const getBoard = ({token, boardId}) => client.get('/api/board/' + boardId, {headers: {"x-access-token": token}});
-export const deleteBoard = ({token, boardId}) => client.delete('/api/board/' + boardId, {headers: {"x-access-token": token}});
-
-export const updateCardSeq = ({token, boardId, list_id, data}) => 
-                client.put('/api/board/' + boardId  + '/list/' + list_id + '/card/seq', data, 
-                {headers: {"x-access-token": token}}); 
-export const updateListSeq = ({token, boardId, data}) => client.put('/api/board/' + boardId + '/list/seq', data, {headers: {"x-access-token": token}});
+export const createBoard = ({data}) => client.post('/api/board', data);
+export const getBoard = ({boardId}) => client.get('/api/board/' + boardId);
+export const deleteBoard = ({boardId}) => client.delete('/api/board/' + boardId);
+export const updateCardSeq = ({boardId, list_id, data}) => client.put('/api/board/' + boardId  + '/list/' + list_id + '/card/seq', data); 
+export const updateListSeq = ({boardId, data}) => client.put('/api/board/' + boardId + '/list/seq', data);
 
 // list
-export const createList = ({token, boardId, data}) =>
-            client.post('/api/board/' + boardId + '/list', data, 
-            {headers: {"x-access-token": token}});
+export const createList = ({boardId, data}) => client.post('/api/board/' + boardId + '/list', data);
 
 // card
-export const createCard = ({token, boardId, list_id, data}) =>
-            client.post('/api/board/' + boardId + '/list/' + list_id + '/card', data, 
-            {headers: {"x-access-token": token}});
+export const createCard = ({boardId, list_id, data}) => client.post('/api/board/' + boardId + '/list/' + list_id + '/card', data);
+export const getCard = ({boardId, card_id}) => client.get('/api/board/' + boardId + '/card/' + card_id);
+export const updateCardDescription = ({boardId, card_id, data}) => client.put('/api/board/' + boardId + '/card/' + card_id + '/description', data);
+export const updateCardDueDate = ({boardId, card_id, data}) => client.put('/api/board/' + boardId + '/card/' + card_id + '/due_date', data);
 
-export const getCard = ({token, boardId, card_id}) =>
-            client.get('/api/board/' + boardId + '/card/' + card_id,
-            {headers: {"x-access-token": token}});
-
-export const updateCardDescription = ({token, boardId, card_id, data}) =>
-            client.put('/api/board/' + boardId + '/card/' + card_id + '/description',
-            data, {headers: {"x-access-token": token}});
-
-export const updateCardDueDate = ({token, boardId, card_id, data}) =>
-            client.put('/api/board/' + boardId + '/card/' + card_id + '/due_date',
-            data, {headers: {"x-access-token": token}});
 // checklist
-export const createCheckList = ({token, boardId, card_id, data}) =>
-            client.post('/api/board/' + boardId + '/card/' + card_id + '/checklist',
-            data, {headers: {"x-access-token": token}});
-
-export const deleteCheckList = ({token, boardId, card_id, checklist_id}) =>
-            client.delete('/api/board/' + boardId + '/card/' + card_id + '/checklist/' + checklist_id,
-            {headers: {"x-access-token": token}});
-
-export const getCheckList = ({token, boardId, card_id}) =>
-            client.get('/api/board/' + boardId + '/card/' + card_id + '/checklist',
-            {headers: {"x-access-token": token}});
+export const createCheckList = ({boardId, card_id, data}) => client.post('/api/board/' + boardId + '/card/' + card_id + '/checklist', data);
+export const deleteCheckList = ({boardId, card_id, checklist_id}) => client.delete('/api/board/' + boardId + '/card/' + card_id + '/checklist/' + checklist_id);
+export const getCheckList = ({boardId, card_id}) => client.get('/api/board/' + boardId + '/card/' + card_id + '/checklist');
 
 // checklist item
-export const createCheckListItem = ({token, boardId, checklist_id, data}) =>
-            client.post('/api/board/' + boardId + '/checklist/' + checklist_id,
-            data, {headers: {"x-access-token": token}});
-
-export const updateCheckListItem = ({token, boardId, item_id, data}) =>
-            client.put('/api/board/' + boardId + '/checklist_item/' + item_id,
-            data, {headers: {"x-access-token": token}});
-
-export const deleteCheckListItem = ({token, boardId, item_id}) =>
-            client.delete('/api/board/' + boardId + '/checklist_item/' + item_id,
-            {headers: {"x-access-token": token}});
+export const createCheckListItem = ({boardId, checklist_id, data}) => client.post('/api/board/' + boardId + '/checklist/' + checklist_id, data);
+export const updateCheckListItem = ({boardId, item_id, data}) => client.put('/api/board/' + boardId + '/checklist_item/' + item_id, data);
+export const deleteCheckListItem = ({boardId, item_id}) => client.delete('/api/board/' + boardId + '/checklist_item/' + item_id);
 
 // comment    
-export const createComment = ({token, boardId, card_id, data}) =>
-            client.post('/api/board/' + boardId + '/card/' + card_id + '/comment',
-            data, {headers: {"x-access-token": token}});
-
-export const deleteComment = ({token, boardId, comment_id}) =>
-            client.delete('/api/board/' + boardId + '/comment/' + comment_id,
-            {headers: {"x-access-token": token}});
-
-export const getAllLabels = ({token, boardId}) => 
-            client.get('/api/board/' + boardId + '/labels', {headers: {"x-access-token": token}});
-
-export const updateCardLabel = ({token, boardId, card_id, label_id, data}) =>
-            client.put('/api/board/' + boardId + '/card/' + card_id + '/labels/' + label_id, 
-            data, {headers: {"x-access-token": token}});
-
-export const getBoardMembers = ({token, boardId}) =>
-            client.get('/api/board/' + boardId + '/members', {headers: {"x-access-token": token}});
-
-export const addBoardMember = ({token, boardId, data}) =>
-            client.post('/api/board/' + boardId + '/members', data, {headers: {"x-access-token": token}});
-
-export const deleteBoardMember = ({token, boardId, member_id}) =>
-            client.delete('/api/board/' + boardId + '/members/' + member_id, {headers: {"x-access-token": token}});
+export const createComment = ({boardId, card_id, data}) => client.post('/api/board/' + boardId + '/card/' + card_id + '/comment', data);
+export const deleteComment = ({boardId, comment_id}) => client.delete('/api/board/' + boardId + '/comment/' + comment_id);
+export const getAllLabels = ({boardId}) => client.get('/api/board/' + boardId + '/labels');
+export const updateCardLabel = ({boardId, card_id, label_id, data}) => client.put('/api/board/' + boardId + '/card/' + card_id + '/labels/' + label_id, data);
+export const getBoardMembers = ({boardId}) => client.get('/api/board/' + boardId + '/members');
+export const addBoardMember = ({boardId, data}) => client.post('/api/board/' + boardId + '/members', data);
+export const deleteBoardMember = ({boardId, member_id}) => client.delete('/api/board/' + boardId + '/members/' + member_id);

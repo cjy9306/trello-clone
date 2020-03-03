@@ -59,10 +59,9 @@ const DetailsContent = ({card}) => {
     const board = useSelector(state => state.board.board);
 
     const onChangeDueDate = async (selected) => {
-        const token = sessionStorage.getItem('token');
         const data = { due_date: selected }
 
-        const result = await dispatch(updateCardDueDate({token, boardId: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(updateCardDueDate({boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
             dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));

@@ -49,8 +49,7 @@ const BoardHeader = ({board}) => {
     const onCloseDeleteModal = () => setDeleteBoaordModalVisible(false);
 
     const onDeleteBoard = async () => {
-        const token = sessionStorage.getItem('token');
-        const result = await dispatch(deleteBoard({token, boardId: board.board_id}));
+        const result = await dispatch(deleteBoard({boardId: board.board_id}));
 
         if (result.success) {
             const memberId = sessionStorage.getItem('memberId');
