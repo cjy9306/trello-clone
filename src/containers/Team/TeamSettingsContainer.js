@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { getTeam, deleteTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
+import { getTeam, updateTeam, deleteTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
 import MemberListItem from '../../components/MemberListItem';
 
 const Container = styled.div`
@@ -149,9 +149,8 @@ const TeamSettingsContainer = ({match}) => {
         if (isEditting) editRef.current.focus();
     }, [isEditting]);
 
-    useEffect(() => {
-        getTeamInfo();
-    }, [match]);
+    useEffect(() => getTeamInfo(), [teamId]);
+    useEffect(() => setDescription(team ? team.description : ''), [team]);
 
     const getTeamInfo = async () => {
         const result = await dispatch(getTeam({teamId}));
@@ -195,6 +194,20 @@ const TeamSettingsContainer = ({match}) => {
         }
     };
 
+    const onSaveDescription = async () => {
+        if (description === team.description) return;
+
+        const data = { team_name: team.team_name, description };
+        const result = await dispatch(updateTeam({teamId, data}));
+
+        if (result.success) {
+            setIsEditting(false);
+        } else {
+            setDescription(team.description);
+            console.log('update description fail');
+        }
+    }
+
     return (
         <>
             <GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
@@ -209,7 +222,7 @@ const TeamSettingsContainer = ({match}) => {
                             <LabelWrapper isEditting={isEditting} onClick={onLabelClick} >
                                 {
                                     description === '' || description == null ? 'Add a more detailed description...' : 
-                                    team.description && team.description.split('\n').map((line, index) => 
+                                    description && description.split('\n').map((line, index) => 
                                         (<span key={index}>{line}<br/></span>))
                                 }
                             </LabelWrapper>
@@ -217,7 +230,7 @@ const TeamSettingsContainer = ({match}) => {
                                 <TextAreaField value={description} placeholder={description == null || description === '' ? 'Add a more detailed description...' : ''} 
                                                 ref={editRef} onChange={onChangeDescription}/>
                                 <ControlWrapper>
-                                    <Button type='primary' >Save</Button> &nbsp;
+                                    <Button type='primary' onClick={onSaveDescription}>Save</Button> &nbsp;
                                     <Button type='default' onClick={onCancelClick} >Cancel</Button>
                                 </ControlWrapper>
                             </TextAreaWrapper>
