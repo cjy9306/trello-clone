@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import useInput from '../../components/useInput';
 import Button from '../../components/Button';
@@ -52,14 +52,15 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
     const boardMembers = useSelector(state => state.board.boardMembers);
     const [email, onChangeEmail, setEmail] = useInput('');
 
-    const getMembers = async () => {
+    const getMembers = useCallback(async () => {
         if (visible === false) return;
         
         dispatch(getBoardMembers({boardId: board.board_id}));
-    }
+    }, [visible, board, dispatch]);
+
     useEffect(() => {
         getMembers();
-    }, [visible]);
+    }, [visible, getMembers]);
 
     const onAddMember = async () => {
         if (email === '') return;

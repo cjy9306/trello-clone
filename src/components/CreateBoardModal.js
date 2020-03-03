@@ -114,12 +114,11 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
                 return colorArray[i][1];
     }
 
-
     useEffect(() => {
         const memberId = sessionStorage.getItem('memberId');
 
         dispatch(getTeams({memberId}));
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         let datas = [];

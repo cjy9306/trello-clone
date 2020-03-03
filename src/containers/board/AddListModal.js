@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import useInput from '../../components/useInput';
 import Button from '../../components/Button';

@@ -1,8 +1,8 @@
-import React, {useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Draggable } from 'react-beautiful-dnd';
-import { changeModalVisible, getCard, setCardModal } from '../../modules/board';
+import { changeModalVisible, getCard } from '../../modules/board';
 import Tag from '../../components/Tag';
 
 const CardContainer = styled.div`
