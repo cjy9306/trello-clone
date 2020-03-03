@@ -149,8 +149,8 @@ const TeamSettingsContainer = ({match}) => {
         if (isEditting) editRef.current.focus();
     }, [isEditting]);
 
-    useEffect(() => getTeamInfo(), [teamId]);
-    useEffect(() => setDescription(team ? team.description : ''), [team]);
+    useEffect(() => { getTeamInfo(); }, [teamId]);
+    useEffect(() => { setDescription(team ? team.description : ''); }, [team]);
 
     const getTeamInfo = async () => {
         const result = await dispatch(getTeam({teamId}));
