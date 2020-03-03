@@ -13,6 +13,7 @@ const DeleteWrapper = styled.div`
     right: 0;
     top: 0;
     margin: 4px 8px 0 0;
+    text-decoration: underline;
     z-index:11;
 `;
 
@@ -131,8 +132,8 @@ const CheckListItem = ({item}) => {
             <LabelContainer isEditting={isEditting} onClick={onLabelClick}>
                 {item.item_name}
             </LabelContainer>
-            <DeleteWrapper >
-                <a href='#' onClick={onDeleteClick}>Delete</a>
+            <DeleteWrapper onClick={onDeleteClick}>
+                Delete
             </DeleteWrapper>
             <EditContainer isEditting={isEditting}>
                 <EditContent>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import GlobalHeader from '../../components/GlobalHeader';
 import useCheckWhetherIsLogined from '../../components/useCheckWhetherIsLogined';
@@ -144,15 +144,7 @@ const TeamSettingsContainer = ({match}) => {
     const onShowTeamDeletMoal = () => setConfirmModalVisible(true);
     const onCloseTeamDeleteModal = () => setConfirmModalVisible(false);
 
-
-    useEffect(() => {
-        if (isEditting) editRef.current.focus();
-    }, [isEditting]);
-
-    useEffect(() => { getTeamInfo(); }, [teamId]);
-    useEffect(() => { setDescription(team ? team.description : ''); }, [team]);
-
-    const getTeamInfo = async () => {
+    const getTeamInfo = useCallback(async () => {
         const result = await dispatch(getTeam({teamId}));
 
         if (!result.success) {
@@ -160,7 +152,7 @@ const TeamSettingsContainer = ({match}) => {
             alert('can not find this team');
             history.push('/member/' + memberId + '/boards');
         }
-    };
+    }, [teamId, dispatch, history]);
 
     const onAddMember = async () => {
         const data = { email };
@@ -207,6 +199,14 @@ const TeamSettingsContainer = ({match}) => {
             console.log('update description fail');
         }
     }
+
+    useEffect(() => {
+        if (isEditting) editRef.current.focus();
+    }, [isEditting]);
+
+    useEffect(() => { getTeamInfo(); }, [getTeamInfo]);
+    useEffect(() => { setDescription(team ? team.description : ''); }, [team, setDescription]);
+
 
     return (
         <>

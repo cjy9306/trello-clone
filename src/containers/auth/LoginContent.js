@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import Button from '../../components/Button';
 import useInput from '../../components/useInput';

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import AddCard from './AddCard';

@@ -82,7 +82,7 @@ const Description = ({card}) => {
     useEffect(() => {
         setIsEditting(false);
         setDescription(card.description || '')
-    }, [card]);
+    }, [card, setDescription]);
 
     useEffect(() => {
         if (isEditting) editRef.current.focus();
