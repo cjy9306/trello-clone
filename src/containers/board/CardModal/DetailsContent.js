@@ -64,7 +64,7 @@ const DetailsContent = ({card}) => {
         const result = await dispatch(updateCardDueDate({boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
-            dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
+            dispatch(getCard({boardId: board.board_id, card_id: card.card_id}));
         } else {
         }
     }

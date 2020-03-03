@@ -61,7 +61,7 @@ const AddListModal = ({visible, onCloseModal}) => {
         const result = await dispatch(createList({boardId: board.board_id, data}));
 
         if (result.success) {
-            dispatch(getBoard({token, boardId: board.board_id}));
+            dispatch(getBoard({boardId: board.board_id}));
             onCloseModal();
         } else {
         }
