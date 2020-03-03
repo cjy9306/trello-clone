@@ -54,9 +54,7 @@ const Card = ({card, board, index}) => {
         if (savedCard && savedCard.card_id === card.card_id) {
             dispatch(changeModalVisible(true));
         } else {
-            // dispatch(setCardModal(card));
-            const token = sessionStorage.getItem('token');
-            const result = await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));
+            const result = await dispatch(getCard({boardId: board.board_id, card_id: card.card_id}));
             if (result.success === true) {
                 dispatch(changeModalVisible(true));
             }

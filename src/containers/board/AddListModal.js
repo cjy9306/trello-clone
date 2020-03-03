@@ -52,14 +52,13 @@ const AddListModal = ({visible, onCloseModal}) => {
     const onAddList = async () => {
         if (title === '') return;
         
-        const token = sessionStorage.getItem('token');
         const seq = lists ? lists.length : 0;
         const data = {
             list_name: title,
             seq,
         }
 
-        const result = await dispatch(createList({token, boardId: board.board_id, data}));
+        const result = await dispatch(createList({boardId: board.board_id, data}));
 
         if (result.success) {
             dispatch(getBoard({token, boardId: board.board_id}));

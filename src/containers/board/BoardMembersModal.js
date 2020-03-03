@@ -55,8 +55,7 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
     const getMembers = async () => {
         if (visible === false) return;
         
-        const token = sessionStorage.getItem('token');
-        dispatch(getBoardMembers({token, boardId: board.board_id}));
+        dispatch(getBoardMembers({boardId: board.board_id}));
     }
     useEffect(() => {
         getMembers();
@@ -64,9 +63,8 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
 
     const onAddMember = async () => {
         if (email === '') return;
-        const token = sessionStorage.getItem('token');
         const data = { email };
-        const result = await dispatch(addBoardMember({token, boardId: board.board_id, data}));
+        const result = await dispatch(addBoardMember({boardId: board.board_id, data}));
 
         if (result.success) {
             getMembers();
@@ -76,8 +74,7 @@ const BoardMembersModal = ({visible, onCloseModal}) => {
     };
 
     const onMemberDeleteClick = async (memberId) => {
-        const token = sessionStorage.getItem('token');
-        const result = await dispatch(deleteBoardMember({token, boardId: board.board_id, member_id: memberId}));
+        const result = await dispatch(deleteBoardMember({boardId: board.board_id, member_id: memberId}));
 
         if (result.success) {
             getMembers();

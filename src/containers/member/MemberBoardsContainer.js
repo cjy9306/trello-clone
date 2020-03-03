@@ -76,9 +76,8 @@ const MemberBoardsContainer = () => {
     const [boardModalVisible, setBoardModalVisible] = useState(false);
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
         const member_id = sessionStorage.getItem('memberId');
-        dispatch(getAllBoards({token, member_id}));
+        dispatch(getAllBoards({member_id}));
 
     }, [dispatch]);
 

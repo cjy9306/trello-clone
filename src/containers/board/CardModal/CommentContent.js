@@ -70,14 +70,13 @@ const CommentContent = ({card}) => {
     const onCreateComment = async () => {
         if (editComment === '') return;
 
-        const token = sessionStorage.getItem('token');
         const member_id = sessionStorage.getItem('memberId');
         const data = {
             comment: editComment,
             member_id,
         }
 
-        const result = await dispatch(createComment({token, boardId: board.board_id, card_id: card.card_id, data}));
+        const result = await dispatch(createComment({boardId: board.board_id, card_id: card.card_id, data}));
 
         if (result.success) {
             await dispatch(getCard({token, boardId: board.board_id, card_id: card.card_id}));

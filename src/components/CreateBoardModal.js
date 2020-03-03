@@ -75,7 +75,6 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
     const teams = useSelector(state => state.member.teams);
 
     const onCreateBoard = async () => {
-        const token = sessionStorage.getItem('token');
         const memberId = sessionStorage.getItem('memberId');
         const backgroundColor = getCheckdColor();
         const data = {
@@ -86,7 +85,7 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
             background_color: backgroundColor,
         };
 
-        const result = await dispatch(createBoard({token, data}));
+        const result = await dispatch(createBoard({data}));
 
         if (result.success) { 
             history.push('/board/' + result.data.data.board.board_id);
@@ -117,10 +116,9 @@ const CreateBoardModal = ({visible, onCloseModal}) => {
 
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
         const memberId = sessionStorage.getItem('memberId');
 
-        dispatch(getTeams({token, memberId}));
+        dispatch(getTeams({memberId}));
     }, []);
 
     useEffect(() => {

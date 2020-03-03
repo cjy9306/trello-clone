@@ -45,16 +45,15 @@ const List = ({list, index, board}) => {
     const dispatch = useDispatch();
 
     const onCreateCard = async (newCardName) => {
-        const token = sessionStorage.getItem('token');
         const data = {
             card_name: newCardName,
             seq: list.cards.length,
         }
 
-        const result = await dispatch(createCard({token, boardId: board.board_id, list_id: list.list_id, data}));
+        const result = await dispatch(createCard({boardId: board.board_id, list_id: list.list_id, data}));
 
         if (result.success === true) {
-            dispatch(getBoard({token, boardId: board.board_id}))
+            dispatch(getBoard({boardId: board.board_id}))
             return true;
         } else {
             console.log('create card fail')

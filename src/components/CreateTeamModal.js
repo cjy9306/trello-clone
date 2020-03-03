@@ -60,7 +60,6 @@ const CreateTeamModal = ({visible, onCloseModal}) => {
     const [description, onChangeDescription, setDescription] = useInput('');
 
     const onCreateTeam = async () => {
-        const token = sessionStorage.getItem('token');
         const memberId = sessionStorage.getItem('memberId');
         const data = {
             team_name: teamName,
@@ -68,7 +67,7 @@ const CreateTeamModal = ({visible, onCloseModal}) => {
             member_id: memberId,
         };
 
-        const result = await dispatch(createTeam({token, data}));
+        const result = await dispatch(createTeam({data}));
 
         if (result.success) {
             onCloseModal();
