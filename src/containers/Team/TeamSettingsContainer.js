@@ -178,7 +178,7 @@ const TeamSettingsContainer = ({match}) => {
         const result = await dispatch(deleteTeamMember({teamId, memberId}));
 
         if (result.success) {
-            dispatch(getTeam({token, teamId}));
+            dispatch(getTeam({teamId}));
         } else {
             console.log('delete member fail')
         }
