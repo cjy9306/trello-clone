@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useDispatch } from 'react-redux';
 import { socialLogin } from '../modules/auth';
-import client from '../lib/api/client';
+// import client from '../lib/api/client';
 
 var firebaseConfig = {
 	apiKey: 'AIzaSyCq4JDJkcfyCRmvWsr0euz11a_3WX0V1o0',

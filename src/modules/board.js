@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import * as boardAPI from '../lib/api/board';
 import createRequestThunk from '../lib/createRequestThunk';
 
-
 const CREATE_BOARD = 'board/CREATE_BOARD';
 const CREATE_BOARD_SUCCESS = 'board/CREATE_BOARD_SUCCESS';
 const CREATE_BOARD_FAIL = 'board/CREATE_BOARD_FAIL';
@@ -19,7 +18,7 @@ const DELETE_BOARD_FAIL = 'board/DELETE_BOARD_FAIL';
 export const deleteBoard = createRequestThunk(DELETE_BOARD, boardAPI.deleteBoard);
 
 const CHANGE_LISTS = 'board/CHANGE_LISTS';
-export const changeLists = createAction(CHANGE_LISTS, lists => ({lists}));
+export const changeLists = createAction(CHANGE_LISTS, lists => ({ lists }));
 
 const CREATE_LIST = 'board/CREATE_LIST';
 const CREATE_LIST_SUCCESS = 'board/CREATE_LIST_SUCCESS';
@@ -42,10 +41,25 @@ const ADD_CARD_FAIL = 'board/ADD_CARD_FAIL';
 export const createCard = createRequestThunk(ADD_CARD, boardAPI.createCard);
 
 const CHANGE_MODAL_VISIBLE = 'board/CHANGE_MODAL_VISIBLE';
-export const changeModalVisible = createAction(CHANGE_MODAL_VISIBLE, visible => ({visible}));
+export const changeModalVisible = createAction(CHANGE_MODAL_VISIBLE, visible => ({ visible }));
 
 const SET_CARD_MODAL = 'board/SET_CARD_MODAL';
-export const setCardModal = createAction(SET_CARD_MODAL, card => ({card}));
+export const setCardModal = createAction(SET_CARD_MODAL, card => ({ card }));
+
+const GET_CARD_MEMBERS = 'boar/GET_CARD_MEMBERS';
+const GET_CARD_MEMBERS_SUCCESS = 'boar/GET_CARD_MEMBERS_SUCCESS';
+const GET_CARD_MEMBERS_FAIL = 'boar/GET_CARD_MEMBERS_FAIL';
+export const getCardMembers = createRequestThunk(GET_CARD_MEMBERS, boardAPI.getCardMembers);
+
+const ADD_CARD_MEMBER = 'board/ADD_CARD_MEMBER';
+const ADD_CARD_MEMBER_SUCCESS = 'board/ADD_CARD_MEMBER_SUCCESS';
+const ADD_CARD_MEMBER_FAIL = 'board/ADD_CARD_MEMBER_FAIL';
+export const addCardMember = createRequestThunk(ADD_CARD_MEMBER, boardAPI.addCardMember);
+
+const DELETE_CARD_MEMBER = 'board/DELETE_CARD_MEMBER';
+const DELETE_CARD_MEMBER_SUCCESS = 'board/DELETE_CARD_MEMBER_SUCCESS';
+const DELETE_CARD_MEMBER_FAIL = 'board/DELETE_CARD_MEMBER_FAIL';
+export const deleteCardMember = createRequestThunk(DELETE_CARD_MEMBER, boardAPI.deleteCardMember);
 
 const GET_CARD = 'board/GET_CARD';
 const GET_CARD_SUCCESS = 'board/GET_CARD_SUCCESS';
@@ -114,10 +128,12 @@ const UPDATE_CARD_LABEL_FAIL = 'board/UPDATE_CARD_LABEL_FAIL';
 export const updateCardLabel = createRequestThunk(UPDATE_CARD_LABEL, boardAPI.updateCardLabel);
 
 const ADD_CARD_LABEL_IN_STATE = 'board/ADD_CARD_LABEL_IN_STATE';
-export const addCardLabelInState = createAction(ADD_CARD_LABEL_IN_STATE, label => ({label}));
+export const addCardLabelInState = createAction(ADD_CARD_LABEL_IN_STATE, label => ({ label }));
 
 const REMOVE_CARD_LABEL_IN_STATE = 'board/REMOVE_CARD_LABEL_IN_STATE';
-export const removeCardLabelInState = createAction(REMOVE_CARD_LABEL_IN_STATE, label_id => ({label_id}));
+export const removeCardLabelInState = createAction(REMOVE_CARD_LABEL_IN_STATE, label_id => ({
+	label_id
+}));
 
 // member
 const GET_BOARD_MEMBERS = 'board/GET_BOARD_MEMBERS';
@@ -135,255 +151,284 @@ const DELETE_BOARD_MEMBER_SUCCESS = 'board/DELETE_BOARD_MEMBER_SUCCESS';
 const DELETE_BOARD_MEMBER_FAIL = 'board/DELETE_BOARD_MEMBER_FAIL';
 export const deleteBoardMember = createRequestThunk(DELETE_BOARD_MEMBER, boardAPI.deleteBoardMember);
 
-
 const initState = {
-    board: {},
-    lists: [],
-    card: {},               // for card modal
-    cardChecklist: [],     // for card modal
-    cardComents: [],      // for card modal
-    allLabels: [],          // for card modal, all labels in system
-    cardModalVisible: false,   // for card modal
-    boardMembers: [],
+	board: {},
+	lists: [],
+	card: {}, // for card modal
+	cardChecklist: [], // for card modal
+	cardComments: [], // for card modal
+	cardMembers: [], // for card modal
+	allLabels: [], // for card modal, all labels in system
+	cardModalVisible: false, // for card modal
+	boardMembers: []
 };
 
 const board = handleActions(
-    {
-        [CREATE_BOARD]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_BOARD_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_BOARD_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [GET_BOARD]: (state, action) => ({
-            ...state,
-        }),
-        [GET_BOARD_SUCCESS]: (state, action) => ({
-            ...state,
-            board: action.payload.board,
-            lists: action.payload.lists,
-        }),
-        [GET_BOARD_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [CHANGE_LISTS]: (state, {payload : {lists}}) => ({
-            ...state,
-            lists: lists,
-        }),
-        [CREATE_LIST]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_LIST_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_LIST_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [CHANGE_MODAL_VISIBLE]: (state, {payload : {visible}}) => ({
-            ...state,
-            cardModalVisible: visible,
-        }),
-        [UPDATE_CARD_SEQ]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_SEQ_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_SEQ_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_LIST_SEQ]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_LIST_SEQ_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_LIST_SEQ_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_CARD]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_CARD_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_CARD_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [SET_CARD_MODAL]: (state, {payload: {card}}) => ({
-            ...state,
-            card: card,
-        }),
-        [GET_CARD]: (state, action) => ({
-            ...state,
-        }),
-        [GET_CARD_SUCCESS]: (state, action) => ({
-            ...state,
-            card: action.payload.card,
-            cardChecklist: action.payload.checklist,
-            cardComments: action.payload.comments,
-        }),
-        [GET_CARD_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DESCRIPTION]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DESCRIPTION_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DESCRIPTION_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DUEDATE]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DUEDATE_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_DUEDATE_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [GET_CHECKLIST]: (state, action) => ({
-            ...state,
-        }),
-        [GET_CHECKLIST_SUCCESS]: (state, action) => ({
-            ...state,
-            cardChecklist: action.payload.checklist,
-        }),
-        [GET_CHECKLIST_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST_ITEM]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CHECKLIST_ITEM]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST_ITEM]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_COMMENT]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_COMMENT_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_COMMENT_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_COMMENT]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_COMMENT_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_COMMENT_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [GET_ALL_LABELS]: (state, action) => ({
-            ...state,
-        }),
-        [GET_ALL_LABELS_SUCCESS]: (state, action) => ({
-            ...state,
-            allLabels: action.payload.labels,
-        }),
-        [GET_ALL_LABELS_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_LABEL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_LABEL_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_CARD_LABEL_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_CARD_LABEL_IN_STATE]: (state, {payload: {label}}) => ({
-            ...state,
-            card: {
-                ...state.card,
-            }
-        }),
-        [GET_BOARD_MEMBERS]: (state, action) => ({
-            ...state,
-        }),
-        [GET_BOARD_MEMBERS_SUCCESS]: (state, action) => ({
-            ...state,
-            boardMembers: action.payload.members,
-        }),
-        [GET_BOARD_MEMBERS_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_BOARD_MEMBER]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_BOARD_MEMBER_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_BOARD_MEMBER_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD_MEMBER]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD_MEMBER_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_BOARD_MEMBER_FAIL]: (state, action) => ({
-            ...state,
-        }),
-    },
-    initState
+	{
+		[CREATE_BOARD]: (state, action) => ({
+			...state
+		}),
+		[CREATE_BOARD_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[CREATE_BOARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[GET_BOARD]: (state, action) => ({
+			...state
+		}),
+		[GET_BOARD_SUCCESS]: (state, action) => ({
+			...state,
+			board: action.payload.board,
+			lists: action.payload.lists
+		}),
+		[GET_BOARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[CHANGE_LISTS]: (state, { payload: { lists } }) => ({
+			...state,
+			lists: lists
+		}),
+		[CREATE_LIST]: (state, action) => ({
+			...state
+		}),
+		[CREATE_LIST_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[CREATE_LIST_FAIL]: (state, action) => ({
+			...state
+		}),
+		[CHANGE_MODAL_VISIBLE]: (state, { payload: { visible } }) => ({
+			...state,
+			cardModalVisible: visible
+		}),
+		[UPDATE_CARD_SEQ]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_SEQ_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_SEQ_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST_SEQ]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST_SEQ_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST_SEQ_FAIL]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[SET_CARD_MODAL]: (state, { payload: { card } }) => ({
+			...state,
+			card: card
+		}),
+		[GET_CARD]: (state, action) => ({
+			...state
+		}),
+		[GET_CARD_SUCCESS]: (state, action) => ({
+			...state,
+			card: action.payload.card,
+			cardChecklist: action.payload.checklist,
+			cardComments: action.payload.comments,
+			cardMembers: action.payload.members
+		}),
+		[GET_CARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[GET_CARD_MEMBERS]: (state, action) => ({
+			...state
+		}),
+		[GET_CARD_MEMBERS_SUCCESS]: (state, action) => ({
+			...state,
+			cardMembers: action.payload.members
+		}),
+		[GET_CARD_MEMBERS_FAIL]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_MEMBER]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_MEMBER_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_MEMBER_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD_MEMBER]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD_MEMBER_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD_MEMBER_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DESCRIPTION]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DESCRIPTION_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DESCRIPTION_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DUEDATE]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DUEDATE_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_DUEDATE_FAIL]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST_FAIL]: (state, action) => ({
+			...state
+		}),
+		[GET_CHECKLIST]: (state, action) => ({
+			...state
+		}),
+		[GET_CHECKLIST_SUCCESS]: (state, action) => ({
+			...state,
+			cardChecklist: action.payload.checklist
+		}),
+		[GET_CHECKLIST_FAIL]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST_ITEM]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[CREATE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CHECKLIST_ITEM]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST_ITEM]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST_ITEM_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CHECKLIST_ITEM_FAIL]: (state, action) => ({
+			...state
+		}),
+		[CREATE_COMMENT]: (state, action) => ({
+			...state
+		}),
+		[CREATE_COMMENT_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[CREATE_COMMENT_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_COMMENT]: (state, action) => ({
+			...state
+		}),
+		[DELETE_COMMENT_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_COMMENT_FAIL]: (state, action) => ({
+			...state
+		}),
+		[GET_ALL_LABELS]: (state, action) => ({
+			...state
+		}),
+		[GET_ALL_LABELS_SUCCESS]: (state, action) => ({
+			...state,
+			allLabels: action.payload.labels
+		}),
+		[GET_ALL_LABELS_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_LABEL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_LABEL_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_CARD_LABEL_FAIL]: (state, action) => ({
+			...state
+		}),
+		[ADD_CARD_LABEL_IN_STATE]: (state, { payload: { label } }) => ({
+			...state,
+			card: {
+				...state.card
+			}
+		}),
+		[GET_BOARD_MEMBERS]: (state, action) => ({
+			...state
+		}),
+		[GET_BOARD_MEMBERS_SUCCESS]: (state, action) => ({
+			...state,
+			boardMembers: action.payload.members
+		}),
+		[GET_BOARD_MEMBERS_FAIL]: (state, action) => ({
+			...state
+		}),
+		[ADD_BOARD_MEMBER]: (state, action) => ({
+			...state
+		}),
+		[ADD_BOARD_MEMBER_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[ADD_BOARD_MEMBER_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD_MEMBER]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD_MEMBER_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_BOARD_MEMBER_FAIL]: (state, action) => ({
+			...state
+		})
+	},
+	initState
 );
 
 export default board;
