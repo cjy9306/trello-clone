@@ -66,6 +66,11 @@ const GET_CARD_SUCCESS = 'board/GET_CARD_SUCCESS';
 const GET_CARD_FAIL = 'board/GET_CARD_FAIL';
 export const getCard = createRequestThunk(GET_CARD, boardAPI.getCard);
 
+const DELETE_CARD = 'board/DELETE_CARD';
+const DELETE_CARD_SUCCESS = 'board/DELETE_CARD_SUCCESS';
+const DELETE_CARD_FAIL = 'board/DELETE_CARD_FAIL';
+export const deleteCard = createRequestThunk(DELETE_CARD, boardAPI.deleteCard);
+
 const UPDATE_CARD_DESCRIPTION = 'board/UPDATE_CARD_DESCRIPTION';
 const UPDATE_CARD_DESCRIPTION_SUCCESS = 'board/UPDATE_CARD_DESCRIPTION_SUCCESS';
 const UPDATE_CARD_DESCRIPTION_FAIL = 'board/UPDATE_CARD_DESCRIPTION_FAIL';
@@ -253,6 +258,15 @@ const board = handleActions(
 			cardMembers: action.payload.members
 		}),
 		[GET_CARD_FAIL]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_CARD_FAIL]: (state, action) => ({
 			...state
 		}),
 		[GET_CARD_MEMBERS]: (state, action) => ({
