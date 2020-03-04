@@ -21,7 +21,7 @@ const LoginContainer = () => {
 			sessionStorage.setItem('memberId', memberId);
 			sessionStorage.setItem('username', username);
 
-			client.defaults.headers.AccessToken = token;
+			// client.defaults.headers.AccessToken = token;
 
 			history.push('/member/' + username + '/boards');
 			return true;
