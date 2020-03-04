@@ -5,32 +5,34 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import Button from './Button';
 
 const MemberItemContainer = styled.div`
-    height: 32px;
-    line-height: 32px;
-    padding-left: 8px;
-    margin-bottom: 8px;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 8px;
+	margin-bottom: 8px;
+	text-overflow: ellipsis;
 `;
 
 const MemberDeleteButton = styled(Button)`
-    float: right;
-    height: 28px;
+	float: right;
+	height: 28px;
+	margin-left: 16px;
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
-    font-size: 16px;
-    margin-right: 16px;
+	font-size: 16px;
+	margin-right: 16px;
 `;
 
-const MemberListItem = React.memo(({className, member, onDeleteClick}) => {
-    return (
-        <MemberItemContainer className={className}>
-            <CustomIcon icon={faUser} size='xs'/>
-            {member.email}
-            <MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
-                { member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
-            </MemberDeleteButton>
-        </MemberItemContainer>
-    );
-});
+const MemberListItem = ({ className, member, onDeleteClick }) => {
+	return (
+		<MemberItemContainer className={className}>
+			<CustomIcon icon={faUser} size="xs" />
+			{member.email}
+			<MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
+				{member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
+			</MemberDeleteButton>
+		</MemberItemContainer>
+	);
+};
 
 export default React.memo(MemberListItem);
