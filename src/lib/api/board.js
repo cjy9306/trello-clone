@@ -13,6 +13,7 @@ export const createList = ({ boardId, data }) => client.post('/board/' + boardId
 // card
 export const createCard = ({ boardId, list_id, data }) => client.post('/board/' + boardId + '/list/' + list_id + '/card', data);
 export const getCard = ({ boardId, card_id }) => client.get('/board/' + boardId + '/card/' + card_id);
+export const deleteCard = ({ boardId, cardId }) => client.delete('/board/' + boardId + '/card/' + cardId);
 export const updateCardDescription = ({ boardId, card_id, data }) =>
 	client.put('/board/' + boardId + '/card/' + card_id + '/description', data);
 export const updateCardDueDate = ({ boardId, card_id, data }) =>
