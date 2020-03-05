@@ -10,6 +10,7 @@ export const updateListSeq = ({ boardId, data }) => client.put('/board/' + board
 // list
 export const createList = ({ boardId, data }) => client.post('/board/' + boardId + '/list', data);
 export const updateList = ({ boardId, listId, data }) => client.put('/board/' + boardId + '/list/' + listId, data);
+export const deleteList = ({ boardId, listId }) => client.delete('/board/' + boardId + '/list/' + listId);
 
 // card
 export const createCard = ({ boardId, list_id, data }) => client.post('/board/' + boardId + '/list/' + list_id + '/card', data);

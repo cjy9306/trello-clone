@@ -74,7 +74,7 @@ const List = ({ list, index, board }) => {
 				<ListContainer {...provided.draggableProps} ref={provided.innerRef}>
 					<ListWrapper>
 						<div {...provided.dragHandleProps}>
-							<ListTitle {...provided.dragHandleProps} title={list.list_name} onUpdate={onUpdateTitle} />
+							<ListTitle {...provided.dragHandleProps} list={list} onUpdate={onUpdateTitle} />
 						</div>
 						<Droppable droppableId={'list-' + list.list_id} type="card">
 							{(provided, snapshot) => (
