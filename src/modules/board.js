@@ -25,6 +25,11 @@ const CREATE_LIST_SUCCESS = 'board/CREATE_LIST_SUCCESS';
 const CREATE_LIST_FAIL = 'board/CREATE_LIST_FAIL';
 export const createList = createRequestThunk(CREATE_LIST, boardAPI.createList);
 
+const UPDATE_LIST = 'board/UPDATE_LIST';
+const UPDATE_LIST_SUCCESS = 'board/UPDATE_LIST_SUCCESS';
+const UPDATE_LIST_FAIL = 'board/UPDATE_LIST_FAIL';
+export const updateList = createRequestThunk(UPDATE_LIST, boardAPI.updateList);
+
 const UPDATE_CARD_SEQ = 'board/UPDATE_CARD_SEQ';
 const UPDATE_CARD_SEQ_SUCCESS = 'board/UPDATE_CARD_SEQ_SUCCESS';
 const UPDATE_CARD_SEQ_FAIL = 'board/UPDATE_CARD_SEQ_FAIL';
@@ -210,6 +215,15 @@ const board = handleActions(
 			...state
 		}),
 		[CREATE_LIST_FAIL]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[UPDATE_LIST_FAIL]: (state, action) => ({
 			...state
 		}),
 		[CHANGE_MODAL_VISIBLE]: (state, { payload: { visible } }) => ({
