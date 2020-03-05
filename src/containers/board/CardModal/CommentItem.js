@@ -60,6 +60,14 @@ const convertDateClientTimezone = time => {
 	);
 };
 
+const CustomIcon = styled(FontAwesomeIcon)`
+	color: #949996;
+	left: -40px;
+	position: absolute;
+	padding: 6px 0 0 10px;
+	font-size: 20px;
+`;
+
 const CommentItem = ({ card, comment }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
@@ -74,11 +82,7 @@ const CommentItem = ({ card, comment }) => {
 	return (
 		<Container>
 			<Header>
-				<FontAwesomeIcon
-					icon={faUserCircle}
-					size="xs"
-					style={{ color: '#949996', left: '-40px', position: 'absolute', padding: '0px 0 0 10px', fontSize: '20px' }}
-				/>
+				<CustomIcon icon={faUserCircle} size="xs" />
 				<b>{comment.member.username}</b> &nbsp;&nbsp; {convertDateClientTimezone(comment.create_time)}
 			</Header>
 			<ContentContainer>

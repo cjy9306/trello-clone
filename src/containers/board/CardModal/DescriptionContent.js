@@ -18,18 +18,18 @@ const DescHeader = styled.div`
 	padding: 8px 0;
 `;
 
-const IconStyle = {
-	left: '-40px',
-	position: 'absolute',
-	padding: '2px 0 0 10px',
-	fontSize: '20px'
-};
+const CustomIcon = styled(FontAwesomeIcon)`
+	left: -40px;
+	position: absolute;
+	padding: 2px 0 0 10px;
+	font-size: 20px;
+`;
 
 const DescriptionContent = ({ card }) => {
 	return (
 		<Container>
 			<DescHeader>
-				<FontAwesomeIcon icon={faAlignLeft} size="xs" style={IconStyle} />
+				<CustomIcon icon={faAlignLeft} size="xs" />
 				Description <br />
 			</DescHeader>
 			<Description card={card} />

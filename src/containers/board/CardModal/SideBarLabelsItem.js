@@ -30,24 +30,15 @@ const SideBarLabelItemCheck = styled.div`
 	display: ${props => (props.checked ? 'block' : 'none')};
 `;
 
-const EditIconStyle = {
-	right: '0',
-	top: '0',
-	padding: '8px',
-	position: 'absolute',
-	borderRadidus: '3px',
-	fontSize: '16px',
-	cursor: 'pointer'
-};
-
-const CheckIconStyle = {
-	top: '0',
-	right: '0',
-	padding: '8px',
-	position: 'absolute',
-	fontSize: '16px',
-	cursor: 'pointer'
-};
+const CustomIcon = styled(FontAwesomeIcon)`
+	top: 0;
+	right: 9;
+	position: absolute;
+	padding: 8px;
+	borderradius: 3px;
+	font-size: 16px;
+	cursor: pointer;
+`;
 
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 	const [checked, setChecked] = useState(false);
@@ -64,11 +55,11 @@ const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 
 	return (
 		<SideBarLabelsItemContainer>
-			<FontAwesomeIcon icon={faPen} size="xs" style={EditIconStyle} />
+			<CustomIcon icon={faPen} size="xs" />
 			<SideBarLabelsItemContent color={`#${label.color}`} onClick={onItemClick}>
 				{label.label_name}
 				<SideBarLabelItemCheck checked={checked}>
-					<FontAwesomeIcon icon={faCheck} size="xs" style={CheckIconStyle} />
+					<CustomIcon icon={faCheck} size="xs" />
 				</SideBarLabelItemCheck>
 			</SideBarLabelsItemContent>
 		</SideBarLabelsItemContainer>

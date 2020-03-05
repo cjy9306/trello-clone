@@ -30,6 +30,11 @@ const UPDATE_LIST_SUCCESS = 'board/UPDATE_LIST_SUCCESS';
 const UPDATE_LIST_FAIL = 'board/UPDATE_LIST_FAIL';
 export const updateList = createRequestThunk(UPDATE_LIST, boardAPI.updateList);
 
+const DELETE_LIST = 'board/DELETE_LIST';
+const DELETE_LIST_SUCCESS = 'board/DELETE_LIST_SUCCESS';
+const DELETE_LIST_FAIL = 'board/DELETE_LIST_FAIL';
+export const deleteList = createRequestThunk(DELETE_LIST, boardAPI.deleteList);
+
 const UPDATE_CARD_SEQ = 'board/UPDATE_CARD_SEQ';
 const UPDATE_CARD_SEQ_SUCCESS = 'board/UPDATE_CARD_SEQ_SUCCESS';
 const UPDATE_CARD_SEQ_FAIL = 'board/UPDATE_CARD_SEQ_FAIL';
@@ -47,6 +52,14 @@ export const createCard = createRequestThunk(ADD_CARD, boardAPI.createCard);
 
 const CHANGE_MODAL_VISIBLE = 'board/CHANGE_MODAL_VISIBLE';
 export const changeModalVisible = createAction(CHANGE_MODAL_VISIBLE, visible => ({ visible }));
+
+const CHANGE_LIST_ACTION_VISIBLE = 'board/CHANGE_LIST_ACTION_VISIBLE';
+export const changeListActionVisible = createAction(CHANGE_LIST_ACTION_VISIBLE, (visible, posX, posY, listId) => ({
+	visible,
+	posX,
+	posY,
+	listId
+}));
 
 const SET_CARD_MODAL = 'board/SET_CARD_MODAL';
 export const setCardModal = createAction(SET_CARD_MODAL, card => ({ card }));
@@ -170,7 +183,13 @@ const initState = {
 	cardMembers: [], // for card modal
 	allLabels: [], // for card modal, all labels in system
 	cardModalVisible: false, // for card modal
-	boardMembers: []
+	boardMembers: [],
+	listAction: {
+		listActionVisible: false,
+		posX: 0,
+		posY: 0,
+		listId: 0
+	}
 };
 
 const board = handleActions(
@@ -226,9 +245,28 @@ const board = handleActions(
 		[UPDATE_LIST_FAIL]: (state, action) => ({
 			...state
 		}),
+		[DELETE_LIST]: (state, action) => ({
+			...state
+		}),
+		[DELETE_LIST_SUCCESS]: (state, action) => ({
+			...state
+		}),
+		[DELETE_LIST_FAIL]: (state, action) => ({
+			...state
+		}),
 		[CHANGE_MODAL_VISIBLE]: (state, { payload: { visible } }) => ({
 			...state,
 			cardModalVisible: visible
+		}),
+		[CHANGE_LIST_ACTION_VISIBLE]: (state, { payload: { visible, posX, posY, listId } }) => ({
+			...state,
+			listAction: {
+				...state.listAction,
+				listActionVisible: visible,
+				posX,
+				posY,
+				listId
+			}
 		}),
 		[UPDATE_CARD_SEQ]: (state, action) => ({
 			...state

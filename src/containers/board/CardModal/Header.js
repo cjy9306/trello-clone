@@ -29,11 +29,11 @@ const InputField = styled.input.attrs({ type: 'text' })`
 	}
 `;
 
-const IconStyle = {
-	left: '-40px',
-	position: 'absolute',
-	padding: '6px 0 0 10px'
-};
+const CustomIcon = styled(FontAwesomeIcon)`
+	left: -40px;
+	position: absolute;
+	padding: 2px 0 0 10px;
+`;
 
 const Header = ({ card }) => {
 	const [title, onChangeTitle, setTitle] = useInput(card ? card.card_name : '');
@@ -46,7 +46,7 @@ const Header = ({ card }) => {
 
 	return (
 		<HeaderContainer>
-			<FontAwesomeIcon icon={faCreditCard} size="xs" style={IconStyle} />
+			<CustomIcon icon={faCreditCard} size="xs" />
 			<InputField value={title} onChange={onChangeTitle} onBlur={onBlurInputField} />
 		</HeaderContainer>
 	);
