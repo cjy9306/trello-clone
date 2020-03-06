@@ -16,10 +16,7 @@ export const deleteList = ({ boardId, listId }) => client.delete('/board/' + boa
 export const createCard = ({ boardId, list_id, data }) => client.post('/board/' + boardId + '/list/' + list_id + '/card', data);
 export const getCard = ({ boardId, card_id }) => client.get('/board/' + boardId + '/card/' + card_id);
 export const deleteCard = ({ boardId, cardId }) => client.delete('/board/' + boardId + '/card/' + cardId);
-export const updateCardDescription = ({ boardId, card_id, data }) =>
-	client.put('/board/' + boardId + '/card/' + card_id + '/description', data);
-export const updateCardDueDate = ({ boardId, card_id, data }) =>
-	client.put('/board/' + boardId + '/card/' + card_id + '/due_date', data);
+export const updateCard = ({ boardId, cardId, data }) => client.put('/board/' + boardId + '/card/' + cardId, data);
 export const getCardMembers = ({ boardId, cardId }) => client.get('/board/' + boardId + '/card/' + cardId + '/members');
 export const addCardMember = ({ boardId, cardId, data }) =>
 	client.post('/board/' + boardId + '/card/' + cardId + '/member', data);

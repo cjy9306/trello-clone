@@ -202,4 +202,4 @@ const BoardContainer = ({ match: { params } }) => {
 	);
 };
 
-export default BoardContainer;
+export default React.memo(BoardContainer);
