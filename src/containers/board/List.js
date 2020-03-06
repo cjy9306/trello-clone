@@ -40,7 +40,6 @@ const CardList = styled.div`
 
 const List = ({ list, index, board }) => {
 	const dispatch = useDispatch();
-
 	const onCreateCard = async newCardName => {
 		const data = {
 			card_name: newCardName,
@@ -94,4 +93,4 @@ const List = ({ list, index, board }) => {
 	);
 };
 
-export default React.memo(List);
+export default List;

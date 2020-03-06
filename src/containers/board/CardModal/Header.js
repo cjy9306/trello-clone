@@ -3,6 +3,8 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import useInput from '../../../components/useInput';
+import { updateCard, changeCard } from '../../../modules/board';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HeaderContainer = styled.div`
 	margin: 12px 40px 8px 56px;
@@ -36,9 +38,39 @@ const CustomIcon = styled(FontAwesomeIcon)`
 `;
 
 const Header = ({ card }) => {
+	const dispatch = useDispatch();
+	const board = useSelector(state => state.board.board);
+	const lists = useSelector(state => state.board.lists);
 	const [title, onChangeTitle, setTitle] = useInput(card ? card.card_name : '');
 
-	const onBlurInputField = () => {};
+	const onBlurInputField = async () => {
+		const data = { ...card, card_name: title };
+		const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
+
+		let listIndex = 0;
+		const targetList = lists.filter((listItem, index) => {
+			if (listItem.list_id === card.list_id) {
+				listIndex = index;
+				return true;
+			}
+			return false;
+		})[0];
+
+		const newCards = targetList.cards.map(cardItem => {
+			if (cardItem.card_id === card.card_id) return data;
+			else return cardItem;
+		});
+
+		targetList.cards = newCards;
+		const newLists = [...lists];
+		newLists[listIndex] = targetList;
+
+		if (result.success) {
+			dispatch(changeCard(newLists));
+		} else {
+			console.log('update card fail');
+		}
+	};
 
 	useEffect(() => {
 		setTitle(card.card_name);

@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import * as boardAPI from '../lib/api/board';
 import createRequestThunk from '../lib/createRequestThunk';
 
+// board
 const CREATE_BOARD = 'board/CREATE_BOARD';
 const CREATE_BOARD_SUCCESS = 'board/CREATE_BOARD_SUCCESS';
 const CREATE_BOARD_FAIL = 'board/CREATE_BOARD_FAIL';
@@ -17,6 +18,7 @@ const DELETE_BOARD_SUCCESS = 'board/DELETE_BOARD_SUCCESS';
 const DELETE_BOARD_FAIL = 'board/DELETE_BOARD_FAIL';
 export const deleteBoard = createRequestThunk(DELETE_BOARD, boardAPI.deleteBoard);
 
+// list
 const CHANGE_LISTS = 'board/CHANGE_LISTS';
 export const changeLists = createAction(CHANGE_LISTS, lists => ({ lists }));
 
@@ -45,10 +47,14 @@ const UPDATE_LIST_SEQ_SUCCESS = 'board/UPDATE_LIST_SEQ_SUCCESS';
 const UPDATE_LIST_SEQ_FAIL = 'board/UPDATE_LIST_SEQ_FAIL';
 export const updateListSeq = createRequestThunk(UPDATE_LIST_SEQ, boardAPI.updateListSeq);
 
+// card
 const ADD_CARD = 'board/ADD_CARD';
 const ADD_CARD_SUCCESS = 'board/ADD_CARD_SUCCESS';
 const ADD_CARD_FAIL = 'board/ADD_CARD_FAIL';
 export const createCard = createRequestThunk(ADD_CARD, boardAPI.createCard);
+
+const CHANGE_CARD = 'board/CHANGE_CARD';
+export const changeCard = createAction(CHANGE_CARD, lists => ({ lists }));
 
 const CHANGE_MODAL_VISIBLE = 'board/CHANGE_MODAL_VISIBLE';
 export const changeModalVisible = createAction(CHANGE_MODAL_VISIBLE, visible => ({ visible }));
@@ -89,15 +95,10 @@ const DELETE_CARD_SUCCESS = 'board/DELETE_CARD_SUCCESS';
 const DELETE_CARD_FAIL = 'board/DELETE_CARD_FAIL';
 export const deleteCard = createRequestThunk(DELETE_CARD, boardAPI.deleteCard);
 
-const UPDATE_CARD_DESCRIPTION = 'board/UPDATE_CARD_DESCRIPTION';
-const UPDATE_CARD_DESCRIPTION_SUCCESS = 'board/UPDATE_CARD_DESCRIPTION_SUCCESS';
-const UPDATE_CARD_DESCRIPTION_FAIL = 'board/UPDATE_CARD_DESCRIPTION_FAIL';
-export const updateCardDescription = createRequestThunk(UPDATE_CARD_DESCRIPTION, boardAPI.updateCardDescription);
-
-const UPDATE_CARD_DUEDATE = 'board/UPDATE_CARD_DUEDATE';
-const UPDATE_CARD_DUEDATE_SUCCESS = 'board/UPDATE_CARD_DUEDATE_SUCCESS';
-const UPDATE_CARD_DUEDATE_FAIL = 'board/UPDATE_CARD_DUEDATE_FAIL';
-export const updateCardDueDate = createRequestThunk(UPDATE_CARD_DUEDATE, boardAPI.updateCardDueDate);
+const UPDATE_CARD = 'board/UPDATE_CARD';
+const UPDATE_CARD_SUCCESS = 'board/UPDATE_CARD_SUCCESS';
+const UPDATE_CARD_FAIL = 'board/UPDATE_CARD_FAIL';
+export const updateCard = createRequestThunk(UPDATE_CARD, boardAPI.updateCard);
 
 const CREATE_CHECKLIST = 'board/CREATE_CHECKLIST';
 const CREATE_CHECKLIST_SUCCESS = 'board/CREATE_CHECKLIST_SUCCESS';
@@ -254,6 +255,10 @@ const board = handleActions(
 		[DELETE_LIST_FAIL]: (state, action) => ({
 			...state
 		}),
+		[CHANGE_CARD]: (state, { payload: { lists } }) => ({
+			...state,
+			lists
+		}),
 		[CHANGE_MODAL_VISIBLE]: (state, { payload: { visible } }) => ({
 			...state,
 			cardModalVisible: visible
@@ -349,22 +354,13 @@ const board = handleActions(
 		[DELETE_CARD_MEMBER_FAIL]: (state, action) => ({
 			...state
 		}),
-		[UPDATE_CARD_DESCRIPTION]: (state, action) => ({
+		[UPDATE_CARD]: (state, action) => ({
 			...state
 		}),
-		[UPDATE_CARD_DESCRIPTION_SUCCESS]: (state, action) => ({
+		[UPDATE_CARD_SUCCESS]: (state, action) => ({
 			...state
 		}),
-		[UPDATE_CARD_DESCRIPTION_FAIL]: (state, action) => ({
-			...state
-		}),
-		[UPDATE_CARD_DUEDATE]: (state, action) => ({
-			...state
-		}),
-		[UPDATE_CARD_DUEDATE_SUCCESS]: (state, action) => ({
-			...state
-		}),
-		[UPDATE_CARD_DUEDATE_FAIL]: (state, action) => ({
+		[UPDATE_CARD_FAIL]: (state, action) => ({
 			...state
 		}),
 		[CREATE_CHECKLIST]: (state, action) => ({

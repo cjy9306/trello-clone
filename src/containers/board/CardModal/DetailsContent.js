@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import Alert from '../../../components/Alert';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCardDueDate, getCard } from '../../../modules/board';
+import { updateCard, getCard } from '../../../modules/board';
 
 const Container = styled.div`
 	margin: 8px 0 24px 40px;
@@ -59,9 +59,9 @@ const DetailsContent = ({ card }) => {
 	const board = useSelector(state => state.board.board);
 
 	const onChangeDueDate = async selected => {
-		const data = { due_date: selected };
+		const data = { ...card, due_date: selected };
 
-		const result = await dispatch(updateCardDueDate({ boardId: board.board_id, card_id: card.card_id, data }));
+		const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
 
 		if (result.success) {
 			dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
