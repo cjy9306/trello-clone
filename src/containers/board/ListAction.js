@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { LinkButton } from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteList, changeListActionVisible, getBoard } from '../../modules/board';
+import { setMessageStates } from '../../modules/common';
 
 const PopupOver = styled.div`
 	display: ${props => (props.visible ? 'block' : 'none')};
@@ -58,6 +59,7 @@ const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
 			await dispatch(getBoard({ boardId: board.board_id }));
 			dispatch(changeListActionVisible(false, 0, 0, 0));
 		} else {
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

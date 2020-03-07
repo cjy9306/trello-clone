@@ -65,7 +65,6 @@ const AddCard = ({ onCreateCard }) => {
 		if (newCardName === '') return;
 
 		const result = await onCreateCard(newCardName);
-
 		if (result) setNewCardName('');
 	};
 

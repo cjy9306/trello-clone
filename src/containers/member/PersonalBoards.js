@@ -45,4 +45,4 @@ const PersonalBoards = () => {
 	);
 };
 
-export default React.memo(PersonalBoards);
+export default PersonalBoards;

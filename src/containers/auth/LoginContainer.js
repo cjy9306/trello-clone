@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContent from './LoginContent';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../modules/auth';
 import { setMessageStates } from '../../modules/common';
+import Message from '../../components/Message';
 
 const LoginContainer = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
+	const message = useSelector(state => state.common.message);
 	const [alertVisible, setAlertVisible] = useState('');
 
 	const onLogin = async ({ username, password }) => {
@@ -27,7 +28,7 @@ const LoginContainer = () => {
 			return true;
 		} else {
 			setAlertVisible(true);
-			dispatch(setMessageStates(true, 'login error'));
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 
 		return false;
@@ -35,6 +36,7 @@ const LoginContainer = () => {
 
 	return (
 		<>
+			<Message visible={message.visible} type={message.type} text={message.text} />
 			<LoginContent onLogin={onLogin} alertVisible={alertVisible} />
 		</>
 	);

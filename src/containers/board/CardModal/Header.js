@@ -5,6 +5,7 @@ import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import useInput from '../../../hooks/useInput';
 import { updateCard, changeCard } from '../../../modules/board';
 import { useDispatch, useSelector } from 'react-redux';
+import { setMessageStates } from '../../../modules/common';
 
 const HeaderContainer = styled.div`
 	margin: 12px 40px 8px 56px;
@@ -65,11 +66,8 @@ const Header = ({ card }) => {
 		const newLists = [...lists];
 		newLists[listIndex] = targetList;
 
-		if (result.success) {
-			dispatch(changeCard(newLists));
-		} else {
-			console.log('update card fail');
-		}
+		if (result.success) dispatch(changeCard(newLists));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	useEffect(() => {

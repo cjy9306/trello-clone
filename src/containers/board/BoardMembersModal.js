@@ -6,6 +6,7 @@ import Modal from '../../components/Modal';
 import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
 import { useDispatch, useSelector } from 'react-redux';
 import MemberListItem from '../../components/MemberListItem';
+import { setMessageStates } from '../../modules/common';
 
 const MembersModal = styled(Modal)`
 	width: 380px;
@@ -54,34 +55,30 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 	const getMembers = useCallback(async () => {
 		if (visible === false) return;
 
-		dispatch(getBoardMembers({ boardId: board.board_id }));
-	}, [visible, board, dispatch]);
+		const result = dispatch(getBoardMembers({ boardId: board.board_id }));
 
-	useEffect(() => {
-		getMembers();
-	}, [visible, getMembers]);
+		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
+	}, [visible, board, dispatch]);
 
 	const onAddMember = async () => {
 		if (email === '') return;
 		const data = { email };
 		const result = await dispatch(addBoardMember({ boardId: board.board_id, data }));
 
-		if (result.success) {
-			getMembers();
-		} else {
-			console.log('add member fail');
-		}
+		if (result.success) getMembers();
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onMemberDeleteClick = async memberId => {
 		const result = await dispatch(deleteBoardMember({ boardId: board.board_id, member_id: memberId }));
 
-		if (result.success) {
-			getMembers();
-		} else {
-			console.log('delete member fail');
-		}
+		if (result.success) getMembers();
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
+
+	useEffect(() => {
+		getMembers();
+	}, [visible, getMembers]);
 
 	useEffect(() => {
 		setEmail('');
