@@ -34,8 +34,8 @@ const BoxContainer = styled.div`
 	}
 
 	@media only screen and (max-width: 480px) {
-		width: 45%;
-		margin: 0 2% 2% 0;
+		width: 48.5%;
+		margin: 0 3% 3% 0;
 		&:nth-of-type(2n) {
 			margin-right: 0;
 		}
