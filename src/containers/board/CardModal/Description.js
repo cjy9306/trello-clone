@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateCard, getCard } from '../../../modules/board';
-import useInput from '../../../components/useInput';
+import useInput from '../../../hooks/useInput';
 import Button from '../../../components/Button';
 
 const Container = styled.div``;
