@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import Button from '../../components/Button';
 import useInput from '../../hooks/useInput';
-import Alert from '../../components/Alert';
 import FireBaseLogin from '../../components/FireBaseLogin';
 
 const Container = styled.div`
@@ -81,7 +80,6 @@ const Login = ({ onLogin, alertVisible }) => {
 	return (
 		<Container>
 			<LoginFormContainer>
-				<Alert type="error" message="Username or password does not correct" visible={alertVisible} />
 				<LoginFormHeader>Login to Trello Clone</LoginFormHeader>
 				<ContentContainer>
 					<InputContainer>
