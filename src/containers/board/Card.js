@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import { Draggable } from 'react-beautiful-dnd';
 import { changeModalVisible, getCard } from '../../modules/board';
 import Tag from '../../components/Tag';
+import { setMessageStates } from '../../modules/common';
 
 const CardContainer = styled.div`
 	border: 1px lightgrey;
@@ -54,9 +55,8 @@ const Card = ({ card, board, index }) => {
 			dispatch(changeModalVisible(true));
 		} else {
 			const result = await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-			if (result.success === true) {
-				dispatch(changeModalVisible(true));
-			}
+			if (result.success) dispatch(changeModalVisible(true));
+			else dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

@@ -5,6 +5,7 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { createList, getBoard } from '../../modules/board';
 import { useDispatch, useSelector } from 'react-redux';
+import { setMessageStates } from '../../modules/common';
 
 const AddModal = styled(Modal)`
 	width: 320px;
@@ -63,6 +64,7 @@ const AddListModal = ({ visible, onCloseModal }) => {
 			dispatch(getBoard({ boardId: board.board_id }));
 			onCloseModal();
 		} else {
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

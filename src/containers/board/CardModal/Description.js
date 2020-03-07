@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateCard, getCard } from '../../../modules/board';
 import useInput from '../../../hooks/useInput';
 import Button from '../../../components/Button';
+import { setMessageStates } from '../../../modules/common';
 
 const Container = styled.div``;
 
@@ -66,11 +67,8 @@ const Description = ({ card }) => {
 
 		const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
 
-		if (result.success) {
-			await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		} else {
-			console.log('update description error');
-		}
+		if (result.success) await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 		onCancelClick();
 	};
 

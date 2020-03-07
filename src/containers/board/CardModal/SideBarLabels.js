@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import SideBarLabelsItem from './SideBarLabelsItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../modules/board';
+import { setMessageStates } from '../../../modules/common';
 
 const SideBarLabelsContainer = styled.div`
 	background-color: #fff;
@@ -67,12 +68,18 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 			await dispatch(getBoard({ boardId: board.board_id }));
 			await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
 		} else {
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
-	useEffect(() => {
-		dispatch(getAllLabels({ boardId: board.board_id }));
+	const getLabels = useCallback(async () => {
+		const result = await dispatch(getAllLabels({ boardId: board.board_id }));
+		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
 	}, [board, dispatch]);
+
+	useEffect(() => {
+		getLabels();
+	}, [getLabels]);
 
 	return (
 		<SideBarLabelsContainer>

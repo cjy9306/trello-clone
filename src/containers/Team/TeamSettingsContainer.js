@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { getTeam, updateTeam, deleteTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
 import MemberListItem from '../../components/MemberListItem';
+import { setMessageStates } from '../../modules/common';
 
 const Container = styled.div``;
 
@@ -148,21 +149,15 @@ const TeamSettingsContainer = ({ match }) => {
 		const data = { email };
 		const result = await dispatch(addTeamMember({ teamId, data }));
 
-		if (result.success) {
-			getTeam();
-		} else {
-			console.log('delete member fail');
-		}
+		if (result.success) getTeam();
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onMemberDeleteClick = async memberId => {
 		const result = await dispatch(deleteTeamMember({ teamId, memberId }));
 
-		if (result.success) {
-			dispatch(getTeam({ teamId }));
-		} else {
-			console.log('delete member fail');
-		}
+		if (result.success) dispatch(getTeam({ teamId }));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onTeamDeleteOk = async () => {
@@ -172,7 +167,7 @@ const TeamSettingsContainer = ({ match }) => {
 			const memberId = sessionStorage.getItem('memberId');
 			history.push('/member/' + memberId + '/boards');
 		} else {
-			console.log('delete team fail');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
@@ -186,7 +181,7 @@ const TeamSettingsContainer = ({ match }) => {
 			setIsEditting(false);
 		} else {
 			setDescription(team.description);
-			console.log('update description fail');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

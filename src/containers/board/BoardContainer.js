@@ -12,6 +12,7 @@ import {
 	changeModalVisible,
 	changeListActionVisible
 } from '../../modules/board';
+import { setMessageStates } from '../../modules/common';
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './ListAction';
@@ -56,8 +57,7 @@ const BoardContainer = ({ match: { params } }) => {
 	const listActionVisible = useSelector(state => state.board.listAction.listActionVisible);
 	const listActionPosX = useSelector(state => state.board.listAction.posX);
 	const listActionPosY = useSelector(state => state.board.listAction.posY);
-	const messageVisible = useSelector(state => state.common.message.visible);
-	const messageText = useSelector(state => state.common.message.text);
+	const message = useSelector(state => state.common.message);
 
 	useEffect(() => {
 		dispatch(getBoard({ boardId }));
@@ -152,7 +152,7 @@ const BoardContainer = ({ match: { params } }) => {
 		}
 	};
 
-	const onUpdateListSeq = (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
+	const onUpdateListSeq = async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
 		dispatch(changeLists(newLists));
 		const data = {
 			listId,
@@ -160,14 +160,13 @@ const BoardContainer = ({ match: { params } }) => {
 			destListSeq
 		};
 
-		dispatch(updateListSeq({ boardId, data })).then(result => {
-			if (result.success === false) {
-				dispatch(changeLists(prevLists));
-			}
-		});
+		const result = await dispatch(updateListSeq({ boardId, data }));
+
+		if (result.success) dispatch(changeLists(prevLists));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
-	const onUpdateCardSeq = (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
+	const onUpdateCardSeq = async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
 		dispatch(changeLists(newLists));
 		const data = {
 			sourceListId,
@@ -177,11 +176,10 @@ const BoardContainer = ({ match: { params } }) => {
 			cardId
 		};
 
-		dispatch(updateCardSeq({ boardId, list_id: sourceListId, data })).then(result => {
-			if (result.success === false) {
-				dispatch(changeLists(prevLists));
-			}
-		});
+		const result = await dispatch(updateCardSeq({ boardId, list_id: sourceListId, data }));
+
+		if (result.success) dispatch(changeLists(prevLists));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onCloseModal = () => dispatch(changeModalVisible(false));
@@ -200,9 +198,8 @@ const BoardContainer = ({ match: { params } }) => {
 					posY={listActionPosY}
 					onCloseModal={onCloseListAction}
 				/>
-				<Message visible={messageVisible} text={messageText} />
 			</Container>
-			<Message visible={messageVisible} text={messageText} />
+			<Message visible={message.visible} type={message.type} text={message.text} />
 		</Root>
 	);
 };

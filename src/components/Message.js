@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faInfoCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { setMessageStates } from '../modules/common';
 import { useDispatch } from 'react-redux';
 
@@ -43,12 +43,27 @@ const MessageContent = styled.div`
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
-	color: red;
 	margin-right: 10px;
 	font-size: 16px;
 `;
 
-const Message = ({ className, visible, text }) => {
+const ErrorIcon = styled(CustomIcon)`
+	color: red;
+`;
+
+const InfoIcon = styled(CustomIcon)`
+	color: blue;
+`;
+
+const WarnIcon = styled(CustomIcon)`
+	color: orange;
+`;
+
+const SuccessIcon = styled(CustomIcon)`
+	color: green;
+`;
+
+const Message = ({ className, visible, text, type }) => {
 	const dispatch = useDispatch();
 
 	const onAnimationEnd = () => dispatch(setMessageStates(false, ''));
@@ -56,7 +71,10 @@ const Message = ({ className, visible, text }) => {
 	return (
 		<MessageContainer className={className} visible={visible} onAnimationEnd={onAnimationEnd}>
 			<MessageContent>
-				<CustomIcon icon={faExclamationCircle} size="xs" />
+				{type === 'error' && <ErrorIcon icon={faExclamationCircle} size="xs" />}
+				{type === 'info' && <InfoIcon icon={faInfoCircle} size="xs" />}
+				{type === 'warn' && <WarnIcon icon={faExclamationTriangle} size="xs" />}
+				{type === 'success' && <SuccessIcon icon={faCheckCircle} size="xs" />}
 				{text}
 			</MessageContent>
 		</MessageContainer>

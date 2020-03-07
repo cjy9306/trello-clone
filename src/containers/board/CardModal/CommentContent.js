@@ -8,6 +8,7 @@ import { createComment, getCard } from '../../../modules/board';
 import CommentItem from './CommentItem';
 import Button from '../../../components/Button';
 import useInput from '../../../hooks/useInput';
+import { setMessageStates } from '../../../modules/common';
 
 const Container = styled.div`
 	margin: 8px 0 24px 40px;
@@ -76,10 +77,10 @@ const CommentContent = ({ card }) => {
 		const result = await dispatch(createComment({ boardId: board.board_id, card_id: card.card_id, data }));
 
 		if (result.success) {
-			await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+			dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
 			setEditComment('');
 		} else {
-			console.log('can not create comment');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

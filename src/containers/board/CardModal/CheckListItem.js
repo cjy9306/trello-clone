@@ -5,6 +5,7 @@ import useInput from '../../../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../modules/board';
 import Button from '../../../components/Button';
+import { setMessageStates } from '../../../modules/common';
 
 const DeleteWrapper = styled.div`
 	display: none;
@@ -79,6 +80,7 @@ const CheckListItem = ({ item }) => {
 		setIsEditting(true);
 		setItemName(item.item_name);
 	}, [item, setItemName]);
+
 	const onCancelClick = useCallback(() => {
 		setIsEditting(false);
 	}, []);
@@ -93,10 +95,10 @@ const CheckListItem = ({ item }) => {
 
 		const result = await dispatch(updateCheckListItem({ boardId: board.board_id, item_id: item.item_id, data }));
 		if (result.success) {
-			await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
+			dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 			onCancelClick();
 		} else {
-			console.log('update fail');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
@@ -104,12 +106,8 @@ const CheckListItem = ({ item }) => {
 		const result = await dispatch(deleteCheckListItem({ boardId: board.board_id, item_id: item.item_id }));
 
 		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-		else console.log('can not delete checklist item');
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
-
-	useEffect(() => {
-		if (isEditting) editRef.current.focus();
-	}, [isEditting]);
 
 	const onClickCheckBox = async checked => {
 		const data = {
@@ -118,12 +116,13 @@ const CheckListItem = ({ item }) => {
 		};
 
 		const result = await dispatch(updateCheckListItem({ boardId: board.board_id, item_id: item.item_id, data }));
-		if (result.success) {
-			dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-		} else {
-			console.log('update checklist item fail');
-		}
+		if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
+
+	useEffect(() => {
+		if (isEditting) editRef.current.focus();
+	}, [isEditting]);
 
 	return (
 		<Container isEditting={isEditting}>

@@ -7,6 +7,7 @@ import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard
 import { LinkButton } from '../../../components/Button';
 import SidebarMembers from './SidebarMembers';
 import { ConfirmModal } from '../../../components/Modal';
+import { setMessageStates } from '../../../modules/common';
 
 const SideBarAddOn = styled.div`
 	margin-bottom: 32px;
@@ -60,6 +61,8 @@ const SideBar = ({ card }) => {
 		if (result.success) {
 			await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 			onCheckListPopupToggle();
+		} else {
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
@@ -74,7 +77,7 @@ const SideBar = ({ card }) => {
 			dispatch(changeModalVisible(false));
 			onCloseDeleteConfirm();
 		} else {
-			console.log('delete card fail');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, getCard } from '../../../modules/board';
+import { setMessageStates } from '../../../modules/common';
 
 const Container = styled.div`
 	margin-bottom: 24px;
@@ -75,8 +76,8 @@ const CommentItem = ({ card, comment }) => {
 	const onDelete = async () => {
 		const result = await dispatch(deleteComment({ boardId: board.board_id, comment_id: comment.comment_id }));
 
-		if (result.success) await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		else console.log('can not delete comment');
+		if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	return (

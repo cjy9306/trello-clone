@@ -6,6 +6,7 @@ import Alert from '../../../components/Alert';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCard, getCard } from '../../../modules/board';
+import { setMessageStates } from '../../../modules/common';
 
 const Container = styled.div`
 	margin: 8px 0 24px 40px;
@@ -63,10 +64,8 @@ const DetailsContent = ({ card }) => {
 
 		const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
 
-		if (result.success) {
-			dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		} else {
-		}
+		if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	useEffect(() => {

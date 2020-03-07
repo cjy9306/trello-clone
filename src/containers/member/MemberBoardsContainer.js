@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { getAllBoards } from '../../modules/member';
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import CreateBoardModal from '../../components/CreateBoardModal';
 import PersonalBoards from './PersonalBoards';
 import MemberTeams from './MemberTeams';
+import { setMessageStates } from '../../modules/common';
 
 const BoardsContainer = styled.div`
 	max-width: 860px;
@@ -22,10 +23,16 @@ const MemberBoardsContainer = () => {
 	const onCloseBoardModal = () => setBoardModalVisible(false);
 	const onShowBoardModal = () => setBoardModalVisible(true);
 
-	useEffect(() => {
+	const getBoards = useCallback(async () => {
 		const member_id = sessionStorage.getItem('memberId');
-		dispatch(getAllBoards({ member_id }));
+		const result = await dispatch(getAllBoards({ member_id }));
+
+		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
 	}, [dispatch]);
+
+	useEffect(() => {
+		getBoards();
+	}, [getBoards]);
 
 	return (
 		<>

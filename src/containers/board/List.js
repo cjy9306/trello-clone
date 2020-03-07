@@ -6,6 +6,7 @@ import ListTitle from './ListTitle';
 import Card from './Card';
 import { useDispatch } from 'react-redux';
 import { createCard, getBoard, updateList } from '../../modules/board';
+import { setMessageStates } from '../../modules/common';
 
 const ListContainer = styled.div`
 	width: 272px;
@@ -52,7 +53,7 @@ const List = ({ list, index, board }) => {
 			dispatch(getBoard({ boardId: board.board_id }));
 			return true;
 		} else {
-			console.log('create card fail');
+			dispatch(setMessageStates(true, 'error', result.data.data));
 			return false;
 		}
 	};
@@ -61,10 +62,7 @@ const List = ({ list, index, board }) => {
 		const data = { list_name: title, seq: list.seq };
 		const result = await dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
 
-		if (result.success) {
-		} else {
-			console.log('update list title is fail');
-		}
+		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	return (
