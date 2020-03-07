@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
-import useCheckWhetherIsLogined from '../../components/useCheckWhetherIsLogined';
+import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import BoardContent from './BoardContent';
 import {
@@ -15,6 +15,7 @@ import {
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './ListAction';
+import Message from '../../components/Message';
 
 const Root = styled.div`
 	background-color: #${props => props.backgroundColor};
@@ -55,6 +56,8 @@ const BoardContainer = ({ match: { params } }) => {
 	const listActionVisible = useSelector(state => state.board.listAction.listActionVisible);
 	const listActionPosX = useSelector(state => state.board.listAction.posX);
 	const listActionPosY = useSelector(state => state.board.listAction.posY);
+	const messageVisible = useSelector(state => state.common.message.visible);
+	const messageText = useSelector(state => state.common.message.text);
 
 	useEffect(() => {
 		dispatch(getBoard({ boardId }));
@@ -197,7 +200,9 @@ const BoardContainer = ({ match: { params } }) => {
 					posY={listActionPosY}
 					onCloseModal={onCloseListAction}
 				/>
+				<Message visible={messageVisible} text={messageText} />
 			</Container>
+			<Message visible={messageVisible} text={messageText} />
 		</Root>
 	);
 };

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createComment, getCard } from '../../../modules/board';
 import CommentItem from './CommentItem';
 import Button from '../../../components/Button';
-import useInput from '../../../components/useInput';
+import useInput from '../../../hooks/useInput';
 
 const Container = styled.div`
 	margin: 8px 0 24px 40px;

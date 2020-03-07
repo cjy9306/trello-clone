@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
-import useInput from '../../../components/useInput';
+import useInput from '../../../hooks/useInput';
 import { updateCard, changeCard } from '../../../modules/board';
 import { useDispatch, useSelector } from 'react-redux';
 

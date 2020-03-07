@@ -98,9 +98,10 @@ const CommentItem = ({ card, comment }) => {
 				</ContentWrapper>
 			</ContentContainer>
 			<ControlContainer>
+				{/* 				
 				<a href="/#" onClick={() => alert(comment.contents)}>
 					Edit
-				</a>{' '}
+				</a> */}
 				&nbsp;&nbsp;
 				<a href="/#" onClick={() => onDelete()}>
 					Delete

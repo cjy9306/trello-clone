@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import LoginContent from './LoginContent';
 import { useDispatch } from 'react-redux';
 import { login } from '../../modules/auth';
-// import client from '../../lib/api/client';
+import { setMessageStates } from '../../modules/common';
 
 const LoginContainer = () => {
 	const dispatch = useDispatch();
@@ -27,12 +27,17 @@ const LoginContainer = () => {
 			return true;
 		} else {
 			setAlertVisible(true);
+			dispatch(setMessageStates(true, 'login error'));
 		}
 
 		return false;
 	};
 
-	return <LoginContent onLogin={onLogin} alertVisible={alertVisible} />;
+	return (
+		<>
+			<LoginContent onLogin={onLogin} alertVisible={alertVisible} />
+		</>
+	);
 };
 
 export default React.memo(LoginContainer);
