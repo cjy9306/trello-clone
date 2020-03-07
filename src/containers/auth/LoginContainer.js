@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContent from './LoginContent';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,6 @@ const LoginContainer = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const message = useSelector(state => state.common.message);
-	const [alertVisible, setAlertVisible] = useState('');
 
 	const onLogin = async ({ username, password }) => {
 		const result = await dispatch(login({ username, password }));
@@ -27,7 +26,6 @@ const LoginContainer = () => {
 			history.push('/member/' + username + '/boards');
 			return true;
 		} else {
-			setAlertVisible(true);
 			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 
@@ -37,7 +35,7 @@ const LoginContainer = () => {
 	return (
 		<>
 			<Message visible={message.visible} type={message.type} text={message.text} />
-			<LoginContent onLogin={onLogin} alertVisible={alertVisible} />
+			<LoginContent onLogin={onLogin} />
 		</>
 	);
 };

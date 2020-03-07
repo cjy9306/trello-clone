@@ -12,6 +12,10 @@ import { setMessageStates } from '../../modules/common';
 const BoardsContainer = styled.div`
 	max-width: 860px;
 	margin: 20px auto;
+
+	@media only screen and (max-width: 768px) {
+		margin: 20px 12px;
+	}
 `;
 
 const MemberBoardsContainer = () => {
