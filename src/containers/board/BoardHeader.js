@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Button from '../../components/Button';
 import HeaderButton from '../../components/HeaderButton';
 import AddListModal from './AddListModal';
@@ -11,8 +11,8 @@ import { useHistory } from 'react-router-dom';
 import { setMessageStates } from '../../modules/common';
 
 const BoardHeaderContainer = styled.div`
-	height: 24px;
-	padding: 8px 16px 8px 16px;
+	height: auto;
+	padding: 8px 16px 0 16px;
 	display: flex;
 	justify-content: space-between;
 `;
@@ -66,7 +66,6 @@ const BoardHeader = ({ board }) => {
 			<AddListModal visible={listModalVisible} onCloseModal={onCloseListModal} />
 			<MenuContainer>
 				<MenuWrapper>{board.board_name}</MenuWrapper>
-				<MenuWrapper>{board.public_scope}</MenuWrapper>
 				<MenuWrapper>
 					<HeaderButton onClick={onShowListModal}>Add another list</HeaderButton> &nbsp;
 					<HeaderButton onClick={onShowMembersModal}>Members</HeaderButton>

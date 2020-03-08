@@ -5,7 +5,8 @@ import { useHistory } from 'react-router-dom';
 import CreateBoardModal from './CreateBoardModal';
 import CreateTeamModal from './CreateTeamModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
+import GlobalCreateAction from './GlobalCreateAction';
 
 const HeaderContainer = styled.div`
 	height: 32px;
@@ -36,6 +37,7 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	const history = useHistory();
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
 	const [teamModalVisible, setTeamModalVisible] = useState(false);
+	const [createActionVisible, setCreateActionVisible] = useState(false);
 
 	const onClickHome = () => {
 		const username = sessionStorage.getItem('username');
@@ -58,6 +60,9 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	const onCloseTeamModal = () => setTeamModalVisible(false);
 	const onShowTeamModal = () => setTeamModalVisible(true);
 
+	// create action
+	const onToggleCreateAction = () => setCreateActionVisible(!createActionVisible);
+
 	return (
 		<HeaderContainer backgroundColor={backgroundColor}>
 			<CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
@@ -67,8 +72,15 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 					<CustomIcon icon={faHome} size="xs" />
 				</HeaderButton>
 				&nbsp;
-				<HeaderButton onClick={onShowTeamModal}>Create team</HeaderButton>&nbsp;
-				<HeaderButton onClick={onShowBoardModal}>Create another board</HeaderButton>
+				<HeaderButton onClick={onToggleCreateAction}>
+					<CustomIcon icon={faPlus} size="xs" />
+				</HeaderButton>
+				<GlobalCreateAction
+					visible={createActionVisible}
+					onTogglePopup={onToggleCreateAction}
+					onShowBoardModal={onShowBoardModal}
+					onShowTeamModal={onShowTeamModal}
+				/>
 			</MenuWrapper>
 			<TitleWrapper>Trello Clone</TitleWrapper>
 			<MenuWrapper textAlign="right">

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTeams } from '../modules/member';
 
 const CreateModal = styled(Modal)`
-	width: 420px;
+	max-width: 420px;
 	height: 160px;
 	border-radius: 3px;
 `;
@@ -31,7 +31,7 @@ const CreateBoardControl = styled.div`
 
 const CreateBoardContent = styled.div`
 	padding: 8px 16px 16px 0;
-	width: 230px;
+	max-width: 230px;
 `;
 
 const TitleInput = styled.input`
