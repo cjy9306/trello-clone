@@ -4,6 +4,8 @@ import HeaderButton from './HeaderButton';
 import { useHistory } from 'react-router-dom';
 import CreateBoardModal from './CreateBoardModal';
 import CreateTeamModal from './CreateTeamModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.div`
 	height: 32px;
@@ -26,6 +28,10 @@ const MenuWrapper = styled.div`
 	text-align: ${props => props.textAlign};
 `;
 
+const CustomIcon = styled(FontAwesomeIcon)`
+	font-size: 16px;
+`;
+
 const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	const history = useHistory();
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
@@ -45,29 +51,22 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	};
 
 	// create board modal
-	const onCloseBoardModal = () => {
-		setBoardModalVisible(false);
-	};
-
-	const onShowBoardModal = () => {
-		setBoardModalVisible(true);
-	};
+	const onCloseBoardModal = () => setBoardModalVisible(false);
+	const onShowBoardModal = () => setBoardModalVisible(true);
 
 	// create team modal
-	const onCloseTeamModal = () => {
-		setTeamModalVisible(false);
-	};
-
-	const onShowTeamModal = () => {
-		setTeamModalVisible(true);
-	};
+	const onCloseTeamModal = () => setTeamModalVisible(false);
+	const onShowTeamModal = () => setTeamModalVisible(true);
 
 	return (
 		<HeaderContainer backgroundColor={backgroundColor}>
 			<CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
 			<CreateTeamModal visible={teamModalVisible} onCloseModal={onCloseTeamModal} />
 			<MenuWrapper textAlign="left">
-				<HeaderButton onClick={onClickHome}>Home</HeaderButton>&nbsp;
+				<HeaderButton onClick={onClickHome}>
+					<CustomIcon icon={faHome} size="xs" />
+				</HeaderButton>
+				&nbsp;
 				<HeaderButton onClick={onShowTeamModal}>Create team</HeaderButton>&nbsp;
 				<HeaderButton onClick={onShowBoardModal}>Create another board</HeaderButton>
 			</MenuWrapper>
