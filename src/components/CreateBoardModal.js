@@ -93,10 +93,6 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 		}
 	};
 
-	useEffect(() => {
-		setTitle('');
-	}, [setTitle]);
-
 	const onColorBlockClick = id => {
 		const newArray = [...colorArray];
 		newArray.forEach(item => {
@@ -109,6 +105,10 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 
 	const getCheckdColor = () => {
 		for (let i = 0; i < colorArray.length; i++) if (colorArray[i][2] === true) return colorArray[i][1];
+	};
+
+	const onTeamSelected = team => {
+		setTeamId(team.id);
 	};
 
 	useEffect(() => {
@@ -127,9 +127,9 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 		setDropdownTeams(datas);
 	}, [teams]);
 
-	const onTeamSelected = team => {
-		setTeamId(team.id);
-	};
+	useEffect(() => {
+		setTitle('');
+	}, [setTitle]);
 
 	return (
 		<CreateModal visible={visible} onCloseModal={onCloseModal}>

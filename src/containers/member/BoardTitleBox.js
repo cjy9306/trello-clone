@@ -33,6 +33,7 @@ const BoxContainer = styled.div`
 		}
 	}
 
+	// low resolution phone
 	@media only screen and (max-width: 480px) {
 		width: 48.5%;
 		margin: 0 3% 3% 0;
