@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateCard, getCard } from '../../../modules/board';
 import useInput from '../../../hooks/useInput';

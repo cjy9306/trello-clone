@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const CreateModal = styled(Modal)`
-	width: 380px;
+	max-width: 380px;
 	height: 300px;
 	border-radius: 3px;
 `;
