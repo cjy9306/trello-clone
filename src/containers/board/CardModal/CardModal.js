@@ -9,25 +9,63 @@ import CommentContent from './CommentContent';
 import SideBar from './SideBar';
 import DescriptionContent from './DescriptionContent';
 
+const CardModalContainer = styled(Modal)`
+	min-height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	@media only screen and (min-width: 769px) {
+		width: 768px;
+	}
+
+	// phone
+	@media only screen and (min-width: 481px) and (max-width: 768px) {
+		width: 90%;
+	}
+
+	// low resolution phone
+	@media only screen and (max-width: 480px) {
+		width: 95%;
+	}
+`;
+
 const MainContent = styled.div`
 	float: left;
-	width: 542px;
 	padding: 0px 8px 8px 16px;
+
+	// desktop, tablet
+	@media only screen and (min-width: 769px) {
+		width: 542px;
+	}
+
+	// phone
+	@media only screen and (min-width: 668px) and (max-width: 768px) {
+		width: 380px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		width: 95%;
+		margin-right: 8px;
+		padding-left: 8px;
+	}
 `;
 
 const SideBarContent = styled.div`
-	width: 188px;
 	margin-top: 26px;
 	float: right;
 	padding: 0 8px 8px 0;
 	overflow: hidden;
-`;
 
-const CardModalContainer = styled(Modal)`
-	width: 768px;
-	min-height: 400px;
-	overflow-x: hidden;
-	overflow-y: auto;
+	// desktop, tablet, phone
+	@media only screen and (min-width: 668px) {
+		width: 188px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		width: 95%;
+	}
 `;
 
 const CardModal = ({ visible, onCloseModal }) => {

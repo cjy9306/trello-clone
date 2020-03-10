@@ -35,7 +35,14 @@ const PopupOver = styled.div`
 const SideBarActions = styled.div``;
 
 const LinkButtonWrapper = styled(LinkButton)`
-	margin: 0 16px 8px 0;
+	@media only screen and (min-width: 669px) {
+		margin: 0 16px 8px 0;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		margin: 0 0px 8px 0;
+	}
 `;
 
 const SideBar = ({ card }) => {
