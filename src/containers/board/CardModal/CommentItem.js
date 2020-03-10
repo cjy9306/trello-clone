@@ -63,10 +63,21 @@ const convertDateClientTimezone = time => {
 
 const CustomIcon = styled(FontAwesomeIcon)`
 	color: #949996;
-	left: -40px;
 	position: absolute;
 	padding: 6px 0 0 10px;
 	font-size: 20px;
+
+	@media only screen and (min-width: 669px) {
+		left: -40px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		left: 0px;
+		position: relative;
+		padding-left: 0;
+		margin-right: 8px;
+	}
 `;
 
 const CommentItem = ({ card, comment }) => {

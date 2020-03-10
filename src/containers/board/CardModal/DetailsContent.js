@@ -9,8 +9,16 @@ import { updateCard, getCard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
 
 const Container = styled.div`
-	margin: 8px 0 24px 40px;
 	display: ${props => props.visible};
+
+	@media only screen and (min-width: 669px) {
+		margin: 8px 0 24px 40px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		margin: 8px 0 24px 8px;
+	}
 `;
 
 const LabelsContainer = styled.div`
