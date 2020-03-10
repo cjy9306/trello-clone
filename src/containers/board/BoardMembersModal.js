@@ -9,7 +9,7 @@ import MemberListItem from '../../components/MemberListItem';
 import { setMessageStates } from '../../modules/common';
 
 const MembersModal = styled(Modal)`
-	width: 380px;
+	width: 480px;
 	min-height: 150px;
 	border-radius: 3px;
 `;

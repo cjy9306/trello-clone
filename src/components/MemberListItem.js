@@ -27,7 +27,7 @@ const MemberListItem = ({ className, member, onDeleteClick }) => {
 	return (
 		<MemberItemContainer className={className}>
 			<CustomIcon icon={faUser} size="xs" />
-			{member.email}
+			{member.name}({member.email})
 			<MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
 				{member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
 			</MemberDeleteButton>
