@@ -7,13 +7,13 @@ import { socialLogin } from '../modules/auth';
 
 var firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-	authDomain: 'trello-clone-b10bc.firebaseapp.com',
-	databaseURL: 'https://trello-clone-b10bc.firebaseio.com',
-	projectId: 'trello-clone-b10bc',
-	storageBucket: 'trello-clone-b10bc.appspot.com',
-	messagingSenderId: '37835664042',
-	appId: '1:37835664042:web:d38040a4ef6375d9357ed3',
-	measurementId: 'G-F6KDP367NZ'
+	authDomain: 'trello-clone-6fd14.firebaseapp.com',
+	databaseURL: 'https://trello-clone-6fd14.firebaseio.com',
+	projectId: 'trello-clone-6fd14',
+	storageBucket: 'trello-clone-6fd14.appspot.com',
+	messagingSenderId: '802554919291',
+	appId: '1:802554919291:web:24b49de8c29130405ca5de',
+	measurementId: 'G-HPRZS90M01'
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -27,8 +27,7 @@ const FireBaseLogin = () => {
 		const data = {
 			username: socialData.user.uid,
 			password: null,
-			first_name: socialData.user.displayName,
-			last_name: null,
+			name: socialData.user.displayName,
 			birth_day: null,
 			gender: null,
 			email: socialData.user.email,
