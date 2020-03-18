@@ -12,6 +12,14 @@ const MembersModal = styled(Modal)`
 	width: 480px;
 	min-height: 150px;
 	border-radius: 3px;
+
+	@media only screen and (min-width: 501px) {
+		width: 480px;
+	}
+
+	@media only screen and (max-width: 500px) {
+		width: 350px;
+	}
 `;
 
 const AddMemberContainer = styled.div`

@@ -23,11 +23,18 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	margin-right: 16px;
 `;
 
+const EmailSpan = styled.span`
+	@media only screen and (max-width: 500px) {
+		display: none;
+	}
+`;
+
 const MemberListItem = ({ className, member, onDeleteClick }) => {
 	return (
 		<MemberItemContainer className={className}>
 			<CustomIcon icon={faUser} size="xs" />
-			{member.name}({member.email})
+			{member.name}
+			<EmailSpan>({member.email})</EmailSpan>
 			<MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
 				{member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
 			</MemberDeleteButton>
