@@ -5,7 +5,7 @@ export const getBoard = ({ boardId }) => client.get('/board/' + boardId);
 export const deleteBoard = ({ boardId }) => client.delete('/board/' + boardId);
 export const updateCardSeq = ({ boardId, list_id, data }) =>
 	client.put('/board/' + boardId + '/list/' + list_id + '/card/seq', data);
-export const updateListSeq = ({ boardId, data }) => client.put('/board/' + boardId + '/list/seq', data);
+export const updateListSeq = ({ boardId, listId, data }) => client.put('/board/' + boardId + '/list/' + listId + '/seq', data);
 
 // list
 export const createList = ({ boardId, data }) => client.post('/board/' + boardId + '/list', data);

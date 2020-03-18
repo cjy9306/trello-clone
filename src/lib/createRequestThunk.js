@@ -3,7 +3,7 @@ export default function createRequestThunk(type, request) {
 	const FAIL = `${type}_FAIL`;
 
 	return params => async dispatch => {
-		console.log('params ; ' + JSON.stringify(params));
+		console.log('type ; ' + type + ' params ; ' + JSON.stringify(params));
 		dispatch({ type }); // start
 
 		try {

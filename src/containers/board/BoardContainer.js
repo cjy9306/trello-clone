@@ -93,7 +93,8 @@ const BoardContainer = ({ match: { params } }) => {
 		const [destList, destListIndex] = getListItem(lists, destListId);
 
 		if (sourceList.list_id === destList.list_id) {
-			const newCards = Array.from(sourceList.cards);
+			const newCards = [...sourceList.cards];
+
 			const deletedCard = newCards.splice(source.index, 1);
 			newCards.splice(destination.index, 0, deletedCard[0]);
 
@@ -121,8 +122,8 @@ const BoardContainer = ({ match: { params } }) => {
 				prevLists
 			);
 		} else {
-			const newSourceCards = Array.from(sourceList.cards);
-			const newDestCards = Array.from(destList.cards);
+			const newSourceCards = [...sourceList.cards];
+			const newDestCards = [...destList.cards];
 
 			const deletedCard = newSourceCards.splice(source.index, 1);
 			const newSourceList = {
@@ -160,10 +161,12 @@ const BoardContainer = ({ match: { params } }) => {
 			destListSeq
 		};
 
-		const result = await dispatch(updateListSeq({ boardId, data }));
+		const result = await dispatch(updateListSeq({ boardId, listId, data }));
 
-		if (result.success) dispatch(changeLists(prevLists));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
+		if (!result.success) {
+			dispatch(changeLists(prevLists));
+			dispatch(setMessageStates(true, 'error', result.data.data));
+		}
 	};
 
 	const onUpdateCardSeq = async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
@@ -178,8 +181,10 @@ const BoardContainer = ({ match: { params } }) => {
 
 		const result = await dispatch(updateCardSeq({ boardId, list_id: sourceListId, data }));
 
-		if (result.success) dispatch(changeLists(prevLists));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
+		if (!result.success) {
+			dispatch(changeLists(prevLists));
+			dispatch(setMessageStates(true, 'error', result.data.data));
+		}
 	};
 
 	const onCloseModal = () => dispatch(changeModalVisible(false));
