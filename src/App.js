@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import BoardConatiner from './containers/board/BoardContainer';
 import LoginContainer from './containers/login/LoginContainer';
 import MemberBoardsContainer from './containers/member/MemberBoardsContainer';
-import TeamSettingsContainer from './containers/Team/TeamSettingsContainer';
+import TeamSettingsContainer from './containers/team/TeamSettingsContainer';
 import dotenv from 'dotenv';
 
 dotenv.config();
