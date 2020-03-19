@@ -7,21 +7,15 @@ import { getTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
 import MemberListItem from '../../components/MemberListItem';
 import { setMessageStates } from '../../modules/common';
 
-const SettingsContent = styled.div``;
-
-const MembersContent = styled.div`
+const TeamMembersContainer = styled.div`
 	max-width: 768px;
 	margin: 0 auto;
 	padding: 16px 32px;
 `;
 
-const MembersHeader = styled.div``;
-
 const MembersInput = styled.div`
 	margin-bottom: 16px;
 `;
-
-const MembersList = styled.div``;
 
 const TitleWrapper = styled.div`
 	height: 32px;
@@ -31,15 +25,15 @@ const TitleWrapper = styled.div`
 `;
 
 const EmailInput = styled.input`
-	height: 32px;
-	width: 300px;
 	background-color: #fafbfc;
 	border: none;
 	box-shadow: inset 0 0 0 2px #dfe1e6;
 	box-sizing: border-box;
 	border-radius: 3px;
-	padding: 8px 12px;
 	font-size: 14px;
+	height: 32px;
+	padding: 8px 12px;
+	width: 300px;
 
 	// desktop, tablet
 	@media only screen and (min-width: 769px) {
@@ -66,7 +60,7 @@ const TeamMemberList = ({ teamId }) => {
 		const data = { email };
 		const result = await dispatch(addTeamMember({ teamId, data }));
 
-		if (result.success) getTeam();
+		if (result.success) dispatch(getTeam({ teamId }));
 		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
@@ -78,27 +72,21 @@ const TeamMemberList = ({ teamId }) => {
 	};
 
 	return (
-		<SettingsContent>
-			<MembersContent>
-				<MembersHeader>
-					<TitleWrapper>Invite member</TitleWrapper>
-				</MembersHeader>
-				<MembersInput>
-					<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
-					<Button type="primary" onClick={onAddMember}>
-						Add
-					</Button>{' '}
-					&nbsp;
-				</MembersInput>
-				<MembersList>
-					<TitleWrapper>Members</TitleWrapper>
-					{teamMembers &&
-						teamMembers.map(member => (
-							<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
-						))}
-				</MembersList>
-			</MembersContent>
-		</SettingsContent>
+		<TeamMembersContainer>
+			<TitleWrapper>Invite member</TitleWrapper>
+			<MembersInput>
+				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
+				<Button type="primary" onClick={onAddMember}>
+					Add
+				</Button>{' '}
+				&nbsp;
+			</MembersInput>
+			<TitleWrapper>Members</TitleWrapper>
+			{teamMembers &&
+				teamMembers.map(member => (
+					<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
+				))}
+		</TeamMembersContainer>
 	);
 };
 

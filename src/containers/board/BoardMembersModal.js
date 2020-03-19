@@ -63,9 +63,9 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 	const getMembers = useCallback(async () => {
 		if (visible === false) return;
 
-		const result = dispatch(getBoardMembers({ boardId: board.board_id }));
+		const result = await dispatch(getBoardMembers({ boardId: board.board_id }));
 
-		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
+		if (!result.success) dispatch(setMessageStates(true, 'error', result.data.data));
 	}, [visible, board, dispatch]);
 
 	const onAddMember = async () => {
