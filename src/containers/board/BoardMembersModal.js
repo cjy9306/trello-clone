@@ -1,17 +1,17 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
-import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
-import { useDispatch, useSelector } from 'react-redux';
 import MemberListItem from '../../components/MemberListItem';
+import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
 import { setMessageStates } from '../../modules/common';
 
 const MembersModal = styled(Modal)`
-	width: 480px;
-	min-height: 150px;
 	border-radius: 3px;
+	min-height: 150px;
+	width: 480px;
 
 	@media only screen and (min-width: 501px) {
 		width: 480px;
@@ -29,10 +29,10 @@ const AddMemberContainer = styled.div`
 
 const MemberListContainer = styled.div`
 	border-radius: 3px;
-	padding: 12px 32px 0 16px;
-	margin-bottom: 16px;
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 16px;
+	padding: 12px 32px 0 16px;
 `;
 
 const TitleWrapper = styled.div`
@@ -43,15 +43,15 @@ const TitleWrapper = styled.div`
 `;
 
 const EmailInput = styled.input`
-	height: 32px;
-	width: 80%;
-	background-color: #fafbfc;
 	border: none;
 	box-shadow: inset 0 0 0 2px #dfe1e6;
 	box-sizing: border-box;
 	border-radius: 3px;
-	padding: 8px 12px;
+	background-color: #fafbfc;
 	font-size: 14px;
+	height: 32px;
+	padding: 8px 12px;
+	width: 80%;
 `;
 
 const BoardMembersModal = ({ visible, onCloseModal }) => {

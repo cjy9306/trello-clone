@@ -1,32 +1,32 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import CheckBox from '../../../../components/CheckBox';
-import useInput from '../../../../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../../modules/board';
+import useInput from '../../../../hooks/useInput';
+import CheckBox from '../../../../components/CheckBox';
 import Button from '../../../../components/Button';
 import { setMessageStates } from '../../../../modules/common';
+import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../../modules/board';
 
 const DeleteWrapper = styled.div`
 	display: none;
 	line-height: 26px;
+	margin: 4px 8px 0 0;
 	position: absolute;
 	right: 0;
-	top: 0;
-	margin: 4px 8px 0 0;
 	text-decoration: underline;
+	top: 0;
 	z-index: 11;
 `;
 
 const Container = styled.div`
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 16px;
 	justify-content: center;
 	margin: 8px 0 0px 0;
 	padding: 8px 0 8px 0;
-	font-size: 16px;
-	cursor: pointer;
-	border-radius: 3px;
-	vertical-align: middle;
 	position: relative;
+	vertical-align: middle;
 	&:hover {
 		background-color: rgba(228, 231, 235, 0.4);
 		& ${DeleteWrapper} {
@@ -39,8 +39,8 @@ const Container = styled.div`
 `;
 
 const LabelContainer = styled.div`
-	display: ${props => (props.isEditting ? 'none' : 'block')};
 	cursor: pointer;
+	display: ${props => (props.isEditting ? 'none' : 'block')};
 	padding-right: 64px;
 `;
 
@@ -54,20 +54,20 @@ const EditContent = styled.div``;
 const EditControl = styled.div``;
 
 const TextAreaField = styled.textarea`
-	font-size: 16px;
-	width: 100%;
-	overflow: hidden;
-	overflow-wrap: break-word;
-	resize: none;
-	height: 80px;
-	min-height: 80px;
-	padding: 8px 12px;
 	box-sizing: border-box;
 	border-radius: 3px;
-	outline: 0;
 	background: rgba(9, 30, 66, 0.04);
 	border-color: rgba(9, 30, 66, 0.13);
 	box-shadow: inset 0 0 0 1px rgba(9, 30, 66, 0.13);
+	font-size: 16px;
+	height: 80px;
+	min-height: 80px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	outline: 0;
+	padding: 8px 12px;
+	resize: none;
+	width: 100%;
 `;
 
 const CheckListItem = ({ item }) => {

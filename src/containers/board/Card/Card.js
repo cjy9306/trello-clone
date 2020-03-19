@@ -2,19 +2,19 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Draggable } from 'react-beautiful-dnd';
-import { changeModalVisible, getCard } from '../../../modules/board';
 import Tag from '../../../components/Tag';
+import { changeModalVisible, getCard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
 
 const CardContainer = styled.div`
 	border: 1px lightgrey;
 	border-radius: 3px;
-	padding: 8px;
-	margin-bottom: 8px;
 	background-color: #fff;
 	box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-	word-wrap: break-word;
+	margin-bottom: 8px;
 	overflow: hidden;
+	padding: 8px;
+	word-wrap: break-word;
 `;
 
 const CardContent = styled.div`
@@ -28,12 +28,12 @@ const CardLabels = styled.div`
 `;
 
 const LabelWrapper = styled.span`
-	float: left;
-	min-width: 20px;
-	width: auto;
-	min-height: 8px;
-	margin: 0 4px 4px 0;
 	border-radius: 4px;
+	float: left;
+	margin: 0 4px 4px 0;
+	min-width: 20px;
+	min-height: 8px;
+	width: auto;
 `;
 
 const getStyle = (style, snapshot) => {

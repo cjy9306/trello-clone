@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import BoardList from './BoardList';
 import { useSelector } from 'react-redux';
+import BoardList from './BoardList';
 import TeamBoardHeader from './TeamBoardHeader';
 
 const TeamBoardContainer = styled.div``;

@@ -6,12 +6,12 @@ import { useHistory } from 'react-router-dom';
 import Button from '../../../components/Button';
 
 const TeamHeader = styled.div`
-	width: 100%;
+	box-sizing: border-box;
 	height: 32px;
 	line-height: 32px;
-	padding: 0 0 0 2%;
 	margin-bottom: 12px;
-	box-sizing: border-box;
+	padding: 0 0 0 2%;
+	width: 100%;
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`

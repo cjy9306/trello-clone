@@ -3,26 +3,27 @@ import styled from 'styled-components/macro';
 import BoardTitleBox from './BoardTitleBox';
 
 const BoardListContainer = styled.div`
-	width: 100%;
+	box-sizing: border-box;
 	height: 32px;
 	line-height: 32px;
-	padding: 0 0 0 2%;
 	margin-bottom: 12px;
-	box-sizing: border-box;
+	padding: 0 0 0 2%;
+	width: 100%;
 `;
 
 const CreateBoardBox = styled.div`
-	width: 21.5%;
-	margin: 0 2% 2% 0;
+	background-color: rgba(9, 30, 66, 0.07);
 	box-sizing: border-box;
-	padding: auto 8px;
-	height: 96px;
-	line-height: 96px;
 	border-radius: 3px;
 	cursor: pointer;
 	font-size: 16px;
+	height: 96px;
+	line-height: 96px;
+	margin: 0 2% 2% 0;
+	padding: auto 8px;
 	text-align: center;
-	background-color: rgba(9, 30, 66, 0.07);
+	width: 21.5%;
+
 	&:hover {
 		background-color: rgba(9, 30, 66, 0.17);
 	}

@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import GlobalHeader from '../../components/GlobalHeader';
-import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
+import GlobalHeader from '../../components/GlobalHeader';
 import { getTeam } from '../../modules/team';
 import TeamInfo from './TeamInfo';
 import TeamMemberList from './TeamMemberList';

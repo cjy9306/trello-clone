@@ -8,36 +8,36 @@ const SideBarLabelsItemContainer = styled.div`
 `;
 
 const SideBarLabelsItemContent = styled.div`
-	width: 182px;
-	min-height: 20px;
-	padding: 6px 32px 6px 12px;
 	background-color: ${props => (props.color ? props.color : 'grey')};
-	cursor: pointer;
-	white-space: nowrap;
-	text-overflow: ellipsis;
 	border-radius: 3px;
+	cursor: pointer;
+	color: white;
 	font-weight: 400;
 	font-size: 16px;
-	position: relative;
 	margin-bottom: 4px;
-	color: white;
+	min-height: 20px;
+	padding: 6px 32px 6px 12px;
+	position: relative;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 182px;
 `;
 
 const SideBarLabelItemCheck = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
 	display: ${props => (props.checked ? 'block' : 'none')};
+	top: 0;
+	position: absolute;
+	right: 0;
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
-	top: 0;
-	right: 9;
+	borderradius: 3px;
+	cursor: pointer;
+	font-size: 16px;
 	position: absolute;
 	padding: 8px;
-	borderradius: 3px;
-	font-size: 16px;
-	cursor: pointer;
+	right: 9;
+	top: 0;
 `;
 
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {

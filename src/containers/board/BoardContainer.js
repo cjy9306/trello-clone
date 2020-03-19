@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
-import BoardContent from './BoardContent';
 import {
 	getBoard,
 	changeLists,
@@ -13,6 +12,7 @@ import {
 	changeListActionVisible
 } from '../../modules/board';
 import { setMessageStates } from '../../modules/common';
+import BoardContent from './BoardContent';
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './List/ListAction';

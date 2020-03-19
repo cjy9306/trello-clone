@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
-import { useDispatch } from 'react-redux';
 import { updateTeam } from '../../modules/team';
 import { setMessageStates } from '../../modules/common';
 

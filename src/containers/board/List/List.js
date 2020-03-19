@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { createCard, getBoard, updateList } from '../../../modules/board';
+import { setMessageStates } from '../../../modules/common';
 import AddCard from './AddCard';
 import ListTitle from './ListTitle';
 import Card from '../Card/Card';
-import { useDispatch } from 'react-redux';
-import { createCard, getBoard, updateList } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
 
 const ListContainer = styled.div`
-	width: 272px;
-	margin: 0 4px;
-	height: 100%;
 	box-sizing: border-box;
 	display: inline-block;
+	height: 100%;
+	margin: 0 4px;
 	vertical-align: top;
+	width: 272px;
 	white-space: nowrap;
 	&:last-child {
 		margin-right: 16px;
@@ -22,21 +22,21 @@ const ListContainer = styled.div`
 `;
 
 const ListWrapper = styled.div`
-	margin: 8px 0 8px 8px;
-	width: 260px;
 	background-color: #ebecf0;
 	border-radius: 3px;
 	display: flex;
 	flex-direction: column;
+	margin: 8px 0 8px 8px;
+	width: 260px;
 `;
 
 const CardList = styled.div`
-	padding: 0 8px 0 8px;
+	border-radius: 3px;
 	background-color: #ebecf0;
 	flex-grow: 1;
-	border-radius: 3px;
 	min-height: 100px;
 	margin-bottom: 4px;
+	padding: 0 8px 0 8px;
 `;
 
 const List = ({ list, index, board }) => {

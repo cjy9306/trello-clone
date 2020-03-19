@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../../hooks/useInput';
 import { updateCard, changeCard } from '../../../modules/board';
-import { useDispatch, useSelector } from 'react-redux';
 import { setMessageStates } from '../../../modules/common';
 
 const HeaderContainer = styled.div`
-	margin: 12px 40px 8px 56px;
 	font-size: 20px;
+	margin: 12px 40px 8px 56px;
 	min-height: 32px;
 	position: relative;
 `;
@@ -19,13 +19,13 @@ const InputField = styled.input.attrs({ type: 'text' })`
 	background: transparent;
 	box-shadow: none;
 	border-radius: 3px;
-	overflow: hidden;
-	min-height: 26px;
-	overflow-wrap: break-word;
-	width: calc(100% - 54px);
-	font-size: 20px;
-	resize: none;
 	font-weight: 400;
+	font-size: 20px;
+	min-height: 26px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	resize: none;
+	width: calc(100% - 54px);
 	&:focus {
 		background: #fff;
 		box-shadow: inset 0 0 0 2px #0079bf;

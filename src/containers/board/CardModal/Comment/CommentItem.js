@@ -21,26 +21,45 @@ const ContentContainer = styled.div`
 	box-shadow: 0 1px 2px -1px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
 	box-sizing: border-box;
 	display: inline-block;
+	font-size: 16px;
 	text-overflow: ellipsis;
 	max-width: 100%;
-	font-size: 16px;
 `;
 
 const ContentWrapper = styled.div`
-    work-break; break-word;
-    overflow-wrap: break-word;
-    padding: 8px 12px;
+	overflow-wrap: break-word;
+	padding: 8px 12px;
+	work-break; break-word;
 `;
 
 const ControlContainer = styled.div`
 	font-size: 12px;
 	line-height: 24px;
 	& > a {
-		text-decoration: underline;
 		color: black;
+		text-decoration: underline;
 	}
 	a:visited {
 		color: inherit;
+	}
+`;
+
+const CustomIcon = styled(FontAwesomeIcon)`
+	color: #949996;
+	font-size: 20px;
+	position: absolute;
+	padding: 6px 0 0 10px;
+
+	@media only screen and (min-width: 669px) {
+		left: -40px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		left: 0px;
+		position: relative;
+		padding-left: 0;
+		margin-right: 8px;
 	}
 `;
 
@@ -60,25 +79,6 @@ const convertDateClientTimezone = time => {
 		date.getMinutes()
 	);
 };
-
-const CustomIcon = styled(FontAwesomeIcon)`
-	color: #949996;
-	position: absolute;
-	padding: 6px 0 0 10px;
-	font-size: 20px;
-
-	@media only screen and (min-width: 669px) {
-		left: -40px;
-	}
-
-	// phone
-	@media only screen and (max-width: 668px) {
-		left: 0px;
-		position: relative;
-		padding-left: 0;
-		margin-right: 8px;
-	}
-`;
 
 const CommentItem = ({ card, comment }) => {
 	const dispatch = useDispatch();

@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import HeaderButton from '../../components/HeaderButton';
-import AddListModal from './AddListModal';
-import BoardMembersModal from './BoardMembersModal';
-import { useDispatch } from 'react-redux';
 import { ConfirmModal } from '../../components/Modal';
 import { deleteBoard } from '../../modules/board';
-import { useHistory } from 'react-router-dom';
 import { setMessageStates } from '../../modules/common';
+import BoardMembersModal from './BoardMembersModal';
+import AddListModal from './AddListModal';
 
 const BoardHeaderContainer = styled.div`
-	height: auto;
-	padding: 8px 16px 0 16px;
 	display: flex;
+	height: auto;
 	justify-content: space-between;
+	padding: 8px 16px 0 16px;
 `;
 
 const MenuContainer = styled.div`
-	width: 100%;
 	color: black;
+	width: 100%;
 `;
 
 const MenuWrapper = styled.div`

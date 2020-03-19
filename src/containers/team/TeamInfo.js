@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmModal } from '../../components/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import Button from '../../components/Button';
 import { deleteTeam } from '../../modules/team';
 import { setMessageStates } from '../../modules/common';
-import Button from '../../components/Button';
 import TeamInfoDescription from './TeamInfoDescription';
 
 const TeamInfoContainer = styled.div`

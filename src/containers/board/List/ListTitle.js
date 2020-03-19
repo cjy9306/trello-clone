@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../../../hooks/useInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import useInput from '../../../hooks/useInput';
 import { changeListActionVisible } from '../../../modules/board';
 
 const Container = styled.div`
@@ -16,36 +16,36 @@ const LabelContainer = styled.div`
 `;
 
 const LabelWrapper = styled.div`
-	padding: 8px 16px 8px 16px;
 	display: ${props => (props.isEditting ? 'none' : 'block')};
 	font-size: 16px;
+	padding: 8px 16px 8px 16px;
 	width: 90%;
 `;
 
 const EditWrapper = styled.div`
-	padding: 8px 8px 8px 8px;
 	display: ${props => (props.isEditting ? 'block' : 'none')};
+	padding: 8px 8px 8px 8px;
 	width: 90%;
 `;
 
 const InputField = styled.input`
 	border: none;
-	font-size: 16px;
 	background: white;
 	box-shadow: none;
-	overflow: hidden;
+	font-size: 16px;
 	min-height: 26px;
+	overflow: hidden;
 	overflow-wrap: break-word;
-	width: calc(100% - 8px);
-	resize: none;
 	padding-left: 8px;
+	resize: none;
+	width: calc(100% - 8px);
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
-	padding: 8px;
 	borderradius: 3px;
-	font-size: 16px;
 	cursor: pointer;
+	font-size: 16px;
+	padding: 8px;
 	&:hover {
 		background-color: rgba(9, 30, 66, 0.07);
 	}

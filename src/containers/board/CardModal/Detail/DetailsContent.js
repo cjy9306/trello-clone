@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import Tag from '../../../../components/Tag';
 import DatePicker from 'react-datepicker';
-import Alert from '../../../../components/Alert';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
+import Tag from '../../../../components/Tag';
+import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
 
@@ -22,19 +22,19 @@ const Container = styled.div`
 `;
 
 const LabelsContainer = styled.div`
-	position: relative;
 	margin-bottom: 20px;
 	overflow: auto;
+	position: relative;
 	display: ${props => (props.visible ? 'block' : 'none')};
 `;
 
 const LabelWrapper = styled.span`
-	float: left;
-	min-width: 20px;
-	width: auto;
-	min-height: 8px;
-	margin: 0 4px 4px 0;
 	border-radius: 4px;
+	float: left;
+	margin: 0 4px 4px 0;
+	min-width: 20px;
+	min-height: 8px;
+	width: auto;
 `;
 
 const DueDateContainer = styled.div`
@@ -43,11 +43,11 @@ const DueDateContainer = styled.div`
 `;
 
 const CustomPicker = styled(DatePicker)`
-	padding: 4px 8px 4px 8px;
-	height: 32px;
-	font-size: 16px;
 	border-radius: 3px;
+	font-size: 16px;
+	height: 32px;
 	margin-top: 8px;
+	padding: 4px 8px 4px 8px;
 `;
 
 const checkOverdue = date => {

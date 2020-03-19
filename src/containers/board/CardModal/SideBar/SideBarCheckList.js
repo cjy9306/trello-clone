@@ -8,10 +8,10 @@ const SideBarCheckListContainer = styled.div`
 `;
 
 const SideBarCheckListHeader = styled.div`
-	text-align: center;
 	line-height: 32px;
 	height: 32px;
 	padding: 8px 16px 0 16px;
+	text-align: center;
 `;
 
 const SideBarCheckListContent = styled.div`
@@ -19,17 +19,17 @@ const SideBarCheckListContent = styled.div`
 `;
 
 const CloseSpan = styled.span`
-	position: absolute;
 	color: #aaaaaa;
-	right: 0;
 	font-size: 20px;
 	font-weight: bold;
 	margin-right: 8px;
+	position: absolute;
+	right: 0;
 	&:hover,
 	&:focus {
 		color: #000;
-		text-decoration: none;
 		cursor: pointer;
+		text-decoration: none;
 	}
 `;
 
@@ -38,15 +38,15 @@ const CheckListTitle = styled.div`
 `;
 
 const TitleInput = styled.input`
-	margin: 4px 0 12px 0;
-	width: 100%;
 	background-color: #fafbfc;
 	border: none;
 	box-shadow: inset 0 0 0 2px #dfe1e6;
 	box-sizing: border-box;
 	border-radius: 3px;
-	padding: 8px 12px;
 	font-size: 14px;
+	margin: 4px 0 12px 0;
+	padding: 8px 12px;
+	width: 100%;
 `;
 
 const SideBarCheckList = ({ onPopupToggle, onCreateCheckList }) => {

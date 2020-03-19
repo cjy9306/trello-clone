@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CheckListItem from './CheckListItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
 import Button from '../../../../components/Button';
+import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
+import CheckListItem from './CheckListItem';
 
 const Container = styled.div`
 	margin-bottom: 16px;
 `;
 
 const CheckListHeader = styled.div`
-	margin-bottom: 12px;
-	position: relative;
 	line-height: 32px;
+	margin-bottom: 12px;
 	min-height: 32px;
+	position: relative;
 `;
 
 const DeleteButtonWrapper = styled.div`
@@ -31,10 +31,10 @@ const CheckListContent = styled.div`
 const CheckListControl = styled.div``;
 
 const CustomIcon = styled(FontAwesomeIcon)`
+	font-size: 20px;
 	left: -40px;
 	position: absolute;
 	padding: 6px 0 0 10px;
-	font-size: 20px;
 `;
 
 const CheckList = ({ checklist }) => {

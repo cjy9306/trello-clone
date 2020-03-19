@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import TextArea from 'react-textarea-autosize';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment, getCard } from '../../../../modules/board';
-import CommentItem from './CommentItem';
-import Button from '../../../../components/Button';
 import useInput from '../../../../hooks/useInput';
+import Button from '../../../../components/Button';
+import { createComment, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
+import CommentItem from './CommentItem';
 
 const Container = styled.div`
 	position: relative;
@@ -32,26 +32,26 @@ const EditContainer = styled.div`
 	box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
 	background-color: #fff;
 	border-radius: 3px;
-	overflow: hidden;
-	line-height: 20px;
-	width: 100%;
 	margin: 0 16px 24px 0;
+	line-height: 20px;
+	overflow: hidden;
+	width: 100%;
 `;
 
 const EditField = styled(TextArea)`
 	background-color: #fff;
 	box-sizing: content-box;
-	width: 100%;
-	resize: none;
-	padding: 8px 12px;
-	height: 20px;
-	overflow-wrap: break-word;
-	overflow: hidden;
 	box-shadow: none;
 	border: 0;
 	font-size: 14px;
+	height: 20px;
+	resize: none;
+	overflow-wrap: break-word;
+	overflow: hidden;
 	outline: 0;
+	padding: 8px 12px;
 	position: relative;
+	width: 100%;
 `;
 
 const ControlContainer = styled.div`
@@ -61,9 +61,9 @@ const ControlContainer = styled.div`
 const CommentViewContainer = styled.div``;
 
 const CustomIcon = styled(FontAwesomeIcon)`
+	font-size: 20px;
 	position: absolute;
 	padding: 6px 0 0 10px;
-	font-size: 20px;
 
 	@media only screen and (min-width: 669px) {
 		left: -40px;
@@ -72,9 +72,9 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	// phone
 	@media only screen and (max-width: 668px) {
 		left: 0px;
+		margin-right: 8px;
 		position: relative;
 		padding-left: 0;
-		margin-right: 8px;
 	}
 `;
 

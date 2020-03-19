@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch, useSelector } from 'react-redux';
+import { LinkButton } from '../../../../components/Button';
+import { ConfirmModal } from '../../../../components/Modal';
+import SidebarMembers from './SidebarMembers';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
-import { useDispatch, useSelector } from 'react-redux';
 import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
-import { LinkButton } from '../../../../components/Button';
-import SidebarMembers from './SidebarMembers';
-import { ConfirmModal } from '../../../../components/Modal';
 import { setMessageStates } from '../../../../modules/common';
 
 const SideBarAddOn = styled.div`
@@ -22,13 +22,13 @@ const SideBarContent = styled.div`
 `;
 
 const PopupOver = styled.div`
+	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
 	display: ${props => (props.visible ? 'block' : 'none')};
-	position: absolute;
-	right: auto;
 	margin: 0px 0 0 0px;
 	min-width: 300px;
 	min-height: 100px;
-	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+	position: absolute;
+	right: auto;
 	z-index: 10;
 `;
 

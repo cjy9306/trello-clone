@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import SideBarLabelsItem from './SideBarLabelsItem';
 import { useSelector, useDispatch } from 'react-redux';
+import SideBarLabelsItem from './SideBarLabelsItem';
 import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
 
@@ -10,10 +10,10 @@ const SideBarLabelsContainer = styled.div`
 `;
 
 const SideBarLabelsHeader = styled.div`
-	text-align: center;
-	line-height: 32px;
 	height: 32px;
+	line-height: 32px;
 	padding: 8px 16px 0 16px;
+	text-align: center;
 `;
 
 const SideBarLabelsContent = styled.div`
@@ -21,12 +21,12 @@ const SideBarLabelsContent = styled.div`
 `;
 
 const CloseSpan = styled.span`
-	position: absolute;
 	color: #aaaaaa;
-	right: 0;
 	font-size: 20px;
 	font-weight: bold;
 	margin-right: 8px;
+	position: absolute;
+	right: 0;
 	&:hover,
 	&:focus {
 		color: #000;

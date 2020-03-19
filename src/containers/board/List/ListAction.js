@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { LinkButton } from '../../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import { LinkButton } from '../../../components/Button';
 import { deleteList, changeListActionVisible, getBoard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
 
 const PopupOver = styled.div`
-	display: ${props => (props.visible ? 'block' : 'none')};
-	position: absolute;
-	left: ${props => props.posX}px;
-	top: calc(${props => props.posY}px + 32px);
-	right: 8px;
-	margin: 0px 0 0 0px;
-	width: 200px;
-	min-height: 50px;
 	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+	display: ${props => (props.visible ? 'block' : 'none')};
+	left: ${props => props.posX}px;
+	margin: 0px 0 0 0px;
+	min-height: 50px;
+	position: absolute;
+	right: 8px;
+	top: calc(${props => props.posY}px + 32px);
+	width: 200px;
 	z-index: 10;
 `;
 
@@ -23,10 +23,10 @@ const ListActionConatiner = styled.div`
 `;
 
 const ActionHeader = styled.div`
-	text-align: center;
-	line-height: 32px;
 	height: 32px;
+	line-height: 32px;
 	padding: 8px 16px 0 16px;
+	text-align: center;
 `;
 
 const ActionContent = styled.div`
@@ -34,12 +34,12 @@ const ActionContent = styled.div`
 `;
 
 const CloseSpan = styled.span`
-	position: absolute;
 	color: #aaaaaa;
-	right: 0;
 	font-size: 20px;
 	font-weight: bold;
 	margin-right: 8px;
+	position: absolute;
+	right: 0;
 	&:hover,
 	&:focus {
 		color: #000;

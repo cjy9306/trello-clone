@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
-import { useDispatch, useSelector } from 'react-redux';
 import MemberListItem from '../../../../components/MemberListItem';
 import { getCardMembers, addCardMember, deleteCardMember } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
@@ -12,10 +12,10 @@ const MembersContainer = styled.div`
 `;
 
 const SideBarMembersHeader = styled.div`
-	text-align: center;
-	line-height: 32px;
 	height: 32px;
+	line-height: 32px;
 	padding: 8px 16px 0 16px;
+	text-align: center;
 `;
 
 const AddMemberContainer = styled.div`
@@ -25,9 +25,9 @@ const AddMemberContainer = styled.div`
 
 const MemberListContainer = styled.div`
 	border-radius: 3px;
-	padding: 12px 16px 0 16px;
 	display: flex;
 	flex-direction: column;
+	padding: 12px 16px 0 16px;
 `;
 
 const TitleWrapper = styled.div`
@@ -38,24 +38,24 @@ const TitleWrapper = styled.div`
 `;
 
 const EmailInput = styled.input`
-	height: 32px;
-	width: 70%;
 	background-color: #fafbfc;
 	border: none;
 	box-shadow: inset 0 0 0 2px #dfe1e6;
 	box-sizing: border-box;
 	border-radius: 3px;
-	padding: 8px 12px;
 	font-size: 14px;
+	height: 32px;
+	width: 70%;
+	padding: 8px 12px;
 `;
 
 const CloseSpan = styled.span`
-	position: absolute;
 	color: #aaaaaa;
-	right: 0;
 	font-size: 20px;
 	font-weight: bold;
 	margin-right: 8px;
+	position: absolute;
+	right: 0;
 	&:hover,
 	&:focus {
 		color: #000;

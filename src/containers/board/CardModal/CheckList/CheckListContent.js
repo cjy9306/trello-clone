@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import CheckList from './CheckList';
 import { useSelector } from 'react-redux';
+import CheckList from './CheckList';
 
 const Container = styled.div`
+	display: ${props => (props.visible ? 'block' : 'none')};
+	font-size: 20px;
 	margin: 8px 0 40px 40px;
 	position: relative;
-	font-size: 20px;
-	display: ${props => (props.visible ? 'block' : 'none')};
 `;
 
 const CheckListContent = () => {

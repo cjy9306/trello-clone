@@ -4,8 +4,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import List from './List/List';
 
 const Container = styled.div`
-	overflow-x: auto;
 	height: 100%;
+	overflow-x: auto;
 	white-space: nowrap;
 `;
 

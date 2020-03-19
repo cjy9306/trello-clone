@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import { getAllBoards } from '../../modules/member';
 import { useDispatch } from 'react-redux';
-import GlobalHeader from '../../components/GlobalHeader';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
+import GlobalHeader from '../../components/GlobalHeader';
 import CreateBoardModal from '../../components/CreateBoardModal';
+import { getAllBoards } from '../../modules/member';
+import { setMessageStates } from '../../modules/common';
 import PersonalBoards from './BoardList/PersonalBoards';
 import TeamBoards from './BoardList/TeamBoards';
-import { setMessageStates } from '../../modules/common';
 
 const BoardsContainer = styled.div`
 	max-width: 860px;

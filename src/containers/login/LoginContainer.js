@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import LoginContent from './LoginContent';
 import { useDispatch, useSelector } from 'react-redux';
+import Message from '../../components/Message';
 import { login } from '../../modules/auth';
 import { setMessageStates } from '../../modules/common';
-import Message from '../../components/Message';
+import LoginContent from './LoginContent';
 
 const LoginContainer = () => {
 	const dispatch = useDispatch();

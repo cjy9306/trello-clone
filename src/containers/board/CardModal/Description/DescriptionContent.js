@@ -5,9 +5,9 @@ import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 import Description from './Description';
 
 const Container = styled.div`
-	position: relative;
 	font-size: 20px;
 	min-height: 32px;
+	position: relative;
 
 	@media only screen and (min-width: 669px) {
 		margin: 8px 0 24px 40px;
@@ -27,9 +27,9 @@ const DescHeader = styled.div`
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
+	font-size: 20px;
 	position: absolute;
 	padding: 2px 0 0 10px;
-	font-size: 20px;
 
 	@media only screen and (min-width: 669px) {
 		left: -40px;

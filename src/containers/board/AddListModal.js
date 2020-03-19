@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { createList, getBoard } from '../../modules/board';
-import { useDispatch, useSelector } from 'react-redux';
 import { setMessageStates } from '../../modules/common';
 
 const AddModal = styled(Modal)`
-	width: 320px;
-	height: 110px;
 	border-radius: 3px;
+	height: 110px;
+	width: 320px;
 `;
 
 const AddListContainer = styled.div`
@@ -31,16 +31,16 @@ const AddListContent = styled.div`
 `;
 
 const TitleInput = styled.input`
-	margin: 0 0 12px 0;
-	height: 30px;
-	width: 100%;
 	background-color: #fafbfc;
 	border: none;
 	box-shadow: inset 0 0 0 2px #dfe1e6;
 	box-sizing: border-box;
 	border-radius: 3px;
-	padding: 8px 12px;
 	font-size: 14px;
+	height: 30px;
+	margin: 0 0 12px 0;
+	padding: 8px 12px;
+	width: 100%;
 `;
 
 const AddListModal = ({ visible, onCloseModal }) => {
