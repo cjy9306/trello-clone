@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import TextArea from 'react-textarea-autosize';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment, getCard } from '../../../modules/board';
+import { createComment, getCard } from '../../../../modules/board';
 import CommentItem from './CommentItem';
-import Button from '../../../components/Button';
-import useInput from '../../../hooks/useInput';
-import { setMessageStates } from '../../../modules/common';
+import Button from '../../../../components/Button';
+import useInput from '../../../../hooks/useInput';
+import { setMessageStates } from '../../../../modules/common';
 
 const Container = styled.div`
 	position: relative;

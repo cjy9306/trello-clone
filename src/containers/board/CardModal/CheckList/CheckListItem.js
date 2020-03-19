@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import CheckBox from '../../../components/CheckBox';
-import useInput from '../../../hooks/useInput';
+import CheckBox from '../../../../components/CheckBox';
+import useInput from '../../../../hooks/useInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../modules/board';
-import Button from '../../../components/Button';
-import { setMessageStates } from '../../../modules/common';
+import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../../modules/board';
+import Button from '../../../../components/Button';
+import { setMessageStates } from '../../../../modules/common';
 
 const DeleteWrapper = styled.div`
 	display: none;

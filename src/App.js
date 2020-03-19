@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import BoardConatiner from './containers/board/BoardContainer';
-import LoginContainer from './containers/auth/LoginContainer';
+import LoginContainer from './containers/login/LoginContainer';
 import MemberBoardsContainer from './containers/member/MemberBoardsContainer';
 import TeamSettingsContainer from './containers/Team/TeamSettingsContainer';
-import './main.css';
 import dotenv from 'dotenv';
 
 dotenv.config();

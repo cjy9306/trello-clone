@@ -3,11 +3,11 @@ import styled from 'styled-components/macro';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../modules/board';
-import { LinkButton } from '../../../components/Button';
+import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
+import { LinkButton } from '../../../../components/Button';
 import SidebarMembers from './SidebarMembers';
-import { ConfirmModal } from '../../../components/Modal';
-import { setMessageStates } from '../../../modules/common';
+import { ConfirmModal } from '../../../../components/Modal';
+import { setMessageStates } from '../../../../modules/common';
 
 const SideBarAddOn = styled.div`
 	margin-bottom: 32px;

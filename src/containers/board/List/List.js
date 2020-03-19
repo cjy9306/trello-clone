@@ -3,10 +3,10 @@ import styled from 'styled-components/macro';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import AddCard from './AddCard';
 import ListTitle from './ListTitle';
-import Card from './Card';
+import Card from '../Card/Card';
 import { useDispatch } from 'react-redux';
-import { createCard, getBoard, updateList } from '../../modules/board';
-import { setMessageStates } from '../../modules/common';
+import { createCard, getBoard, updateList } from '../../../modules/board';
+import { setMessageStates } from '../../../modules/common';
 
 const ListContainer = styled.div`
 	width: 272px;

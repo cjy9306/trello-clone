@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateCard, getCard } from '../../../modules/board';
-import useInput from '../../../hooks/useInput';
-import Button from '../../../components/Button';
-import { setMessageStates } from '../../../modules/common';
+import { updateCard, getCard } from '../../../../modules/board';
+import useInput from '../../../../hooks/useInput';
+import Button from '../../../../components/Button';
+import { setMessageStates } from '../../../../modules/common';
 
 const Container = styled.div``;
 

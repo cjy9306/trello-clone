@@ -1,11 +1,11 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../../../hooks/useInput';
-import Button from '../../../components/Button';
+import useInput from '../../../../hooks/useInput';
+import Button from '../../../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import MemberListItem from '../../../components/MemberListItem';
-import { getCardMembers, addCardMember, deleteCardMember } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
+import MemberListItem from '../../../../components/MemberListItem';
+import { getCardMembers, addCardMember, deleteCardMember } from '../../../../modules/board';
+import { setMessageStates } from '../../../../modules/common';
 
 const MembersContainer = styled.div`
 	background-color: #fff;

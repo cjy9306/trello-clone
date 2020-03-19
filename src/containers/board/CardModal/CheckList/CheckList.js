@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CheckListItem from './CheckListItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCheckList, getCheckList, createCheckListItem } from '../../../modules/board';
-import Button from '../../../components/Button';
+import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
+import Button from '../../../../components/Button';
 
 const Container = styled.div`
 	margin-bottom: 16px;

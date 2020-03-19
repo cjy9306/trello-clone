@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import Tag from '../../../components/Tag';
+import Tag from '../../../../components/Tag';
 import DatePicker from 'react-datepicker';
-import Alert from '../../../components/Alert';
+import Alert from '../../../../components/Alert';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCard, getCard } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
+import { updateCard, getCard } from '../../../../modules/board';
+import { setMessageStates } from '../../../../modules/common';
 
 const Container = styled.div`
 	display: ${props => props.visible};

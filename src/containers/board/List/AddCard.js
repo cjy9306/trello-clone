@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../../hooks/useInput';
-import Button from '../../components/Button';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../components/Button';
 
 const Container = styled.div`
 	color: #5e6c84;

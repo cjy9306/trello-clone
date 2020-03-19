@@ -15,7 +15,7 @@ import {
 import { setMessageStates } from '../../modules/common';
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
-import ListAction from './ListAction';
+import ListAction from './List/ListAction';
 import Message from '../../components/Message';
 
 const Root = styled.div`

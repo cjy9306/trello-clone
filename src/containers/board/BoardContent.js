@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import List from './List';
+import List from './List/List';
 
 const Container = styled.div`
 	overflow-x: auto;

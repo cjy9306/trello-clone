@@ -2,8 +2,8 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import SideBarLabelsItem from './SideBarLabelsItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
+import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../../modules/board';
+import { setMessageStates } from '../../../../modules/common';
 
 const SideBarLabelsContainer = styled.div`
 	background-color: #fff;

@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import GlobalHeader from '../../components/GlobalHeader';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import CreateBoardModal from '../../components/CreateBoardModal';
-import PersonalBoards from './PersonalBoards';
-import MemberTeams from './MemberTeams';
+import PersonalBoards from './BoardList/PersonalBoards';
+import TeamBoards from './BoardList/TeamBoards';
 import { setMessageStates } from '../../modules/common';
 
 const BoardsContainer = styled.div`
@@ -43,8 +43,8 @@ const MemberBoardsContainer = () => {
 			<GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
 			<CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
 			<BoardsContainer>
-				<PersonalBoards />
-				<MemberTeams onShowBoardModal={onShowBoardModal} />
+				<PersonalBoards onShowBoardModal={onShowBoardModal} />
+				<TeamBoards onShowBoardModal={onShowBoardModal} />
 			</BoardsContainer>
 		</>
 	);

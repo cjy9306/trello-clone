@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Draggable } from 'react-beautiful-dnd';
-import { changeModalVisible, getCard } from '../../modules/board';
-import Tag from '../../components/Tag';
-import { setMessageStates } from '../../modules/common';
+import { changeModalVisible, getCard } from '../../../modules/board';
+import Tag from '../../../components/Tag';
+import { setMessageStates } from '../../../modules/common';
 
 const CardContainer = styled.div`
 	border: 1px lightgrey;

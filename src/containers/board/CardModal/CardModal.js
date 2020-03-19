@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import Header from './Header';
 import Modal from '../../../components/Modal';
-import DetailsContent from './DetailsContent';
-import CheckListContent from './CheckListContent';
-import CommentContent from './CommentContent';
-import SideBar from './SideBar';
-import DescriptionContent from './DescriptionContent';
+import DetailsContent from './Detail/DetailsContent';
+import CheckListContent from './CheckList/CheckListContent';
+import CommentContent from './Comment/CommentContent';
+import SideBar from './SideBar/SideBar';
+import DescriptionContent from './Description/DescriptionContent';
 
 const CardModalContainer = styled(Modal)`
 	min-height: 400px;

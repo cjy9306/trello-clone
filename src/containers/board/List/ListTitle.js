@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../../hooks/useInput';
+import useInput from '../../../hooks/useInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeListActionVisible } from '../../modules/board';
+import { changeListActionVisible } from '../../../modules/board';
 
 const Container = styled.div`
 	background: none;

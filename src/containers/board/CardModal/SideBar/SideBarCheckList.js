@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../../../hooks/useInput';
-import Button from '../../../components/Button';
+import useInput from '../../../../hooks/useInput';
+import Button from '../../../../components/Button';
 
 const SideBarCheckListContainer = styled.div`
 	background-color: #fff;
