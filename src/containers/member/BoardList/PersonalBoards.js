@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import BoardTitleBox from './BoardTitleBox';
+import BoardList from './BoardList';
 
 const BoardListContainer = styled.div`
 	margin: 20px auto;
@@ -18,18 +18,12 @@ const BoardListHeader = styled.div`
 	width: 100%;
 `;
 
-const BoardContent = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-`;
-
 const CustomIcon = styled(FontAwesomeIcon)`
 	font-size: 16px;
 	margin-right: 16px;
 `;
 
-const PersonalBoards = () => {
+const PersonalBoards = ({ onToggleBoardModal }) => {
 	const personalBoards = useSelector(state => state.member.personalBoards);
 
 	return (
@@ -38,11 +32,9 @@ const PersonalBoards = () => {
 				<CustomIcon icon={faUser} size="xs" />
 				Personal Boards
 			</BoardListHeader>
-			<BoardContent>
-				{personalBoards && personalBoards.map(board => <BoardTitleBox board={board} key={board.board_id} />)}
-			</BoardContent>
+			<BoardList boards={personalBoards} onToggleBoardModal={onToggleBoardModal} />
 		</BoardListContainer>
 	);
 };
 
-export default PersonalBoards;
+export default React.memo(PersonalBoards);

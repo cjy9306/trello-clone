@@ -36,7 +36,6 @@ const EditField = styled.textarea`
 	border: none;
 	background: none;
 	box-shadow: none;
-	dir: auto;
 	font-size: 16px;
 	min-height: 54px;
 	max-height: 162px;

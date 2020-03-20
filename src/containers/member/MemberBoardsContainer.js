@@ -24,8 +24,9 @@ const MemberBoardsContainer = () => {
 
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
 
-	const onCloseBoardModal = () => setBoardModalVisible(false);
-	const onShowBoardModal = () => setBoardModalVisible(true);
+	const onToggleBoardModal = useCallback(() => {
+		setBoardModalVisible(boardModalVisible => !boardModalVisible);
+	}, []);
 
 	const getBoards = useCallback(async () => {
 		const member_id = sessionStorage.getItem('memberId');
@@ -41,10 +42,10 @@ const MemberBoardsContainer = () => {
 	return (
 		<>
 			<GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
-			<CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
+			<CreateBoardModal visible={boardModalVisible} onCloseModal={onToggleBoardModal} />
 			<BoardsContainer>
-				<PersonalBoards onShowBoardModal={onShowBoardModal} />
-				<TeamBoards onShowBoardModal={onShowBoardModal} />
+				<PersonalBoards onToggleBoardModal={onToggleBoardModal} />
+				<TeamBoards onToggleBoardModal={onToggleBoardModal} />
 			</BoardsContainer>
 		</>
 	);

@@ -8,16 +8,16 @@ const TeamBoardContainer = styled.div``;
 
 const TeamContainer = styled.div``;
 
-const TeamBoards = ({ onShowBoardModal }) => {
+const TeamBoards = ({ onToggleBoardModal }) => {
 	const teamBoards = useSelector(state => state.member.teamBoards);
 
 	return (
 		<TeamContainer>
 			{teamBoards &&
 				teamBoards.map(team => (
-					<TeamBoardContainer>
+					<TeamBoardContainer key={team.team_id}>
 						<TeamBoardHeader team={team} />
-						<BoardList boards={team.boards} onShowBoardModal={onShowBoardModal} />
+						<BoardList boards={team.boards} onToggleBoardModal={onToggleBoardModal} />
 					</TeamBoardContainer>
 				))}
 		</TeamContainer>
