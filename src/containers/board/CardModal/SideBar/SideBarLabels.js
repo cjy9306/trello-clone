@@ -57,20 +57,23 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 	const board = useSelector(state => state.board.board);
 	const dispatch = useDispatch();
 
-	const onLabelsItemClick = async (label_id, checked) => {
-		const data = {
-			checked
-		};
+	const onLabelsItemClick = useCallback(
+		async (label_id, checked) => {
+			const data = {
+				checked
+			};
 
-		const result = await dispatch(updateCardLabel({ boardId: board.board_id, card_id: card.card_id, label_id, data }));
+			const result = await dispatch(updateCardLabel({ boardId: board.board_id, card_id: card.card_id, label_id, data }));
 
-		if (result.success) {
-			await dispatch(getBoard({ boardId: board.board_id }));
-			await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
-		}
-	};
+			if (result.success) {
+				await dispatch(getBoard({ boardId: board.board_id }));
+				await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+			} else {
+				dispatch(setMessageStates(true, 'error', result.data.data));
+			}
+		},
+		[dispatch, board, card]
+	);
 
 	const getLabels = useCallback(async () => {
 		const result = await dispatch(getAllLabels({ boardId: board.board_id }));

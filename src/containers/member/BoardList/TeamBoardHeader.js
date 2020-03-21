@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +25,7 @@ const SettingsButton = styled(Button)`
 
 const TeamBoardHeader = ({ team }) => {
 	const history = useHistory();
-	const onClickSettings = teamId => history.push('/team/' + teamId + '/settings');
+	const onClickSettings = useCallback(teamId => history.push('/team/' + teamId + '/settings'), [history]);
 
 	return (
 		<TeamHeader>

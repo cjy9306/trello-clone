@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
@@ -11,26 +11,29 @@ const LoginContainer = () => {
 	const history = useHistory();
 	const message = useSelector(state => state.common.message);
 
-	const onLogin = async ({ username, password }) => {
-		const result = await dispatch(login({ username, password }));
+	const onLogin = useCallback(
+		async ({ username, password }) => {
+			const result = await dispatch(login({ username, password }));
 
-		if (result && result.success) {
-			const token = result.data.data.token;
-			const memberId = result.data.data.member_id;
-			sessionStorage.setItem('token', token);
-			sessionStorage.setItem('memberId', memberId);
-			sessionStorage.setItem('username', username);
+			if (result && result.success) {
+				const token = result.data.data.token;
+				const memberId = result.data.data.member_id;
+				sessionStorage.setItem('token', token);
+				sessionStorage.setItem('memberId', memberId);
+				sessionStorage.setItem('username', username);
 
-			// client.defaults.headers.AccessToken = token;
+				// client.defaults.headers.AccessToken = token;
 
-			history.push('/member/' + username + '/boards');
-			return true;
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
-		}
+				history.push('/member/' + username + '/boards');
+				return true;
+			} else {
+				dispatch(setMessageStates(true, 'error', result.data.data));
+			}
 
-		return false;
-	};
+			return false;
+		},
+		[dispatch, history]
+	);
 
 	return (
 		<>

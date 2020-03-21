@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
@@ -59,19 +59,23 @@ const ListTitle = ({ list, onUpdate }) => {
 	const listIdInAction = useSelector(state => state.board.listAction.listId);
 	const listActionVisible = useSelector(state => state.board.listAction.listActionVisible);
 
-	const onToggle = () => setIsEditting(!isEditting);
-	const onShowListAction = e => {
-		if (list.list_id === listIdInAction && listActionVisible) {
-			dispatch(changeListActionVisible(false, 0, 0, list.list_id));
-			return;
-		}
+	const onToggleTitle = useCallback(() => setIsEditting(isEditting => !isEditting), []);
 
-		const rect = e.target.getBoundingClientRect();
-		const rightX = 200 + rect.x;
-		const clientWidth = document.documentElement.clientWidth;
-		const leftX = rightX > clientWidth ? clientWidth - 204 : rect.x;
-		dispatch(changeListActionVisible(true, leftX, rect.y, list.list_id));
-	};
+	const onShowListAction = useCallback(
+		e => {
+			if (list.list_id === listIdInAction && listActionVisible) {
+				dispatch(changeListActionVisible(false, 0, 0, list.list_id));
+				return;
+			}
+
+			const rect = e.target.getBoundingClientRect();
+			const rightX = 200 + rect.x;
+			const clientWidth = document.documentElement.clientWidth;
+			const leftX = rightX > clientWidth ? clientWidth - 204 : rect.x;
+			dispatch(changeListActionVisible(true, leftX, rect.y, list.list_id));
+		},
+		[dispatch, list, listIdInAction, listActionVisible]
+	);
 
 	useEffect(() => {
 		if (isEditting) inputRef.current.focus();
@@ -86,11 +90,11 @@ const ListTitle = ({ list, onUpdate }) => {
 	return (
 		<Container>
 			<LabelContainer>
-				<LabelWrapper isEditting={isEditting} onClick={onToggle}>
+				<LabelWrapper isEditting={isEditting} onClick={onToggleTitle}>
 					{inputTitle}
 				</LabelWrapper>
 				<EditWrapper isEditting={isEditting}>
-					<InputField ref={inputRef} onBlur={onToggle} value={inputTitle} onChange={onChangeInputTitle} />
+					<InputField ref={inputRef} onBlur={onToggleTitle} value={inputTitle} onChange={onChangeInputTitle} />
 				</EditWrapper>
 				<div>
 					<CustomIcon icon={faEllipsisH} size="xs" onClick={onShowListAction} />

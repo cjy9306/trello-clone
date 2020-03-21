@@ -77,12 +77,15 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
-	const onMemberDeleteClick = async memberId => {
-		const result = await dispatch(deleteBoardMember({ boardId: board.board_id, member_id: memberId }));
+	const onMemberDeleteClick = useCallback(
+		async memberId => {
+			const result = await dispatch(deleteBoardMember({ boardId: board.board_id, member_id: memberId }));
 
-		if (result.success) getMembers();
-		else dispatch(setMessageStates(true, 'error', result.data.data));
-	};
+			if (result.success) getMembers();
+			else dispatch(setMessageStates(true, 'error', result.data.data));
+		},
+		[dispatch, board, getMembers]
+	);
 
 	useEffect(() => {
 		getMembers();

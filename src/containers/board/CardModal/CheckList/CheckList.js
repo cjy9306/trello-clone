@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -42,22 +42,22 @@ const CheckList = ({ checklist }) => {
 	const board = useSelector(state => state.board.board);
 	const card = useSelector(state => state.board.card);
 
-	const onDeleteClick = async () => {
+	const onDeleteClick = useCallback(async () => {
 		const result = await dispatch(
 			deleteCheckList({ boardId: board.board_id, card_id: card.card_id, checklist_id: checklist.checklist_id })
 		);
 
 		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-	};
+	}, [board, card, dispatch, checklist]);
 
-	const onCreateCheckListItem = async () => {
+	const onCreateCheckListItem = useCallback(async () => {
 		const data = { item_name: 'new item' };
 		const result = await dispatch(
 			createCheckListItem({ boardId: board.board_id, checklist_id: checklist.checklist_id, data })
 		);
 
 		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-	};
+	}, [board, checklist, card, dispatch]);
 
 	return (
 		<Container>

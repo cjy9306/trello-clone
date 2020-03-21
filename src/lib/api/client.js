@@ -5,7 +5,6 @@ const client = axios.create();
 client.defaults.baseURL = process.env.REACT_APP_API_SERVER_ADDRESS;
 client.interceptors.request.use(config => {
 	config.headers.AccessToken = sessionStorage.getItem('token');
-	console.log('url ' + config.url);
 	return config;
 });
 axios.interceptors.response.use(

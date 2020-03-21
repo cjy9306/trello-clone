@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +7,7 @@ import Tag from '../../../../components/Tag';
 import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
+import { checkOverdueDate } from '../../../../CommonUtils';
 
 const Container = styled.div`
 	display: ${props => props.visible};
@@ -50,16 +51,6 @@ const CustomPicker = styled(DatePicker)`
 	padding: 4px 8px 4px 8px;
 `;
 
-const checkOverdue = date => {
-	const current = new Date();
-	const dueDate = new Date(date);
-	if (current > dueDate) {
-		return true;
-	} else {
-		return false;
-	}
-};
-
 const DetailsContent = ({ card }) => {
 	const [dueDate, setDueDate] = useState('');
 	const [overdueVisible, setOverdueVisible] = useState(false);
@@ -67,20 +58,23 @@ const DetailsContent = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
 
-	const onChangeDueDate = async selected => {
-		const data = { ...card, due_date: selected };
+	const onChangeDueDate = useCallback(
+		async selected => {
+			const data = { ...card, due_date: selected };
 
-		const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
+			const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
 
-		if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
-	};
+			if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
+			else dispatch(setMessageStates(true, 'error', result.data.data));
+		},
+		[dispatch, board, card]
+	);
 
 	useEffect(() => {
 		if (card.due_date) {
 			setDueDate(new Date(card.due_date));
 
-			if (checkOverdue(card.due_date)) setOverdueVisible(true);
+			if (checkOverdueDate(card.due_date)) setOverdueVisible(true);
 			else setOverdueVisible(false);
 		} else {
 			setDueDate(null);

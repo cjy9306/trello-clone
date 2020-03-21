@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useHistory } from 'react-router-dom';
 import BoardBox from './BoardBox';
@@ -10,7 +10,7 @@ const TitleBox = styled(BoardBox)`
 const BoardTitleBox = ({ board }) => {
 	const backgroundColor = board ? board.background_color : '666666';
 	const history = useHistory();
-	const onBoxClick = () => history.push('/board/' + board.board_id);
+	const onBoxClick = useCallback(() => history.push('/board/' + board.board_id), [history, board]);
 
 	return <TitleBox backgroundColor={backgroundColor} onClick={onBoxClick} text={board.board_name} />;
 };

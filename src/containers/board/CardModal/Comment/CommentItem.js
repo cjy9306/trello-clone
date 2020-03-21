@@ -5,6 +5,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
+import { convertDateClientTimezone } from '../../../../CommonUtils';
 
 const Container = styled.div`
 	margin-bottom: 24px;
@@ -63,23 +64,6 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	}
 `;
 
-const convertDateClientTimezone = time => {
-	const tmpDate = new Date(time);
-	const date = new Date(tmpDate.getTime() + tmpDate.getTimezoneOffset() * 60);
-
-	return (
-		date.getFullYear() +
-		'-' +
-		(date.getMonth() + 1) +
-		'-' +
-		date.getDate() +
-		' at ' +
-		date.getHours() +
-		':' +
-		date.getMinutes()
-	);
-};
-
 const CommentItem = ({ card, comment }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
@@ -110,10 +94,6 @@ const CommentItem = ({ card, comment }) => {
 				</ContentWrapper>
 			</ContentContainer>
 			<ControlContainer>
-				{/* 				
-				<a href="/#" onClick={() => alert(comment.contents)}>
-					Edit
-				</a> */}
 				&nbsp;&nbsp;
 				<a href="/#" onClick={() => onDelete()}>
 					Delete

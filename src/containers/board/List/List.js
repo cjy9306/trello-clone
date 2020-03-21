@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
@@ -41,29 +41,36 @@ const CardList = styled.div`
 
 const List = ({ list, index, board }) => {
 	const dispatch = useDispatch();
-	const onCreateCard = async newCardName => {
-		const data = {
-			card_name: newCardName,
-			seq: list.cards.length
-		};
 
-		const result = await dispatch(createCard({ boardId: board.board_id, list_id: list.list_id, data }));
+	const onCreateCard = useCallback(
+		async newCardName => {
+			const data = {
+				card_name: newCardName,
+				seq: list.cards.length
+			};
 
-		if (result.success === true) {
-			dispatch(getBoard({ boardId: board.board_id }));
-			return true;
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
-			return false;
-		}
-	};
+			const result = await dispatch(createCard({ boardId: board.board_id, list_id: list.list_id, data }));
 
-	const onUpdateTitle = async title => {
-		const data = { list_name: title, seq: list.seq };
-		const result = await dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
+			if (result.success === true) {
+				dispatch(getBoard({ boardId: board.board_id }));
+				return true;
+			} else {
+				dispatch(setMessageStates(true, 'error', result.data.data));
+				return false;
+			}
+		},
+		[dispatch, board, list]
+	);
 
-		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
-	};
+	const onUpdateTitle = useCallback(
+		async title => {
+			const data = { list_name: title, seq: list.seq };
+			const result = await dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
+
+			if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
+		},
+		[dispatch, board, list]
+	);
 
 	return (
 		<Draggable draggableId={'list-' + list.list_id} index={index}>

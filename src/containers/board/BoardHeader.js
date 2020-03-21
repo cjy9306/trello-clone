@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -36,20 +36,13 @@ const BoardHeader = ({ board }) => {
 	const dispatch = useDispatch();
 	const [listModalVisible, setListModalVisible] = useState(false);
 	const [membersModalVisible, setMembersModalVisible] = useState(false);
-	const [deleteBoardModalVisible, setDeleteBoaordModalVisible] = useState(false);
+	const [deleteBoardModalVisible, setDeleteBoardModalVisible] = useState(false);
 
-	// list modal
-	const onCloseListModal = () => setListModalVisible(false);
-	const onShowListModal = () => setListModalVisible(true);
+	const onToggleListModal = useCallback(() => setListModalVisible(visible => !visible), []);
+	const onToggleMembersModal = useCallback(() => setMembersModalVisible(visible => !visible), []);
+	const onToggleDeleteModal = useCallback(() => setDeleteBoardModalVisible(visible => !visible), []);
 
-	// members modal
-	const onCloseMembersModal = () => setMembersModalVisible(false);
-	const onShowMembersModal = () => setMembersModalVisible(true);
-
-	const onShowDeleteModal = () => setDeleteBoaordModalVisible(true);
-	const onCloseDeleteModal = () => setDeleteBoaordModalVisible(false);
-
-	const onDeleteBoard = async () => {
+	const onDeleteBoard = useCallback(async () => {
 		const result = await dispatch(deleteBoard({ boardId: board.board_id }));
 
 		if (result.success) {
@@ -58,25 +51,29 @@ const BoardHeader = ({ board }) => {
 		} else {
 			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
-	};
+	}, [dispatch, board, history]);
 
 	return (
 		<BoardHeaderContainer>
-			<BoardMembersModal visible={membersModalVisible} onCloseModal={onCloseMembersModal} />
-			<AddListModal visible={listModalVisible} onCloseModal={onCloseListModal} />
+			<BoardMembersModal visible={membersModalVisible} onCloseModal={onToggleMembersModal} />
+			<AddListModal visible={listModalVisible} onCloseModal={onToggleListModal} />
+			const onToggleMembersModal = useCallback(() => setMembersModalVisible(visible => !visible), []); const
+			onToggleDeleteModal = useCallback(() => setDeleteBoaordModalVisible)
 			<MenuContainer>
 				<MenuWrapper>{board.board_name}</MenuWrapper>
 				<MenuWrapper>
-					<HeaderButton onClick={onShowListModal}>Add another list</HeaderButton> &nbsp;
-					<HeaderButton onClick={onShowMembersModal}>Members</HeaderButton>
+					<HeaderButton onClick={onToggleListModal}>Add another list</HeaderButton> &nbsp; const onToggleMembersModal =
+					useCallback(() => setMembersModalVisible(visible => !visible), []); const onToggleDeleteModal = useCallback(()
+					=> setDeleteBoaordModalVisible)
+					<HeaderButton onClick={onToggleMembersModal}>Members</HeaderButton>
 				</MenuWrapper>
 				<ConfirmModal
 					visible={deleteBoardModalVisible}
-					onCloseModal={onCloseDeleteModal}
+					onCloseModal={onToggleDeleteModal}
 					message="Are you sure delete this board?"
 					onClickOk={onDeleteBoard}
 				/>
-				<DeleteBoardButton type="danger" onClick={onShowDeleteModal}>
+				<DeleteBoardButton type="danger" onClick={onToggleDeleteModal}>
 					Delete Board
 				</DeleteBoardButton>
 			</MenuContainer>

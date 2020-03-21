@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -34,10 +34,9 @@ const TeamInfo = ({ teamId }) => {
 	const team = useSelector(state => state.team.team);
 	const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
-	const onShowTeamDeletMoal = () => setConfirmModalVisible(true);
-	const onCloseTeamDeleteModal = () => setConfirmModalVisible(false);
+	const onToggleDeleteModal = useCallback(() => setConfirmModalVisible(visible => !visible), []);
 
-	const onTeamDeleteOk = async () => {
+	const onTeamDeleteOk = useCallback(async () => {
 		const result = await dispatch(deleteTeam({ teamId }));
 
 		if (result.success) {
@@ -46,7 +45,7 @@ const TeamInfo = ({ teamId }) => {
 		} else {
 			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
-	};
+	}, [dispatch, history, teamId]);
 
 	return (
 		<TeamInfoContainer>
@@ -55,13 +54,13 @@ const TeamInfo = ({ teamId }) => {
 				{team && team.team_name}
 			</TeamInfoTitle>
 			<TeamInfoDescription team={team} />
-			<Button type="danger" onClick={onShowTeamDeletMoal}>
+			<Button type="danger" onClick={onToggleDeleteModal}>
 				Delete this team
 			</Button>
 			<ConfirmModal
 				visible={confirmModalVisible}
 				message="Are you sure delete this team?"
-				onCloseModal={onCloseTeamDeleteModal}
+				onCloseModal={onToggleDeleteModal}
 				onClickOk={onTeamDeleteOk}
 			/>
 		</TeamInfoContainer>

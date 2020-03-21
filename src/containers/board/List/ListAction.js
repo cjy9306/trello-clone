@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkButton } from '../../../components/Button';
@@ -52,7 +52,8 @@ const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
 	const listId = useSelector(state => state.board.listAction.listId);
-	const onDeleteList = async () => {
+
+	const onDeleteList = useCallback(async () => {
 		const result = await dispatch(deleteList({ boardId: board.board_id, listId }));
 
 		if (result.success) {
@@ -61,7 +62,7 @@ const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
 		} else {
 			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
-	};
+	}, [dispatch, board, listId]);
 
 	return (
 		<PopupOver visible={visible} posX={posX} posY={posY}>

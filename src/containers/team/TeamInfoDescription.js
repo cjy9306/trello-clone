@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
@@ -55,6 +55,7 @@ const TeamInfoDescription = ({ team }) => {
 
 	const [isEditting, setIsEditting] = useState(false);
 	const [description, onChangeDescription, setDescription] = useInput('');
+	const onToggleDescription = useCallback(() => setIsEditting(isEditting => !isEditting), []);
 
 	const onSaveDescription = async () => {
 		if (description === team.description) return;
@@ -70,16 +71,13 @@ const TeamInfoDescription = ({ team }) => {
 		}
 	};
 
-	const onLabelClick = () => setIsEditting(true);
-	const onCancelClick = () => setIsEditting(false);
-
 	useEffect(() => {
 		if (isEditting) editRef.current.focus();
 	}, [isEditting]);
 
 	return (
 		<TeamInfoContainer>
-			<LabelWrapper isEditting={isEditting} onClick={onLabelClick}>
+			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
 				{description === '' || description == null
 					? 'Add a more detailed description...'
 					: description &&
@@ -102,7 +100,7 @@ const TeamInfoDescription = ({ team }) => {
 						Save
 					</Button>{' '}
 					&nbsp;
-					<Button type="default" onClick={onCancelClick}>
+					<Button type="default" onClick={onToggleDescription}>
 						Cancel
 					</Button>
 				</ControlWrapper>

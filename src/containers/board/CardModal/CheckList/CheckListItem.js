@@ -76,6 +76,7 @@ const CheckListItem = ({ item }) => {
 	const card = useSelector(state => state.board.card);
 	const [itemName, onChangeItemName, setItemName] = useInput(item.item_name);
 	const [isEditting, setIsEditting] = useState(false);
+
 	const onLabelClick = useCallback(() => {
 		setIsEditting(true);
 		setItemName(item.item_name);
@@ -102,23 +103,26 @@ const CheckListItem = ({ item }) => {
 		}
 	};
 
-	const onDeleteClick = async () => {
+	const onDeleteClick = useCallback(async () => {
 		const result = await dispatch(deleteCheckListItem({ boardId: board.board_id, item_id: item.item_id }));
 
 		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 		else dispatch(setMessageStates(true, 'error', result.data.data));
-	};
+	}, [dispatch, board, card, item]);
 
-	const onClickCheckBox = async checked => {
-		const data = {
-			item_name: item.item_name,
-			checked
-		};
+	const onClickCheckBox = useCallback(
+		async checked => {
+			const data = {
+				item_name: item.item_name,
+				checked
+			};
 
-		const result = await dispatch(updateCheckListItem({ boardId: board.board_id, item_id: item.item_id, data }));
-		if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
-	};
+			const result = await dispatch(updateCheckListItem({ boardId: board.board_id, item_id: item.item_id, data }));
+			if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
+			else dispatch(setMessageStates(true, 'error', result.data.data));
+		},
+		[dispatch, item, board, card]
+	);
 
 	useEffect(() => {
 		if (isEditting) editRef.current.focus();

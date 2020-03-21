@@ -24,9 +24,7 @@ const MemberBoardsContainer = () => {
 
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
 
-	const onToggleBoardModal = useCallback(() => {
-		setBoardModalVisible(boardModalVisible => !boardModalVisible);
-	}, []);
+	const onToggleBoardModal = useCallback(() => setBoardModalVisible(visible => !visible), []);
 
 	const getBoards = useCallback(async () => {
 		const member_id = sessionStorage.getItem('memberId');

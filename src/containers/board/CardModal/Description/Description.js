@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import useInput from '../../../../hooks/useInput';
@@ -54,8 +54,7 @@ const Description = ({ card }) => {
 	const board = useSelector(state => state.board.board);
 	const editRef = useRef();
 
-	const onLabelClick = () => setIsEditting(true);
-	const onCancelClick = () => setIsEditting(false);
+	const onToggleDescription = useCallback(() => setIsEditting(isEditting => !isEditting), []);
 
 	const onSaveClick = async () => {
 		if (card.description === description) return;
@@ -69,7 +68,7 @@ const Description = ({ card }) => {
 
 		if (result.success) await dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
 		else dispatch(setMessageStates(true, 'error', result.data.data));
-		onCancelClick();
+		onToggleDescription();
 	};
 
 	useEffect(() => {
@@ -83,7 +82,7 @@ const Description = ({ card }) => {
 
 	return (
 		<Container>
-			<LabelWrapper isEditting={isEditting} onClick={onLabelClick}>
+			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
 				{description === '' || description == null
 					? 'Add a more detailed description...'
 					: card.description &&
@@ -106,7 +105,7 @@ const Description = ({ card }) => {
 						Save
 					</Button>{' '}
 					&nbsp;
-					<Button type="default" onClick={onCancelClick}>
+					<Button type="default" onClick={onToggleDescription}>
 						Cancel
 					</Button>
 				</ControlWrapper>
