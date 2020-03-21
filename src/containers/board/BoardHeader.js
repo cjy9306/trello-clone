@@ -57,14 +57,10 @@ const BoardHeader = ({ board }) => {
 		<BoardHeaderContainer>
 			<BoardMembersModal visible={membersModalVisible} onCloseModal={onToggleMembersModal} />
 			<AddListModal visible={listModalVisible} onCloseModal={onToggleListModal} />
-			const onToggleMembersModal = useCallback(() => setMembersModalVisible(visible => !visible), []); const
-			onToggleDeleteModal = useCallback(() => setDeleteBoaordModalVisible)
 			<MenuContainer>
 				<MenuWrapper>{board.board_name}</MenuWrapper>
 				<MenuWrapper>
-					<HeaderButton onClick={onToggleListModal}>Add another list</HeaderButton> &nbsp; const onToggleMembersModal =
-					useCallback(() => setMembersModalVisible(visible => !visible), []); const onToggleDeleteModal = useCallback(()
-					=> setDeleteBoaordModalVisible)
+					<HeaderButton onClick={onToggleListModal}>Add another list</HeaderButton> &nbsp;
 					<HeaderButton onClick={onToggleMembersModal}>Members</HeaderButton>
 				</MenuWrapper>
 				<ConfirmModal
