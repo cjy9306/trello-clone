@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
@@ -36,6 +37,10 @@ const TeamBoardHeader = ({ team }) => {
 			</SettingsButton>
 		</TeamHeader>
 	);
+};
+
+TeamBoardHeader.propTypes = {
+	team: PropTypes.object.isRequired
 };
 
 export default React.memo(TeamBoardHeader);

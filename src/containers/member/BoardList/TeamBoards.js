@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { useSelector } from 'react-redux';
 import BoardList from './BoardList';
 import TeamBoardHeader from './TeamBoardHeader';
+import PropTypes from 'prop-types';
 
 const TeamBoardContainer = styled.div``;
 
@@ -22,6 +23,10 @@ const TeamBoards = ({ onToggleBoardModal }) => {
 				))}
 		</TeamContainer>
 	);
+};
+
+TeamBoards.propTypes = {
+	onToggleBoardModal: PropTypes.func.isRequired
 };
 
 export default React.memo(TeamBoards);

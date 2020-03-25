@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 const BoxContainer = styled.div`
 	box-sizing: border-box;
@@ -47,6 +48,12 @@ const BoardBox = ({ className, text, onClick }) => {
 			{text}
 		</BoxContainer>
 	);
+};
+
+BoardBox.propTypes = {
+	className: PropTypes.string,
+	text: PropTypes.string,
+	onClick: PropTypes.func
 };
 
 export default BoardBox;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import BoardTitleBox from './BoardTitleBox';
 import CreateBoardBox from './CreateBoardBox';
 
@@ -16,6 +17,11 @@ const BoardList = ({ boards, onToggleBoardModal }) => {
 			{boards && boards.length === 0 && <CreateBoardBox onClick={onToggleBoardModal} text="Create a new board" />}
 		</BoardListContainer>
 	);
+};
+
+BoardList.propTypes = {
+	boards: PropTypes.array.isRequired,
+	onToggleBoardModal: PropTypes.func.isRequired
 };
 
 export default React.memo(BoardList);

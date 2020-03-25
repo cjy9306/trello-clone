@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import BoardList from './BoardList';
+import PropTypes from 'prop-types';
 
 const BoardListContainer = styled.div`
 	margin: 20px auto;
@@ -35,6 +36,10 @@ const PersonalBoards = ({ onToggleBoardModal }) => {
 			<BoardList boards={personalBoards} onToggleBoardModal={onToggleBoardModal} />
 		</BoardListContainer>
 	);
+};
+
+PersonalBoards.propTypes = {
+	onToggleBoardModal: PropTypes.func.isRequired
 };
 
 export default React.memo(PersonalBoards);
