@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import CheckBox from '../../../../components/CheckBox';
 import Button from '../../../../components/Button';
@@ -76,6 +77,7 @@ const CheckListItem = ({ item }) => {
 	const card = useSelector(state => state.board.card);
 	const [itemName, onChangeItemName, setItemName] = useInput(item.item_name);
 	const [isEditting, setIsEditting] = useState(false);
+	const editRef = useRef();
 
 	const onLabelClick = useCallback(() => {
 		setIsEditting(true);
@@ -85,8 +87,6 @@ const CheckListItem = ({ item }) => {
 	const onCancelClick = useCallback(() => {
 		setIsEditting(false);
 	}, []);
-
-	const editRef = useRef();
 
 	const onSaveClick = async () => {
 		const data = {
@@ -155,6 +155,10 @@ const CheckListItem = ({ item }) => {
 			</EditContainer>
 		</Container>
 	);
+};
+
+CheckListItem.propTypes = {
+	item: PropTypes.object.isRequired
 };
 
 export default React.memo(CheckListItem);

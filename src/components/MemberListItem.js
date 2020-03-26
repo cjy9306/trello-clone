@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
 const MemberItemContainer = styled.div`
@@ -40,6 +41,12 @@ const MemberListItem = ({ className, member, onDeleteClick }) => {
 			</MemberDeleteButton>
 		</MemberItemContainer>
 	);
+};
+
+MemberListItem.propTypes = {
+	className: PropTypes.string,
+	member: PropTypes.object.isRequired,
+	onDeleteClick: PropTypes.func
 };
 
 export default React.memo(MemberListItem);

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmModal } from '../../components/Modal';
@@ -65,6 +66,10 @@ const TeamInfo = ({ teamId }) => {
 			/>
 		</TeamInfoContainer>
 	);
+};
+
+TeamInfo.propTypes = {
+	teamId: PropTypes.number.isRequired
 };
 
 export default React.memo(TeamInfo);

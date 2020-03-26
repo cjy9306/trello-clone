@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import Button from './Button';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import Button from './Button';
 
 const ModalContainer = styled.div`
 	display: ${props => (props.visible ? 'flex' : 'none')};
@@ -51,6 +52,13 @@ const Modal = ({ className, visible = false, onCloseModal, children }) => {
 	);
 };
 
+Modal.propTypes = {
+	className: PropTypes.string,
+	visible: PropTypes.bool,
+	onCloseModal: PropTypes.func.isRequired,
+	children: PropTypes.node
+};
+
 export default React.memo(Modal);
 
 const ConfirmModalContainer = styled(Modal)`
@@ -93,3 +101,11 @@ export const ConfirmModal = React.memo(({ className, visible = false, onCloseMod
 		</ConfirmModalContainer>
 	);
 });
+
+ConfirmModal.propTypes = {
+	className: PropTypes.string,
+	visible: PropTypes.bool,
+	onCloseModal: PropTypes.func.isRequired,
+	onClickOk: PropTypes.func,
+	message: PropTypes.string
+};

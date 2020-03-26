@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import TextArea from 'react-textarea-autosize';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import { createComment, getCard } from '../../../../modules/board';
@@ -123,6 +124,10 @@ const CommentContent = ({ card }) => {
 			</CommentViewContainer>
 		</Container>
 	);
+};
+
+CommentContent.propTypes = {
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(CommentContent);

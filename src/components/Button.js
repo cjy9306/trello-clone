@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 // Size
 const DefaultHeight = '32px';
@@ -87,6 +88,16 @@ const Button = ({ className, type, size, background = null, children, block, onC
 			{children}
 		</ButtonContainer>
 	);
+};
+
+Button.propTypes = {
+	className: PropTypes.string,
+	type: PropTypes.string,
+	size: PropTypes.string,
+	background: PropTypes.string,
+	children: PropTypes.node,
+	block: PropTypes.any,
+	onClick: PropTypes.func
 };
 
 export default React.memo(Button);

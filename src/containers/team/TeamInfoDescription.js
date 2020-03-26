@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import { updateTeam } from '../../modules/team';
@@ -107,6 +108,10 @@ const TeamInfoDescription = ({ team }) => {
 			</TextAreaWrapper>
 		</TeamInfoContainer>
 	);
+};
+
+TeamInfoDescription.propTypes = {
+	team: PropTypes.object.isRequired
 };
 
 export default React.memo(TeamInfoDescription);

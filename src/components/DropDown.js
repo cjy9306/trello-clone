@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 const DropDownContainer = styled.div`
 	font-size: 14px;
@@ -90,6 +91,12 @@ const DropDown = ({ data, onSelected, className }) => {
 			</DropDownList>
 		</DropDownContainer>
 	);
+};
+
+DropDown.propTypes = {
+	data: PropTypes.array.isRequired,
+	onSelected: PropTypes.string,
+	className: PropTypes.string
 };
 
 export default React.memo(DropDown);

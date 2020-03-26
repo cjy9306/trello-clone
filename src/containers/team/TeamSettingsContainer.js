@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import { getTeam } from '../../modules/team';
@@ -39,6 +40,14 @@ const TeamSettingsContainer = ({ match }) => {
 			</Container>
 		</>
 	);
+};
+
+TeamSettingsContainer.propTypes = {
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			teamId: PropTypes.number.isRequired
+		}).isRequired
+	}).isRequired
 };
 
 export default React.memo(TeamSettingsContainer);

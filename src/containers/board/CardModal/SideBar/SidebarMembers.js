@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import MemberListItem from '../../../../components/MemberListItem';
@@ -74,10 +75,6 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 		dispatch(getCardMembers({ boardId: board.board_id, cardId: card.card_id }));
 	}, [board, card, dispatch]);
 
-	useEffect(() => {
-		getMembers();
-	}, [card, getMembers]);
-
 	const onAddMember = async () => {
 		if (email === '') return;
 		const data = { email };
@@ -93,6 +90,10 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 		if (result.success) getMembers();
 		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
+
+	useEffect(() => {
+		getMembers();
+	}, [card, getMembers]);
 
 	useEffect(() => {
 		setEmail('');
@@ -121,6 +122,11 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 			</MemberListContainer>
 		</MembersContainer>
 	);
+};
+
+SideBarMembers.propTypes = {
+	onPopupToggle: PropTypes.func.isRequired,
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(SideBarMembers);

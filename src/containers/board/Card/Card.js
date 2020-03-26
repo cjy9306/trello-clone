@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Draggable } from 'react-beautiful-dnd';
+import PropTypes from 'prop-types';
 import Tag from '../../../components/Tag';
 import { changeModalVisible, getCard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
@@ -87,6 +88,12 @@ const Card = ({ card, board, index }) => {
 			)}
 		</Draggable>
 	);
+};
+
+Card.propTypes = {
+	card: PropTypes.object.isRequired,
+	board: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired
 };
 
 export default Card;

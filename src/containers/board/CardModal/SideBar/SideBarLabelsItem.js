@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 const SideBarLabelsItemContainer = styled.div`
 	position: relative;
@@ -64,6 +65,12 @@ const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 			</SideBarLabelsItemContent>
 		</SideBarLabelsItemContainer>
 	);
+};
+
+SideBarLabelsItem.propTypes = {
+	label: PropTypes.object.isRequired,
+	defaultChecked: PropTypes.bool.isRequired,
+	onLabelsItemClick: PropTypes.func.isRequired
 };
 
 export default React.memo(SideBarLabelsItem);

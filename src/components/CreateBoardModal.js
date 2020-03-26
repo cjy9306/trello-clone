@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../hooks/useInput';
-import Button from './Button';
-import Modal from './Modal';
-import { createBoard } from '../modules/board';
-import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import DropDown from './DropDown';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import useInput from '../hooks/useInput';
+import { createBoard } from '../modules/board';
 import { getTeams } from '../modules/member';
+import DropDown from './DropDown';
+import Button from './Button';
+import Modal from './Modal';
+import { BoardColorArray } from '../CommonUtils';
 
 const CreateModal = styled(Modal)`
 	max-width: 420px;
@@ -55,20 +57,11 @@ const ColorContent = styled.div`
 	justify-content: space-between;
 `;
 
-const ColarArray = [
-	[0, '4BBF6B', true],
-	[1, '00a5c3', false],
-	[2, '006eb3', false],
-	[3, 'ce8437', false],
-	[4, '778186', false],
-	[5, 'a93b2e', false]
-];
-
 const CreateBoardModal = ({ visible, onCloseModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [title, onChangeTitle, setTitle] = useInput('');
-	const [colorArray, setColorArray] = useState(ColarArray);
+	const [colorArray, setColorArray] = useState(BoardColorArray);
 	const [dropdownTeams, setDropdownTeams] = useState([]);
 	const [teamId, setTeamId] = useState(0);
 	const teams = useSelector(state => state.member.teams);
@@ -104,12 +97,12 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 	};
 
 	const getCheckdColor = () => {
-		for (let i = 0; i < colorArray.length; i++) if (colorArray[i][2] === true) return colorArray[i][1];
+		for (let i = 0; i < colorArray.length; i++) {
+			if (colorArray[i][2] === true) return colorArray[i][1];
+		}
 	};
 
-	const onTeamSelected = team => {
-		setTeamId(team.id);
-	};
+	const onTeamSelected = team => setTeamId(team.id);
 
 	useEffect(() => {
 		const memberId = sessionStorage.getItem('memberId');
@@ -157,6 +150,11 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 	);
 };
 
+CreateBoardModal.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	onCloseModal: PropTypes.func.isRequired
+};
+
 export default React.memo(CreateBoardModal);
 
 const ColorBlockContainer = styled.div`
@@ -193,4 +191,9 @@ const ColorBlock = ({ data, onColorBlockClick }) => {
 			<CustomIcon icon={faCheck} checked={checked} size="xs" />
 		</ColorBlockContainer>
 	);
+};
+
+ColorBlock.propTypes = {
+	data: PropTypes.array.isRequired,
+	onColorBlockClick: PropTypes.func.isRequired
 };

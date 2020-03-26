@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { deleteComment, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
 import { convertDateClientTimezone } from '../../../../CommonUtils';
@@ -103,4 +104,9 @@ const CommentItem = ({ card, comment }) => {
 	);
 };
 
-export default CommentItem;
+CommentItem.propTypes = {
+	card: PropTypes.object.isRequired,
+	comment: PropTypes.object.isRequired
+};
+
+export default React.memo(CommentItem);

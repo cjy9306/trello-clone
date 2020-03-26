@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
@@ -90,6 +91,11 @@ const AddListModal = ({ visible, onCloseModal }) => {
 			</AddListControl>
 		</AddModal>
 	);
+};
+
+AddListModal.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	onCloseModal: PropTypes.func.isRequired
 };
 
 export default React.memo(AddListModal);

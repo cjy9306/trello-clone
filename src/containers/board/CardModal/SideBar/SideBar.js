@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { LinkButton } from '../../../../components/Button';
 import { ConfirmModal } from '../../../../components/Modal';
+import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
+import { setMessageStates } from '../../../../modules/common';
 import SidebarMembers from './SidebarMembers';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
-import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 
 const SideBarAddOn = styled.div`
 	margin-bottom: 32px;
@@ -136,6 +137,10 @@ const SideBar = ({ card }) => {
 			</SideBarActions>
 		</div>
 	);
+};
+
+SideBar.propTypes = {
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(SideBar);

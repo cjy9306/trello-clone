@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Button from '../../../../components/Button';
 import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
 import CheckListItem from './CheckListItem';
@@ -24,7 +25,7 @@ const DeleteButtonWrapper = styled.div`
 	position: absolute;
 `;
 
-const CheckListContent = styled.div`
+const CheckListContainer = styled.div`
 	margin-bottom: 8px;
 `;
 
@@ -68,10 +69,10 @@ const CheckList = ({ checklist }) => {
 					<Button onClick={onDeleteClick}>Delete</Button>
 				</DeleteButtonWrapper>
 			</CheckListHeader>
-			<CheckListContent>
+			<CheckListContainer>
 				{checklist.checklist_items &&
 					checklist.checklist_items.map(item => <CheckListItem item={item} key={item.item_id} />)}
-			</CheckListContent>
+			</CheckListContainer>
 			<CheckListControl>
 				<Button onClick={onCreateCheckListItem}>Add an item</Button>
 			</CheckListControl>
@@ -79,4 +80,8 @@ const CheckList = ({ checklist }) => {
 	);
 };
 
-export default CheckList;
+CheckList.propTypes = {
+	checklist: PropTypes.object.isRequired
+};
+
+export default React.memo(CheckList);

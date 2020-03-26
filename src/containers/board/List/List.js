@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import PropTypes from 'prop-types';
 import { createCard, getBoard, updateList } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
 import AddCard from './AddCard';
@@ -96,6 +97,12 @@ const List = ({ list, index, board }) => {
 			)}
 		</Draggable>
 	);
+};
+
+List.propTypes = {
+	list: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+	board: PropTypes.object.isRequired
 };
 
 export default List;

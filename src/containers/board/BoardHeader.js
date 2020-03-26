@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import HeaderButton from '../../components/HeaderButton';
 import { ConfirmModal } from '../../components/Modal';
@@ -75,6 +76,10 @@ const BoardHeader = ({ board }) => {
 			</MenuContainer>
 		</BoardHeaderContainer>
 	);
+};
+
+BoardHeader.propTypes = {
+	board: PropTypes.object.isRequired
 };
 
 export default React.memo(BoardHeader);

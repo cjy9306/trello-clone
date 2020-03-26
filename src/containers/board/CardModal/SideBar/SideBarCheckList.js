@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 
@@ -76,6 +77,11 @@ const SideBarCheckList = ({ onPopupToggle, onCreateCheckList }) => {
 			</SideBarCheckListContent>
 		</SideBarCheckListContainer>
 	);
+};
+
+SideBarCheckList.propTypes = {
+	onPopupToggle: PropTypes.func.isRequired,
+	onCreateCheckList: PropTypes.func.isRequired
 };
 
 export default SideBarCheckList;

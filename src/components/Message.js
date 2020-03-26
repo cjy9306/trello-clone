@@ -2,8 +2,9 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faInfoCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { setMessageStates } from '../modules/common';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setMessageStates } from '../modules/common';
 
 const MessageContainer = styled.div`
 	position: absolute;
@@ -79,6 +80,13 @@ const Message = ({ className, visible, text, type }) => {
 			</MessageContent>
 		</MessageContainer>
 	);
+};
+
+Message.propTypes = {
+	className: PropTypes.string,
+	visible: PropTypes.bool,
+	text: PropTypes.string,
+	type: PropTypes.string
 };
 
 export default Message;

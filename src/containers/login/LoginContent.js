@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import FireBaseLogin from '../../components/FireBaseLogin';
@@ -72,7 +73,7 @@ const ButtonWraper = styled.div`
 	margin-bottom: 8px;
 `;
 
-const Login = ({ onLogin }) => {
+const LoginContent = ({ onLogin }) => {
 	const [username, onChangeUserename] = useInput('');
 	const [password, onChangePassword] = useInput('');
 
@@ -120,4 +121,8 @@ const Login = ({ onLogin }) => {
 	);
 };
 
-export default React.memo(Login);
+LoginContent.propTypes = {
+	onLogin: PropTypes.func.isRequired
+};
+
+export default React.memo(LoginContent);

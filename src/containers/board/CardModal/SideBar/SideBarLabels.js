@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
-import SideBarLabelsItem from './SideBarLabelsItem';
+import PropTypes from 'prop-types';
 import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../../modules/board';
 import { setMessageStates } from '../../../../modules/common';
+import SideBarLabelsItem from './SideBarLabelsItem';
 
 const SideBarLabelsContainer = styled.div`
 	background-color: #fff;
@@ -106,6 +107,11 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 			</SideBarLabelsContent>
 		</SideBarLabelsContainer>
 	);
+};
+
+SideBarLabelsItem.propTypes = {
+	onPopupToggle: PropTypes.func.isRequired,
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(SideBarLabels);

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import List from './List/List';
 
@@ -24,6 +25,12 @@ const BoardContent = ({ board, lists, onDragEnd }) => {
 			</Droppable>
 		</DragDropContext>
 	);
+};
+
+BoardContent.propTypes = {
+	board: PropTypes.object.isRequired,
+	lists: PropTypes.array.isRequired,
+	onDragEnd: PropTypes.func.isRequired
 };
 
 export default React.memo(BoardContent);

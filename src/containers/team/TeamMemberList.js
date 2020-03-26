@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import MemberListItem from '../../components/MemberListItem';
@@ -88,6 +89,10 @@ const TeamMemberList = ({ teamId }) => {
 				))}
 		</TeamMembersContainer>
 	);
+};
+
+TeamMemberList.propTypes = {
+	teamId: PropTypes.number.isRequired
 };
 
 export default React.memo(TeamMemberList);

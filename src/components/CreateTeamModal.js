@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
-import useInput from '../hooks/useInput';
-import Button from './Button';
-import Modal from './Modal';
-import { createTeam } from '../modules/team';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import useInput from '../hooks/useInput';
+import { createTeam } from '../modules/team';
+import Button from './Button';
+import Modal from './Modal';
 
 const CreateModal = styled(Modal)`
 	max-width: 380px;
@@ -100,6 +101,11 @@ const CreateTeamModal = ({ visible, onCloseModal }) => {
 			</CreateTeamControl>
 		</CreateModal>
 	);
+};
+
+CreateTeamModal.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	onCloseModal: PropTypes.func.isRequired
 };
 
 export default React.memo(CreateTeamModal);

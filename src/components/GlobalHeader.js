@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import HeaderButton from './HeaderButton';
 import { useHistory } from 'react-router-dom';
-import CreateBoardModal from './CreateBoardModal';
-import CreateTeamModal from './CreateTeamModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import CreateBoardModal from './CreateBoardModal';
+import CreateTeamModal from './CreateTeamModal';
 import GlobalCreateAction from './GlobalCreateAction';
+import HeaderButton from './HeaderButton';
 
 const HeaderContainer = styled.div`
 	height: 32px;
@@ -53,20 +54,14 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	};
 
 	// create board modal
-	const onCloseBoardModal = () => setBoardModalVisible(false);
-	const onShowBoardModal = () => setBoardModalVisible(true);
-
-	// create team modal
-	const onCloseTeamModal = () => setTeamModalVisible(false);
-	const onShowTeamModal = () => setTeamModalVisible(true);
-
-	// create action
-	const onToggleCreateAction = () => setCreateActionVisible(!createActionVisible);
+	const onToggleBoardModal = useCallback(() => setBoardModalVisible(visible => !visible), []);
+	const onToggleTeamModal = useCallback(() => setTeamModalVisible(visible => !visible), []);
+	const onToggleCreateAction = useCallback(() => setCreateActionVisible(visible => !visible), []);
 
 	return (
 		<HeaderContainer backgroundColor={backgroundColor}>
-			<CreateBoardModal visible={boardModalVisible} onCloseModal={onCloseBoardModal} />
-			<CreateTeamModal visible={teamModalVisible} onCloseModal={onCloseTeamModal} />
+			<CreateBoardModal visible={boardModalVisible} onCloseModal={onToggleBoardModal} />
+			<CreateTeamModal visible={teamModalVisible} onCloseModal={onToggleTeamModal} />
 			<MenuWrapper textAlign="left">
 				<HeaderButton onClick={onClickHome}>
 					<CustomIcon icon={faHome} size="xs" />
@@ -78,8 +73,8 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 				<GlobalCreateAction
 					visible={createActionVisible}
 					onTogglePopup={onToggleCreateAction}
-					onShowBoardModal={onShowBoardModal}
-					onShowTeamModal={onShowTeamModal}
+					onShowBoardModal={onToggleBoardModal}
+					onShowTeamModal={onToggleTeamModal}
 				/>
 			</MenuWrapper>
 			<TitleWrapper>Trello Clone</TitleWrapper>
@@ -94,6 +89,11 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 			</MenuWrapper>
 		</HeaderContainer>
 	);
+};
+
+GlobalHeader.propTypes = {
+	isLogined: PropTypes.bool.isRequired,
+	backgroundColor: PropTypes.string.isRequired
 };
 
 export default React.memo(GlobalHeader);

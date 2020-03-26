@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import { updateCard, changeCard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
@@ -80,6 +81,10 @@ const Header = ({ card }) => {
 			<InputField value={title} onChange={onChangeTitle} onBlur={onBlurInputField} />
 		</HeaderContainer>
 	);
+};
+
+Header.propTypes = {
+	card: PropTypes.object.isRequired
 };
 
 export default Header;

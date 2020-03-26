@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import Button from '../../../components/Button';
 
@@ -94,6 +95,10 @@ const AddCard = ({ onCreateCard }) => {
 			</InputContainer>
 		</Container>
 	);
+};
+
+AddCard.propTypes = {
+	onCreateCard: PropTypes.func.isRequired
 };
 
 export default React.memo(AddCard);

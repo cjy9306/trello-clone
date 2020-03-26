@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { LinkButton } from '../../../components/Button';
 import { deleteList, changeListActionVisible, getBoard } from '../../../modules/board';
 import { setMessageStates } from '../../../modules/common';
@@ -80,6 +81,13 @@ const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
 			</ListActionConatiner>
 		</PopupOver>
 	);
+};
+
+ListAction.propTypes = {
+	posX: PropTypes.number.isRequired,
+	posY: PropTypes.number.isRequired,
+	visible: PropTypes.bool.isRequired,
+	onPopupToggle: PropTypes.func.isRequired
 };
 
 export default React.memo(ListAction);

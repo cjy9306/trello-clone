@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
+import PropTypes from 'prop-types';
 
 const PopupOver = styled.div`
 	display: ${props => (props.visible ? 'block' : 'none')};
@@ -63,15 +64,15 @@ const BoardIcon = styled(CustomIcon)`
 `;
 
 const GlobalCreateAction = ({ visible, onTogglePopup, onShowBoardModal, onShowTeamModal }) => {
-	const onCreateTeamClick = () => {
+	const onCreateTeamClick = useCallback(() => {
 		onTogglePopup();
 		onShowTeamModal();
-	};
+	}, [onTogglePopup, onShowTeamModal]);
 
-	const onCreateBoardClick = () => {
+	const onCreateBoardClick = useCallback(() => {
 		onTogglePopup();
 		onShowBoardModal();
-	};
+	}, [onTogglePopup, onShowBoardModal]);
 
 	return (
 		<PopupOver visible={visible}>
@@ -92,6 +93,13 @@ const GlobalCreateAction = ({ visible, onTogglePopup, onShowBoardModal, onShowTe
 			</CreateActionList>
 		</PopupOver>
 	);
+};
+
+GlobalCreateAction.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	onTogglePopup: PropTypes.func.isRequired,
+	onShowBoardModal: PropTypes.func.isRequired,
+	onShowTeamModal: PropTypes.func.isRequired
 };
 
 export default React.memo(GlobalCreateAction);

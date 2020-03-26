@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 import Modal from '../../../components/Modal';
-import Header from './Header';
 import DetailsContent from './Detail/DetailsContent';
 import CheckListContent from './CheckList/CheckListContent';
 import CommentContent from './Comment/CommentContent';
 import SideBar from './SideBar/SideBar';
+import Header from './Header';
 import DescriptionContent from './Description/DescriptionContent';
 
 const CardModalContainer = styled(Modal)`
@@ -85,6 +86,11 @@ const CardModal = ({ visible, onCloseModal }) => {
 			</SideBarContent>
 		</CardModalContainer>
 	);
+};
+
+CardModal.propTypes = {
+	vsible: PropTypes.bool.isRequired,
+	onCloseModal: PropTypes.func.isRequired
 };
 
 export default React.memo(CardModal);

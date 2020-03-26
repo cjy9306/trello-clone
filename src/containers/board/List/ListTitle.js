@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import { changeListActionVisible } from '../../../modules/board';
 
@@ -102,6 +103,11 @@ const ListTitle = ({ list, onUpdate }) => {
 			</LabelContainer>
 		</Container>
 	);
+};
+
+ListTitle.propTypes = {
+	list: PropTypes.object.isRequired,
+	onUpdate: PropTypes.func.isRequired
 };
 
 export default React.memo(ListTitle);

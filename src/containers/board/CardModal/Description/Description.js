@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import { updateCard, getCard } from '../../../../modules/board';
@@ -112,6 +113,10 @@ const Description = ({ card }) => {
 			</TextAreaWrapper>
 		</Container>
 	);
+};
+
+Description.propTypes = {
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(Description);

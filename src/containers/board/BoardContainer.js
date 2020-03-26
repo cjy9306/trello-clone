@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
+import Message from '../../components/Message';
 import {
 	getBoard,
 	changeLists,
@@ -16,7 +18,6 @@ import BoardContent from './BoardContent';
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './List/ListAction';
-import Message from '../../components/Message';
 
 const Root = styled.div`
 	background-color: #${props => props.backgroundColor};
@@ -207,6 +208,14 @@ const BoardContainer = ({ match: { params } }) => {
 			<Message visible={message.visible} type={message.type} text={message.text} />
 		</Root>
 	);
+};
+
+BoardContainer.propTypes = {
+	match: PropTypes.shape({
+		params: PropTypes.shape({
+			boardId: PropTypes.number.isRequired
+		}).isRequired
+	}).isRequired
 };
 
 export default React.memo(BoardContainer);

@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Tag from '../../../../components/Tag';
 import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
@@ -103,6 +104,10 @@ const DetailsContent = ({ card }) => {
 			</DueDateContainer>
 		</Container>
 	);
+};
+
+DetailsContent.propTypes = {
+	card: PropTypes.object.isRequired
 };
 
 export default React.memo(DetailsContent);

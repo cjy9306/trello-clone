@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import PropTypes from 'prop-types';
 
 const SuccessBackgroundColor = '#f4ffeb';
 const SuccessBorderColor = '#ace98b';
@@ -44,6 +45,13 @@ const Alert = ({ className, type, message, visible }) => {
 			{message}
 		</AlertContainer>
 	);
+};
+
+Alert.propTypes = {
+	className: PropTypes.string,
+	type: PropTypes.string,
+	message: PropTypes.string,
+	visible: PropTypes.bool
 };
 
 export default React.memo(Alert);
