@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -188,8 +188,8 @@ const BoardContainer = ({ match: { params } }) => {
 		}
 	};
 
-	const onCloseModal = () => dispatch(changeModalVisible(false));
-	const onCloseListAction = () => dispatch(changeListActionVisible(false));
+	const onCloseModal = useCallback(() => dispatch(changeModalVisible(false)), [dispatch]);
+	const onCloseListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);
 
 	return (
 		<Root backgroundColor={board.background_color}>
@@ -202,7 +202,7 @@ const BoardContainer = ({ match: { params } }) => {
 					visible={listActionVisible}
 					posX={listActionPosX}
 					posY={listActionPosY}
-					onCloseModal={onCloseListAction}
+					onCloseListAction={onCloseListAction}
 				/>
 			</Container>
 			<Message visible={message.visible} type={message.type} text={message.text} />
@@ -213,7 +213,7 @@ const BoardContainer = ({ match: { params } }) => {
 BoardContainer.propTypes = {
 	match: PropTypes.shape({
 		params: PropTypes.shape({
-			boardId: PropTypes.number.isRequired
+			boardId: PropTypes.string.isRequired
 		}).isRequired
 	}).isRequired
 };

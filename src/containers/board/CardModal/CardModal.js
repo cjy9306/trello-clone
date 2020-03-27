@@ -89,7 +89,7 @@ const CardModal = ({ visible, onCloseModal }) => {
 };
 
 CardModal.propTypes = {
-	vsible: PropTypes.bool.isRequired,
+	visible: PropTypes.bool.isRequired,
 	onCloseModal: PropTypes.func.isRequired
 };
 

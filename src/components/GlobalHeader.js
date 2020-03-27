@@ -93,7 +93,12 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 
 GlobalHeader.propTypes = {
 	isLogined: PropTypes.bool.isRequired,
-	backgroundColor: PropTypes.string.isRequired
+	backgroundColor: (props, propName, componentName) => {
+		const propValue = props[propName];
+		if (propValue === null || propValue === undefined) return;
+		if (typeof propValue === 'string') return;
+		return new Error(`${componentName} only accepts null or undefined or string`);
+	}
 };
 
 export default React.memo(GlobalHeader);

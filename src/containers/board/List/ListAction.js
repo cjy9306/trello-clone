@@ -49,7 +49,7 @@ const CloseSpan = styled.span`
 	}
 `;
 
-const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
+const ListAction = ({ posX, posY, visible, onCloseListAction }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
 	const listId = useSelector(state => state.board.listAction.listId);
@@ -70,7 +70,7 @@ const ListAction = ({ posX, posY, visible, onPopupToggle }) => {
 			<ListActionConatiner>
 				<ActionHeader>
 					List Actions
-					<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
+					<CloseSpan onClick={onCloseListAction}>&times;</CloseSpan>
 					<hr />
 				</ActionHeader>
 				<ActionContent>
@@ -87,7 +87,7 @@ ListAction.propTypes = {
 	posX: PropTypes.number.isRequired,
 	posY: PropTypes.number.isRequired,
 	visible: PropTypes.bool.isRequired,
-	onPopupToggle: PropTypes.func.isRequired
+	onCloseListAction: PropTypes.func.isRequired
 };
 
 export default React.memo(ListAction);

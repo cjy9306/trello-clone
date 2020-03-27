@@ -109,7 +109,7 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 	);
 };
 
-SideBarLabelsItem.propTypes = {
+SideBarLabels.propTypes = {
 	onPopupToggle: PropTypes.func.isRequired,
 	card: PropTypes.object.isRequired
 };
