@@ -24,6 +24,9 @@ jobs:
         run: npm install
         
       - name: Build
+        env:
+          REACT_APP_API_SERVER_ADDRESS: ${{ secrets.REACT_APP_API_SERVER_ADDRESS }}
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
         run: npm run build --if-present
       
       - name: Deploy
