@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { LinkButton } from '../../../components/Button';
 import { deleteList, changeListActionVisible, getBoard } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
 
 const PopupOver = styled.div`
 	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
@@ -58,10 +57,8 @@ const ListAction = ({ posX, posY, visible, onCloseListAction }) => {
 		const result = await dispatch(deleteList({ boardId: board.board_id, listId }));
 
 		if (result.success) {
-			await dispatch(getBoard({ boardId: board.board_id }));
+			dispatch(getBoard({ boardId: board.board_id }));
 			dispatch(changeListActionVisible(false, 0, 0, 0));
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	}, [dispatch, board, listId]);
 

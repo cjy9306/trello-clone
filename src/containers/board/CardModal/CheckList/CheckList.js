@@ -48,7 +48,7 @@ const CheckList = ({ checklist }) => {
 			deleteCheckList({ boardId: board.board_id, card_id: card.card_id, checklist_id: checklist.checklist_id })
 		);
 
-		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
+		if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 	}, [board, card, dispatch, checklist]);
 
 	const onCreateCheckListItem = useCallback(async () => {
@@ -57,7 +57,7 @@ const CheckList = ({ checklist }) => {
 			createCheckListItem({ boardId: board.board_id, checklist_id: checklist.checklist_id, data })
 		);
 
-		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
+		if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 	}, [board, checklist, card, dispatch]);
 
 	return (

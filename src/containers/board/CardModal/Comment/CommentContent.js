@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import { createComment, getCard } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 import CommentItem from './CommentItem';
 
 const Container = styled.div`
@@ -99,8 +98,6 @@ const CommentContent = ({ card }) => {
 		if (result.success) {
 			dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
 			setEditComment('');
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

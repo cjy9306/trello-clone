@@ -8,7 +8,6 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmModal } from '../../components/Modal';
 import Button from '../../components/Button';
 import { deleteTeam } from '../../modules/team';
-import { setMessageStates } from '../../modules/common';
 import TeamInfoDescription from './TeamInfoDescription';
 
 const TeamInfoContainer = styled.div`
@@ -43,8 +42,6 @@ const TeamInfo = ({ teamId }) => {
 		if (result.success) {
 			const memberId = sessionStorage.getItem('memberId');
 			history.push('/member/' + memberId + '/boards');
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	}, [dispatch, history, teamId]);
 

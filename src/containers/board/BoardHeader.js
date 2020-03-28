@@ -7,7 +7,6 @@ import Button from '../../components/Button';
 import HeaderButton from '../../components/HeaderButton';
 import { ConfirmModal } from '../../components/Modal';
 import { deleteBoard } from '../../modules/board';
-import { setMessageStates } from '../../modules/common';
 import BoardMembersModal from './BoardMembersModal';
 import AddListModal from './AddListModal';
 
@@ -49,8 +48,6 @@ const BoardHeader = ({ board }) => {
 		if (result.success) {
 			const memberId = sessionStorage.getItem('memberId');
 			history.push('/member/' + memberId + '/boards');
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	}, [dispatch, board, history]);
 

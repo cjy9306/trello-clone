@@ -5,7 +5,6 @@ import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import CreateBoardModal from '../../components/CreateBoardModal';
 import { getAllBoards } from '../../modules/member';
-import { setMessageStates } from '../../modules/common';
 import PersonalBoards from './BoardList/PersonalBoards';
 import TeamBoards from './BoardList/TeamBoards';
 
@@ -28,9 +27,7 @@ const MemberBoardsContainer = () => {
 
 	const getBoards = useCallback(async () => {
 		const member_id = sessionStorage.getItem('memberId');
-		const result = await dispatch(getAllBoards({ member_id }));
-
-		if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
+		dispatch(getAllBoards({ member_id }));
 	}, [dispatch]);
 
 	useEffect(() => {

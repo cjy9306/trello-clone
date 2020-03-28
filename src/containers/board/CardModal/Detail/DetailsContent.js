@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Tag from '../../../../components/Tag';
 import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 import { checkOverdueDate } from '../../../../CommonUtils';
 
 const Container = styled.div`
@@ -66,7 +65,6 @@ const DetailsContent = ({ card }) => {
 			const result = await dispatch(updateCard({ boardId: board.board_id, card_id: card.card_id, data }));
 
 			if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-			else dispatch(setMessageStates(true, 'error', result.data.data));
 		},
 		[dispatch, board, card]
 	);

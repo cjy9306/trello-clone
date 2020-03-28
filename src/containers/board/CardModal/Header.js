@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import { updateCard, changeCard } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
 
 const HeaderContainer = styled.div`
 	font-size: 20px;
@@ -43,7 +42,7 @@ const Header = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector(state => state.board.board);
 	const lists = useSelector(state => state.board.lists);
-	const [title, onChangeTitle, setTitle] = useInput(card ? card.card_name : '');
+	const [title, onChangeTitle, setTitle] = useInput('');
 
 	const onBlurInputField = async () => {
 		const data = { ...card, card_name: title };
@@ -68,11 +67,10 @@ const Header = ({ card }) => {
 		newLists[listIndex] = targetList;
 
 		if (result.success) dispatch(changeCard(newLists));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	useEffect(() => {
-		setTitle(card.card_name);
+		if (card.card_name !== undefined) setTitle(card.card_name);
 	}, [card, setTitle]);
 
 	return (

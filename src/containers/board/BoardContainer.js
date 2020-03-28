@@ -13,7 +13,6 @@ import {
 	changeModalVisible,
 	changeListActionVisible
 } from '../../modules/board';
-import { setMessageStates } from '../../modules/common';
 import BoardContent from './BoardContent';
 import BoardHeader from './BoardHeader';
 import CardModal from './CardModal/CardModal';
@@ -166,7 +165,6 @@ const BoardContainer = ({ match: { params } }) => {
 
 		if (!result.success) {
 			dispatch(changeLists(prevLists));
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
@@ -184,7 +182,6 @@ const BoardContainer = ({ match: { params } }) => {
 
 		if (!result.success) {
 			dispatch(changeLists(prevLists));
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

@@ -7,7 +7,6 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import MemberListItem from '../../components/MemberListItem';
 import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
-import { setMessageStates } from '../../modules/common';
 
 const MembersModal = styled(Modal)`
 	border-radius: 3px;
@@ -64,9 +63,7 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 	const getMembers = useCallback(async () => {
 		if (visible === false) return;
 
-		const result = await dispatch(getBoardMembers({ boardId: board.board_id }));
-
-		if (!result.success) dispatch(setMessageStates(true, 'error', result.data.data));
+		dispatch(getBoardMembers({ boardId: board.board_id }));
 	}, [visible, board, dispatch]);
 
 	const onAddMember = async () => {
@@ -75,7 +72,6 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 		const result = await dispatch(addBoardMember({ boardId: board.board_id, data }));
 
 		if (result.success) getMembers();
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onMemberDeleteClick = useCallback(
@@ -83,7 +79,6 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 			const result = await dispatch(deleteBoardMember({ boardId: board.board_id, member_id: memberId }));
 
 			if (result.success) getMembers();
-			else dispatch(setMessageStates(true, 'error', result.data.data));
 		},
 		[dispatch, board, getMembers]
 	);

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import CheckBox from '../../../../components/CheckBox';
 import Button from '../../../../components/Button';
-import { setMessageStates } from '../../../../modules/common';
 import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../../modules/board';
 
 const DeleteWrapper = styled.div`
@@ -84,9 +83,7 @@ const CheckListItem = ({ item }) => {
 		setItemName(item.item_name);
 	}, [item, setItemName]);
 
-	const onCancelClick = useCallback(() => {
-		setIsEditting(false);
-	}, []);
+	const onCancelClick = useCallback(() => setIsEditting(false), []);
 
 	const onSaveClick = async () => {
 		const data = {
@@ -98,8 +95,6 @@ const CheckListItem = ({ item }) => {
 		if (result.success) {
 			dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 			onCancelClick();
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 
@@ -107,7 +102,6 @@ const CheckListItem = ({ item }) => {
 		const result = await dispatch(deleteCheckListItem({ boardId: board.board_id, item_id: item.item_id }));
 
 		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	}, [dispatch, board, card, item]);
 
 	const onClickCheckBox = useCallback(
@@ -119,7 +113,6 @@ const CheckListItem = ({ item }) => {
 
 			const result = await dispatch(updateCheckListItem({ boardId: board.board_id, item_id: item.item_id, data }));
 			if (result.success) dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
-			else dispatch(setMessageStates(true, 'error', result.data.data));
 		},
 		[dispatch, item, board, card]
 	);

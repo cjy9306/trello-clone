@@ -6,7 +6,6 @@ import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import MemberListItem from '../../../../components/MemberListItem';
 import { getCardMembers, addCardMember, deleteCardMember } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 
 const MembersContainer = styled.div`
 	background-color: #fff;
@@ -81,14 +80,12 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 		const result = await dispatch(addCardMember({ boardId: board.board_id, cardId: card.card_id, data }));
 
 		if (result.success) getMembers();
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onMemberDeleteClick = async memberId => {
 		const result = await dispatch(deleteCardMember({ boardId: board.board_id, cardId: card.card_id, memberId }));
 
 		if (result.success) getMembers();
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	useEffect(() => {

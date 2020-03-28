@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { LinkButton } from '../../../../components/Button';
 import { ConfirmModal } from '../../../../components/Modal';
 import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 import SidebarMembers from './SidebarMembers';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
@@ -70,8 +69,6 @@ const SideBar = ({ card }) => {
 			if (result.success) {
 				await dispatch(getCheckList({ boardId: board.board_id, card_id: card.card_id }));
 				onToggleCheckListPopup();
-			} else {
-				dispatch(setMessageStates(true, 'error', result.data.data));
 			}
 		},
 		[dispatch, onToggleCheckListPopup, board, card]
@@ -86,8 +83,6 @@ const SideBar = ({ card }) => {
 			dispatch(getBoard({ boardId: board.board_id }));
 			dispatch(changeModalVisible(false));
 			onToggleDeleteConfirm();
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	}, [dispatch, board, card, onToggleDeleteConfirm]);
 

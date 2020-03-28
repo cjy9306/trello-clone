@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import { login } from '../../modules/auth';
-import { setMessageStates } from '../../modules/common';
 import LoginContent from './LoginContent';
 
 const LoginContainer = () => {
@@ -22,12 +21,8 @@ const LoginContainer = () => {
 				sessionStorage.setItem('memberId', memberId);
 				sessionStorage.setItem('username', username);
 
-				// client.defaults.headers.AccessToken = token;
-
 				history.push('/member/' + username + '/boards');
 				return true;
-			} else {
-				dispatch(setMessageStates(true, 'error', result.data.data));
 			}
 
 			return false;

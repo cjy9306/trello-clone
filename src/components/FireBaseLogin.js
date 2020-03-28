@@ -45,10 +45,7 @@ const FireBaseLogin = () => {
 			sessionStorage.setItem('memberId', memberId);
 			sessionStorage.setItem('username', data.username);
 
-			// client.defaults.headers.AccessToken = token;
-
 			history.push('/member/' + data.username + '/boards');
-		} else {
 		}
 	};
 

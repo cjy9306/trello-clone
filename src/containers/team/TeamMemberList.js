@@ -6,7 +6,6 @@ import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import MemberListItem from '../../components/MemberListItem';
 import { getTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
-import { setMessageStates } from '../../modules/common';
 
 const TeamMembersContainer = styled.div`
 	max-width: 768px;
@@ -62,14 +61,12 @@ const TeamMemberList = ({ teamId }) => {
 		const result = await dispatch(addTeamMember({ teamId, data }));
 
 		if (result.success) dispatch(getTeam({ teamId }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	const onMemberDeleteClick = async memberId => {
 		const result = await dispatch(deleteTeamMember({ teamId, memberId }));
 
 		if (result.success) dispatch(getTeam({ teamId }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	return (

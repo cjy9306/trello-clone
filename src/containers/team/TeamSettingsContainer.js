@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
@@ -15,17 +14,10 @@ const TeamSettingsContainer = ({ match }) => {
 	const teamId = match.params.teamId;
 	const isLogined = useCheckWhetherIsLogined();
 	const dispatch = useDispatch();
-	const history = useHistory();
 
 	const getTeamInfo = useCallback(async () => {
-		const result = await dispatch(getTeam({ teamId }));
-
-		if (!result.success) {
-			const memberId = sessionStorage.getItem('memberId');
-			alert('can not find this team');
-			history.push('/member/' + memberId + '/boards');
-		}
-	}, [teamId, dispatch, history]);
+		dispatch(getTeam({ teamId }));
+	}, [dispatch, teamId]);
 
 	useEffect(() => {
 		getTeamInfo();

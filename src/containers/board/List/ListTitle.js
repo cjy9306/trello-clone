@@ -79,9 +79,9 @@ const ListTitle = ({ list, onUpdate }) => {
 	);
 
 	useEffect(() => {
-		if (isEditting) inputRef.current.focus();
-		else {
-			console.log(inputTitle + ', ' + list.title);
+		if (isEditting) {
+			inputRef.current.focus();
+		} else {
 			if (inputTitle === list.title) return;
 
 			onUpdate(inputTitle);

@@ -6,7 +6,6 @@ import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import { createList, getBoard } from '../../modules/board';
-import { setMessageStates } from '../../modules/common';
 
 const AddModal = styled(Modal)`
 	border-radius: 3px;
@@ -64,8 +63,6 @@ const AddListModal = ({ visible, onCloseModal }) => {
 		if (result.success) {
 			dispatch(getBoard({ boardId: board.board_id }));
 			onCloseModal();
-		} else {
-			dispatch(setMessageStates(true, 'error', result.data.data));
 		}
 	};
 

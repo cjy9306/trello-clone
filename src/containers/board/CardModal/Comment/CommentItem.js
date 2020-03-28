@@ -5,7 +5,6 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment, getCard } from '../../../../modules/board';
-import { setMessageStates } from '../../../../modules/common';
 import { convertDateClientTimezone } from '../../../../CommonUtils';
 
 const Container = styled.div`
@@ -73,7 +72,6 @@ const CommentItem = ({ card, comment }) => {
 		const result = await dispatch(deleteComment({ boardId: board.board_id, comment_id: comment.comment_id }));
 
 		if (result.success) dispatch(getCard({ boardId: board.board_id, card_id: card.card_id }));
-		else dispatch(setMessageStates(true, 'error', result.data.data));
 	};
 
 	return (

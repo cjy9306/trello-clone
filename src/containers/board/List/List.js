@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import { createCard, getBoard, updateList } from '../../../modules/board';
-import { setMessageStates } from '../../../modules/common';
 import AddCard from './AddCard';
 import ListTitle from './ListTitle';
 import Card from '../Card/Card';
@@ -56,7 +55,6 @@ const List = ({ list, index, board }) => {
 				dispatch(getBoard({ boardId: board.board_id }));
 				return true;
 			} else {
-				dispatch(setMessageStates(true, 'error', result.data.data));
 				return false;
 			}
 		},
@@ -66,9 +64,7 @@ const List = ({ list, index, board }) => {
 	const onUpdateTitle = useCallback(
 		async title => {
 			const data = { list_name: title, seq: list.seq };
-			const result = await dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
-
-			if (result.success === false) dispatch(setMessageStates(true, 'error', result.data.data));
+			dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
 		},
 		[dispatch, board, list]
 	);

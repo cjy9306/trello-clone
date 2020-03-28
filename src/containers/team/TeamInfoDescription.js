@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../../components/Button';
 import { updateTeam } from '../../modules/team';
-import { setMessageStates } from '../../modules/common';
 
 const TeamInfoContainer = styled.div`
 	margin-bottom: 28px;
@@ -64,12 +63,8 @@ const TeamInfoDescription = ({ team }) => {
 		const data = { team_name: team.team_name, description };
 		const result = await dispatch(updateTeam({ teamId: team.teamId, data }));
 
-		if (result.success) {
-			setIsEditting(false);
-		} else {
-			setDescription(team.description);
-			dispatch(setMessageStates(true, 'error', result.data.data));
-		}
+		if (result.success) setIsEditting(false);
+		else setDescription(team.description);
 	};
 
 	useEffect(() => {

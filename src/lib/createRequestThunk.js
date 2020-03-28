@@ -5,7 +5,7 @@ export default function createRequestThunk(type, request) {
 	const FAIL = `${type}_FAIL`;
 
 	return params => async dispatch => {
-		console.log('type ; ' + type + ' params ; ' + JSON.stringify(params));
+		// console.log('type ; ' + type + ' params ; ' + JSON.stringify(params));
 		dispatch({ type }); // start
 
 		try {
@@ -28,7 +28,7 @@ export default function createRequestThunk(type, request) {
 				error: true
 			});
 
-			console.log('inCreateRequest , error ; ' + JSON.stringify(e.response));
+			// console.log('inCreateRequest , error ; ' + JSON.stringify(e.response));
 			dispatch(setMessageStates(true, 'error', error));
 			if (error === undefined) return { success: false, data: '서버에 연결할 수 없습니다.' };
 			else return { success: false, data: error };
