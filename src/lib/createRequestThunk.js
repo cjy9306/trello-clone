@@ -1,3 +1,5 @@
+import { setMessageStates } from '../modules/common';
+
 export default function createRequestThunk(type, request) {
 	const SUCCESS = `${type}_SUCCESS`;
 	const FAIL = `${type}_FAIL`;
@@ -19,7 +21,7 @@ export default function createRequestThunk(type, request) {
 
 			return { success: true, data: response.data };
 		} catch (e) {
-			const error = e.response ? e.response.data : 'unknown error';
+			const error = e.response ? e.response.data : '서버에 연결할 수 없습니다.';
 			dispatch({
 				type: FAIL,
 				payload: error,
@@ -27,7 +29,9 @@ export default function createRequestThunk(type, request) {
 			});
 
 			console.log('inCreateRequest , error ; ' + JSON.stringify(e.response));
-			return { success: false, data: error };
+			dispatch(setMessageStates(true, 'error', error));
+			if (error === undefined) return { success: false, data: '서버에 연결할 수 없습니다.' };
+			else return { success: false, data: error };
 		}
 	};
 }

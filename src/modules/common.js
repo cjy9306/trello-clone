@@ -6,8 +6,8 @@ export const setMessageStates = createAction(SET_MESSAGE_STATES, (visible, type,
 const initState = {
 	message: {
 		visible: false,
-		type: '',
-		text: ''
+		type: 'error',
+		text: '유효하지 않은 접근입니다!'
 	}
 };
 
