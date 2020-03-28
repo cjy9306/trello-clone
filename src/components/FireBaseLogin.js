@@ -50,7 +50,7 @@ const FireBaseLogin = () => {
 	};
 
 	const uiConfig = {
-		signInFlow: 'popup',
+		signInFlow: 'redirect',
 		signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
 		callbacks: {
 			signInSuccessWithAuthResult: socialData => {

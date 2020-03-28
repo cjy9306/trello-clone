@@ -8,9 +8,17 @@ import FireBaseLogin from '../../components/FireBaseLogin';
 const Container = styled.div`
 	display: flex;
 	justify-content: center;
-	margin: 160px auto 0 auto;
-	min-height: 380px;
-	width: 420px;
+
+	@media only screen and (min-width: 401px) {
+		padding-top: 160px;
+		margin: 0 auto;
+		width: 420px;
+	}
+
+	@media only screen and (max-width: 400px) {
+		margin: 80px auto 80px auto;
+		width: 320px;
+	}
 `;
 
 const LoginFormContainer = styled.div`
