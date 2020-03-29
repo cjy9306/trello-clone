@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../../components/Message';
+import jwt from 'jsonwebtoken';
 import { login } from '../../modules/auth';
+import Message from '../../components/Message';
 import LoginContent from './LoginContent';
 
 const LoginContainer = () => {
@@ -14,13 +15,13 @@ const LoginContainer = () => {
 		async ({ username, password }) => {
 			const result = await dispatch(login({ username, password }));
 
-			if (result && result.success) {
+			if (result.success) {
 				const token = result.data.data.token;
-				const memberId = result.data.data.member_id;
-				sessionStorage.setItem('token', token);
-				sessionStorage.setItem('memberId', memberId);
-				sessionStorage.setItem('username', username);
 
+				const decoded = jwt.decode(token);
+				sessionStorage.setItem('token', token);
+				sessionStorage.setItem('memberId', decoded.memberId);
+				sessionStorage.setItem('username', decoded.username);
 				history.push('/member/' + username + '/boards');
 				return true;
 			}
