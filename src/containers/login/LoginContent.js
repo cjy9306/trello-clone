@@ -71,7 +71,7 @@ const InputField = React.memo(styled.input`
 	font-weight: 600;
 	min-height: 38px;
 	margin: 0px 0px 16px 0px;
-	padding-left: ${props => (props.includeIcon === true ? '40px' : '10px')};
+	padding-left: ${(props) => (props.includeIcon === true ? '40px' : '10px')};
 	padding-right: 10px;
 	resize: none;
 	width: 100%;
@@ -92,6 +92,7 @@ const LoginContent = ({ onLogin }) => {
 				<ContentContainer>
 					<InputContainer>
 						<InputWrapper>
+							<label for="username"></label>
 							<InputField
 								type="text"
 								placeholder="input your name"
@@ -101,6 +102,7 @@ const LoginContent = ({ onLogin }) => {
 							/>
 						</InputWrapper>
 						<InputWrapper>
+							<label for="password"></label>
 							<InputField
 								type="password"
 								placeholder="input your password"
@@ -130,7 +132,7 @@ const LoginContent = ({ onLogin }) => {
 };
 
 LoginContent.propTypes = {
-	onLogin: PropTypes.func.isRequired
+	onLogin: PropTypes.func.isRequired,
 };
 
 export default React.memo(LoginContent);
