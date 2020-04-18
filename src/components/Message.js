@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle, faInfoCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
@@ -12,7 +13,7 @@ const MessageContainer = styled.div`
 	left: 0;
 	height: 80px;
 	width: 100%;
-	display: ${props => (props.visible === true ? 'flex' : 'none')};
+	display: ${(props) => (props.visible === true ? 'flex' : 'none')};
 	justify-content: center;
 `;
 
@@ -86,7 +87,7 @@ Message.propTypes = {
 	className: PropTypes.string,
 	visible: PropTypes.bool,
 	text: PropTypes.string,
-	type: PropTypes.string
+	type: PropTypes.string,
 };
 
 export default React.memo(Message);

@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../../modules/board';
