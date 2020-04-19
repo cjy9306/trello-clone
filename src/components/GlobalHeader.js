@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus } from '@fortawesome/free-solid-svg-icons';

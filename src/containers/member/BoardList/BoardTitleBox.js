@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BoardBox from './BoardBox';

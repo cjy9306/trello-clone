@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Modal from '../../../components/Modal';
 import DetailsContent from './Detail/DetailsContent';

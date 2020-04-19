@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import Tag from '../../../components/Tag';
