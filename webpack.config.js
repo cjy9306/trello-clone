@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
 
@@ -70,6 +71,11 @@ module.exports = {
 				to: './axios.min.js',
 			},
 		]),
+		new HtmlWebpackPlugin({
+            template: path.join(__dirname, './public/index.html'),
+            inject: true,
+            filename: path.join(__dirname, './dist/index.html')
+        })
 	],
 	optimization: {
 		minimizer:

@@ -1,0 +1,1 @@
+export const GLOBAL_HEADER_DEFAULT_BACKGROUND = '#026aa7';
