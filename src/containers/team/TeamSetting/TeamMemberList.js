@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
-import Button from '../../components/Button';
-import MemberListItem from '../../components/MemberListItem';
-import { getTeam, addTeamMember, deleteTeamMember } from '../../modules/team';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../components/Button';
+import MemberListItem from '../../../components/MemberListItem';
+import { getTeam, addTeamMember, deleteTeamMember } from '../../../modules/team';
 
 const TeamMembersContainer = styled.div`
 	max-width: 768px;

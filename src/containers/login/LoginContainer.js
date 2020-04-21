@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import { login } from '../../modules/auth';
 import Message from '../../components/Message';
-import LoginContent from './LoginContent';
+import LoginContent from './Login/LoginContent';
 
 const LoginContainer = () => {
 	const dispatch = useDispatch();

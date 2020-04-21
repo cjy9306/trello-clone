@@ -5,7 +5,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment, getCard } from '../../../../modules/board';
-import { convertDateClientTimezone } from '../../../../CommonUtils';
+import { convertDateClientTimezone } from '../../../../common/CommonUtils';
 
 const Container = styled.div`
 	margin-bottom: 24px;

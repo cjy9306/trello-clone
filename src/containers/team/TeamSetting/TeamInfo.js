@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { ConfirmModal } from '../../components/Modal';
-import Button from '../../components/Button';
-import { deleteTeam } from '../../modules/team';
+import { ConfirmModal } from '../../../components/Modal';
+import Button from '../../../components/Button';
+import { deleteTeam } from '../../../modules/team';
 import TeamInfoDescription from './TeamInfoDescription';
 
 const TeamInfoContainer = styled.div`

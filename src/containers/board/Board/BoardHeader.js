@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Button from '../../components/Button';
-import HeaderButton from '../../components/HeaderButton';
-import { ConfirmModal } from '../../components/Modal';
-import { deleteBoard } from '../../modules/board';
-import BoardMembersModal from './BoardMembersModal';
-import AddListModal from './AddListModal';
+import Button from '../../../components/Button';
+import HeaderButton from '../../../components/HeaderButton';
+import { ConfirmModal } from '../../../components/Modal';
+import { deleteBoard } from '../../../modules/board';
+import BoardMembersModal from '../Modal/BoardMembersModal';
+import AddListModal from '../Modal/AddListModal';
 
 const BoardHeaderContainer = styled.div`
 	display: flex;

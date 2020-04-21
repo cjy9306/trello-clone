@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
-import Button from '../../components/Button';
-import { updateTeam } from '../../modules/team';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../components/Button';
+import { updateTeam } from '../../../modules/team';
 
 const TeamInfoContainer = styled.div`
 	margin-bottom: 28px;

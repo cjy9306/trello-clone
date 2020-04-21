@@ -2,11 +2,12 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { GLOBAL_HEADER_DEFAULT_BACKGROUND } from '../../common/Constants';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import { getTeam } from '../../modules/team';
-import TeamInfo from './TeamInfo';
-import TeamMemberList from './TeamMemberList';
+import TeamInfo from './TeamSetting/TeamInfo';
+import TeamMemberList from './TeamSetting/TeamMemberList';
 
 const Container = styled.div``;
 
@@ -25,7 +26,7 @@ const TeamSettingsContainer = ({ match }) => {
 
 	return (
 		<>
-			<GlobalHeader isLogined={isLogined} backgroundColor={'#026aa7'} />
+			<GlobalHeader isLogined={isLogined} backgroundColor={GLOBAL_HEADER_DEFAULT_BACKGROUND} />
 			<Container>
 				<TeamInfo teamId={teamId} />
 				<TeamMemberList teamId={teamId} />

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Tag from '../../../../components/Tag';
 import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
-import { checkOverdueDate } from '../../../../CommonUtils';
+import { checkOverdueDate } from '../../../../common/CommonUtils';
 
 const Container = styled.div`
 	display: ${props => props.visible};

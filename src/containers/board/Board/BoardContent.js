@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import List from './List/List';
+import List from '../List/List';
 
 const Container = styled.div`
 	height: 100%;

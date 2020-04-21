@@ -11,7 +11,7 @@ import { getTeams } from '../modules/member';
 import DropDown from './DropDown';
 import Button from './Button';
 import Modal from './Modal';
-import { BoardColorArray } from '../CommonUtils';
+import { BoardColorArray } from '../common/Constants';
 
 const CreateModal = styled(Modal)`
 	max-width: 420px;

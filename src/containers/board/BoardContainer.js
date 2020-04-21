@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { GLOBAL_HEADER_DEFAULT_BACKGROUND } from '../../common/Constants';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import Message from '../../components/Message';
@@ -13,8 +14,8 @@ import {
 	changeModalVisible,
 	changeListActionVisible
 } from '../../modules/board';
-import BoardContent from './BoardContent';
-import BoardHeader from './BoardHeader';
+import BoardContent from './Board/BoardContent';
+import BoardHeader from './Board/BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './List/ListAction';
 
@@ -189,7 +190,7 @@ const BoardContainer = ({ match: { params } }) => {
 	const onCloseListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);
 
 	return (
-		<Root backgroundColor={board.background_color}>
+		<Root backgroundColor={board.background_color || GLOBAL_HEADER_DEFAULT_BACKGROUND}>
 			<GlobalHeader isLogined={isLogined} />
 			<Container>
 				<BoardHeader board={board} />

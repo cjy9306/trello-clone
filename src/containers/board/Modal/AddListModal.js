@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
-import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import { createList, getBoard } from '../../modules/board';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../components/Button';
+import Modal from '../../../components/Modal';
+import { createList, getBoard } from '../../../modules/board';
 
 const AddModal = styled(Modal)`
 	border-radius: 3px;

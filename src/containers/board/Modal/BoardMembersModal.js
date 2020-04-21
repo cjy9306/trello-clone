@@ -2,11 +2,11 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from '../../hooks/useInput';
-import Button from '../../components/Button';
-import Modal from '../../components/Modal';
-import MemberListItem from '../../components/MemberListItem';
-import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../modules/board';
+import useInput from '../../../hooks/useInput';
+import Button from '../../../components/Button';
+import Modal from '../../../components/Modal';
+import MemberListItem from '../../../components/MemberListItem';
+import { getBoardMembers, addBoardMember, deleteBoardMember } from '../../../modules/board';
 
 const MembersModal = styled(Modal)`
 	border-radius: 3px;
