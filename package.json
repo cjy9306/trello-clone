@@ -82,10 +82,10 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "echo commit"
+			"pre-commit": "lint-staged"
 		}
 	},
-	"list-staged": {
+	"lint-staged": {
 		"*.js": "eslint --fix"
 	}
 }
