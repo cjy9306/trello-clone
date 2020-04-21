@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import Constants from '../../Constants';
+import { GLOBAL_HEADER_DEFAULT_BACKGROUND } from '../../Constants';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
 import GlobalHeader from '../../components/GlobalHeader';
 import CreateBoardModal from '../../components/CreateBoardModal';
@@ -37,7 +37,7 @@ const MemberBoardsContainer = () => {
 
 	return (
 		<>
-			<GlobalHeader isLogined={isLogined} backgroundColor={Constants.GLOBAL_HEADER_DEFAULT_BACKGROUND} />
+			<GlobalHeader isLogined={isLogined} backgroundColor={GLOBAL_HEADER_DEFAULT_BACKGROUND} />
 			<CreateBoardModal visible={boardModalVisible} onCloseModal={onToggleBoardModal} />
 			<BoardsContainer>
 				<PersonalBoards onToggleBoardModal={onToggleBoardModal} />
