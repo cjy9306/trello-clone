@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { transformLineFeed } from '../../../common/CommonUtils';
+import ContentsWithLF from '../../../components/ContentsWithLF';
 import useInput from '../../../hooks/useInput';
 import Button from '../../../components/Button';
 import { updateTeam } from '../../../modules/team';
@@ -75,9 +75,11 @@ const TeamInfoDescription = ({ team }) => {
 	return (
 		<TeamInfoContainer>
 			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
-				{description === '' || description == null
-					? 'Add a more detailed description...'
-					: transformLineFeed(description)}
+				{description === '' || description == null ? (
+					'Add a more detailed description...'
+				) : (
+					<ContentsWithLF string={description} />
+				)}
 			</LabelWrapper>
 			<TextAreaWrapper isEditting={isEditting}>
 				<TextAreaField

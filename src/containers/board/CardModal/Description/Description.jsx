@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { transformLineFeed } from '../../../../common/CommonUtils';
+import ContentsWithLF from '../../../../components/ContentsWithLF';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
 import { updateCard, getCard } from '../../../../modules/board';
@@ -83,9 +83,11 @@ const Description = ({ card }) => {
 	return (
 		<Container>
 			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
-				{description === '' || description == null
-					? 'Add a more detailed description...'
-					: transformLineFeed(description)}
+				{description === '' || description == null ? (
+					'Add a more detailed description...'
+				) : (
+					<ContentsWithLF string={description} />
+				)}
 			</LabelWrapper>
 			<TextAreaWrapper isEditting={isEditting}>
 				<TextAreaField
