@@ -1,4 +1,6 @@
-exports.convertDateClientTimezone = time => {
+import React from 'react';
+
+exports.convertDateClientTimezone = (time) => {
 	const tmpDate = new Date(time);
 	const date = new Date(tmpDate.getTime() + tmpDate.getTimezoneOffset() * 60);
 
@@ -15,7 +17,7 @@ exports.convertDateClientTimezone = time => {
 	);
 };
 
-exports.checkOverdueDate = date => {
+exports.checkOverdueDate = (date) => {
 	const current = new Date();
 	const dueDate = new Date(date);
 	if (current > dueDate) {
@@ -25,3 +27,13 @@ exports.checkOverdueDate = date => {
 	}
 };
 
+exports.transformLineFeed = (string) => {
+	if (string)
+		return string.split('\n').map((line, index) => (
+			<span key={index}>
+				{line}
+				<br />
+			</span>
+		));
+	else return <span></span>;
+};

@@ -30,6 +30,9 @@ module.exports = {
 		historyApiFallback: true,
 	},
 	node: { fs: 'empty' }, // 모듈 시스템 (commonjs 등)을 사용하기 위해 추가하는 라이브러리, 다른 라이브러리에 디펜던시가 있어 추가함
+	resolve: {
+		extensions: ['.js', '.jsx'],
+	},
 	module: {
 		rules: [
 			{
@@ -46,7 +49,7 @@ module.exports = {
 				},
 			},
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				loader: 'babel-loader',
 				exclude: /node_modules/,
 				options: {
@@ -74,20 +77,25 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({}), // 전역변수 설정 플러그인
 		new CleanWebpackPlugin({}), // 빌드시 이전 dist 폴더를 삭제함
-		...(process.env.NODE_ENV === 'production' ? [new MiniCssExtractPlugin({ filename: '[name].css' })] : []),	// css 파일을 <style>태그가 아니라 파일로 따로 입력하기 위함
+		...(process.env.NODE_ENV === 'production' ? [new MiniCssExtractPlugin({ filename: '[name].css' })] : []), // css 파일을 <style>태그가 아니라 파일로 따로 입력하기 위함
 		new CopyPlugin([
 			{
 				// axios는 빌드할 필요가 없기 때문에, 이미 빌드된 min.js를 /dist에 복사만 하면됨
 				from: './node_modules/axios/dist/axios.min.js',
 				to: './axios.min.js',
 			},
+			{
+				// favicon
+				from: './public/favicon.ico',
+				to: './favicon.ico',
+			},
 		]),
 		new HtmlWebpackPlugin({
-            template: path.join(__dirname, './public/index.html'),
-            inject: true,
-            filename: path.join(__dirname, './dist/index.html'),
-		}),	
-		new Dotenv()
+			template: path.join(__dirname, './public/index.html'),
+			inject: true,
+			filename: path.join(__dirname, './dist/index.html'),
+		}),
+		new Dotenv(),
 	],
 	optimization: {
 		minimizer:

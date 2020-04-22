@@ -79,8 +79,8 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 		const data = {
 			board_name: title,
 			public_scope: 'private',
-			member_id: memberId,
-			team_id: teamId === 0 ? null : teamId,
+			memberId: memberId,
+			teamId: teamId === 0 ? null : teamId,
 			background_color: backgroundColor,
 		};
 
