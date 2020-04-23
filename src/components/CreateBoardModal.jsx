@@ -193,6 +193,6 @@ const ColorBlock = ({ data, onColorBlockClick }) => {
 };
 
 ColorBlock.propTypes = {
-	data: PropTypes.object.isRequired,
+	data: PropTypes.array.isRequired,
 	onColorBlockClick: PropTypes.func.isRequired,
 };
