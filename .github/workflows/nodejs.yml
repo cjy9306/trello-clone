@@ -41,5 +41,3 @@ jobs:
             --recursive \
             --region ap-northeast-2 \
             dist s3://trello.jaeyong.dev
-
-
