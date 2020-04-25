@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { socialLogin } from '../modules/auth';
 
 const firebaseConfig = {
-	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+	apiKey: 'AIzaSyBibKor2pKu05mBRMn_o6yOn-X1VONnLRY',
 	authDomain: 'trello-clone-6fd14.firebaseapp.com',
 	databaseURL: 'https://trello-clone-6fd14.firebaseio.com',
 	projectId: 'trello-clone-6fd14',

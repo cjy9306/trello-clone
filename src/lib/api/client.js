@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 
 const client = axios.create();
 
-client.defaults.baseURL = process.env.REACT_APP_API_SERVER_ADDRESS;
-client.interceptors.request.use(async config => {
+client.defaults.baseURL = 'https://15.164.213.61:5000/api';
+client.interceptors.request.use(async (config) => {
 	const token = sessionStorage.getItem('token');
 	if (token === null) return config;
 
@@ -13,7 +13,7 @@ client.interceptors.request.use(async config => {
 
 	if (decoded.exp < Date.now() / 1000) {
 		const response = await axios.post(process.env.REACT_APP_API_SERVER_ADDRESS + '/auth/refresh', token, {
-			headers: { AccessToken: token }
+			headers: { AccessToken: token },
 		});
 
 		const refreshedToken = response.data.data.token;
