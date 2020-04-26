@@ -77,11 +77,11 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 		const memberId = sessionStorage.getItem('memberId');
 		const backgroundColor = getCheckdColor();
 		const data = {
-			board_name: title,
-			public_scope: 'private',
+			boardName: title,
+			publicScope: 'private',
 			memberId: memberId,
 			teamId: teamId === 0 ? null : teamId,
-			background_color: backgroundColor,
+			backgroundColor,
 		};
 
 		const result = await dispatch(createBoard({ data }));
