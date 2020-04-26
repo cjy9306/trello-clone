@@ -38,7 +38,7 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	padding: 2px 0 0 10px;
 `;
 
-const Header = ({ card }) => {
+const CardModalHeader = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 	const lists = useSelector((state) => state.board.lists);
@@ -81,8 +81,8 @@ const Header = ({ card }) => {
 	);
 };
 
-Header.propTypes = {
+CardModalHeader.propTypes = {
 	card: PropTypes.object.isRequired,
 };
 
-export default Header;
+export default React.memo(CardModalHeader);

@@ -53,7 +53,7 @@
 	},
 	"scripts": {
 		"build": "NODE_ENV=production webpack --progress",
-		"start": "NODE_ENV=production webpack-dev-server --progress --config webpack.config.js --color"
+		"start": "NODE_ENV=development webpack-dev-server --progress --config webpack.config.js --color"
 	},
 	"browserslist": {
 		"production": [

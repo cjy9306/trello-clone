@@ -7,7 +7,7 @@ import DetailsContent from './Detail/DetailsContent';
 import CheckListContent from './CheckList/CheckListContent';
 import CommentContent from './Comment/CommentContent';
 import SideBar from './SideBar/SideBar';
-import Header from './Header';
+import CardModalHeader from './CardModalHeader';
 import DescriptionContent from './Description/DescriptionContent';
 
 const CardModalContainer = styled(Modal)`
@@ -74,7 +74,7 @@ const CardModal = ({ visible, onCloseModal }) => {
 
 	return (
 		<CardModalContainer visible={visible} onCloseModal={onCloseModal}>
-			<Header card={card} />
+			<CardModalHeader card={card} />
 			<MainContent>
 				<DetailsContent card={card} />
 				<DescriptionContent card={card} />

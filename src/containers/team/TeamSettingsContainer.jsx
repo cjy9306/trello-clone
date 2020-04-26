@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GLOBAL_HEADER_DEFAULT_BACKGROUND } from '../../common/Constants';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
+import Message from '../../components/Message';
 import GlobalHeader from '../../components/GlobalHeader';
 import { getTeam } from '../../modules/team';
 import TeamInfo from './TeamSetting/TeamInfo';
@@ -15,6 +16,7 @@ const TeamSettingsContainer = ({ match }) => {
 	const teamId = match.params.teamId;
 	const isLogined = useCheckWhetherIsLogined();
 	const dispatch = useDispatch();
+	const message = useSelector((state) => state.common.message);
 
 	const getTeamInfo = useCallback(async () => {
 		dispatch(getTeam({ teamId }));
@@ -31,6 +33,7 @@ const TeamSettingsContainer = ({ match }) => {
 				<TeamInfo teamId={teamId} />
 				<TeamMemberList teamId={teamId} />
 			</Container>
+			<Message visible={message.visible} type={message.type} text={message.text} />
 		</>
 	);
 };

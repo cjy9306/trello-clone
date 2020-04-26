@@ -67,10 +67,18 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 	const teams = useSelector((state) => state.member.teams);
 
 	const getCheckdColor = () => {
-		colorArray.forEach((color) => {
-			if (color[2] === true) return color[1];
+		let backgroundColor = '';
+		// some은 return true일 경우 loop가 break가 됨
+		colorArray.some((color) => {
+			if (color[2] === true) {
+				backgroundColor = color[1];
+				return true;
+			}
+
+			return false;
 		});
-		return '';
+
+		return backgroundColor;
 	};
 
 	const onCreateBoard = async () => {
@@ -93,9 +101,9 @@ const CreateBoardModal = ({ visible, onCloseModal }) => {
 
 	const onColorBlockClick = (id) => {
 		const newArray = [...colorArray];
-		newArray.forEach((item) => {
-			if (item[0] === id) item[2] = true;
-			else item[2] = false;
+		newArray.forEach((item, index) => {
+			if (item[0] === id) newArray[index][2] = true;
+			else newArray[index][2] = false;
 		});
 
 		setColorArray(newArray);

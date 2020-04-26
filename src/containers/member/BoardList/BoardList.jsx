@@ -5,6 +5,8 @@ import BoardTitleBox from './BoardTitleBox';
 import CreateBoardBox from './CreateBoardBox';
 
 const BoardListContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
 	box-sizing: border-box;
 	margin-bottom: 12px;
 	padding: 0 0 0 2%;

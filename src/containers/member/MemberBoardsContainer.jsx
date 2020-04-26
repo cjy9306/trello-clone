@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GLOBAL_HEADER_DEFAULT_BACKGROUND } from '../../common/Constants';
 import useCheckWhetherIsLogined from '../../hooks/useCheckWhetherIsLogined';
+import Message from '../../components/Message';
 import GlobalHeader from '../../components/GlobalHeader';
 import CreateBoardModal from '../../components/CreateBoardModal';
 import { getAllBoards } from '../../modules/member';
@@ -21,7 +22,7 @@ const BoardsContainer = styled.div`
 const MemberBoardsContainer = () => {
 	const isLogined = useCheckWhetherIsLogined();
 	const dispatch = useDispatch();
-
+	const message = useSelector((state) => state.common.message);
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
 
 	const onToggleBoardModal = useCallback(() => setBoardModalVisible((visible) => !visible), []);
@@ -43,6 +44,7 @@ const MemberBoardsContainer = () => {
 				<PersonalBoards onToggleBoardModal={onToggleBoardModal} />
 				<TeamBoards onToggleBoardModal={onToggleBoardModal} />
 			</BoardsContainer>
+			<Message visible={message.visible} type={message.type} text={message.text} />
 		</>
 	);
 };

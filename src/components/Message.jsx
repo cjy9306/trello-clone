@@ -28,6 +28,7 @@ const moveOpen = keyframes`{
   }`;
 
 const MessageContent = styled.div`
+	display: block;
 	margin: 0 auto;
 	min-width: 220px;
 	height: 32px;
@@ -37,9 +38,9 @@ const MessageContent = styled.div`
 	text-align: center;
 	border-radius: 4px;
 	background-color: white;
-	display: block;
 	box-shadow: rgba(0, 0, 0, 0.5) 0 0 10px;
 	animation: ${moveOpen} 4s;
+	z-index: 100;
 	-webkit-animation: ${moveOpen} 4s;
 	-webkit-animation-fill-mode: forwards;
 `;
