@@ -1,11 +1,10 @@
 # Trello-clone
-
-## 프로젝트 정보
 포트폴리오용으로 제작된 Trello 클론 코딩 프로젝트입니다.
 지속적으로 업데이트되고 있으며, 내용이 조금씩 바뀔 수 있습니다.
 클라이언트는 React, Redux, Styled-components 등을 사용하여 작성되었으며, 서버는 Nodejs + Express를 사용하여 RESTful API 서버로 작성되었습니다.
 
 서버 Repo: [https://github.com/cjy9306/trello-clone-server](https://github.com/cjy9306/trello-clone-server)
+
 
 ## 프로젝트 설치
 ```
