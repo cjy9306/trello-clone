@@ -1,4 +1,4 @@
-# # Trello-clone
+# Trello-clone
 
 ## 프로젝트 정보
 포트폴리오용으로 제작된 Trello 클론 코딩 프로젝트입니다.
