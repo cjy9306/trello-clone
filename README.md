@@ -8,10 +8,10 @@
 서버 Repo: [https://github.com/cjy9306/trello-clone-server](https://github.com/cjy9306/trello-clone-server)
 
 ## 프로젝트 설치
-<code>
+```
 git clone [https://github.com/cjy9306/trello-clone.git](https://github.com/cjy9306/trello-clone.git)
 npm install
-</code>
+```
 
 ## 프로젝트 구조
 root
