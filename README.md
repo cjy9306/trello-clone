@@ -19,14 +19,14 @@ root
  - .github/workflows: github actions에 쓰이는 CI/CD 설정 yml 
  - webpack.config.js: webpack 설정파일
  - src: src 파일들이 위치
-  - common: 공통적으로 사용되는 함수, 상수
-  - components: 공통적으로 많이 사용되는 컴포넌트들
-  - containers: 실제 페이지에 해당하는 container들 ( 각 페이지의 컴포넌트들이 폴더로 구성되어 있음 )
-  - hooks: custom hooks
-  - lib: axios로 구성된 RESTful API 호출 모듈
-  - modules: ducks패턴으로 구성된 redux store(action type, action, reducer가 각 모듈에 맞게 한 파일에 들어있음)
-  - App.js: Root 컴포넌트
-  - index.js: react entry
+   - common: 공통적으로 사용되는 함수, 상수
+   - components: 공통적으로 많이 사용되는 컴포넌트들
+   - containers: 실제 페이지에 해당하는 container들 ( 각 페이지의 컴포넌트들이 폴더로 구성되어 있음 )
+   - hooks: custom hooks
+   - lib: axios로 구성된 RESTful API 호출 모듈
+   - modules: ducks패턴으로 구성된 redux store(action type, action, reducer가 각 모듈에 맞게 한 파일에 들어있음)
+   - App.js: Root 컴포넌트
+   - index.js: react entry
  
   
 
