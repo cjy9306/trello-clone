@@ -9,7 +9,7 @@
 
 ## 프로젝트 설치
 ```
-git clone [https://github.com/cjy9306/trello-clone.git](https://github.com/cjy9306/trello-clone.git)
+git clone https://github.com/cjy9306/trello-clone.git
 npm install
 ```
 
