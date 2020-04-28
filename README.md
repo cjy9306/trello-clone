@@ -12,6 +12,18 @@ git clone https://github.com/cjy9306/trello-clone.git
 npm install
 ```
 
+## 프로젝트 빌드 및 실행
+빌드
+```
+npm run build
+```
+
+시작
+```
+npm start
+```
+빌드 환경의 경우 package.json의 NODE_ENV 환경변수를 변경하여 설정하실 수 있습니다.
+
 ## 프로젝트 구조
 root
  - public: template으로 사용될 index.html 등 파일들이 있음.
