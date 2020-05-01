@@ -45,7 +45,7 @@ const List = ({ list, index, board }) => {
 	const onCreateCard = useCallback(
 		async (newCardName) => {
 			const data = {
-				cardname: newCardName,
+				cardName: newCardName,
 				seq: list.cards.length,
 			};
 
