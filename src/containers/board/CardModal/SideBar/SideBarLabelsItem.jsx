@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 const SideBarLabelsItemContainer = styled.div`
@@ -21,7 +21,7 @@ const SideBarLabelsItemContent = styled.div`
 	position: relative;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	width: 182px;
+	width: 215px;
 `;
 
 const SideBarLabelItemCheck = styled.div`
@@ -32,13 +32,13 @@ const SideBarLabelItemCheck = styled.div`
 `;
 
 const CustomIcon = styled(FontAwesomeIcon)`
-	borderradius: 3px;
+	border-radius: 3px;
 	cursor: pointer;
 	font-size: 16px;
 	position: absolute;
 	padding: 8px;
-	right: 9;
-	top: 0;
+	right: 9px;
+	top: 0px;
 `;
 
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
@@ -56,7 +56,6 @@ const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 
 	return (
 		<SideBarLabelsItemContainer>
-			<CustomIcon icon={faPen} size="xs" />
 			<SideBarLabelsItemContent color={`#${label.color}`} onClick={onItemClick}>
 				{label.label_name}
 				<SideBarLabelItemCheck checked={checked}>

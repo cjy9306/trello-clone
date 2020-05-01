@@ -26,7 +26,7 @@ const CloseSpan = styled.span`
 	font-weight: bold;
 	margin-right: 8px;
 	position: absolute;
-	right: 0;
+	right: 0px;
 	&:hover,
 	&:focus {
 		color: #000;
