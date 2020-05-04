@@ -6,6 +6,10 @@ import { login } from '../../modules/auth';
 import Message from '../../components/Message';
 import LoginContent from './Login/LoginContent';
 
+/*
+ *	Login 컴포넌트의 루트 컴포넌트
+ *
+ */
 const LoginContainer = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();

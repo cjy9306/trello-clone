@@ -1,3 +1,7 @@
+/*
+ *	common redux store
+ *
+ */
 import { handleActions, createAction } from 'redux-actions';
 
 const SET_MESSAGE_STATES = 'board/SET_MESSAGE_STATES';
@@ -7,8 +11,8 @@ const initState = {
 	message: {
 		visible: false,
 		type: 'error',
-		text: '유효하지 않은 접근입니다!'
-	}
+		text: '유효하지 않은 접근입니다!',
+	},
 };
 
 const common = handleActions(
@@ -18,9 +22,9 @@ const common = handleActions(
 			message: {
 				visible: action.payload.visible,
 				type: action.payload.type,
-				text: action.payload.text
-			}
-		})
+				text: action.payload.text,
+			},
+		}),
 	},
 	initState
 );

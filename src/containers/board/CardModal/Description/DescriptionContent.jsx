@@ -45,6 +45,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	}
 `;
 
+/*
+ *	Card의 Description 컴포넌트
+ *
+ */
 const DescriptionContent = ({ card }) => {
 	return (
 		<Container>

@@ -1,3 +1,7 @@
+/*
+ *	redux-thunk사용을 위한 thunk 생성 함수
+ *
+ */
 import { setMessageStates } from '../modules/common';
 
 export default function createRequestThunk(type, request) {

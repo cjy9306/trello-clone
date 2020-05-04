@@ -1,3 +1,7 @@
+/*
+ *	member api 함수
+ *
+ */
 import client from './client';
 
 export const getAllBoards = ({ memberId }) => client.get('/member/' + memberId + '/boards');

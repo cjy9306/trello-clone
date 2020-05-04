@@ -50,6 +50,10 @@ const TextAreaField = styled.textarea`
 
 const ControlWrapper = styled.div``;
 
+/*
+ *	Team의 Description 컴포넌트
+ *
+ */
 const TeamInfoDescription = ({ team }) => {
 	const dispatch = useDispatch();
 	const editRef = useRef();
@@ -71,12 +75,12 @@ const TeamInfoDescription = ({ team }) => {
 
 	useEffect(() => {
 		if (team.description !== undefined) setDescription(team.description);
-	}, [team]);
+	}, [team, setDescription]);
 
 	useEffect(() => {
 		if (isEditting) editRef.current.focus();
 		else setDescription(team.description);
-	}, [isEditting]);
+	}, [isEditting, setDescription]);
 
 	return (
 		<TeamInfoContainer>

@@ -70,6 +70,10 @@ const TextAreaField = styled.textarea`
 	width: 100%;
 `;
 
+/*
+ *	각 Checklist의 sub-item 컴포넌트
+ *
+ */
 const CheckListItem = ({ item }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

@@ -45,6 +45,10 @@ const LinkButtonWrapper = styled(LinkButton)`
 	}
 `;
 
+/*
+ *	CardModal의 Sidebar 컴포넌트
+ *
+ */
 const SideBar = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

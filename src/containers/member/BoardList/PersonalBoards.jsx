@@ -24,6 +24,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	margin-right: 16px;
 `;
 
+/*
+ *	MemberBoardsContainer에서 개인 board list 를 담은 컴포넌트
+ *
+ */
 const PersonalBoards = ({ onToggleBoardModal }) => {
 	const personalBoards = useSelector((state) => state.member.personalBoards);
 

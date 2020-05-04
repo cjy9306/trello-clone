@@ -38,6 +38,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	padding: 6px 0 0 10px;
 `;
 
+/*
+ *	CheckList의 각 item 컴포넌트
+ *
+ */
 const CheckList = ({ checklist }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

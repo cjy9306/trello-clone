@@ -64,6 +64,11 @@ const CloseSpan = styled.span`
 	}
 `;
 
+/*
+ *	Sidebar의 member를 선택하는 컴포넌트
+ *
+ */
+
 const SideBarMembers = ({ onPopupToggle, card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

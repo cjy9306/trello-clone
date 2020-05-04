@@ -14,6 +14,10 @@ const CreateBox = styled(BoardBox)`
 	}
 `;
 
+/*
+ *	create board 이벤트를 담은 box 컴포넌트. BoardBox를 상속함
+ *
+ */
 const CreateBoardBox = ({ text, onClick }) => {
 	return <CreateBox text={text} onClick={onClick} />;
 };

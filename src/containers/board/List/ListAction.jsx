@@ -48,6 +48,10 @@ const CloseSpan = styled.span`
 	}
 `;
 
+/*
+ *	List의 action들을 담은 컴포넌트
+ *
+ */
 const ListAction = ({ posX, posY, visible, onCloseListAction }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

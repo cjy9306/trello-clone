@@ -12,6 +12,10 @@ import TeamMemberList from './TeamSetting/TeamMemberList';
 
 const Container = styled.div``;
 
+/*
+ *	Team Setting page의 루트 컴포넌트
+ *
+ */
 const TeamSettingsContainer = ({ match }) => {
 	const teamId = match.params.teamId;
 	const isLogined = useCheckWhetherIsLogined();

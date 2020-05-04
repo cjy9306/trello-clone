@@ -9,6 +9,10 @@ const TeamBoardContainer = styled.section``;
 
 const TeamContainer = styled.div``;
 
+/*
+ *	MemberBoardsContainer에서 member가 속한 team들의 board list 를 담은 컴포넌트
+ *
+ */
 const TeamBoards = ({ onToggleBoardModal }) => {
 	const teamBoards = useSelector((state) => state.member.teamBoards);
 

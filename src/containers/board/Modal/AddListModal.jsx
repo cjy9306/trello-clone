@@ -43,6 +43,10 @@ const TitleInput = styled.input`
 	width: 100%;
 `;
 
+/*
+ *	Board에 List를 추가하는 Modal 컴포넌트
+ *
+ */
 const AddListModal = ({ visible, onCloseModal }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

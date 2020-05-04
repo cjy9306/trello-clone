@@ -41,6 +41,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	top: 0px;
 `;
 
+/*
+ *	SideBarLables의 각 item 컴포넌트
+ *
+ */
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 	const [checked, setChecked] = useState(false);
 

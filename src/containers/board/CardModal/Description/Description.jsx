@@ -48,6 +48,11 @@ const TextAreaField = styled.textarea`
 
 const ControlWrapper = styled.div``;
 
+/*
+ *	DescriptionContent의 실제 정보를 나타내는 컴포넌트
+ *
+ */
+
 const Description = ({ card }) => {
 	const dispatch = useDispatch();
 	const [isEditting, setIsEditting] = useState(false);

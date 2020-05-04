@@ -69,6 +69,10 @@ const SideBarContent = styled.div`
 	}
 `;
 
+/*
+ *	카드 상세보기 Modal 컴포넌트
+ *
+ */
 const CardModal = ({ visible, onCloseModal }) => {
 	const card = useSelector((state) => state.board.card);
 

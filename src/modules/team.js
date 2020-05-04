@@ -1,7 +1,10 @@
+/*
+ *	team redux store
+ *
+ */
 import { handleActions } from 'redux-actions';
 import * as teamAPI from '../lib/api/team';
 import createRequestThunk from '../lib/createRequestThunk';
-
 
 const CREATE_TEAM = 'member/CREATE_TEAM';
 const CREATE_TEAM_SUCCESS = 'member/CREATE_TEAM_SUCCESS';
@@ -34,70 +37,70 @@ const DELETE_TEAM_MEMBER_FAIL = 'team/DELETE_TEAM_MEMBER_FAIL';
 export const deleteTeamMember = createRequestThunk(DELETE_TEAM_MEMBER, teamAPI.deleteTeamMember);
 
 const initState = {
-    team: {},
-    teamMembers: [],
+	team: {},
+	teamMembers: [],
 };
 
 const team = handleActions(
-    {
-        [CREATE_TEAM]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_TEAM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [CREATE_TEAM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [GET_TEAM]: (state, action) => ({
-            ...state,
-        }),
-        [GET_TEAM_SUCCESS]: (state, action) => ({
-            ...state,
-            team: action.payload.team,
-            teamMembers: action.payload.teamMembers,
-        }),
-        [GET_TEAM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_TEAM]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_TEAM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [UPDATE_TEAM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_TEAM_MEMBER]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_TEAM_MEMBER_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [ADD_TEAM_MEMBER_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM_MEMBER]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM_MEMBER_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [DELETE_TEAM_MEMBER_FAIL]: (state, action) => ({
-            ...state,
-        }),
-    },
-    initState
+	{
+		[CREATE_TEAM]: (state, action) => ({
+			...state,
+		}),
+		[CREATE_TEAM_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[CREATE_TEAM_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[GET_TEAM]: (state, action) => ({
+			...state,
+		}),
+		[GET_TEAM_SUCCESS]: (state, action) => ({
+			...state,
+			team: action.payload.team,
+			teamMembers: action.payload.teamMembers,
+		}),
+		[GET_TEAM_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[UPDATE_TEAM]: (state, action) => ({
+			...state,
+		}),
+		[UPDATE_TEAM_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[UPDATE_TEAM_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[ADD_TEAM_MEMBER]: (state, action) => ({
+			...state,
+		}),
+		[ADD_TEAM_MEMBER_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[ADD_TEAM_MEMBER_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM_MEMBER]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM_MEMBER_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[DELETE_TEAM_MEMBER_FAIL]: (state, action) => ({
+			...state,
+		}),
+	},
+	initState
 );
 
 export default team;

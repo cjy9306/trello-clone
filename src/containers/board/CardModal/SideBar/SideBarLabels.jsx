@@ -52,6 +52,10 @@ const isInCardLabels = (label, cardLabels) => {
 	return false;
 };
 
+/*
+ *	Sidebar의 Labels를 선택하는 컴포넌트
+ *
+ */
 const SideBarLabels = ({ onPopupToggle, card }) => {
 	const allLabels = useSelector((state) => state.board.allLabels);
 	const board = useSelector((state) => state.board.board);

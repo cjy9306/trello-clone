@@ -39,6 +39,10 @@ const CardList = styled.div`
 	padding: 0 8px 0 8px;
 `;
 
+/*
+ *	List 컴포넌트
+ *
+ */
 const List = ({ list, index, board }) => {
 	const dispatch = useDispatch();
 

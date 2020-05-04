@@ -1,3 +1,7 @@
+/*
+ *	api의 공통 컴포넌트
+ *
+ */
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
@@ -12,6 +16,7 @@ client.interceptors.request.use(async (config) => {
 	const decoded = jwt.decode(token);
 	if (decoded === null) return config;
 
+	// token refresh를 위함. 현재는 만료됬을 경우 무조건 refresh함.
 	if (decoded.exp < Date.now() / 1000) {
 		const response = await axios.post(process.env.REACT_APP_API_SERVER_ADDRESS + '/auth/refresh', token, {
 			headers: { AccessToken: token },

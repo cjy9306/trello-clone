@@ -47,6 +47,10 @@ const getListItem = (lists, listId) => {
 	return null;
 };
 
+/*
+ *	Board 페이지의 루트 컴포넌트
+ *
+ */
 const BoardContainer = ({ match: { params } }) => {
 	const { boardId } = params;
 	const isLogined = useCheckWhetherIsLogined();

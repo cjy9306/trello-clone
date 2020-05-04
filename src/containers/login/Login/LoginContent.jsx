@@ -81,6 +81,10 @@ const ButtonWraper = styled.div`
 	margin-bottom: 8px;
 `;
 
+/*
+ *	Login 데이터 입력 컴포넌트
+ *
+ */
 const LoginContent = ({ onLogin }) => {
 	const [username, onChangeUserename] = useInput('');
 	const [password, onChangePassword] = useInput('');

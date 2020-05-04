@@ -42,6 +42,10 @@ const BoxContainer = styled.div`
 	}
 `;
 
+/*
+ *	BoardList에서 각 board를 나타내는 공통 box 컴포넌트
+ *
+ */
 const BoardBox = ({ className, text, onClick }) => {
 	return (
 		<BoxContainer className={className} onClick={onClick}>

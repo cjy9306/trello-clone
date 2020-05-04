@@ -51,6 +51,10 @@ const CustomPicker = styled(DatePicker)`
 	padding: 4px 8px 4px 8px;
 `;
 
+/*
+ *	Card의 Details 정보 컴포넌트. 아직은 Label과 DueDate 정보만 잇음
+ *
+ */
 const DetailsContent = ({ card }) => {
 	const [dueDate, setDueDate] = useState('');
 	const [overdueVisible, setOverdueVisible] = useState(false);

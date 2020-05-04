@@ -31,6 +31,10 @@ const DeleteBoardButton = styled(Button)`
 	float: right;
 `;
 
+/*
+ *	BoardContainer의 board header
+ *
+ */
 const BoardHeader = ({ board }) => {
 	const history = useHistory();
 	const dispatch = useDispatch();

@@ -1,3 +1,7 @@
+/*
+ *	해당 프로젝트의 root jsx 컴포넌트
+ *
+ */
 import React from 'react';
 import { Route } from 'react-router-dom';
 import BoardConatiner from './containers/board/BoardContainer';

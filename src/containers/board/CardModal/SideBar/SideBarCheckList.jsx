@@ -50,6 +50,11 @@ const TitleInput = styled.input`
 	width: 100%;
 `;
 
+/*
+ *	Sidebar의 Checklist를 생성하는 컴포넌트
+ *
+ */
+
 const SideBarCheckList = ({ onPopupToggle, onCreateCheckList }) => {
 	const [title, onChangeTitle, setTitle] = useInput('');
 

@@ -1,3 +1,7 @@
+/*
+ *	board api 함수
+ *
+ */
 import client from './client';
 
 export const createBoard = ({ data }) => client.post('/board', data);

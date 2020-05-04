@@ -19,6 +19,10 @@ const BoardsContainer = styled.div`
 	}
 `;
 
+/*
+ *	member가 속한 board list 의 루트 컴포넌트
+ *
+ */
 const MemberBoardsContainer = () => {
 	const isLogined = useCheckWhetherIsLogined();
 	const dispatch = useDispatch();

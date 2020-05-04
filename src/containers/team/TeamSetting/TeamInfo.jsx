@@ -28,6 +28,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	margin-right: 16px;
 `;
 
+/*
+ *	Team 메인 정보 컴포넌트
+ *
+ */
 const TeamInfo = ({ teamId }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();

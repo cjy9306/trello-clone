@@ -1,3 +1,7 @@
+/*
+ *	redux root store
+ *
+ */
 import { combineReducers } from 'redux';
 import board from './board';
 import auth from './auth';
@@ -10,7 +14,7 @@ const rootReducer = combineReducers({
 	auth,
 	member,
 	team,
-	common
+	common,
 });
 
 export default rootReducer;

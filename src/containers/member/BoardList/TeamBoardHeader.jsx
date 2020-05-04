@@ -24,6 +24,10 @@ const SettingsButton = styled(Button)`
 	float: right;
 `;
 
+/*
+ *	TeamBoards에서 각 team의 header 컴포넌트
+ *
+ */
 const TeamBoardHeader = ({ team }) => {
 	const history = useHistory();
 	const onClickSettings = useCallback((teamId) => history.push('/team/' + teamId + '/settings'), [history]);

@@ -54,6 +54,10 @@ const EmailInput = styled.input`
 	width: 80%;
 `;
 
+/*
+ *	Board에 member를 추가하는 컴포넌트
+ *
+ */
 const BoardMembersModal = ({ visible, onCloseModal }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

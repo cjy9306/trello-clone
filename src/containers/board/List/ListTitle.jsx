@@ -52,6 +52,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	}
 `;
 
+/*
+ *	List의 Title 컴포넌트
+ *
+ */
 const ListTitle = ({ list, onUpdate }) => {
 	const inputRef = useRef(null);
 	const dispatch = useDispatch();

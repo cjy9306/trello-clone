@@ -12,6 +12,10 @@ const BoardListContainer = styled.div`
 	padding: 0 0 0 2%;
 `;
 
+/*
+ *	주어진 board list를 출력하는 컴포넌트
+ *
+ */
 const BoardList = ({ boards, onToggleBoardModal }) => {
 	return (
 		<BoardListContainer>

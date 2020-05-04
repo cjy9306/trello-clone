@@ -78,6 +78,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	}
 `;
 
+/*
+ *	Card의 Comment 컴포넌트
+ *
+ */
 const CommentContent = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

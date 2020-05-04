@@ -50,6 +50,10 @@ const ControlWrapper = styled.div`
 	margin-top: 8px;
 `;
 
+/*
+ *	card를 추가할 때 사용하는 컴포넌트
+ *
+ */
 const AddCard = ({ onCreateCard }) => {
 	const [isAdding, setIsAdding] = useState(false);
 	const [newCardName, onChangeCardName, setNewCardName] = useInput('');

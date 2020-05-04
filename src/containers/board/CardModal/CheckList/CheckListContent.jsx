@@ -10,6 +10,10 @@ const Container = styled.div`
 	position: relative;
 `;
 
+/*
+ *	Card의 Checklist 컴포넌트
+ *
+ */
 const CheckListContent = () => {
 	const checklist = useSelector((state) => state.board.cardChecklist);
 	const [visible, setVisible] = useState(false);

@@ -51,6 +51,10 @@ const EmailInput = styled.input`
 	}
 `;
 
+/*
+ *	Team에 속한 member list 컴포넌트
+ *
+ */
 const TeamMemberList = ({ teamId }) => {
 	const dispatch = useDispatch();
 	const teamMembers = useSelector((state) => state.team.teamMembers);

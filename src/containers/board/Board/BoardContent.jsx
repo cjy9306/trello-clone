@@ -10,6 +10,10 @@ const Container = styled.div`
 	white-space: nowrap;
 `;
 
+/*
+ *	BoardContainer에서 board 내용에 해당하는 컴포넌트
+ *
+ */
 const BoardContent = ({ board, lists, onDragEnd }) => {
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>

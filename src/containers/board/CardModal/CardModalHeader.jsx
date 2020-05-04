@@ -38,6 +38,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	padding: 2px 0 0 10px;
 `;
 
+/*
+ *	CardModal의 header
+ *
+ */
 const CardModalHeader = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);

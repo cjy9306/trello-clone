@@ -1,3 +1,7 @@
+/*
+ *	해당 프로젝트의 최상위 컴포넌트
+ *
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

@@ -46,6 +46,10 @@ const getStyle = (style, snapshot) => {
 	};
 };
 
+/*
+ *	List의 각 카드에 해당하는 컴포넌트
+ *
+ */
 const Card = ({ card, board, index }) => {
 	const dispatch = useDispatch();
 	const savedCard = useSelector((state) => state.board.card);

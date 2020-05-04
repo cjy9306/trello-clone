@@ -1,3 +1,7 @@
+/*
+ *	auth redux store
+ *
+ */
 import { handleActions } from 'redux-actions';
 import * as authAPI from '../lib/api/auth';
 import createRequestThunk from '../lib/createRequestThunk';
@@ -18,54 +22,54 @@ const LOGIN_FAIL = 'auth/LOGIN_FAIL';
 export const login = createRequestThunk(LOGIN, authAPI.login);
 
 const initState = {
-    loading: {
-        LOGIN: false,
-    }
+	loading: {
+		LOGIN: false,
+	},
 };
 
 const auth = handleActions(
-    {
-        [REGISTER]: (state, action) => ({
-            ...state,
-        }),
-        [REGISTER_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [REGISTER_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [SOCIAL_LOGIN]: (state, action) => ({
-            ...state,
-        }),
-        [SOCIAL_LOGIN_SUCCESS]: (state, action) => ({
-            ...state,
-        }),
-        [SOCIAL_LOGIN_FAIL]: (state, action) => ({
-            ...state,
-        }),
-        [LOGIN]: (state, action) => ({
-            ...state,
-            loading: {
-                ...state.loading,
-                LOGIN: true,
-            }
-        }),
-        [LOGIN_SUCCESS]: (state, action) => ({
-            ...state,
-            loading: {
-                ...state.loading,
-                LOGIN: false,
-            }
-        }),
-        [LOGIN_FAIL]: (state, action) => ({
-            ...state,
-            loading: {
-                ...state.loading,
-                LOGIN: false,
-            }
-        }),
-    },
-    initState
+	{
+		[REGISTER]: (state, action) => ({
+			...state,
+		}),
+		[REGISTER_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[REGISTER_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[SOCIAL_LOGIN]: (state, action) => ({
+			...state,
+		}),
+		[SOCIAL_LOGIN_SUCCESS]: (state, action) => ({
+			...state,
+		}),
+		[SOCIAL_LOGIN_FAIL]: (state, action) => ({
+			...state,
+		}),
+		[LOGIN]: (state, action) => ({
+			...state,
+			loading: {
+				...state.loading,
+				LOGIN: true,
+			},
+		}),
+		[LOGIN_SUCCESS]: (state, action) => ({
+			...state,
+			loading: {
+				...state.loading,
+				LOGIN: false,
+			},
+		}),
+		[LOGIN_FAIL]: (state, action) => ({
+			...state,
+			loading: {
+				...state.loading,
+				LOGIN: false,
+			},
+		}),
+	},
+	initState
 );
 
 export default auth;
