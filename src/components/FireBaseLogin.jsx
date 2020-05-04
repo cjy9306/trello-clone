@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from 'firebase';
+import jwt from 'jsonwebtoken';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useDispatch } from 'react-redux';
 import { socialLogin } from '../modules/auth';
@@ -43,10 +44,10 @@ const FireBaseLogin = () => {
 
 		if (result && result.success) {
 			const token = result.data.data.token;
-			const memberId = result.data.data.member_id;
+			const decoded = jwt.decode(token);
 			sessionStorage.setItem('token', token);
-			sessionStorage.setItem('memberId', memberId);
-			sessionStorage.setItem('username', data.username);
+			sessionStorage.setItem('memberId', decoded.memberId);
+			sessionStorage.setItem('username', decoded.username);
 
 			history.push('/member/' + data.username + '/boards');
 		}

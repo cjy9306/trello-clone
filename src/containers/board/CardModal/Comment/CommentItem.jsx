@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteComment, getCard } from '../../../../modules/board';
 import { convertDateClientTimezone } from '../../../../common/CommonUtils';
+import ContentsWithLF from '../../../../components/ContentsWithLF';
 
 const Container = styled.div`
 	margin-bottom: 24px;
@@ -64,6 +65,10 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	}
 `;
 
+const DeleteButton = styled.a`
+	cursor: pointer;
+`;
+
 /*
  *	Comment의 각 item 컴포넌트
  *
@@ -74,7 +79,6 @@ const CommentItem = ({ card, comment }) => {
 
 	const onDelete = async () => {
 		const result = await dispatch(deleteComment({ boardId: board.board_id, commentId: comment.comment_id }));
-
 		if (result.success) dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
 	};
 
@@ -82,27 +86,16 @@ const CommentItem = ({ card, comment }) => {
 		<Container>
 			<Header>
 				<CustomIcon icon={faUserCircle} size="xs" />
-				<b>{comment.member.username}</b> &nbsp;&nbsp; {convertDateClientTimezone(comment.create_time)}
+				<b>{comment.member.name}</b> &nbsp;&nbsp; {convertDateClientTimezone(comment.create_time)}
 			</Header>
 			<ContentContainer>
 				<ContentWrapper>
-					{
-						// new line을 출력하기 위한 기능
-						comment.contents &&
-							comment.contents.split('\n').map((line, index) => (
-								<span key={index}>
-									{line}
-									<br />
-								</span>
-							))
-					}
+					<ContentsWithLF contents={comment.contents} />
 				</ContentWrapper>
 			</ContentContainer>
 			<ControlContainer>
 				&nbsp;&nbsp;
-				<a href="/#" onClick={() => onDelete()}>
-					Delete
-				</a>
+				<DeleteButton onClick={onDelete}>Delete</DeleteButton>
 			</ControlContainer>
 		</Container>
 	);

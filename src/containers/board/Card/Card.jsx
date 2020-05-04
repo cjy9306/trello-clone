@@ -77,7 +77,7 @@ const Card = ({ card, board, index }) => {
 							{card.labels &&
 								card.labels.map((label) => (
 									<LabelWrapper key={label.label_id}>
-										<Tag size="default" color={`#${label.color}`}>
+										<Tag size="default" color={`${label.color}`}>
 											{label.label_name}
 										</Tag>
 									</LabelWrapper>

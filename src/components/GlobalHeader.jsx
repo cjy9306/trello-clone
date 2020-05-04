@@ -78,7 +78,7 @@ const GlobalHeader = ({ isLogined, backgroundColor }) => {
 				</HeaderButton>
 				<GlobalCreateAction
 					visible={createActionVisible}
-					onTogglePopup={onToggleCreateAction}
+					onCloseAction={onToggleCreateAction}
 					onShowBoardModal={onToggleBoardModal}
 					onShowTeamModal={onToggleTeamModal}
 				/>

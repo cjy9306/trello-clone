@@ -70,6 +70,11 @@ const TextAreaField = styled.textarea`
 	width: 100%;
 `;
 
+const CustomCheckBox = styled(CheckBox)`
+	margin-left: -25px;
+	position: absolute;
+`;
+
 /*
  *	각 Checklist의 sub-item 컴포넌트
  *
@@ -127,11 +132,7 @@ const CheckListItem = ({ item }) => {
 
 	return (
 		<Container isEditting={isEditting}>
-			<CheckBox
-				defaultChecked={item.checked}
-				onClick={onClickCheckBox}
-				style={{ marginLeft: '-25px', position: 'absolute' }}
-			/>
+			<CustomCheckBox defaultChecked={item.checked} onClick={onClickCheckBox} />
 			<LabelContainer isEditting={isEditting} onClick={onLabelClick}>
 				{item.item_name}
 			</LabelContainer>

@@ -83,6 +83,7 @@ const SideBar = ({ card }) => {
 		async (itemName) => {
 			const data = {
 				checklistName: itemName,
+				checked: false,
 			};
 			const result = await dispatch(createCheckList({ boardId: board.board_id, cardId: card.card_id, data }));
 

@@ -57,7 +57,7 @@ const CheckButton = ({ className, defaultChecked, onClick }) => {
 
 CheckButton.propTypes = {
 	className: PropTypes.string,
-	defaultChecked: PropTypes.isRequired,
+	defaultChecked: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
 };
 

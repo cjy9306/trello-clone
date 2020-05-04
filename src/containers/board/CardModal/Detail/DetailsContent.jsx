@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Tag from '../../../../components/Tag';
 import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
-import { checkOverdueDate } from '../../../../common/CommonUtils';
+import { checkOverDueDate } from '../../../../common/CommonUtils';
 
 const DetailsContainer = styled.div`
 	display: ${(props) => props.visible};
@@ -77,7 +77,7 @@ const DetailsContent = ({ card }) => {
 		if (card.due_date) {
 			setDueDate(new Date(card.due_date));
 
-			if (checkOverdueDate(card.due_date)) setOverdueVisible(true);
+			if (checkOverDueDate(card.due_date)) setOverdueVisible(true);
 			else setOverdueVisible(false);
 		} else {
 			setDueDate(null);
@@ -91,7 +91,7 @@ const DetailsContent = ({ card }) => {
 				{card.labels &&
 					card.labels.map((label) => (
 						<LabelWrapper color={label.color} key={label.label_id}>
-							<Tag size="large" color={`#${label.color}`}>
+							<Tag size="large" color={`${label.color}`}>
 								{label.label_name}
 							</Tag>
 						</LabelWrapper>
