@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import BoardList from './BoardList';
 import PropTypes from 'prop-types';
 
-const BoardListContainer = styled.div`
+const BoardListContainer = styled.section`
 	margin: 20px auto;
 `;
 

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const client = axios.create();
 
-client.defaults.baseURL = 'https://15.164.213.61:5000/api';
+client.defaults.baseURL = 'http://15.164.213.61:5000/api';
 // client.defaults.baseURL = 'https://localhost:5000/api';
 client.interceptors.request.use(async (config) => {
 	const token = sessionStorage.getItem('token');

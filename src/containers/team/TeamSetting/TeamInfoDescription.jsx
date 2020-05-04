@@ -62,14 +62,20 @@ const TeamInfoDescription = ({ team }) => {
 		if (description === team.description) return;
 
 		const data = { teamName: team.team_name, description };
-		const result = await dispatch(updateTeam({ teamId: team.teamId, data }));
+		const result = await dispatch(updateTeam({ teamId: team.team_id, data }));
 
-		if (result.success) setIsEditting(false);
-		else setDescription(team.description);
+		if (result.success) {
+			onToggleDescription();
+		}
 	};
 
 	useEffect(() => {
+		if (team.description !== undefined) setDescription(team.description);
+	}, [team]);
+
+	useEffect(() => {
 		if (isEditting) editRef.current.focus();
+		else setDescription(team.description);
 	}, [isEditting]);
 
 	return (
@@ -78,7 +84,7 @@ const TeamInfoDescription = ({ team }) => {
 				{description === '' || description == null ? (
 					'Add a more detailed description...'
 				) : (
-					<ContentsWithLF string={description} />
+					<ContentsWithLF contents={description} />
 				)}
 			</LabelWrapper>
 			<TextAreaWrapper isEditting={isEditting}>
@@ -92,7 +98,6 @@ const TeamInfoDescription = ({ team }) => {
 					<Button type="primary" onClick={onSaveDescription}>
 						Save
 					</Button>{' '}
-					&nbsp;
 					<Button type="default" onClick={onToggleDescription}>
 						Cancel
 					</Button>

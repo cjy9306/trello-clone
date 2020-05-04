@@ -53,6 +53,12 @@ const TeamDescTextArea = styled.textarea`
 	resize: none;
 `;
 
+/*
+ *	team 생성에 사용되는 modal. global header에서 사용
+ *
+ *	@visible - 해당 컴포넌트의 ui 출력 설정. true or false로 설정
+ *	@onCloseModal - 해당 컴포넌트를 ui에서 제거하는 함수
+ */
 const CreateTeamModal = ({ visible, onCloseModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -72,8 +78,6 @@ const CreateTeamModal = ({ visible, onCloseModal }) => {
 		if (result.success) {
 			onCloseModal();
 			history.push('/team/' + result.data.data.team.team_id + '/settings');
-		} else {
-			console.log('create fail');
 		}
 	};
 

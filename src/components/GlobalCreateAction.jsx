@@ -63,22 +63,30 @@ const BoardIcon = styled(CustomIcon)`
 	font-size: 16px;
 `;
 
-const GlobalCreateAction = ({ visible, onTogglePopup, onShowBoardModal, onShowTeamModal }) => {
+/*
+ *	global header에서 + 버튼 액션이 발생하면 나오는 ui 컴포넌트. create board와 create team 액션이 있음
+ *
+ *	@visible - 해당 ui의 출력 여부 설정. true or false로 설정
+ *	@onCloseAction - 해당 컴포넌트를 ui에서 제거하는 이벤트 함수
+ *	@onShowBoardModal - CreateBoardModal을 ui에 출력하는 함수
+ *	@onShowTeamModal - CreateTeamModal ui에 출력하는 함수
+ */
+const GlobalCreateAction = ({ visible, onCloseAction, onShowBoardModal, onShowTeamModal }) => {
 	const onCreateTeamClick = useCallback(() => {
-		onTogglePopup();
+		onCloseAction();
 		onShowTeamModal();
-	}, [onTogglePopup, onShowTeamModal]);
+	}, [onCloseAction, onShowTeamModal]);
 
 	const onCreateBoardClick = useCallback(() => {
-		onTogglePopup();
+		onCloseAction();
 		onShowBoardModal();
-	}, [onTogglePopup, onShowBoardModal]);
+	}, [onCloseAction, onShowBoardModal]);
 
 	return (
 		<PopupOver visible={visible}>
 			<CreateActionHeader>
 				Create
-				<CloseSpan onClick={onTogglePopup}>&times;</CloseSpan>
+				<CloseSpan onClick={onCloseAction}>&times;</CloseSpan>
 				<hr />
 			</CreateActionHeader>
 			<CreateActionList>
@@ -97,7 +105,7 @@ const GlobalCreateAction = ({ visible, onTogglePopup, onShowBoardModal, onShowTe
 
 GlobalCreateAction.propTypes = {
 	visible: PropTypes.bool.isRequired,
-	onTogglePopup: PropTypes.func.isRequired,
+	onCloseAction: PropTypes.func.isRequired,
 	onShowBoardModal: PropTypes.func.isRequired,
 	onShowTeamModal: PropTypes.func.isRequired,
 };

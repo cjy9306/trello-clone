@@ -10,7 +10,7 @@ import Button from '../../../components/Button';
 import { deleteTeam } from '../../../modules/team';
 import TeamInfoDescription from './TeamInfoDescription';
 
-const TeamInfoContainer = styled.div`
+const TeamInfoContainer = styled.article`
 	background-color: #f4f5f7;
 	max-width: 768px;
 	margin: 0 auto;
@@ -66,7 +66,7 @@ const TeamInfo = ({ teamId }) => {
 };
 
 TeamInfo.propTypes = {
-	teamId: PropTypes.number.isRequired,
+	teamId: PropTypes.string.isRequired,
 };
 
 export default React.memo(TeamInfo);

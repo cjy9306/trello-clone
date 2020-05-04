@@ -41,7 +41,7 @@ const TeamSettingsContainer = ({ match }) => {
 TeamSettingsContainer.propTypes = {
 	match: PropTypes.shape({
 		params: PropTypes.shape({
-			teamId: PropTypes.number.isRequired,
+			teamId: PropTypes.string.isRequired,
 		}).isRequired,
 	}).isRequired,
 };

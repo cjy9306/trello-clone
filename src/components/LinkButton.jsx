@@ -27,36 +27,43 @@ const DangerBackgroundColor = 'rgba(255, 77, 79, 1)';
 const DangerHoverBackgroundColor = 'rgba(255, 77, 79, 0.7)';
 const DangerColor = 'white';
 
-const ButtonContainer = styled.button`
+// a 태그를 이용한 Link 용 버튼
+const LinkButtonConatiner = styled.a`
+	display: block;
 	background-color: ${(props) => props.backgroundColor};
-	border: none;
-	border-radius: 4px;
 	box-shadow: none;
-	padding: 0 12px;
+	border: none;
+	cursor: pointer;
+	box-sizing: border-box;
+	overflow: hidden;
 	height: ${(props) => props.height};
 	font-size: ${(props) => props.fontSize};
 	color: ${(props) => props.color};
-	text-align: center;
+	padding: 6px 12px;
+	position: relative;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	line-height: 1.499;
-	cursor: pointer;
-	width: ${(props) => (props.block === true ? '100%' : 'auto')};
+	font-weight: 400;
+	border-radius: 3px;
+
 	&:hover {
 		background-color: ${(props) => props.hoverBackgroundColor};
 	}
 `;
 
 /*
- *	버튼 컴포넌트
+ *	링크버튼 컴포넌트. 버튼하고 비슷한 동작이지만 ui가 다르게 구성되어 있음.
+ *	trello의 card details의 sidebar 영역에 사용
  *
  *	@className - Styled-component 상속을 위한 prop
  *	@type - 버튼 종류(default, primary, danger)
  *	@size - 버튼 크기(large, default, small)
- *	@background - 버튼 배경색상으로 default로 null, 색상은 css표현식으로 주어져야함.
  *	@children - 하위 컴포넌트
- *	@block - width를 결정함, block이 true면 100%고 false면 auto
  *	@onClick - 버튼 클릭시 이벤트 함수
  */
-const Button = ({ className, type, size, background = null, children, block = false, onClick }) => {
+const LinkButton = ({ className, type, size, children, onClick }) => {
 	let backgroundColor = DefaultBackgroundColor;
 	let hoverBackgroundColor = DefaultHoverBackgroundColor;
 	let height = DefaultHeight;
@@ -81,12 +88,8 @@ const Button = ({ className, type, size, background = null, children, block = fa
 		fontSize = SmallFontSize;
 	}
 
-	if (background !== null) {
-		backgroundColor = background;
-	}
-
 	return (
-		<ButtonContainer
+		<LinkButtonConatiner
 			className={className}
 			backgroundColor={backgroundColor}
 			hoverBackgroundColor={hoverBackgroundColor}
@@ -94,21 +97,18 @@ const Button = ({ className, type, size, background = null, children, block = fa
 			fontSize={fontSize}
 			color={color}
 			onClick={onClick}
-			block={block}
 		>
 			{children}
-		</ButtonContainer>
+		</LinkButtonConatiner>
 	);
 };
 
-Button.propTypes = {
+LinkButton.propTypes = {
 	className: PropTypes.string,
 	type: PropTypes.string,
 	size: PropTypes.string,
-	background: PropTypes.string,
 	children: PropTypes.node,
-	block: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 
-export default React.memo(Button);
+export default React.memo(LinkButton);

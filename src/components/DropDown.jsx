@@ -56,7 +56,14 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	margin-left: 12px;
 `;
 
-const DropDown = ({ data, onSelected, className }) => {
+/*
+ *	dropdown 컴포넌트
+ *
+ *	@className - Styled-components의 상속에 쓰임
+ *	@data - dropdown에 출력할 데이터, 배열로 입력해야 하며 각 배열 element는 다음의 객채로 구성되어 있어야함. {id: teamId, value: teamName}
+ *	@onSelected - 각 요소가 선택되었을 때의 이벤트, onSelected( @배열 element )
+ */
+const DropDown = ({ className, data, onSelected }) => {
 	const [listVisible, setListVisible] = useState(false);
 	const [selected, setSelected] = useState('');
 

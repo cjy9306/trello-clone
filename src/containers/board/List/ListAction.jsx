@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { LinkButton } from '../../../components/Button';
+import LinkButton from '../../../components/LinkButton';
 import { deleteList, changeListActionVisible, getBoard } from '../../../modules/board';
 
 const PopupOver = styled.div`

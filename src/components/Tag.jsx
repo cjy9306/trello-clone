@@ -33,6 +33,14 @@ const TagContainer = styled.span`
 	display: inline-block;
 `;
 
+/*
+ *	공통 tag 컴포넌트. 현재 sidebar의 labels에 사용됨
+ *
+ *	@className - Styled-components를 상속을 위한 prop
+ *	@color - tag 색상
+ *	@size - 해당 컴포넌트의 크기(large, default, small)
+ *	@children - 하위 컴포넌트
+ */
 const Tag = ({ className, color, size, children }) => {
 	let fontSize = DefaultFontSize;
 	let height = DefaultHeight;

@@ -19,6 +19,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+/*
+ * firebase login을 위한 컴포넌트
+ */
 const FireBaseLogin = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();

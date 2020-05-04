@@ -15,6 +15,13 @@ const ButtonContainer = styled.button`
 	color: #fff;
 `;
 
+/*
+ *	global header에서 사용되는 button.
+ *
+ *	@className - Styled-components를 상속을 위한 prop
+ *	@children - 하위 컴포넌트
+ *	@onClick - 클릭시 이벤트 함수
+ */
 const HeaderButton = ({ className, children, onClick }) => {
 	return (
 		<ButtonContainer className={className} onClick={onClick}>

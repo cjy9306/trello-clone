@@ -25,6 +25,14 @@ const AlertContainer = styled.div`
 	line-height: 1.5;
 `;
 
+/*
+ *	각종 정보(성공, 정보, 에러)를 위한 블락을 띄우는 컴포넌트
+ *
+ *	@className - Styled-component 상속을 위한 prop
+ *	@type - 블락 타입(success, info, warning, error)
+ *	@message - 블락내에 표시될 메시지
+ *	@visible - 해당 블락을 ui에 표시하는 flag로 true, false 값으로 표시
+ */
 const Alert = ({ className, type, message, visible }) => {
 	let backgroundColor = WarningBackgroundColor;
 	let borderColor = WarningBorderColor;

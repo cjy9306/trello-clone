@@ -71,7 +71,8 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 	const [email, onChangeEmail, setEmail] = useInput('');
 
 	const getMembers = useCallback(async () => {
-		dispatch(getCardMembers({ boardId: board.board_id, cardId: card.card_id }));
+		if (board.board_id !== undefined && card.card_id !== undefined)
+			dispatch(getCardMembers({ boardId: board.board_id, cardId: card.card_id }));
 	}, [board, card, dispatch]);
 
 	const onAddMember = async () => {

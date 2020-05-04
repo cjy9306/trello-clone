@@ -5,7 +5,7 @@ import BoardList from './BoardList';
 import TeamBoardHeader from './TeamBoardHeader';
 import PropTypes from 'prop-types';
 
-const TeamBoardContainer = styled.div``;
+const TeamBoardContainer = styled.section``;
 
 const TeamContainer = styled.div``;
 

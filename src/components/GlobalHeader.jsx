@@ -34,6 +34,12 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	font-size: 16px;
 `;
 
+/*
+ *	Trello의 Global Header
+ *
+ *	@isLogined - 로그인 여부
+ *	@backgroundColor - 배경 색상 설정. css 표현식으로 입력해야함
+ */
 const GlobalHeader = ({ isLogined, backgroundColor }) => {
 	const history = useHistory();
 	const [boardModalVisible, setBoardModalVisible] = useState(false);

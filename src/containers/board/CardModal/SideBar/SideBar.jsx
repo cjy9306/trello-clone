@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { LinkButton } from '../../../../components/Button';
+import LinkButton from '../../../../components/LinkButton';
 import { ConfirmModal } from '../../../../components/Modal';
 import { createCheckList, getCheckList, deleteCard, changeModalVisible, getBoard } from '../../../../modules/board';
 import SidebarMembers from './SidebarMembers';

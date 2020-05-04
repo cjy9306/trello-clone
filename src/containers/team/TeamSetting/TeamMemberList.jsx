@@ -76,8 +76,7 @@ const TeamMemberList = ({ teamId }) => {
 				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
 				<Button type="primary" onClick={onAddMember}>
 					Add
-				</Button>{' '}
-				&nbsp;
+				</Button>
 			</MembersInput>
 			<TitleWrapper>Members</TitleWrapper>
 			{teamMembers &&
@@ -89,7 +88,7 @@ const TeamMemberList = ({ teamId }) => {
 };
 
 TeamMemberList.propTypes = {
-	teamId: PropTypes.number.isRequired,
+	teamId: PropTypes.string.isRequired,
 };
 
 export default React.memo(TeamMemberList);

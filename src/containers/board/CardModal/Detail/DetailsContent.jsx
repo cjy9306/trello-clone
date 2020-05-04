@@ -60,7 +60,7 @@ const DetailsContent = ({ card }) => {
 
 	const onChangeDueDate = useCallback(
 		async (selected) => {
-			const data = { ...card, due_date: selected };
+			const data = { ...card, dueDate: selected };
 
 			const result = await dispatch(updateCard({ boardId: board.board_id, cardId: card.card_id, data }));
 

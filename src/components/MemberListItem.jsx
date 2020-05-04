@@ -13,7 +13,7 @@ const MemberItemContainer = styled.div`
 	text-overflow: ellipsis;
 `;
 
-const MemberDeleteButton = styled(Button)`
+const DeleteButton = styled(Button)`
 	float: right;
 	height: 28px;
 	margin-left: 16px;
@@ -30,15 +30,22 @@ const EmailSpan = styled.span`
 	}
 `;
 
+/*
+ *	member list 출력에 사용되는 공통 컴포넌트
+ *
+ *	@className - Styled-components를 상속을 위한 prop
+ *	@member - member object. 스토어에 저장된 member객
+ *	@onDeleteClick - 삭제 버튼 클릭시 이벤트 함수
+ */
 const MemberListItem = ({ className, member, onDeleteClick }) => {
 	return (
 		<MemberItemContainer className={className}>
 			<CustomIcon icon={faUser} size="xs" />
 			{member.name}
 			<EmailSpan>({member.email})</EmailSpan>
-			<MemberDeleteButton onClick={() => onDeleteClick(member.member_id)}>
+			<DeleteButton onClick={() => onDeleteClick(member.member_id)}>
 				{member.member_id === Number(sessionStorage.getItem('memberId')) ? 'Leave' : 'Delete'}
-			</MemberDeleteButton>
+			</DeleteButton>
 		</MemberItemContainer>
 	);
 };

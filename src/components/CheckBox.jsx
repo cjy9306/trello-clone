@@ -27,6 +27,13 @@ const checkedStyle = {
 	fontSize: '20px',
 };
 
+/*
+ *	체크박스 컴포넌트
+ *
+ *	@className - Styled-component 상속을 위한 prop
+ *	@defaultChecked - 처음 생성시 체크여부를 설정. true or false의 값
+ *	@onClick - 체크박스 클릭시 이벤트 함수
+ */
 const CheckButton = ({ className, defaultChecked, onClick }) => {
 	const [checked, setChecked] = useState(defaultChecked);
 

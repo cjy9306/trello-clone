@@ -86,7 +86,7 @@ const Description = ({ card }) => {
 				{description === '' || description == null ? (
 					'Add a more detailed description...'
 				) : (
-					<ContentsWithLF string={description} />
+					<ContentsWithLF contents={description} />
 				)}
 			</LabelWrapper>
 			<TextAreaWrapper isEditting={isEditting}>

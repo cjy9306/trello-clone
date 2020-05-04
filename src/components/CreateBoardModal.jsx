@@ -57,6 +57,13 @@ const ColorContent = styled.div`
 	justify-content: space-between;
 `;
 
+/*
+ *	board 생성을 위한 modal. modal 컴포넌트 css 상속
+ *	global header에 쓰임
+ *
+ *	@visible - 해당 modal을 ui에 출력하는 flag. true or false 로 설정
+ *	@onCloseModal - 해당 modal을 ui에서 제거하는 함수
+ */
 const CreateBoardModal = ({ visible, onCloseModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -182,6 +189,13 @@ const CustomIcon = styled(FontAwesomeIcon)`
 	display: ${(props) => (props.checked ? 'inline-block' : 'none')};
 `;
 
+/*
+ *	위의 board modal에서 사용되는 컴포넌트.
+ *	board의 색상을 설정하는 ui의 color block을 나타냄
+ *
+ *	@data - common/Constants.js에 BoardColorArray를 사용한 데이터. 배열 형태로 되어있음.
+ *	@onColorBlockClick - 해당 color block이 클릭했을 때의 이벤트
+ */
 const ColorBlock = ({ data, onColorBlockClick }) => {
 	const colorId = data[0];
 	const backgroundColor = data[1];

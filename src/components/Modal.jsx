@@ -41,6 +41,14 @@ const CloseSpan = styled.span`
 	}
 `;
 
+/*
+ *	공통 Modal 컴포넌트. 보통 해당 컴포넌트를 css 상속하여 사용함
+ *
+ *	@className - Styled-components를 상속을 위한 prop
+ *	@visible - 해당 컴포넌트의 출력 여부. 현재는 리덕스의 common에서 상태로 관리중
+ *	@onCloseModal - 해당 모델을 ui에서 제거하는 함수
+ *	@children - 하위 컴포넌트
+ */
 const Modal = ({ className, visible = false, onCloseModal, children }) => {
 	return (
 		<ModalContainer visible={visible}>

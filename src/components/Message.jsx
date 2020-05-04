@@ -66,6 +66,14 @@ const SuccessIcon = styled(CustomIcon)`
 	color: green;
 `;
 
+/*
+ *	trello에서 사용되는 공통 알림 컴포넌트. 애니메이션 사용됨
+ *
+ *	@className - Styled-components를 상속을 위한 prop
+ *	@visible - 해당 컴포넌트의 출력 여부. 현재는 리덕스의 common에서 상태로 관리중
+ *	@text - 출력할 text
+ *	@type - 메시지 type(error, info, warn, success). type에 따라 아이콘이 바뀜
+ */
 const Message = ({ className, visible, text, type }) => {
 	const dispatch = useDispatch();
 

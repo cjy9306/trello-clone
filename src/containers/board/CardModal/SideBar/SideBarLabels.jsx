@@ -73,13 +73,9 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 		[dispatch, board, card]
 	);
 
-	const getLabels = useCallback(async () => {
-		dispatch(getAllLabels({ boardId: board.board_id }));
-	}, [board, dispatch]);
-
 	useEffect(() => {
-		getLabels();
-	}, [getLabels]);
+		if (board.board_id !== undefined) dispatch(getAllLabels({ boardId: board.board_id }));
+	}, [board, dispatch]);
 
 	return (
 		<SideBarLabelsContainer>
