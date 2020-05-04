@@ -60,7 +60,7 @@ const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 
 	return (
 		<SideBarLabelsItemContainer>
-			<SideBarLabelsItemContent color={`#${label.color}`} onClick={onItemClick}>
+			<SideBarLabelsItemContent color={`${label.color}`} onClick={onItemClick}>
 				{label.label_name}
 				<SideBarLabelItemCheck checked={checked}>
 					<CustomIcon icon={faCheck} size="xs" />

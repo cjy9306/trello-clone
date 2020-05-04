@@ -8,7 +8,7 @@ import AddCard from './AddCard';
 import ListTitle from './ListTitle';
 import Card from '../Card/Card';
 
-const ListContainer = styled.div`
+const ListContainer = styled.section`
 	box-sizing: border-box;
 	display: inline-block;
 	height: 100%;

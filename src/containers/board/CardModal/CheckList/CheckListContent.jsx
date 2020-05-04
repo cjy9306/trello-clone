@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import CheckList from './CheckList';
 
-const Container = styled.div`
+const ChecklistContainer = styled.div`
 	display: ${(props) => (props.visible ? 'block' : 'none')};
 	font-size: 20px;
 	margin: 8px 0 40px 40px;
@@ -24,11 +24,11 @@ const CheckListContent = () => {
 	}, [checklist]);
 
 	return (
-		<Container visible={visible}>
+		<ChecklistContainer visible={visible}>
 			{checklist &&
 				checklist.length > 0 &&
 				checklist.map((checklist) => <CheckList checklist={checklist} key={checklist.checklist_id} />)}
-		</Container>
+		</ChecklistContainer>
 	);
 };
 

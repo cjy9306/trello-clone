@@ -5,7 +5,7 @@ import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import Description from './Description';
 
-const Container = styled.div`
+const DescContainer = styled.div`
 	font-size: 20px;
 	min-height: 32px;
 	position: relative;
@@ -51,13 +51,13 @@ const CustomIcon = styled(FontAwesomeIcon)`
  */
 const DescriptionContent = ({ card }) => {
 	return (
-		<Container>
+		<DescContainer>
 			<DescHeader>
 				<CustomIcon icon={faAlignLeft} size="xs" />
 				Description <br />
 			</DescHeader>
 			<Description card={card} />
-		</Container>
+		</DescContainer>
 	);
 };
 

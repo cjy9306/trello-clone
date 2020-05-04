@@ -9,7 +9,7 @@ import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
 import { checkOverdueDate } from '../../../../common/CommonUtils';
 
-const Container = styled.div`
+const DetailsContainer = styled.div`
 	display: ${(props) => props.visible};
 
 	@media only screen and (min-width: 669px) {
@@ -86,7 +86,7 @@ const DetailsContent = ({ card }) => {
 	}, [card]);
 
 	return (
-		<Container>
+		<DetailsContainer>
 			<LabelsContainer visible={!!card.labels}>
 				{card.labels &&
 					card.labels.map((label) => (
@@ -104,7 +104,7 @@ const DetailsContent = ({ card }) => {
 				&nbsp;
 				<Alert type="error" message="OVERDUE" visible={overdueVisible} />
 			</DueDateContainer>
-		</Container>
+		</DetailsContainer>
 	);
 };
 

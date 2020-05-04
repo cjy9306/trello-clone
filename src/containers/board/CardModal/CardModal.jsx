@@ -30,7 +30,7 @@ const CardModalContainer = styled(Modal)`
 	}
 `;
 
-const MainContent = styled.div`
+const ContentContainer = styled.div`
 	float: left;
 	padding: 0px 8px 8px 16px;
 
@@ -52,23 +52,6 @@ const MainContent = styled.div`
 	}
 `;
 
-const SideBarContent = styled.div`
-	margin-top: 26px;
-	float: right;
-	padding: 0 8px 8px 0;
-	overflow: hidden;
-
-	// desktop, tablet, phone
-	@media only screen and (min-width: 668px) {
-		width: 188px;
-	}
-
-	// phone
-	@media only screen and (max-width: 668px) {
-		width: 95%;
-	}
-`;
-
 /*
  *	카드 상세보기 Modal 컴포넌트
  *
@@ -79,15 +62,13 @@ const CardModal = ({ visible, onCloseModal }) => {
 	return (
 		<CardModalContainer visible={visible} onCloseModal={onCloseModal}>
 			<CardModalHeader card={card} />
-			<MainContent>
+			<ContentContainer>
 				<DetailsContent card={card} />
 				<DescriptionContent card={card} />
 				<CheckListContent card={card} />
 				<CommentContent card={card} />
-			</MainContent>
-			<SideBarContent>
-				<SideBar card={card} />
-			</SideBarContent>
+			</ContentContainer>
+			<SideBar card={card} />
 		</CardModalContainer>
 	);
 };

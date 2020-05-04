@@ -9,6 +9,22 @@ import SidebarMembers from './SidebarMembers';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
 
+const SidebarContainer = styled.section`
+	margin-top: 26px;
+	float: right;
+	padding: 0 8px 8px 0;
+	overflow: hidden;
+
+	// desktop, tablet, phone
+	@media only screen and (min-width: 668px) {
+		width: 188px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		width: 95%;
+	}
+`;
 const SideBarAddOn = styled.div`
 	margin-bottom: 32px;
 `;
@@ -97,7 +113,7 @@ const SideBar = ({ card }) => {
 	}, [cardModalVisible]);
 
 	return (
-		<div>
+		<SidebarContainer>
 			<ConfirmModal
 				visible={deleteConfirmVisible}
 				onCloseModal={onToggleDeleteConfirm}
@@ -134,7 +150,7 @@ const SideBar = ({ card }) => {
 					</LinkButtonWrapper>
 				</SideBarContent>
 			</SideBarActions>
-		</div>
+		</SidebarContainer>
 	);
 };
 

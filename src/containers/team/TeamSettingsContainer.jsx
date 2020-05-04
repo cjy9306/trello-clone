@@ -10,7 +10,7 @@ import { getTeam } from '../../modules/team';
 import TeamInfo from './TeamSetting/TeamInfo';
 import TeamMemberList from './TeamSetting/TeamMemberList';
 
-const Container = styled.div``;
+const SettingContainer = styled.div``;
 
 /*
  *	Team Setting page의 루트 컴포넌트
@@ -33,10 +33,10 @@ const TeamSettingsContainer = ({ match }) => {
 	return (
 		<>
 			<GlobalHeader isLogined={isLogined} backgroundColor={GLOBAL_HEADER_DEFAULT_BACKGROUND} />
-			<Container>
+			<SettingContainer>
 				<TeamInfo teamId={teamId} />
 				<TeamMemberList teamId={teamId} />
-			</Container>
+			</SettingContainer>
 			<Message visible={message.visible} type={message.type} text={message.text} />
 		</>
 	);

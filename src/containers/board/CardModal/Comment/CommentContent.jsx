@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import { createComment, getCard } from '../../../../modules/board';
 import CommentItem from './CommentItem';
 
-const Container = styled.div`
+const CommentsContainer = styled.div`
 	position: relative;
 	font-size: 20px;
 
@@ -106,7 +106,7 @@ const CommentContent = ({ card }) => {
 	};
 
 	return (
-		<Container>
+		<CommentsContainer>
 			<CommentHeader>
 				<CustomIcon icon={faComment} size="xs" />
 				Comments
@@ -123,7 +123,7 @@ const CommentContent = ({ card }) => {
 				{cardComments &&
 					cardComments.map((comment) => <CommentItem comment={comment} card={card} key={comment.comment_id} />)}
 			</CommentViewContainer>
-		</Container>
+		</CommentsContainer>
 	);
 };
 
