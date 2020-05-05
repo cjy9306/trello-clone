@@ -9,7 +9,7 @@ import SidebarMembers from './SidebarMembers';
 import SideBarCheckList from './SideBarCheckList';
 import SideBarLabels from './SideBarLabels';
 
-const SidebarContainer = styled.section`
+const SidebarContainer = styled.aside`
 	margin-top: 26px;
 	float: right;
 	padding: 0 8px 8px 0;
