@@ -8,6 +8,8 @@
 서버는 Nodejs + Express를 사용하여 RESTful API 서버로 작성되었습니다.  
 
 서버 Repo: [https://github.com/cjy9306/trello-clone-server](https://github.com/cjy9306/trello-clone-server)
+
+*코드에 대한 의견 및 개선사항 모두 환영합니다!!*
   
 ![trello-1](https://user-images.githubusercontent.com/7731519/81029010-70770480-8ebe-11ea-84ff-626f6f9981c2.png)
 
