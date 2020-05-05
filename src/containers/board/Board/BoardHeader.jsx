@@ -10,7 +10,7 @@ import { deleteBoard } from '../../../modules/board';
 import BoardMembersModal from '../Modal/BoardMembersModal';
 import AddListModal from '../Modal/AddListModal';
 
-const BoardHeaderContainer = styled.div`
+const BoardHeaderContainer = styled.header`
 	display: flex;
 	height: auto;
 	justify-content: space-between;

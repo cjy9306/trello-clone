@@ -9,7 +9,7 @@ import CreateTeamModal from './CreateTeamModal';
 import GlobalCreateAction from './GlobalCreateAction';
 import HeaderButton from './HeaderButton';
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
 	height: 32px;
 	padding: 8px 16px 8px 16px;
 	background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'rgba(0,0,0,.15)')};
