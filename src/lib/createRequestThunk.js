@@ -23,15 +23,15 @@ export default function createRequestThunk(type, request) {
 
 			return { success: true, data: response.data };
 		} catch (e) {
-			const error = e.response ? e.response.data : '서버에 연결할 수 없습니다.';
+			const error = e.response ? e.response.data.data : 'Can not connect the server.';
 			dispatch({
 				type: FAIL,
 				payload: error,
 				error: true,
 			});
 
-			dispatch(setMessageStates(true, 'error', error.data));
-			if (error === undefined) return { success: false, data: '서버에 연결할 수 없습니다.' };
+			dispatch(setMessageStates(true, 'error', error));
+			if (error === undefined) return { success: false, data: error };
 			else return { success: false, data: error };
 		}
 	};
