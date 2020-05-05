@@ -102,8 +102,8 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
 				<Button type="primary" onClick={onAddMember}>
 					Add
-				</Button>{' '}
-				&nbsp;
+				</Button>
+				&nbsp;&nbsp;
 			</AddMemberContainer>
 			<MemberListContainer>
 				<TitleWrapper>Members</TitleWrapper>

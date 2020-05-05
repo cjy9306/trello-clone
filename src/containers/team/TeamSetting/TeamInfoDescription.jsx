@@ -101,7 +101,8 @@ const TeamInfoDescription = ({ team }) => {
 				<ControlWrapper>
 					<Button type="primary" onClick={onSaveDescription}>
 						Save
-					</Button>{' '}
+					</Button>
+					&nbsp;&nbsp;
 					<Button type="default" onClick={onToggleDescription}>
 						Cancel
 					</Button>

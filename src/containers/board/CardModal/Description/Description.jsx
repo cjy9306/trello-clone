@@ -104,8 +104,8 @@ const Description = ({ card }) => {
 				<ControlWrapper>
 					<Button type="primary" onClick={onSaveClick}>
 						Save
-					</Button>{' '}
-					&nbsp;
+					</Button>
+					&nbsp;&nbsp;
 					<Button type="default" onClick={onToggleDescription}>
 						Cancel
 					</Button>

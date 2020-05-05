@@ -84,8 +84,8 @@ const AddListModal = ({ visible, onCloseModal }) => {
 			<AddListControl>
 				<Button type="primary" onClick={onAddList}>
 					Add
-				</Button>{' '}
-				&nbsp;
+				</Button>
+				&nbsp;&nbsp;
 				<Button type="default" onClick={onCloseModal}>
 					Cancel
 				</Button>

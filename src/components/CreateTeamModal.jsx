@@ -97,7 +97,7 @@ const CreateTeamModal = ({ visible, onCloseModal }) => {
 			<CreateTeamControl>
 				<Button type="primary" onClick={onCreateTeam}>
 					Create
-				</Button>{' '}
+				</Button>
 				&nbsp;
 				<Button type="default" onClick={onCloseModal}>
 					Cancel

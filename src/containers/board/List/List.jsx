@@ -51,11 +51,12 @@ const List = ({ list, index, board }) => {
 			const data = {
 				cardName: newCardName,
 				seq: list.cards.length,
+				memberId: sessionStorage.getItem('memberId'),
 			};
 
 			const result = await dispatch(createCard({ boardId: board.board_id, listId: list.list_id, data }));
 
-			if (result.success === true) {
+			if (result.success) {
 				dispatch(getBoard({ boardId: board.board_id }));
 				return true;
 			} else {
