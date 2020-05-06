@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { login } from '../../modules/auth';
 import Message from '../../components/Message';
 import LoginContent from './Login/LoginContent';
+import LoginFooter from './Login/LoginFooter';
 
 /*
  *	Login 컴포넌트의 루트 컴포넌트
@@ -39,6 +40,7 @@ const LoginContainer = () => {
 		<>
 			<Message visible={message.visible} type={message.type} text={message.text} />
 			<LoginContent onLogin={onLogin} />
+			<LoginFooter />
 		</>
 	);
 };

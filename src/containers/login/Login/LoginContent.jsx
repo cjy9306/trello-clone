@@ -7,10 +7,11 @@ import FireBaseLogin from '../../../components/FireBaseLogin';
 
 const Container = styled.div`
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 
 	@media only screen and (min-width: 401px) {
-		padding-top: 160px;
+		padding-top: 130px;
 		margin: 0 auto;
 		width: 420px;
 	}
@@ -19,6 +20,10 @@ const Container = styled.div`
 		margin: 80px auto 80px auto;
 		width: 320px;
 	}
+`;
+
+const LoginFormLogo = styled.div`
+	margin: 0 auto;
 `;
 
 const LoginFormContainer = styled.div`
@@ -77,8 +82,10 @@ const InputField = React.memo(styled.input`
 	width: 100%;
 `);
 
-const ButtonWraper = styled.div`
-	margin-bottom: 8px;
+const NoticeContainer = styled.div`
+	height: 100px;
+	line-height: 100px;
+	margin: 0 auto;
 `;
 
 /*
@@ -86,11 +93,14 @@ const ButtonWraper = styled.div`
  *
  */
 const LoginContent = ({ onLogin }) => {
-	const [username, onChangeUserename] = useInput('');
-	const [password, onChangePassword] = useInput('');
+	const [username, onChangeUserename] = useInput('test');
+	const [password, onChangePassword] = useInput('test');
 
 	return (
 		<Container>
+			<LoginFormLogo>
+				<h1>Trello Clone</h1>
+			</LoginFormLogo>
 			<LoginFormContainer>
 				<LoginFormHeader>Login to Trello Clone</LoginFormHeader>
 				<ContentContainer>
@@ -117,20 +127,14 @@ const LoginContent = ({ onLogin }) => {
 						</InputWrapper>
 					</InputContainer>
 					<ControlContainer>
-						<ButtonWraper>
-							<Button type="primary" onClick={() => onLogin({ username, password })} block>
-								Log In
-							</Button>
-						</ButtonWraper>
-						<ButtonWraper>OR</ButtonWraper>
-						<ButtonWraper>
-							<Button block={true}>Sign Up</Button>
-						</ButtonWraper>
+						<Button type="primary" onClick={() => onLogin({ username, password })} block>
+							Log In
+						</Button>
 					</ControlContainer>
 					<FireBaseLogin />
-					Terms of Service
 				</ContentContainer>
 			</LoginFormContainer>
+			<NoticeContainer>테스트 계정은 test/test (ID/PWD)를 사용하시면 됩니다.</NoticeContainer>
 		</Container>
 	);
 };
