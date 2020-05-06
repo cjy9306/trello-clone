@@ -11,7 +11,7 @@ const initState = {
 	message: {
 		visible: false,
 		type: 'error',
-		text: '유효하지 않은 접근입니다!',
+		text: 'Invalid Access.',
 	},
 };
 
