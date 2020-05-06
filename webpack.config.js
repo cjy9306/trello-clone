@@ -28,6 +28,7 @@ module.exports = {
 		inline: true,
 		writeToDisk: true,
 		historyApiFallback: true,
+		disableHostCheck: true,
 	},
 	node: { fs: 'empty' }, // 모듈 시스템 (commonjs 등)을 사용하기 위해 추가하는 라이브러리, 다른 라이브러리에 디펜던시가 있어 추가함
 	resolve: {
