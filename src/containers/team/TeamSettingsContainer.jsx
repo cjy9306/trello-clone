@@ -24,7 +24,7 @@ const TeamSettingsContainer = ({ match }) => {
 
 	const getTeamInfo = useCallback(async () => {
 		dispatch(getTeam({ teamId }));
-	}, [dispatch, teamId]);
+	}, [teamId]);
 
 	useEffect(() => {
 		getTeamInfo();
