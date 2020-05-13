@@ -60,14 +60,14 @@ const TeamMemberList = ({ teamId }) => {
 	const teamMembers = useSelector((state) => state.team.teamMembers);
 	const [email, onChangeEmail] = useInput('');
 
-	const onAddMember = async () => {
+	const handleMemberAdd = async () => {
 		const data = { email };
 		const result = await dispatch(addTeamMember({ teamId, data }));
 
 		if (result.success) dispatch(getTeam({ teamId }));
 	};
 
-	const onMemberDeleteClick = async (memberId) => {
+	const handleMemberDelete = async (memberId) => {
 		const result = await dispatch(deleteTeamMember({ teamId, memberId }));
 
 		if (result.success) dispatch(getTeam({ teamId }));
@@ -78,14 +78,14 @@ const TeamMemberList = ({ teamId }) => {
 			<TitleWrapper>Invite member</TitleWrapper>
 			<MembersInput>
 				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
-				<Button type="primary" onClick={onAddMember}>
+				<Button type="primary" onClick={handleMemberAdd}>
 					Add
 				</Button>
 			</MembersInput>
 			<TitleWrapper>Members</TitleWrapper>
 			{teamMembers &&
 				teamMembers.map((member) => (
-					<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
+					<MemberListItem member={member} onDeleteClick={handleMemberDelete} key={member.member_id} />
 				))}
 		</TeamMembersContainer>
 	);

@@ -19,13 +19,13 @@ import BoardHeader from './Board/BoardHeader';
 import CardModal from './CardModal/CardModal';
 import ListAction from './List/ListAction';
 
-const Root = styled.div`
+const Container = styled.div`
 	background-color: #${(props) => props.backgroundColor};
 	height: 100%;
 	overflow: hidden;
 `;
 
-const Container = styled.div`
+const BoardMainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -69,95 +69,6 @@ const BoardContainer = ({ match: { params } }) => {
 	}, [boardId, dispatch]);
 
 	// drag & drop related functions
-	const onDragEnd = async (result) => {
-		const { destination, source, type } = result;
-
-		if (!destination) {
-			return;
-		}
-
-		if (destination.droppableId === source.droppableId && destination.index === source.index) {
-			return;
-		}
-
-		// List 끼리 옮겼을때
-		if (type === 'list') {
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			const deletedList = newLists.splice(source.index, 1);
-			newLists.splice(destination.index, 0, deletedList[0]);
-
-			onUpdateListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
-			return;
-		}
-
-		const sourceListId = parseDndItemId(source.droppableId);
-		const destListId = parseDndItemId(destination.droppableId);
-
-		const [sourceList, sourceListIndex] = getListItem(lists, sourceListId);
-		const [destList, destListIndex] = getListItem(lists, destListId);
-
-		if (sourceList.list_id === destList.list_id) {
-			const newCards = [...sourceList.cards];
-
-			const deletedCard = newCards.splice(source.index, 1);
-			newCards.splice(destination.index, 0, deletedCard[0]);
-
-			// update sequence
-			for (const index in newCards) {
-				newCards[index].seq = index;
-			}
-
-			const newList = {
-				...sourceList,
-				cards: newCards,
-			};
-
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			newLists[sourceListIndex] = newList;
-
-			onUpdateCardSeq(
-				sourceListId,
-				destListId,
-				source.index,
-				destination.index,
-				deletedCard[0].card_id,
-				newLists,
-				prevLists
-			);
-		} else {
-			const newSourceCards = [...sourceList.cards];
-			const newDestCards = [...destList.cards];
-
-			const deletedCard = newSourceCards.splice(source.index, 1);
-			const newSourceList = {
-				...sourceList,
-				cards: newSourceCards,
-			};
-
-			newDestCards.splice(destination.index, 0, deletedCard[0]);
-			const newDestList = {
-				...destList,
-				cards: newDestCards,
-			};
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			newLists[sourceListIndex] = newSourceList;
-			newLists[destListIndex] = newDestList;
-
-			onUpdateCardSeq(
-				sourceListId,
-				destListId,
-				source.index,
-				destination.index,
-				deletedCard[0].card_id,
-				newLists,
-				prevLists
-			);
-		}
-	};
-
 	const onUpdateListSeq = async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
 		dispatch(changeLists(newLists));
 		const data = {
@@ -190,13 +101,104 @@ const BoardContainer = ({ match: { params } }) => {
 		}
 	};
 
+	const onDragEnd = async (result) => {
+		const { destination, source, type } = result;
+
+		if (!destination) {
+			return;
+		}
+
+		if (destination.droppableId === source.droppableId && destination.index === source.index) {
+			return;
+		}
+
+		// List 끼리 옮겼을때
+		if (type === 'list') {
+			const prevLists = [...lists];
+			const newLists = [...lists];
+			const deletedList = newLists.splice(source.index, 1);
+			newLists.splice(destination.index, 0, deletedList[0]);
+
+			onUpdateListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
+			return;
+		}
+
+		const sourceListId = parseDndItemId(source.droppableId);
+		const destListId = parseDndItemId(destination.droppableId);
+
+		const [sourceList, sourceListIndex] = getListItem(lists, sourceListId);
+		const [destList, destListIndex] = getListItem(lists, destListId);
+
+		// 같은 list 내에서 card 만 이동할 경우
+		if (sourceList.list_id === destList.list_id) {
+			const newCards = [...sourceList.cards];
+
+			const deletedCard = newCards.splice(source.index, 1);
+			newCards.splice(destination.index, 0, deletedCard[0]);
+
+			// update sequence
+			for (const index in newCards) {
+				newCards[index].seq = index;
+			}
+
+			const newList = {
+				...sourceList,
+				cards: newCards,
+			};
+
+			const prevLists = [...lists];
+			const newLists = [...lists];
+			newLists[sourceListIndex] = newList;
+
+			onUpdateCardSeq(
+				sourceListId,
+				destListId,
+				source.index,
+				destination.index,
+				deletedCard[0].card_id,
+				newLists,
+				prevLists
+			);
+		} else {
+			// card가 다른 list로 옮겨가는 경우
+			const newSourceCards = [...sourceList.cards];
+			const newDestCards = [...destList.cards];
+
+			const deletedCard = newSourceCards.splice(source.index, 1);
+			const newSourceList = {
+				...sourceList,
+				cards: newSourceCards,
+			};
+
+			newDestCards.splice(destination.index, 0, deletedCard[0]);
+			const newDestList = {
+				...destList,
+				cards: newDestCards,
+			};
+			const prevLists = [...lists];
+			const newLists = [...lists];
+			newLists[sourceListIndex] = newSourceList;
+			newLists[destListIndex] = newDestList;
+
+			onUpdateCardSeq(
+				sourceListId,
+				destListId,
+				source.index,
+				destination.index,
+				deletedCard[0].card_id,
+				newLists,
+				prevLists
+			);
+		}
+	};
+
 	const onCloseModal = useCallback(() => dispatch(changeModalVisible(false)), [dispatch]);
 	const onCloseListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);
 
 	return (
-		<Root backgroundColor={board.background_color || GLOBAL_HEADER_DEFAULT_BACKGROUND}>
+		<Container backgroundColor={board.background_color || GLOBAL_HEADER_DEFAULT_BACKGROUND}>
 			<GlobalHeader isLogined={isLogined} />
-			<Container>
+			<BoardMainContainer>
 				<BoardHeader board={board} />
 				<BoardContent board={board} lists={lists} onDragEnd={onDragEnd} />
 				<CardModal visible={cardModalVisible} onCloseModal={onCloseModal} />
@@ -206,9 +208,9 @@ const BoardContainer = ({ match: { params } }) => {
 					posY={listActionPosY}
 					onCloseListAction={onCloseListAction}
 				/>
-			</Container>
+			</BoardMainContainer>
 			<Message visible={message.visible} type={message.type} text={message.text} />
-		</Root>
+		</Container>
 	);
 };
 

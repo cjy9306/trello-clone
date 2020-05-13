@@ -42,11 +42,11 @@ const BoardHeader = ({ board }) => {
 	const [membersModalVisible, setMembersModalVisible] = useState(false);
 	const [deleteBoardModalVisible, setDeleteBoardModalVisible] = useState(false);
 
-	const onToggleListModal = useCallback(() => setListModalVisible((visible) => !visible), []);
-	const onToggleMembersModal = useCallback(() => setMembersModalVisible((visible) => !visible), []);
-	const onToggleDeleteModal = useCallback(() => setDeleteBoardModalVisible((visible) => !visible), []);
+	const toggleListModal = useCallback(() => setListModalVisible((visible) => !visible), []);
+	const toggleMembersModal = useCallback(() => setMembersModalVisible((visible) => !visible), []);
+	const toggleDeleteModal = useCallback(() => setDeleteBoardModalVisible((visible) => !visible), []);
 
-	const onDeleteBoard = useCallback(async () => {
+	const handleBoardDelete = useCallback(async () => {
 		const result = await dispatch(deleteBoard({ boardId: board.board_id }));
 
 		if (result.success) {
@@ -57,21 +57,21 @@ const BoardHeader = ({ board }) => {
 
 	return (
 		<BoardHeaderContainer>
-			<BoardMembersModal visible={membersModalVisible} onCloseModal={onToggleMembersModal} />
-			<AddListModal visible={listModalVisible} onCloseModal={onToggleListModal} />
+			<BoardMembersModal visible={membersModalVisible} onCloseModal={toggleMembersModal} />
+			<AddListModal visible={listModalVisible} onCloseModal={toggleListModal} />
 			<MenuContainer>
 				<MenuWrapper>{board.board_name}</MenuWrapper>
 				<MenuWrapper>
-					<HeaderButton onClick={onToggleListModal}>Add another list</HeaderButton> &nbsp;
-					<HeaderButton onClick={onToggleMembersModal}>Members</HeaderButton>
+					<HeaderButton onClick={toggleListModal}>Add list</HeaderButton> &nbsp;
+					<HeaderButton onClick={toggleMembersModal}>Members</HeaderButton>
 				</MenuWrapper>
 				<ConfirmModal
 					visible={deleteBoardModalVisible}
-					onCloseModal={onToggleDeleteModal}
+					onCloseModal={toggleDeleteModal}
 					message="Are you sure delete this board?"
-					onClickOk={onDeleteBoard}
+					onClickOk={handleBoardDelete}
 				/>
-				<DeleteBoardButton type="danger" onClick={onToggleDeleteModal}>
+				<DeleteBoardButton type="danger" onClick={toggleDeleteModal}>
 					Delete Board
 				</DeleteBoardButton>
 			</MenuContainer>

@@ -39,7 +39,7 @@ const ButtonContainer = styled.button`
 	text-align: center;
 	line-height: 1.499;
 	cursor: pointer;
-	width: ${(props) => (props.block === true ? '100%' : 'auto')};
+	width: ${(props) => (props.isBlock === true ? '100%' : 'auto')};
 	&:hover {
 		background-color: ${(props) => props.hoverBackgroundColor};
 	}
@@ -56,7 +56,7 @@ const ButtonContainer = styled.button`
  *	@block - width를 결정함, block이 true면 100%고 false면 auto
  *	@onClick - 버튼 클릭시 이벤트 함수
  */
-const Button = ({ className, type, size, background = null, children, block = false, onClick }) => {
+const Button = ({ className, type, size, background = null, children, isBlock = false, onClick }) => {
 	let backgroundColor = DefaultBackgroundColor;
 	let hoverBackgroundColor = DefaultHoverBackgroundColor;
 	let height = DefaultHeight;
@@ -94,7 +94,7 @@ const Button = ({ className, type, size, background = null, children, block = fa
 			fontSize={fontSize}
 			color={color}
 			onClick={onClick}
-			block={block}
+			isBlock={isBlock}
 		>
 			{children}
 		</ButtonContainer>
@@ -107,7 +107,7 @@ Button.propTypes = {
 	size: PropTypes.string,
 	background: PropTypes.string,
 	children: PropTypes.node,
-	block: PropTypes.bool,
+	isBlock: PropTypes.bool,
 	onClick: PropTypes.func,
 };
 

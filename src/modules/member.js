@@ -24,27 +24,20 @@ const initState = {
 
 const member = handleActions(
 	{
-		[GET_TEAMS]: (state, action) => ({
-			...state,
-		}),
+		[GET_TEAMS]: (state, action) => ({ ...state }),
 		[GET_TEAMS_SUCCESS]: (state, action) => ({
 			...state,
 			teams: action.payload.teams,
 		}),
-		[GET_TEAMS_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[GET_ALL_BOARDS]: (state, action) => ({
-			...state,
-		}),
+		[GET_TEAMS_FAIL]: (state, action) => ({ ...state }),
+
+		[GET_ALL_BOARDS]: (state, action) => ({ ...state }),
 		[GET_ALL_BOARDS_SUCCESS]: (state, action) => ({
 			...state,
 			personalBoards: action.payload.personalBoards,
 			teamBoards: action.payload.teamBoards,
 		}),
-		[GET_ALL_BOARDS_FAIL]: (state, action) => ({
-			...state,
-		}),
+		[GET_ALL_BOARDS_FAIL]: (state, action) => ({ ...state }),
 	},
 	initState
 );

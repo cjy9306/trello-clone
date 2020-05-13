@@ -9,6 +9,16 @@ const FooterContainer = styled.footer`
 	line-height: 100px;
 	width: 100%;
 	text-align: center;
+
+	@media only screen and (min-width: 401px) {
+		font-size: 16px;
+	}
+
+	@media only screen and (max-width: 400px) {
+		height: 50px;
+		line-height: 50px;
+		font-size: 12px;
+	}
 `;
 
 const LoginFooter = () => {

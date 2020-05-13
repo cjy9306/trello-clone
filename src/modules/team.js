@@ -43,62 +43,33 @@ const initState = {
 
 const team = handleActions(
 	{
-		[CREATE_TEAM]: (state, action) => ({
-			...state,
-		}),
-		[CREATE_TEAM_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[CREATE_TEAM_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[GET_TEAM]: (state, action) => ({
-			...state,
-		}),
+		[CREATE_TEAM]: (state, action) => ({ ...state }),
+		[CREATE_TEAM_SUCCESS]: (state, action) => ({ ...state }),
+		[CREATE_TEAM_FAIL]: (state, action) => ({ ...state }),
+
+		[GET_TEAM]: (state, action) => ({ ...state }),
 		[GET_TEAM_SUCCESS]: (state, action) => ({
 			...state,
 			team: action.payload.team,
 			teamMembers: action.payload.teamMembers,
 		}),
-		[GET_TEAM_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[UPDATE_TEAM]: (state, action) => ({
-			...state,
-		}),
-		[UPDATE_TEAM_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[UPDATE_TEAM_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[ADD_TEAM_MEMBER]: (state, action) => ({
-			...state,
-		}),
-		[ADD_TEAM_MEMBER_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[ADD_TEAM_MEMBER_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM_MEMBER]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM_MEMBER_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[DELETE_TEAM_MEMBER_FAIL]: (state, action) => ({
-			...state,
-		}),
+		[GET_TEAM_FAIL]: (state, action) => ({ ...state }),
+
+		[UPDATE_TEAM]: (state, action) => ({ ...state }),
+		[UPDATE_TEAM_SUCCESS]: (state, action) => ({ ...state }),
+		[UPDATE_TEAM_FAIL]: (state, action) => ({ ...state }),
+
+		[DELETE_TEAM]: (state, action) => ({ ...state }),
+		[DELETE_TEAM_SUCCESS]: (state, action) => ({ ...state }),
+		[DELETE_TEAM_FAIL]: (state, action) => ({ ...state }),
+
+		[ADD_TEAM_MEMBER]: (state, action) => ({ ...state }),
+		[ADD_TEAM_MEMBER_SUCCESS]: (state, action) => ({ ...state }),
+		[ADD_TEAM_MEMBER_FAIL]: (state, action) => ({ ...state }),
+
+		[DELETE_TEAM_MEMBER]: (state, action) => ({ ...state }),
+		[DELETE_TEAM_MEMBER_SUCCESS]: (state, action) => ({ ...state }),
+		[DELETE_TEAM_MEMBER_FAIL]: (state, action) => ({ ...state }),
 	},
 	initState
 );

@@ -22,6 +22,8 @@ const LOGIN_FAIL = 'auth/LOGIN_FAIL';
 export const login = createRequestThunk(LOGIN, authAPI.login);
 
 const initState = {
+	// 후에 비동기 작업시 로딩중 구현 필요
+	// board, common 등 다른 redux store에도 구현 필요함
 	loading: {
 		LOGIN: false,
 	},
@@ -29,24 +31,14 @@ const initState = {
 
 const auth = handleActions(
 	{
-		[REGISTER]: (state, action) => ({
-			...state,
-		}),
-		[REGISTER_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[REGISTER_FAIL]: (state, action) => ({
-			...state,
-		}),
-		[SOCIAL_LOGIN]: (state, action) => ({
-			...state,
-		}),
-		[SOCIAL_LOGIN_SUCCESS]: (state, action) => ({
-			...state,
-		}),
-		[SOCIAL_LOGIN_FAIL]: (state, action) => ({
-			...state,
-		}),
+		[REGISTER]: (state, action) => ({ ...state }),
+		[REGISTER_SUCCESS]: (state, action) => ({ ...state }),
+		[REGISTER_FAIL]: (state, action) => ({ ...state }),
+
+		[SOCIAL_LOGIN]: (state, action) => ({ ...state }),
+		[SOCIAL_LOGIN_SUCCESS]: (state, action) => ({ ...state }),
+		[SOCIAL_LOGIN_FAIL]: (state, action) => ({ ...state }),
+
 		[LOGIN]: (state, action) => ({
 			...state,
 			loading: {

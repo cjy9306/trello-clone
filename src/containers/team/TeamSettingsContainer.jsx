@@ -18,13 +18,13 @@ const SettingContainer = styled.div``;
  */
 const TeamSettingsContainer = ({ match }) => {
 	const teamId = match.params.teamId;
-	const isLogined = useCheckWhetherIsLogined();
 	const dispatch = useDispatch();
+	const isLogined = useCheckWhetherIsLogined();
 	const message = useSelector((state) => state.common.message);
 
 	const getTeamInfo = useCallback(async () => {
 		dispatch(getTeam({ teamId }));
-	}, [teamId]);
+	}, [dispatch, teamId]);
 
 	useEffect(() => {
 		getTeamInfo();

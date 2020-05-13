@@ -31,6 +31,7 @@ export default function createRequestThunk(type, request) {
 			});
 
 			dispatch(setMessageStates(true, 'error', error));
+
 			if (error === undefined) return { success: false, data: error };
 			else return { success: false, data: error };
 		}

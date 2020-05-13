@@ -56,19 +56,13 @@ const InputContainer = styled.div`
 const InputWrapper = styled.div`
 	display: inline-flex;
 	width: 100%;
-
-	& > svg {
-		height: 42px;
-		margin-left: 15px;
-		position: absolute;
-	}
 `;
 
 const ControlContainer = styled.div`
 	margin-bottom: 16px;
 `;
 
-const InputField = React.memo(styled.input`
+const InputField = styled.input`
 	background: white;
 	box-shadow: none;
 	border: 2px solid #dfe1e6;
@@ -76,16 +70,26 @@ const InputField = React.memo(styled.input`
 	font-weight: 600;
 	min-height: 38px;
 	margin: 0px 0px 16px 0px;
-	padding-left: ${(props) => (props.includeIcon === true ? '40px' : '10px')};
+	padding-left: 10px;
 	padding-right: 10px;
 	resize: none;
 	width: 100%;
-`);
+`;
 
 const NoticeContainer = styled.div`
 	height: 100px;
 	line-height: 100px;
 	margin: 0 auto;
+
+	@media only screen and (min-width: 401px) {
+		font-size: 16px;
+	}
+
+	@media only screen and (max-width: 400px) {
+		height: 50px;
+		line-height: 50px;
+		font-size: 12px;
+	}
 `;
 
 /*
@@ -127,7 +131,7 @@ const LoginContent = ({ onLogin }) => {
 						</InputWrapper>
 					</InputContainer>
 					<ControlContainer>
-						<Button type="primary" onClick={() => onLogin({ username, password })} block>
+						<Button type="primary" onClick={() => onLogin({ username, password })} isBlock={true}>
 							Log In
 						</Button>
 					</ControlContainer>
