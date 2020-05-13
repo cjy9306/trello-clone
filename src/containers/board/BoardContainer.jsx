@@ -69,7 +69,7 @@ const BoardContainer = ({ match: { params } }) => {
 	}, [boardId, dispatch]);
 
 	// drag & drop related functions
-	const onUpdateListSeq = async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
+	const changeListSeq = async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
 		dispatch(changeLists(newLists));
 		const data = {
 			listId,
@@ -79,12 +79,12 @@ const BoardContainer = ({ match: { params } }) => {
 
 		const result = await dispatch(updateListSeq({ boardId, listId, data }));
 
-		if (!result.success) {
+		if (result.success === false) {
 			dispatch(changeLists(prevLists));
 		}
 	};
 
-	const onUpdateCardSeq = async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
+	const changeCardSeq = async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
 		dispatch(changeLists(newLists));
 		const data = {
 			sourceListId,
@@ -96,7 +96,7 @@ const BoardContainer = ({ match: { params } }) => {
 
 		const result = await dispatch(updateCardSeq({ boardId, listId: sourceListId, data }));
 
-		if (!result.success) {
+		if (result.success === false) {
 			dispatch(changeLists(prevLists));
 		}
 	};
@@ -119,12 +119,14 @@ const BoardContainer = ({ match: { params } }) => {
 			const deletedList = newLists.splice(source.index, 1);
 			newLists.splice(destination.index, 0, deletedList[0]);
 
-			onUpdateListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
+			changeListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
 			return;
 		}
 
 		const sourceListId = parseDndItemId(source.droppableId);
 		const destListId = parseDndItemId(destination.droppableId);
+
+		if (sourceListId === null || destListId === null) return;
 
 		const [sourceList, sourceListIndex] = getListItem(lists, sourceListId);
 		const [destList, destListIndex] = getListItem(lists, destListId);
@@ -133,8 +135,8 @@ const BoardContainer = ({ match: { params } }) => {
 		if (sourceList.list_id === destList.list_id) {
 			const newCards = [...sourceList.cards];
 
-			const deletedCard = newCards.splice(source.index, 1);
-			newCards.splice(destination.index, 0, deletedCard[0]);
+			const deletedCard = newCards.splice(source.index, 1)[0];
+			newCards.splice(destination.index, 0, deletedCard);
 
 			// update sequence
 			for (const index in newCards) {
@@ -150,27 +152,19 @@ const BoardContainer = ({ match: { params } }) => {
 			const newLists = [...lists];
 			newLists[sourceListIndex] = newList;
 
-			onUpdateCardSeq(
-				sourceListId,
-				destListId,
-				source.index,
-				destination.index,
-				deletedCard[0].card_id,
-				newLists,
-				prevLists
-			);
+			changeCardSeq(sourceListId, destListId, source.index, destination.index, deletedCard.card_id, newLists, prevLists);
 		} else {
 			// card가 다른 list로 옮겨가는 경우
 			const newSourceCards = [...sourceList.cards];
 			const newDestCards = [...destList.cards];
 
-			const deletedCard = newSourceCards.splice(source.index, 1);
+			const deletedCard = newSourceCards.splice(source.index, 1)[0];
 			const newSourceList = {
 				...sourceList,
 				cards: newSourceCards,
 			};
 
-			newDestCards.splice(destination.index, 0, deletedCard[0]);
+			newDestCards.splice(destination.index, 0, deletedCard);
 			const newDestList = {
 				...destList,
 				cards: newDestCards,
@@ -180,20 +174,12 @@ const BoardContainer = ({ match: { params } }) => {
 			newLists[sourceListIndex] = newSourceList;
 			newLists[destListIndex] = newDestList;
 
-			onUpdateCardSeq(
-				sourceListId,
-				destListId,
-				source.index,
-				destination.index,
-				deletedCard[0].card_id,
-				newLists,
-				prevLists
-			);
+			changeCardSeq(sourceListId, destListId, source.index, destination.index, deletedCard.card_id, newLists, prevLists);
 		}
 	};
 
-	const onCloseModal = useCallback(() => dispatch(changeModalVisible(false)), [dispatch]);
-	const onCloseListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);
+	const closeCardModal = useCallback(() => dispatch(changeModalVisible(false)), [dispatch]);
+	const closeListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);
 
 	return (
 		<Container backgroundColor={board.background_color || GLOBAL_HEADER_DEFAULT_BACKGROUND}>
@@ -201,12 +187,12 @@ const BoardContainer = ({ match: { params } }) => {
 			<BoardMainContainer>
 				<BoardHeader board={board} />
 				<BoardContent board={board} lists={lists} onDragEnd={onDragEnd} />
-				<CardModal visible={cardModalVisible} onCloseModal={onCloseModal} />
+				<CardModal visible={cardModalVisible} onCloseModal={closeCardModal} />
 				<ListAction
 					visible={listActionVisible}
 					posX={listActionPosX}
 					posY={listActionPosY}
-					onCloseListAction={onCloseListAction}
+					onCloseListAction={closeListAction}
 				/>
 			</BoardMainContainer>
 			<Message visible={message.visible} type={message.type} text={message.text} />
@@ -222,4 +208,4 @@ BoardContainer.propTypes = {
 	}).isRequired,
 };
 
-export default React.memo(BoardContainer);
+export default BoardContainer;

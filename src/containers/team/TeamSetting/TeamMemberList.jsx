@@ -64,13 +64,13 @@ const TeamMemberList = ({ teamId }) => {
 		const data = { email };
 		const result = await dispatch(addTeamMember({ teamId, data }));
 
-		if (result.success) dispatch(getTeam({ teamId }));
+		if (result.success === true) dispatch(getTeam({ teamId }));
 	};
 
 	const handleMemberDelete = async (memberId) => {
 		const result = await dispatch(deleteTeamMember({ teamId, memberId }));
 
-		if (result.success) dispatch(getTeam({ teamId }));
+		if (result.success === true) dispatch(getTeam({ teamId }));
 	};
 
 	return (

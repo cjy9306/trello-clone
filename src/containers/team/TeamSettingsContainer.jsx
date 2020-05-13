@@ -50,4 +50,4 @@ TeamSettingsContainer.propTypes = {
 	}).isRequired,
 };
 
-export default React.memo(TeamSettingsContainer);
+export default TeamSettingsContainer;

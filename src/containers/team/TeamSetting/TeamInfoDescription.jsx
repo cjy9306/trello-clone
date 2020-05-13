@@ -60,16 +60,16 @@ const TeamInfoDescription = ({ team }) => {
 
 	const [isEditting, setIsEditting] = useState(false);
 	const [description, onChangeDescription, setDescription] = useInput('');
-	const onToggleDescription = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
+	const toggleDescription = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
 
-	const onSaveDescription = async () => {
+	const handleDescriptionSave = async () => {
 		if (description === team.description) return;
 
 		const data = { teamName: team.team_name, description };
 		const result = await dispatch(updateTeam({ teamId: team.team_id, data }));
 
-		if (result.success) {
-			onToggleDescription();
+		if (result.success === true) {
+			toggleDescription();
 		}
 	};
 
@@ -84,7 +84,7 @@ const TeamInfoDescription = ({ team }) => {
 
 	return (
 		<TeamInfoContainer>
-			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
+			<LabelWrapper isEditting={isEditting} onClick={toggleDescription}>
 				{description === '' || description == null ? (
 					'Add a more detailed description...'
 				) : (
@@ -99,11 +99,11 @@ const TeamInfoDescription = ({ team }) => {
 					onChange={onChangeDescription}
 				/>
 				<ControlWrapper>
-					<Button type="primary" onClick={onSaveDescription}>
+					<Button type="primary" onClick={handleDescriptionSave}>
 						Save
 					</Button>
 					&nbsp;&nbsp;
-					<Button type="default" onClick={onToggleDescription}>
+					<Button type="default" onClick={toggleDescription}>
 						Cancel
 					</Button>
 				</ControlWrapper>

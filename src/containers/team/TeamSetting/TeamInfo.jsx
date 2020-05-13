@@ -38,12 +38,12 @@ const TeamInfo = ({ teamId }) => {
 	const team = useSelector((state) => state.team.team);
 	const [confirmModalVisible, setConfirmModalVisible] = useState(false);
 
-	const onToggleDeleteModal = useCallback(() => setConfirmModalVisible((visible) => !visible), []);
+	const toggleDeleteModal = useCallback(() => setConfirmModalVisible((visible) => !visible), []);
 
-	const onTeamDeleteOk = useCallback(async () => {
+	const handleTeamDelete = useCallback(async () => {
 		const result = await dispatch(deleteTeam({ teamId }));
 
-		if (result.success) {
+		if (result.success === true) {
 			const memberId = sessionStorage.getItem('memberId');
 			history.push('/member/' + memberId + '/boards');
 		}
@@ -56,14 +56,14 @@ const TeamInfo = ({ teamId }) => {
 				{team && team.team_name}
 			</TeamInfoTitle>
 			<TeamInfoDescription team={team} />
-			<Button type="danger" onClick={onToggleDeleteModal}>
+			<Button type="danger" onClick={toggleDeleteModal}>
 				Delete this team
 			</Button>
 			<ConfirmModal
 				visible={confirmModalVisible}
 				message="Are you sure delete this team?"
-				onCloseModal={onToggleDeleteModal}
-				onClickOk={onTeamDeleteOk}
+				onCloseModal={toggleDeleteModal}
+				onClickOk={handleTeamDelete}
 			/>
 		</TeamInfoContainer>
 	);

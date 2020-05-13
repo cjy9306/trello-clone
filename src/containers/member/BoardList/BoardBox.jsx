@@ -44,7 +44,7 @@ const BoxContainer = styled.div`
 
 /*
  *	BoardList에서 각 board를 나타내는 공통 box 컴포넌트
- *
+ *	BoardTitleBox와 CreateBoardBox에서 이 컴포넌트를 상속해서 사용중
  */
 const BoardBox = ({ className, text, onClick }) => {
 	return (

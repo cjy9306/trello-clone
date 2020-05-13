@@ -15,9 +15,9 @@ const TitleBox = styled(BoardBox)`
 const BoardTitleBox = ({ board }) => {
 	const backgroundColor = board ? board.background_color : '666666';
 	const history = useHistory();
-	const onBoxClick = useCallback(() => history.push('/board/' + board.board_id), [history, board]);
+	const handleBoxClick = useCallback(() => history.push('/board/' + board.board_id), [history, board]);
 
-	return <TitleBox backgroundColor={backgroundColor} onClick={onBoxClick} text={board.board_name} />;
+	return <TitleBox backgroundColor={backgroundColor} onClick={handleBoxClick} text={board.board_name} />;
 };
 
 BoardTitleBox.propTypes = {

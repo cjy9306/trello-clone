@@ -30,13 +30,13 @@ const SettingsButton = styled(Button)`
  */
 const TeamBoardHeader = ({ team }) => {
 	const history = useHistory();
-	const onClickSettings = useCallback((teamId) => history.push('/team/' + teamId + '/settings'), [history]);
+	const handleSettingClick = useCallback(() => history.push('/team/' + team.team_id + '/settings'), [history, team]);
 
 	return (
 		<TeamHeader>
 			<CustomIcon icon={faUserFriends} size="xs" />
 			{team.team_name}&nbsp;
-			<SettingsButton type="default" onClick={() => onClickSettings(team.team_id)}>
+			<SettingsButton type="default" onClick={handleSettingClick}>
 				Settings
 			</SettingsButton>
 		</TeamHeader>

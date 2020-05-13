@@ -20,7 +20,7 @@ const LoginContainer = () => {
 		async ({ username, password }) => {
 			const result = await dispatch(login({ username, password }));
 
-			if (result.success) {
+			if (result.success === true) {
 				const token = result.data.data.token;
 
 				const decoded = jwt.decode(token);
@@ -45,4 +45,4 @@ const LoginContainer = () => {
 	);
 };
 
-export default React.memo(LoginContainer);
+export default LoginContainer;

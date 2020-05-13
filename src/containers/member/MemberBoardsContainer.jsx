@@ -29,7 +29,7 @@ const MemberBoardsContainer = () => {
 	const message = useSelector((state) => state.common.message);
 	const [boardModalVisible, setBoardModalVisible] = useState(false);
 
-	const onToggleBoardModal = useCallback(() => setBoardModalVisible((visible) => !visible), []);
+	const toggleBoardModal = useCallback(() => setBoardModalVisible((visible) => !visible), []);
 
 	const getBoards = useCallback(async () => {
 		const memberId = sessionStorage.getItem('memberId');
@@ -43,14 +43,14 @@ const MemberBoardsContainer = () => {
 	return (
 		<>
 			<GlobalHeader isLogined={isLogined} backgroundColor={GLOBAL_HEADER_DEFAULT_BACKGROUND} />
-			<CreateBoardModal visible={boardModalVisible} onCloseModal={onToggleBoardModal} />
+			<CreateBoardModal visible={boardModalVisible} onCloseModal={toggleBoardModal} />
 			<BoardsContainer>
-				<PersonalBoards onToggleBoardModal={onToggleBoardModal} />
-				<TeamBoards onToggleBoardModal={onToggleBoardModal} />
+				<PersonalBoards onToggleBoardModal={toggleBoardModal} />
+				<TeamBoards onToggleBoardModal={toggleBoardModal} />
 			</BoardsContainer>
 			<Message visible={message.visible} type={message.type} text={message.text} />
 		</>
 	);
 };
 
-export default React.memo(MemberBoardsContainer);
+export default MemberBoardsContainer;
