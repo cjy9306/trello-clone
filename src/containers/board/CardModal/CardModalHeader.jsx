@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
-import { updateCard, changeCard } from '../../../modules/board';
+import { updateCard, changeLists } from '../../../modules/board';
 
 const HeaderContainer = styled.div`
 	font-size: 20px;
@@ -48,7 +48,7 @@ const CardModalHeader = ({ card }) => {
 	const lists = useSelector((state) => state.board.lists);
 	const [title, onChangeTitle, setTitle] = useInput('');
 
-	const onBlurInputField = async () => {
+	const handleInputFieldBlur = useCallback(async () => {
 		const data = { ...card, cardName: title };
 		const result = await dispatch(updateCard({ boardId: board.board_id, cardId: card.card_id, data }));
 
@@ -62,7 +62,7 @@ const CardModalHeader = ({ card }) => {
 		})[0];
 
 		const newCards = targetList.cards.map((cardItem) => {
-			if (cardItem.card_id === card.card_id) return data;
+			if (cardItem.card_id === card.card_id) return { ...card, card_name: title };
 			else return cardItem;
 		});
 
@@ -70,8 +70,8 @@ const CardModalHeader = ({ card }) => {
 		const newLists = [...lists];
 		newLists[listIndex] = targetList;
 
-		if (result.success) dispatch(changeCard(newLists));
-	};
+		if (result.success === true) dispatch(changeLists(newLists));
+	}, [dispatch, board, card, title, lists]);
 
 	useEffect(() => {
 		if (card.card_name !== undefined) setTitle(card.card_name);
@@ -80,7 +80,7 @@ const CardModalHeader = ({ card }) => {
 	return (
 		<HeaderContainer>
 			<CustomIcon icon={faCreditCard} size="xs" />
-			<InputField value={title} onChange={onChangeTitle} onBlur={onBlurInputField} />
+			<InputField value={title} onChange={onChangeTitle} onBlur={handleInputFieldBlur} />
 		</HeaderContainer>
 	);
 };

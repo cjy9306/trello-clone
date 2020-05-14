@@ -9,7 +9,7 @@ import Alert from '../../../../components/Alert';
 import { updateCard, getCard } from '../../../../modules/board';
 import { checkOverDueDate } from '../../../../common/CommonUtils';
 
-const DetailsContainer = styled.div`
+const DetailContainer = styled.div`
 	display: ${(props) => props.visible};
 
 	@media only screen and (min-width: 669px) {
@@ -55,20 +55,20 @@ const CustomPicker = styled(DatePicker)`
  *	Card의 Details 정보 컴포넌트. 아직은 Label과 DueDate 정보만 잇음
  *
  */
-const DetailsContent = ({ card }) => {
+const Detail = ({ card }) => {
 	const [dueDate, setDueDate] = useState('');
 	const [overdueVisible, setOverdueVisible] = useState(false);
 
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 
-	const onChangeDueDate = useCallback(
+	const handleDueDateChange = useCallback(
 		async (selected) => {
 			const data = { ...card, dueDate: selected };
 
 			const result = await dispatch(updateCard({ boardId: board.board_id, cardId: card.card_id, data }));
 
-			if (result.success) dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
+			if (result.success === true) dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
 		},
 		[dispatch, board, card]
 	);
@@ -86,7 +86,7 @@ const DetailsContent = ({ card }) => {
 	}, [card]);
 
 	return (
-		<DetailsContainer>
+		<DetailContainer>
 			<LabelsContainer visible={!!card.labels}>
 				{card.labels &&
 					card.labels.map((label) => (
@@ -100,16 +100,16 @@ const DetailsContent = ({ card }) => {
 			<DueDateContainer>
 				DUE DATE
 				<br />
-				<CustomPicker selected={dueDate} onChange={onChangeDueDate} />
+				<CustomPicker selected={dueDate} onChange={handleDueDateChange} />
 				&nbsp;
 				<Alert type="error" message="OVERDUE" visible={overdueVisible} />
 			</DueDateContainer>
-		</DetailsContainer>
+		</DetailContainer>
 	);
 };
 
-DetailsContent.propTypes = {
+Detail.propTypes = {
 	card: PropTypes.object.isRequired,
 };
 
-export default React.memo(DetailsContent);
+export default React.memo(Detail);

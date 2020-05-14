@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import Button from '../../../components/Button';
 
-const Container = styled.div`
+const AddCardContainer = styled.div`
 	color: #5e6c84;
 `;
 
@@ -68,12 +68,12 @@ const AddCard = ({ onCreateCard }) => {
 	const onAddClick = async () => {
 		if (newCardName === '') return;
 
-		const result = await onCreateCard(newCardName);
-		if (result) setNewCardName('');
+		await onCreateCard(newCardName);
+		setNewCardName('');
 	};
 
 	return (
-		<Container>
+		<AddCardContainer>
 			<LabelWrapper isAdding={isAdding} onClick={onToggle}>
 				+ Add a card
 			</LabelWrapper>
@@ -97,7 +97,7 @@ const AddCard = ({ onCreateCard }) => {
 					</Button>
 				</ControlWrapper>
 			</InputContainer>
-		</Container>
+		</AddCardContainer>
 	);
 };
 

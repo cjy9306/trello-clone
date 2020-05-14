@@ -7,11 +7,7 @@ import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
 import { changeListActionVisible } from '../../../modules/board';
 
-const Container = styled.div`
-	background: none;
-`;
-
-const LabelContainer = styled.div`
+const ListTitleContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 `;
@@ -64,9 +60,9 @@ const ListTitle = ({ list, onUpdate }) => {
 	const listIdInAction = useSelector((state) => state.board.listAction.listId);
 	const listActionVisible = useSelector((state) => state.board.listAction.listActionVisible);
 
-	const onToggleTitle = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
+	const toggleTitleEditting = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
 
-	const onShowListAction = useCallback(
+	const handleListActionClick = useCallback(
 		(e) => {
 			if (list.list_id === listIdInAction && listActionVisible) {
 				dispatch(changeListActionVisible(false, 0, 0, list.list_id));
@@ -93,19 +89,15 @@ const ListTitle = ({ list, onUpdate }) => {
 	}, [isEditting, inputTitle, list, onUpdate]);
 
 	return (
-		<Container>
-			<LabelContainer>
-				<LabelWrapper isEditting={isEditting} onClick={onToggleTitle}>
-					{inputTitle}
-				</LabelWrapper>
-				<EditWrapper isEditting={isEditting}>
-					<InputField ref={inputRef} onBlur={onToggleTitle} value={inputTitle} onChange={onChangeInputTitle} />
-				</EditWrapper>
-				<div>
-					<CustomIcon icon={faEllipsisH} size="xs" onClick={onShowListAction} />
-				</div>
-			</LabelContainer>
-		</Container>
+		<ListTitleContainer>
+			<LabelWrapper isEditting={isEditting} onClick={toggleTitleEditting}>
+				{inputTitle}
+			</LabelWrapper>
+			<EditWrapper isEditting={isEditting}>
+				<InputField ref={inputRef} onBlur={toggleTitleEditting} value={inputTitle} onChange={onChangeInputTitle} />
+			</EditWrapper>
+			<CustomIcon icon={faEllipsisH} size="xs" onClick={handleListActionClick} />
+		</ListTitleContainer>
 	);
 };
 

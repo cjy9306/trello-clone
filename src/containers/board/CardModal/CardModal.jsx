@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Modal from '../../../components/Modal';
-import DetailsContent from './Detail/DetailsContent';
-import CheckListContent from './CheckList/CheckListContent';
-import CommentContent from './Comment/CommentContent';
-import SideBar from './SideBar/SideBar';
 import CardModalHeader from './CardModalHeader';
-import DescriptionContent from './Description/DescriptionContent';
+import Modal from '../../../components/Modal';
+import Detail from './Detail/Detail';
+import CheckList from './CheckList/CheckList';
+import Comment from './Comment/Comment';
+import SideBar from './SideBar/SideBar';
+import Description from './Description/Description';
 
 const CardModalContainer = styled(Modal)`
 	min-height: 400px;
@@ -63,10 +63,10 @@ const CardModal = ({ visible, onCloseModal }) => {
 		<CardModalContainer visible={visible} onCloseModal={onCloseModal}>
 			<CardModalHeader card={card} />
 			<ContentContainer>
-				<DetailsContent card={card} />
-				<DescriptionContent card={card} />
-				<CheckListContent card={card} />
-				<CommentContent card={card} />
+				<Detail card={card} />
+				<Description card={card} />
+				<CheckList card={card} />
+				<Comment card={card} />
 			</ContentContainer>
 			<SideBar card={card} />
 		</CardModalContainer>

@@ -1,91 +1,35 @@
-import React, { useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import Button from '../../../../components/Button';
-import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
+import { useSelector } from 'react-redux';
 import CheckListItem from './CheckListItem';
 
-const Container = styled.div`
-	margin-bottom: 16px;
-`;
-
-const CheckListHeader = styled.div`
-	line-height: 32px;
-	margin-bottom: 12px;
-	min-height: 32px;
+const CheckListContainer = styled.div`
+	display: ${(props) => (props.visible ? 'block' : 'none')};
+	font-size: 20px;
+	margin: 8px 0 40px 40px;
 	position: relative;
 `;
 
-const DeleteButtonWrapper = styled.div`
-	right: 0;
-	top: 0;
-	position: absolute;
-`;
-
-const CheckListContainer = styled.div`
-	margin-bottom: 8px;
-`;
-
-const CheckListControl = styled.div``;
-
-const CustomIcon = styled(FontAwesomeIcon)`
-	font-size: 20px;
-	left: -40px;
-	position: absolute;
-	padding: 6px 0 0 10px;
-`;
-
 /*
- *	CheckList의 각 item 컴포넌트
+ *	Card의 Checklist 컴포넌트
  *
  */
-const CheckList = ({ checklist }) => {
-	const dispatch = useDispatch();
-	const board = useSelector((state) => state.board.board);
-	const card = useSelector((state) => state.board.card);
+const CheckList = () => {
+	const checklist = useSelector((state) => state.board.cardChecklist);
+	const [visible, setVisible] = useState(false);
 
-	const onDeleteClick = useCallback(async () => {
-		const result = await dispatch(
-			deleteCheckList({ boardId: board.board_id, cardId: card.card_id, checklistId: checklist.checklist_id })
-		);
-
-		if (result.success) dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-	}, [board, card, dispatch, checklist]);
-
-	const onCreateCheckListItem = useCallback(async () => {
-		const data = { itemName: 'new item' };
-		const result = await dispatch(
-			createCheckListItem({ boardId: board.board_id, checklistId: checklist.checklist_id, data })
-		);
-
-		if (result.success) dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-	}, [board, checklist, card, dispatch]);
+	useEffect(() => {
+		if (checklist.length > 0) setVisible(true);
+		else setVisible(false);
+	}, [checklist]);
 
 	return (
-		<Container>
-			<CheckListHeader>
-				<CustomIcon icon={faCheck} size="xs" />
-				{checklist.checklist_name}
-				<DeleteButtonWrapper>
-					<Button onClick={onDeleteClick}>Delete</Button>
-				</DeleteButtonWrapper>
-			</CheckListHeader>
-			<CheckListContainer>
-				{checklist.checklist_items &&
-					checklist.checklist_items.map((item) => <CheckListItem item={item} key={item.item_id} />)}
-			</CheckListContainer>
-			<CheckListControl>
-				<Button onClick={onCreateCheckListItem}>Add an item</Button>
-			</CheckListControl>
-		</Container>
+		<CheckListContainer visible={visible}>
+			{checklist &&
+				checklist.length > 0 &&
+				checklist.map((checklist) => <CheckListItem checklist={checklist} key={checklist.checklist_id} />)}
+		</CheckListContainer>
 	);
-};
-
-CheckList.propTypes = {
-	checklist: PropTypes.object.isRequired,
 };
 
 export default React.memo(CheckList);

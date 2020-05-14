@@ -46,7 +46,7 @@ const CardList = styled.div`
 const List = ({ list, index, board }) => {
 	const dispatch = useDispatch();
 
-	const onCreateCard = useCallback(
+	const handleCardCreate = useCallback(
 		async (newCardName) => {
 			const data = {
 				cardName: newCardName,
@@ -56,17 +56,14 @@ const List = ({ list, index, board }) => {
 
 			const result = await dispatch(createCard({ boardId: board.board_id, listId: list.list_id, data }));
 
-			if (result.success) {
+			if (result.success === true) {
 				dispatch(getBoard({ boardId: board.board_id }));
-				return true;
-			} else {
-				return false;
 			}
 		},
 		[dispatch, board, list]
 	);
 
-	const onUpdateTitle = useCallback(
+	const handleTitleUpdate = useCallback(
 		async (title) => {
 			const data = { listName: title, seq: list.seq };
 			dispatch(updateList({ boardId: board.board_id, listId: list.list_id, data }));
@@ -80,7 +77,7 @@ const List = ({ list, index, board }) => {
 				<ListContainer {...provided.draggableProps} ref={provided.innerRef}>
 					<ListWrapper>
 						<div {...provided.dragHandleProps}>
-							<ListTitle {...provided.dragHandleProps} list={list} onUpdate={onUpdateTitle} />
+							<ListTitle {...provided.dragHandleProps} list={list} onUpdate={handleTitleUpdate} />
 						</div>
 						<Droppable droppableId={'list-' + list.list_id} type="card">
 							{(provided, snapshot) => (
@@ -92,7 +89,7 @@ const List = ({ list, index, board }) => {
 								</CardList>
 							)}
 						</Droppable>
-						<AddCard onCreateCard={onCreateCard} />
+						<AddCard onCreateCard={handleCardCreate} />
 					</ListWrapper>
 				</ListContainer>
 			)}

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAllLabels, updateCardLabel, getBoard, getCard } from '../../../../modules/board';
 import SideBarLabelsItem from './SideBarLabelsItem';
+import SideBarPopup from './SideBarPopup';
 
 const SideBarLabelsContainer = styled.div`
 	background-color: #fff;
@@ -56,7 +57,7 @@ const isInCardLabels = (label, cardLabels) => {
  *	Sidebar의 Labels를 선택하는 컴포넌트
  *
  */
-const SideBarLabels = ({ onPopupToggle, card }) => {
+const SideBarLabels = ({ visible, onPopupToggle, card }) => {
 	const allLabels = useSelector((state) => state.board.allLabels);
 	const board = useSelector((state) => state.board.board);
 	const dispatch = useDispatch();
@@ -82,30 +83,33 @@ const SideBarLabels = ({ onPopupToggle, card }) => {
 	}, [board, dispatch]);
 
 	return (
-		<SideBarLabelsContainer>
-			<SideBarLabelsHeader>
-				Lables
-				<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
-				<hr />
-			</SideBarLabelsHeader>
-			<SideBarLabelsContent>
-				<LabelsTitle>LABELS</LabelsTitle>
-				{allLabels &&
-					card &&
-					allLabels.map((label) => (
-						<SideBarLabelsItem
-							label={label}
-							defaultChecked={isInCardLabels(label, card.labels)}
-							onLabelsItemClick={onLabelsItemClick}
-							key={label.label_id}
-						/>
-					))}
-			</SideBarLabelsContent>
-		</SideBarLabelsContainer>
+		<SideBarPopup visible={visible}>
+			<SideBarLabelsContainer>
+				<SideBarLabelsHeader>
+					Lables
+					<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
+					<hr />
+				</SideBarLabelsHeader>
+				<SideBarLabelsContent>
+					<LabelsTitle>LABELS</LabelsTitle>
+					{allLabels &&
+						card &&
+						allLabels.map((label) => (
+							<SideBarLabelsItem
+								label={label}
+								defaultChecked={isInCardLabels(label, card.labels)}
+								onLabelsItemClick={onLabelsItemClick}
+								key={label.label_id}
+							/>
+						))}
+				</SideBarLabelsContent>
+			</SideBarLabelsContainer>
+		</SideBarPopup>
 	);
 };
 
 SideBarLabels.propTypes = {
+	visible: PropTypes.bool.isRequired,
 	onPopupToggle: PropTypes.func.isRequired,
 	card: PropTypes.object.isRequired,
 };

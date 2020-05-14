@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
 import Button from '../../../../components/Button';
+import SideBarPopup from './SideBarPopup';
 
 const SideBarCheckListContainer = styled.div`
 	background-color: #fff;
@@ -55,7 +56,7 @@ const TitleInput = styled.input`
  *
  */
 
-const SideBarCheckList = ({ onPopupToggle, onCreateCheckList }) => {
+const SideBarCheckList = ({ visible, onPopupToggle, onCreateCheckList }) => {
 	const [title, onChangeTitle, setTitle] = useInput('');
 
 	const onAddClick = async () => {
@@ -67,24 +68,27 @@ const SideBarCheckList = ({ onPopupToggle, onCreateCheckList }) => {
 	}, [onCreateCheckList, setTitle]);
 
 	return (
-		<SideBarCheckListContainer>
-			<SideBarCheckListHeader>
-				Add CheckList
-				<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
-				<hr />
-			</SideBarCheckListHeader>
-			<SideBarCheckListContent>
-				<CheckListTitle>Title</CheckListTitle>
-				<TitleInput value={title} onChange={onChangeTitle} />
-				<Button type="primary" onClick={onAddClick}>
-					Add
-				</Button>
-			</SideBarCheckListContent>
-		</SideBarCheckListContainer>
+		<SideBarPopup visible={visible}>
+			<SideBarCheckListContainer>
+				<SideBarCheckListHeader>
+					Add CheckList
+					<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
+					<hr />
+				</SideBarCheckListHeader>
+				<SideBarCheckListContent>
+					<CheckListTitle>Title</CheckListTitle>
+					<TitleInput value={title} onChange={onChangeTitle} />
+					<Button type="primary" onClick={onAddClick}>
+						Add
+					</Button>
+				</SideBarCheckListContent>
+			</SideBarCheckListContainer>
+		</SideBarPopup>
 	);
 };
 
 SideBarCheckList.propTypes = {
+	visible: PropTypes.bool.isRequired,
 	onPopupToggle: PropTypes.func.isRequired,
 	onCreateCheckList: PropTypes.func.isRequired,
 };

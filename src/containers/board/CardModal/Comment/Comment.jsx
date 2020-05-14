@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import { createComment, getCard } from '../../../../modules/board';
 import CommentItem from './CommentItem';
 
-const CommentsContainer = styled.div`
+const CommentContainer = styled.div`
 	position: relative;
 	font-size: 20px;
 
@@ -60,7 +60,7 @@ const ControlContainer = styled.div`
 
 const CommentViewContainer = styled.div``;
 
-const CustomIcon = styled(FontAwesomeIcon)`
+const CommentIcon = styled(FontAwesomeIcon)`
 	font-size: 20px;
 	position: absolute;
 	padding: 6px 0 0 10px;
@@ -82,13 +82,13 @@ const CustomIcon = styled(FontAwesomeIcon)`
  *	Card의 Comment 컴포넌트
  *
  */
-const CommentContent = ({ card }) => {
+const Comment = ({ card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 	const [editComment, onChangeComment, setEditComment] = useInput('');
 	const cardComments = useSelector((state) => state.board.cardComments);
 
-	const onCreateComment = async () => {
+	const handleCommentCreate = async () => {
 		if (editComment === '') return;
 
 		const memberId = sessionStorage.getItem('memberId');
@@ -99,22 +99,22 @@ const CommentContent = ({ card }) => {
 
 		const result = await dispatch(createComment({ boardId: board.board_id, cardId: card.card_id, data }));
 
-		if (result.success) {
+		if (result.success === true) {
 			dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
 			setEditComment('');
 		}
 	};
 
 	return (
-		<CommentsContainer>
+		<CommentContainer>
 			<CommentHeader>
-				<CustomIcon icon={faComment} size="xs" />
+				<CommentIcon icon={faComment} size="xs" />
 				Comments
 			</CommentHeader>
 			<EditContainer>
 				<EditField placeholder="Write a comment..." value={editComment} onChange={onChangeComment} />
 				<ControlContainer>
-					<Button type="primary" onClick={onCreateComment}>
+					<Button type="primary" onClick={handleCommentCreate}>
 						Save
 					</Button>
 				</ControlContainer>
@@ -123,12 +123,12 @@ const CommentContent = ({ card }) => {
 				{cardComments &&
 					cardComments.map((comment) => <CommentItem comment={comment} card={card} key={comment.comment_id} />)}
 			</CommentViewContainer>
-		</CommentsContainer>
+		</CommentContainer>
 	);
 };
 
-CommentContent.propTypes = {
+Comment.propTypes = {
 	card: PropTypes.object.isRequired,
 };
 
-export default React.memo(CommentContent);
+export default React.memo(Comment);

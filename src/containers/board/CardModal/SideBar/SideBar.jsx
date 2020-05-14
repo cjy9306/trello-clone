@@ -27,28 +27,12 @@ const SidebarContainer = styled.aside`
 `;
 const SideBarAddOn = styled.div`
 	margin-bottom: 32px;
+	font-size: 16px;
 `;
 const SideBarHeader = styled.div`
 	font-size: 16px;
 	margin-bottom: 16px;
 `;
-
-const SideBarContent = styled.div`
-	font-size: 16px;
-`;
-
-const PopupOver = styled.div`
-	box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
-	display: ${(props) => (props.visible ? 'block' : 'none')};
-	margin: 0px 0 0 0px;
-	min-width: 300px;
-	min-height: 100px;
-	position: absolute;
-	right: auto;
-	z-index: 10;
-`;
-
-const SideBarActions = styled.div``;
 
 const LinkButtonWrapper = styled(LinkButton)`
 	@media only screen and (min-width: 669px) {
@@ -75,11 +59,12 @@ const SideBar = ({ card }) => {
 	const [checkListPopupVisible, setCheckListPopupVisible] = useState(false);
 	const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
 
-	const onToggleMembersPopup = useCallback(() => setMembersPopupVisible((visible) => !visible), []);
-	const onToggleLabelPopup = useCallback(() => setLabelPopupVisible((visible) => !visible), []);
-	const onToggleCheckListPopup = useCallback(() => setCheckListPopupVisible((visible) => !visible), []);
+	const toggleMembersPopup = useCallback(() => setMembersPopupVisible((visible) => !visible), []);
+	const toggleLabelPopup = useCallback(() => setLabelPopupVisible((visible) => !visible), []);
+	const toggleCheckListPopup = useCallback(() => setCheckListPopupVisible((visible) => !visible), []);
+	const toggleDeleteConfirm = useCallback(() => setDeleteConfirmVisible((visible) => !visible), []);
 
-	const onCreateCheckList = useCallback(
+	const handleCheckListCreate = useCallback(
 		async (itemName) => {
 			const data = {
 				checklistName: itemName,
@@ -87,25 +72,23 @@ const SideBar = ({ card }) => {
 			};
 			const result = await dispatch(createCheckList({ boardId: board.board_id, cardId: card.card_id, data }));
 
-			if (result.success) {
+			if (result.success === true) {
 				await dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-				onToggleCheckListPopup();
+				toggleCheckListPopup();
 			}
 		},
-		[dispatch, onToggleCheckListPopup, board, card]
+		[dispatch, toggleCheckListPopup, board, card]
 	);
 
-	const onToggleDeleteConfirm = useCallback(() => setDeleteConfirmVisible((visible) => !visible), []);
-
-	const onDeleteCard = useCallback(async () => {
+	const handleCardDelete = useCallback(async () => {
 		const result = await dispatch(deleteCard({ boardId: board.board_id, cardId: card.card_id }));
 
-		if (result.success) {
+		if (result.success === true) {
 			dispatch(getBoard({ boardId: board.board_id }));
 			dispatch(changeModalVisible(false));
-			onToggleDeleteConfirm();
+			toggleDeleteConfirm();
 		}
-	}, [dispatch, board, card, onToggleDeleteConfirm]);
+	}, [dispatch, board, card, toggleDeleteConfirm]);
 
 	useEffect(() => {
 		setMembersPopupVisible(false);
@@ -117,40 +100,32 @@ const SideBar = ({ card }) => {
 		<SidebarContainer>
 			<ConfirmModal
 				visible={deleteConfirmVisible}
-				onCloseModal={onToggleDeleteConfirm}
+				onCloseModal={toggleDeleteConfirm}
 				message="Are you sure delete this card?"
-				onClickOk={onDeleteCard}
+				onClickOk={handleCardDelete}
 			/>
 			<SideBarAddOn>
 				<SideBarHeader>ADD TO CARD</SideBarHeader>
-				<SideBarContent>
-					<LinkButtonWrapper size="large" onClick={onToggleMembersPopup}>
-						Members
-					</LinkButtonWrapper>
-					<PopupOver visible={membersPopupVisible}>
-						<SidebarMembers onPopupToggle={onToggleMembersPopup} card={card} />
-					</PopupOver>
-					<LinkButtonWrapper size="large" onClick={onToggleLabelPopup}>
-						Labels
-					</LinkButtonWrapper>
-					<PopupOver visible={labelPopupVisible}>
-						<SideBarLabels onPopupToggle={onToggleLabelPopup} card={card} />
-					</PopupOver>
-					<LinkButtonWrapper size="large" onClick={onToggleCheckListPopup}>
-						Check List
-					</LinkButtonWrapper>
-					<PopupOver visible={checkListPopupVisible}>
-						<SideBarCheckList onPopupToggle={onToggleCheckListPopup} onCreateCheckList={onCreateCheckList} />
-					</PopupOver>
-				</SideBarContent>
+				<LinkButtonWrapper size="large" onClick={toggleMembersPopup}>
+					Members
+				</LinkButtonWrapper>
+				<SidebarMembers visible={membersPopupVisible} onPopupToggle={toggleMembersPopup} card={card} />
+				<LinkButtonWrapper size="large" onClick={toggleLabelPopup}>
+					Labels
+				</LinkButtonWrapper>
+				<SideBarLabels visible={labelPopupVisible} onPopupToggle={toggleLabelPopup} card={card} />
+				<LinkButtonWrapper size="large" onClick={toggleCheckListPopup}>
+					Check List
+				</LinkButtonWrapper>
+				<SideBarCheckList
+					visible={checkListPopupVisible}
+					onPopupToggle={toggleCheckListPopup}
+					onCreateCheckList={handleCheckListCreate}
+				/>
 			</SideBarAddOn>
-			<SideBarActions>
-				<SideBarContent>
-					<LinkButtonWrapper type="danger" size="large" onClick={onToggleDeleteConfirm}>
-						Delete
-					</LinkButtonWrapper>
-				</SideBarContent>
-			</SideBarActions>
+			<LinkButtonWrapper type="danger" size="large" onClick={toggleDeleteConfirm}>
+				Delete
+			</LinkButtonWrapper>
 		</SidebarContainer>
 	);
 };

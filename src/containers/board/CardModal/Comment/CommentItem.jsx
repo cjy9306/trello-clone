@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -8,11 +8,11 @@ import { deleteComment, getCard } from '../../../../modules/board';
 import { convertDateClientTimezone } from '../../../../common/CommonUtils';
 import ContentsWithLF from '../../../../components/ContentsWithLF';
 
-const Container = styled.div`
+const CommentItemContainer = styled.div`
 	margin-bottom: 24px;
 `;
 
-const Header = styled.div`
+const CommentItemHeader = styled.div`
 	font-size: 16px;
 	margin-bottom: 12px;
 `;
@@ -46,11 +46,11 @@ const ControlContainer = styled.div`
 	}
 `;
 
-const CustomIcon = styled(FontAwesomeIcon)`
+const UserIcon = styled(FontAwesomeIcon)`
 	color: #949996;
 	font-size: 20px;
 	position: absolute;
-	padding: 6px 0 0 10px;
+	padding: 0 0 0 10px;
 
 	@media only screen and (min-width: 669px) {
 		left: -40px;
@@ -77,27 +77,26 @@ const CommentItem = ({ card, comment }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 
-	const onDelete = async () => {
+	const handleCommentDelete = useCallback(async () => {
 		const result = await dispatch(deleteComment({ boardId: board.board_id, commentId: comment.comment_id }));
-		if (result.success) dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
-	};
+		if (result.success === true) dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
+	}, [dispatch, board, card, comment]);
 
 	return (
-		<Container>
-			<Header>
-				<CustomIcon icon={faUserCircle} size="xs" />
+		<CommentItemContainer>
+			<CommentItemHeader>
+				<UserIcon icon={faUserCircle} size="xs" />
 				<b>{comment.member.name}</b> &nbsp;&nbsp; {convertDateClientTimezone(comment.create_time)}
-			</Header>
+			</CommentItemHeader>
 			<ContentContainer>
 				<ContentWrapper>
 					<ContentsWithLF contents={comment.contents} />
 				</ContentWrapper>
 			</ContentContainer>
 			<ControlContainer>
-				&nbsp;&nbsp;
-				<DeleteButton onClick={onDelete}>Delete</DeleteButton>
+				<DeleteButton onClick={handleCommentDelete}>Delete</DeleteButton>
 			</ControlContainer>
-		</Container>
+		</CommentItemContainer>
 	);
 };
 

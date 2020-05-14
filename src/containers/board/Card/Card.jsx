@@ -55,11 +55,11 @@ const Card = ({ card, board, index }) => {
 	const savedCard = useSelector((state) => state.board.card);
 
 	const onShowModal = async () => {
-		if (savedCard && savedCard.card_id === card.card_id) {
+		if (savedCard.card_id === card.card_id) {
 			dispatch(changeModalVisible(true));
 		} else {
 			const result = await dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
-			if (result.success) dispatch(changeModalVisible(true));
+			if (result.success === true) dispatch(changeModalVisible(true));
 		}
 	};
 
@@ -84,7 +84,6 @@ const Card = ({ card, board, index }) => {
 								))}
 						</CardLabels>
 						{card.card_name}
-						<br />
 					</CardContent>
 				</CardContainer>
 			)}

@@ -48,7 +48,7 @@ const CustomIcon = styled(FontAwesomeIcon)`
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 	const [checked, setChecked] = useState(false);
 
-	const onItemClick = () => {
+	const handleItemClick = () => {
 		const result = !checked;
 		setChecked(result);
 		onLabelsItemClick(label.label_id, result);
@@ -60,7 +60,7 @@ const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 
 	return (
 		<SideBarLabelsItemContainer>
-			<SideBarLabelsItemContent color={`${label.color}`} onClick={onItemClick}>
+			<SideBarLabelsItemContent color={`${label.color}`} onClick={handleItemClick}>
 				{label.label_name}
 				<SideBarLabelItemCheck checked={checked}>
 					<CustomIcon icon={faCheck} size="xs" />

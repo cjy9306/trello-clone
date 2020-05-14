@@ -1,162 +1,91 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import useInput from '../../../../hooks/useInput';
-import CheckBox from '../../../../components/CheckBox';
 import Button from '../../../../components/Button';
-import { updateCheckListItem, getCheckList, deleteCheckListItem } from '../../../../modules/board';
+import { deleteCheckList, getCheckList, createCheckListItem } from '../../../../modules/board';
+import CheckListSubItem from './CheckListSubItem';
 
-const DeleteWrapper = styled.div`
-	display: none;
-	line-height: 26px;
-	margin: 4px 8px 0 0;
-	position: absolute;
-	right: 0;
-	text-decoration: underline;
-	top: 0;
-	z-index: 11;
+const CheckListItemContainer = styled.div`
+	margin-bottom: 16px;
 `;
 
-const Container = styled.div`
-	border-radius: 3px;
-	cursor: pointer;
-	font-size: 16px;
-	justify-content: center;
-	margin: 8px 0 0px 0;
-	padding: 8px 0 8px 0;
+const CheckListHeader = styled.div`
+	line-height: 32px;
+	margin-bottom: 12px;
+	min-height: 32px;
 	position: relative;
-	vertical-align: middle;
-	&:hover {
-		background-color: rgba(228, 231, 235, 0.4);
-		& ${DeleteWrapper} {
-			display: ${(props) => (props.isEditting ? 'none' : 'block')};
-		}
-	}
-	a:visited {
-		color: inherit;
-	}
 `;
 
-const LabelContainer = styled.div`
-	cursor: pointer;
-	display: ${(props) => (props.isEditting ? 'none' : 'block')};
-	padding-right: 64px;
-`;
-
-const EditContainer = styled.div`
-	display: ${(props) => (props.isEditting ? 'block' : 'none')};
-	padding-right: 32px;
-`;
-
-const EditContent = styled.div``;
-
-const EditControl = styled.div``;
-
-const TextAreaField = styled.textarea`
-	box-sizing: border-box;
-	border-radius: 3px;
-	background: rgba(9, 30, 66, 0.04);
-	border-color: rgba(9, 30, 66, 0.13);
-	box-shadow: inset 0 0 0 1px rgba(9, 30, 66, 0.13);
-	font-size: 16px;
-	height: 80px;
-	min-height: 80px;
-	overflow: hidden;
-	overflow-wrap: break-word;
-	outline: 0;
-	padding: 8px 12px;
-	resize: none;
-	width: 100%;
-`;
-
-const CustomCheckBox = styled(CheckBox)`
-	margin-left: -25px;
+const DeleteButtonWrapper = styled.div`
+	right: 0;
+	top: 0;
 	position: absolute;
+`;
+
+const CheckListContainer = styled.div`
+	margin-bottom: 8px;
+`;
+
+const CheckListControl = styled.div``;
+
+const CheckListIcon = styled(FontAwesomeIcon)`
+	font-size: 20px;
+	left: -40px;
+	position: absolute;
+	padding: 6px 0 0 10px;
 `;
 
 /*
- *	각 Checklist의 sub-item 컴포넌트
+ *	CheckList의 각 item 컴포넌트
  *
  */
-const CheckListItem = ({ item }) => {
+const CheckListItem = ({ checklist }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 	const card = useSelector((state) => state.board.card);
-	const [itemName, onChangeItemName, setItemName] = useInput(item.item_name);
-	const [isEditting, setIsEditting] = useState(false);
-	const editRef = useRef();
 
-	const onLabelClick = useCallback(() => {
-		setIsEditting(true);
-		setItemName(item.item_name);
-	}, [item, setItemName]);
+	const handleDeleteClick = useCallback(async () => {
+		const result = await dispatch(
+			deleteCheckList({ boardId: board.board_id, cardId: card.card_id, checklistId: checklist.checklist_id })
+		);
 
-	const onCancelClick = useCallback(() => setIsEditting(false), []);
+		if (result.success === true) dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
+	}, [board, card, dispatch, checklist]);
 
-	const onSaveClick = async () => {
-		const data = {
-			itemName,
-			checked: item.checked,
-		};
+	const handleCheckListItemCreate = useCallback(async () => {
+		const data = { itemName: 'new item', checked: false };
+		const result = await dispatch(
+			createCheckListItem({ boardId: board.board_id, checklistId: checklist.checklist_id, data })
+		);
 
-		const result = await dispatch(updateCheckListItem({ boardId: board.board_id, itemId: item.item_id, data }));
-		if (result.success) {
-			dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-			onCancelClick();
-		}
-	};
-
-	const onDeleteClick = useCallback(async () => {
-		const result = await dispatch(deleteCheckListItem({ boardId: board.board_id, itemId: item.item_id }));
-
-		if (result.success) await dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-	}, [dispatch, board, card, item]);
-
-	const onClickCheckBox = useCallback(
-		async (checked) => {
-			const data = {
-				itemName: item.item_name,
-				checked,
-			};
-
-			const result = await dispatch(updateCheckListItem({ boardId: board.board_id, itemId: item.item_id, data }));
-			if (result.success) dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
-		},
-		[dispatch, item, board, card]
-	);
-
-	useEffect(() => {
-		if (isEditting) editRef.current.focus();
-	}, [isEditting]);
+		if (result.success === true) dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
+	}, [board, checklist, card, dispatch]);
 
 	return (
-		<Container isEditting={isEditting}>
-			<CustomCheckBox defaultChecked={item.checked} onClick={onClickCheckBox} />
-			<LabelContainer isEditting={isEditting} onClick={onLabelClick}>
-				{item.item_name}
-			</LabelContainer>
-			<DeleteWrapper onClick={onDeleteClick}>Delete</DeleteWrapper>
-			<EditContainer isEditting={isEditting}>
-				<EditContent>
-					<TextAreaField ref={editRef} value={itemName} onChange={onChangeItemName} />
-				</EditContent>
-				<EditControl>
-					<Button type="primary" onClick={onSaveClick}>
-						Save
-					</Button>
-					&nbsp;&nbsp;
-					<Button type="default" onClick={onCancelClick}>
-						Cancel
-					</Button>
-				</EditControl>
-			</EditContainer>
-		</Container>
+		<CheckListItemContainer>
+			<CheckListHeader>
+				<CheckListIcon icon={faCheck} size="xs" />
+				{checklist.checklist_name}
+				<DeleteButtonWrapper>
+					<Button onClick={handleDeleteClick}>Delete</Button>
+				</DeleteButtonWrapper>
+			</CheckListHeader>
+			<CheckListContainer>
+				{checklist.checklist_items &&
+					checklist.checklist_items.map((item) => <CheckListSubItem item={item} key={item.item_id} />)}
+			</CheckListContainer>
+			<CheckListControl>
+				<Button onClick={handleCheckListItemCreate}>Add an item</Button>
+			</CheckListControl>
+		</CheckListItemContainer>
 	);
 };
 
 CheckListItem.propTypes = {
-	item: PropTypes.object.isRequired,
+	checklist: PropTypes.object.isRequired,
 };
 
 export default React.memo(CheckListItem);

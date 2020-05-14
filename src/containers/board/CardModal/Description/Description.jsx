@@ -1,117 +1,63 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import ContentsWithLF from '../../../../components/ContentsWithLF';
-import useInput from '../../../../hooks/useInput';
-import Button from '../../../../components/Button';
-import { updateCard, getCard } from '../../../../modules/board';
+import DescriptionContent from './DescriptionContent';
 
-const Container = styled.div``;
+const DescriptionContainer = styled.div`
+	font-size: 20px;
+	min-height: 32px;
+	position: relative;
 
-const LabelWrapper = styled.div`
-	background-color: rgba(9, 30, 66, 0.04);
-	box-shadow: none;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	display: ${(props) => (props.isEditting ? 'none' : 'block')};
-	font-size: 14px;
-	min-height: 40px;
-	padding: 8px 12px;
-	text-decoration: none;
-	&:hover {
-		background-color: rgba(9, 30, 66, 0.09);
+	@media only screen and (min-width: 669px) {
+		margin: 8px 0 24px 40px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		margin: 8px 0 24px 8px;
 	}
 `;
 
-const TextAreaWrapper = styled.div`
-	display: ${(props) => (props.isEditting ? 'block' : 'none')};
-	width: 100%;
+const DescHeader = styled.div`
+	display: flex;
+	min-height: 32px;
+	margin: 0 0 4px 0;
+	padding: 8px 0;
 `;
 
-const TextAreaField = styled.textarea`
-	border: none;
-	background: #fff;
-	box-shadow: none;
-	padding: 8px 12px;
-	box-sizing: border-box;
-	border-radius: 3px;
-	font-size: 14px;
-	height: 108px;
-	min-height: 108px;
-	overflow: hidden;
-	overflow-wrap: break-word;
-	resize: none;
-	width: 100%;
-`;
+const CustomIcon = styled(FontAwesomeIcon)`
+	font-size: 20px;
+	position: absolute;
+	padding: 2px 0 0 10px;
 
-const ControlWrapper = styled.div``;
+	@media only screen and (min-width: 669px) {
+		left: -40px;
+	}
+
+	// phone
+	@media only screen and (max-width: 668px) {
+		left: 0px;
+		position: relative;
+		padding-left: 0;
+		margin-right: 8px;
+	}
+`;
 
 /*
- *	DescriptionContent의 실제 정보를 나타내는 컴포넌트
+ *	Card의 Description 컴포넌트
  *
  */
-
 const Description = ({ card }) => {
-	const dispatch = useDispatch();
-	const [isEditting, setIsEditting] = useState(false);
-	const [description, onChangeDescription, setDescription] = useInput('');
-	const board = useSelector((state) => state.board.board);
-	const editRef = useRef();
-
-	const onToggleDescription = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
-
-	const onSaveClick = async () => {
-		if (card.description === description) return;
-
-		const data = {
-			...card,
-			description,
-		};
-
-		const result = await dispatch(updateCard({ boardId: board.board_id, cardId: card.card_id, data }));
-
-		if (result.success) await dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
-		onToggleDescription();
-	};
-
-	useEffect(() => {
-		setIsEditting(false);
-		setDescription(card.description || '');
-	}, [card, setDescription]);
-
-	useEffect(() => {
-		if (isEditting) editRef.current.focus();
-	}, [isEditting]);
-
 	return (
-		<Container>
-			<LabelWrapper isEditting={isEditting} onClick={onToggleDescription}>
-				{description === '' || description == null ? (
-					'Add a more detailed description...'
-				) : (
-					<ContentsWithLF contents={description} />
-				)}
-			</LabelWrapper>
-			<TextAreaWrapper isEditting={isEditting}>
-				<TextAreaField
-					value={description}
-					placeholder={description == null || description === '' ? 'Add a more detailed description...' : ''}
-					ref={editRef}
-					onChange={onChangeDescription}
-				/>
-				<ControlWrapper>
-					<Button type="primary" onClick={onSaveClick}>
-						Save
-					</Button>
-					&nbsp;&nbsp;
-					<Button type="default" onClick={onToggleDescription}>
-						Cancel
-					</Button>
-				</ControlWrapper>
-			</TextAreaWrapper>
-		</Container>
+		<DescriptionContainer>
+			<DescHeader>
+				<CustomIcon icon={faAlignLeft} size="xs" />
+				Description <br />
+			</DescHeader>
+			<DescriptionContent card={card} />
+		</DescriptionContainer>
 	);
 };
 

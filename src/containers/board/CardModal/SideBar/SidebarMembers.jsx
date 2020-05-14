@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
+import { getCardMembers, addCardMember, deleteCardMember } from '../../../../modules/board';
 import Button from '../../../../components/Button';
 import MemberListItem from '../../../../components/MemberListItem';
-import { getCardMembers, addCardMember, deleteCardMember } from '../../../../modules/board';
+import SideBarPopup from './SideBarPopup';
 
 const MembersContainer = styled.div`
 	background-color: #fff;
@@ -69,7 +70,7 @@ const CloseSpan = styled.span`
  *
  */
 
-const SideBarMembers = ({ onPopupToggle, card }) => {
+const SideBarMembers = ({ visible, onPopupToggle, card }) => {
 	const dispatch = useDispatch();
 	const board = useSelector((state) => state.board.board);
 	const cardMembers = useSelector((state) => state.board.cardMembers);
@@ -103,31 +104,34 @@ const SideBarMembers = ({ onPopupToggle, card }) => {
 	}, [setEmail]);
 
 	return (
-		<MembersContainer>
-			<SideBarMembersHeader>
-				Members
-				<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
-				<hr />
-			</SideBarMembersHeader>
-			<AddMemberContainer>
-				<TitleWrapper>Invite member</TitleWrapper>
-				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
-				<Button type="primary" onClick={onAddMember}>
-					Add
-				</Button>
-				&nbsp;&nbsp;
-			</AddMemberContainer>
-			<MemberListContainer>
-				{cardMembers &&
-					cardMembers.map((member) => (
-						<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
-					))}
-			</MemberListContainer>
-		</MembersContainer>
+		<SideBarPopup visible={visible}>
+			<MembersContainer>
+				<SideBarMembersHeader>
+					Members
+					<CloseSpan onClick={onPopupToggle}>&times;</CloseSpan>
+					<hr />
+				</SideBarMembersHeader>
+				<AddMemberContainer>
+					<TitleWrapper>Invite member</TitleWrapper>
+					<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
+					<Button type="primary" onClick={onAddMember}>
+						Add
+					</Button>
+					&nbsp;&nbsp;
+				</AddMemberContainer>
+				<MemberListContainer>
+					{cardMembers &&
+						cardMembers.map((member) => (
+							<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
+						))}
+				</MemberListContainer>
+			</MembersContainer>
+		</SideBarPopup>
 	);
 };
 
 SideBarMembers.propTypes = {
+	visible: PropTypes.bool.isRequired,
 	onPopupToggle: PropTypes.func.isRequired,
 	card: PropTypes.object.isRequired,
 };
