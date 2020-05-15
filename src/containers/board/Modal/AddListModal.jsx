@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -53,7 +53,7 @@ const AddListModal = ({ visible, onCloseModal }) => {
 	const lists = useSelector((state) => state.board.lists);
 	const [title, onChangeTitle, setTitle] = useInput('');
 
-	const onAddList = async () => {
+	const handleListAdd = useCallback(async () => {
 		if (title === '') return;
 
 		const seq = lists ? lists.length : 0;
@@ -64,11 +64,11 @@ const AddListModal = ({ visible, onCloseModal }) => {
 
 		const result = await dispatch(createList({ boardId: board.board_id, data }));
 
-		if (result.success) {
+		if (result.success === true) {
 			dispatch(getBoard({ boardId: board.board_id }));
 			onCloseModal();
 		}
-	};
+	}, [dispatch, board, lists, onCloseModal]);
 
 	useEffect(() => {
 		setTitle('');
@@ -82,7 +82,7 @@ const AddListModal = ({ visible, onCloseModal }) => {
 				</AddListContent>
 			</AddListContainer>
 			<AddListControl>
-				<Button type="primary" onClick={onAddList}>
+				<Button type="primary" onClick={handleListAdd}>
 					Add
 				</Button>
 				&nbsp;&nbsp;

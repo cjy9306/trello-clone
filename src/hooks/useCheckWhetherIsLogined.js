@@ -19,7 +19,7 @@ const useCheckWhetherIsLogined = () => {
 		} else {
 			setIsLogined(true);
 		}
-	}, [history]);
+	}, [dispatch, history, setIsLogined]);
 
 	return isLogined;
 };

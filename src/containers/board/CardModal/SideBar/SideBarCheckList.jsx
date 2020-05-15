@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInput from '../../../../hooks/useInput';
@@ -59,13 +59,13 @@ const TitleInput = styled.input`
 const SideBarCheckList = ({ visible, onPopupToggle, onCreateCheckList }) => {
 	const [title, onChangeTitle, setTitle] = useInput('');
 
-	const onAddClick = async () => {
+	const handleAddClick = useCallback(async () => {
 		onCreateCheckList(title);
-	};
+	}, [onCreateCheckList]);
 
 	useEffect(() => {
 		setTitle('');
-	}, [onCreateCheckList, setTitle]);
+	}, [setTitle]);
 
 	return (
 		<SideBarPopup visible={visible}>
@@ -78,7 +78,7 @@ const SideBarCheckList = ({ visible, onPopupToggle, onCreateCheckList }) => {
 				<SideBarCheckListContent>
 					<CheckListTitle>Title</CheckListTitle>
 					<TitleInput value={title} onChange={onChangeTitle} />
-					<Button type="primary" onClick={onAddClick}>
+					<Button type="primary" onClick={handleAddClick}>
 						Add
 					</Button>
 				</SideBarCheckListContent>

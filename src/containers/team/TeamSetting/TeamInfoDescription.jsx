@@ -62,7 +62,7 @@ const TeamInfoDescription = ({ team }) => {
 	const [description, onChangeDescription, setDescription] = useInput('');
 	const toggleDescription = useCallback(() => setIsEditting((isEditting) => !isEditting), []);
 
-	const handleDescriptionSave = async () => {
+	const handleDescriptionSave = useCallback(async () => {
 		if (description === team.description) return;
 
 		const data = { teamName: team.team_name, description };
@@ -71,7 +71,7 @@ const TeamInfoDescription = ({ team }) => {
 		if (result.success === true) {
 			toggleDescription();
 		}
-	};
+	}, [dispatch, team, toggleDescription, description]);
 
 	useEffect(() => {
 		if (team.description !== undefined) setDescription(team.description);
@@ -80,7 +80,7 @@ const TeamInfoDescription = ({ team }) => {
 	useEffect(() => {
 		if (isEditting) editRef.current.focus();
 		else setDescription(team.description);
-	}, [isEditting, setDescription]);
+	}, [isEditting, setDescription, team]);
 
 	return (
 		<TeamInfoContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -48,11 +48,11 @@ const CustomIcon = styled(FontAwesomeIcon)`
 const SideBarLabelsItem = ({ label, defaultChecked, onLabelsItemClick }) => {
 	const [checked, setChecked] = useState(false);
 
-	const handleItemClick = () => {
+	const handleItemClick = useCallback(() => {
 		const result = !checked;
 		setChecked(result);
 		onLabelsItemClick(label.label_id, result);
-	};
+	}, [setChecked, onLabelsItemClick]);
 
 	useEffect(() => {
 		setChecked(defaultChecked);

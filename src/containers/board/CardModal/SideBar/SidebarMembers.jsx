@@ -81,19 +81,22 @@ const SideBarMembers = ({ visible, onPopupToggle, card }) => {
 			dispatch(getCardMembers({ boardId: board.board_id, cardId: card.card_id }));
 	}, [board, card, dispatch]);
 
-	const onAddMember = async () => {
+	const handleAddMember = useCallback(async () => {
 		if (email === '') return;
 		const data = { email };
 		const result = await dispatch(addCardMember({ boardId: board.board_id, cardId: card.card_id, data }));
 
-		if (result.success) getMembers();
-	};
+		if (result.success === true) getMembers();
+	}, [dispatch, board, card, email, getMembers]);
 
-	const onMemberDeleteClick = async (memberId) => {
-		const result = await dispatch(deleteCardMember({ boardId: board.board_id, cardId: card.card_id, memberId }));
+	const handleMemberDelete = useCallback(
+		async (memberId) => {
+			const result = await dispatch(deleteCardMember({ boardId: board.board_id, cardId: card.card_id, memberId }));
 
-		if (result.success) getMembers();
-	};
+			if (result.success === true) getMembers();
+		},
+		[dispatch, board, card, getMembers]
+	);
 
 	useEffect(() => {
 		getMembers();
@@ -114,7 +117,7 @@ const SideBarMembers = ({ visible, onPopupToggle, card }) => {
 				<AddMemberContainer>
 					<TitleWrapper>Invite member</TitleWrapper>
 					<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
-					<Button type="primary" onClick={onAddMember}>
+					<Button type="primary" onClick={handleAddMember}>
 						Add
 					</Button>
 					&nbsp;&nbsp;
@@ -122,7 +125,7 @@ const SideBarMembers = ({ visible, onPopupToggle, card }) => {
 				<MemberListContainer>
 					{cardMembers &&
 						cardMembers.map((member) => (
-							<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
+							<MemberListItem member={member} onDeleteClick={handleMemberDelete} key={member.member_id} />
 						))}
 				</MemberListContainer>
 			</MembersContainer>

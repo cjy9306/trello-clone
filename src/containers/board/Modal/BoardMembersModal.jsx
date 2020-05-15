@@ -70,26 +70,26 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 		if (board.board_id !== undefined) dispatch(getBoardMembers({ boardId: board.board_id }));
 	}, [visible, board, dispatch]);
 
-	const onAddMember = async () => {
+	const handleMemberAdd = useCallback(async () => {
 		if (email === '') return;
 		const data = { email };
 		const result = await dispatch(addBoardMember({ boardId: board.board_id, data }));
 
-		if (result.success) getMembers();
-	};
+		if (result.success === true) getMembers();
+	}, [dispatch, board, getMembers]);
 
-	const onMemberDeleteClick = useCallback(
+	const handleMemberDelete = useCallback(
 		async (memberId) => {
 			const result = await dispatch(deleteBoardMember({ boardId: board.board_id, memberId }));
 
-			if (result.success) getMembers();
+			if (result.success === true) getMembers();
 		},
 		[dispatch, board, getMembers]
 	);
 
 	useEffect(() => {
 		getMembers();
-	}, [visible, getMembers]);
+	}, [getMembers]);
 
 	useEffect(() => {
 		setEmail('');
@@ -100,7 +100,7 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 			<AddMemberContainer>
 				<TitleWrapper>Invite member</TitleWrapper>
 				<EmailInput value={email} onChange={onChangeEmail} placeholder="input member email" /> &nbsp;
-				<Button type="primary" onClick={onAddMember}>
+				<Button type="primary" onClick={handleMemberAdd}>
 					Add
 				</Button>
 				&nbsp;&nbsp;
@@ -109,7 +109,7 @@ const BoardMembersModal = ({ visible, onCloseModal }) => {
 				<TitleWrapper>Members</TitleWrapper>
 				{boardMembers &&
 					boardMembers.map((member) => (
-						<MemberListItem member={member} onDeleteClick={onMemberDeleteClick} key={member.member_id} />
+						<MemberListItem member={member} onDeleteClick={handleMemberDelete} key={member.member_id} />
 					))}
 			</MemberListContainer>
 		</MembersModal>

@@ -57,10 +57,10 @@ const ListAction = ({ posX, posY, visible, onCloseListAction }) => {
 	const board = useSelector((state) => state.board.board);
 	const listId = useSelector((state) => state.board.listAction.listId);
 
-	const onDeleteList = useCallback(async () => {
+	const handleDeleteList = useCallback(async () => {
 		const result = await dispatch(deleteList({ boardId: board.board_id, listId }));
 
-		if (result.success) {
+		if (result.success === true) {
 			dispatch(getBoard({ boardId: board.board_id }));
 			dispatch(changeListActionVisible(false, 0, 0, 0));
 		}
@@ -75,7 +75,7 @@ const ListAction = ({ posX, posY, visible, onCloseListAction }) => {
 					<hr />
 				</ActionHeader>
 				<ActionContent>
-					<LinkButton type="danger" onClick={onDeleteList}>
+					<LinkButton type="danger" onClick={handleDeleteList}>
 						Delete List
 					</LinkButton>
 				</ActionContent>

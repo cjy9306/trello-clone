@@ -42,7 +42,7 @@ const LabelsTitle = styled.div`
 `;
 
 const isInCardLabels = (label, cardLabels) => {
-	if (typeof cardLabels !== 'object') return false;
+	if (Array.isArray(cardLabels) === false) return false;
 
 	for (let i = 0; i < cardLabels.length; i++) {
 		if (label.label_id === cardLabels[i].label_id) {
@@ -62,7 +62,7 @@ const SideBarLabels = ({ visible, onPopupToggle, card }) => {
 	const board = useSelector((state) => state.board.board);
 	const dispatch = useDispatch();
 
-	const onLabelsItemClick = useCallback(
+	const handleLabelsItemClick = useCallback(
 		async (labelId, checked) => {
 			const data = {
 				checked,
@@ -70,7 +70,7 @@ const SideBarLabels = ({ visible, onPopupToggle, card }) => {
 
 			const result = await dispatch(updateCardLabel({ boardId: board.board_id, cardId: card.card_id, labelId, data }));
 
-			if (result.success) {
+			if (result.success === true) {
 				dispatch(getBoard({ boardId: board.board_id }));
 				dispatch(getCard({ boardId: board.board_id, cardId: card.card_id }));
 			}
@@ -98,7 +98,7 @@ const SideBarLabels = ({ visible, onPopupToggle, card }) => {
 							<SideBarLabelsItem
 								label={label}
 								defaultChecked={isInCardLabels(label, card.labels)}
-								onLabelsItemClick={onLabelsItemClick}
+								onLabelsItemClick={handleLabelsItemClick}
 								key={label.label_id}
 							/>
 						))}

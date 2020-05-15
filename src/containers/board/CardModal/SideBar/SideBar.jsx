@@ -41,7 +41,7 @@ const LinkButtonWrapper = styled(LinkButton)`
 
 	// phone
 	@media only screen and (max-width: 668px) {
-		margin: 0 0px 8px 0;
+		margin: 0 0 8px 0;
 	}
 `;
 
@@ -73,7 +73,7 @@ const SideBar = ({ card }) => {
 			const result = await dispatch(createCheckList({ boardId: board.board_id, cardId: card.card_id, data }));
 
 			if (result.success === true) {
-				await dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
+				dispatch(getCheckList({ boardId: board.board_id, cardId: card.card_id }));
 				toggleCheckListPopup();
 			}
 		},

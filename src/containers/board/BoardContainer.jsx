@@ -69,114 +69,139 @@ const BoardContainer = ({ match: { params } }) => {
 	}, [boardId, dispatch]);
 
 	// drag & drop related functions
-	const changeListSeq = async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
-		dispatch(changeLists(newLists));
-		const data = {
-			listId,
-			sourceListSeq,
-			destListSeq,
-		};
+	const changeListSeq = useCallback(
+		async (listId, sourceListSeq, destListSeq, newLists, prevLists) => {
+			dispatch(changeLists(newLists));
+			const data = {
+				listId,
+				sourceListSeq,
+				destListSeq,
+			};
 
-		const result = await dispatch(updateListSeq({ boardId, listId, data }));
+			const result = await dispatch(updateListSeq({ boardId, listId, data }));
 
-		if (result.success === false) {
-			dispatch(changeLists(prevLists));
-		}
-	};
+			if (result.success === false) {
+				dispatch(changeLists(prevLists));
+			}
+		},
+		[dispatch, boardId]
+	);
 
-	const changeCardSeq = async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
-		dispatch(changeLists(newLists));
-		const data = {
-			sourceListId,
-			destListId,
-			sourceCardSeq,
-			destCardSeq,
-			cardId,
-		};
+	const changeCardSeq = useCallback(
+		async (sourceListId, destListId, sourceCardSeq, destCardSeq, cardId, newLists, prevLists) => {
+			dispatch(changeLists(newLists));
+			const data = {
+				sourceListId,
+				destListId,
+				sourceCardSeq,
+				destCardSeq,
+				cardId,
+			};
 
-		const result = await dispatch(updateCardSeq({ boardId, listId: sourceListId, data }));
+			const result = await dispatch(updateCardSeq({ boardId, listId: sourceListId, data }));
 
-		if (result.success === false) {
-			dispatch(changeLists(prevLists));
-		}
-	};
+			if (result.success === false) {
+				dispatch(changeLists(prevLists));
+			}
+		},
+		[dispatch, boardId]
+	);
 
-	const onDragEnd = async (result) => {
-		const { destination, source, type } = result;
+	const onDragEnd = useCallback(
+		async (result) => {
+			const { destination, source, type } = result;
 
-		if (!destination) {
-			return;
-		}
-
-		if (destination.droppableId === source.droppableId && destination.index === source.index) {
-			return;
-		}
-
-		// List 끼리 옮겼을때
-		if (type === 'list') {
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			const deletedList = newLists.splice(source.index, 1);
-			newLists.splice(destination.index, 0, deletedList[0]);
-
-			changeListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
-			return;
-		}
-
-		const sourceListId = parseDndItemId(source.droppableId);
-		const destListId = parseDndItemId(destination.droppableId);
-
-		if (sourceListId === null || destListId === null) return;
-
-		const [sourceList, sourceListIndex] = getListItem(lists, sourceListId);
-		const [destList, destListIndex] = getListItem(lists, destListId);
-
-		// 같은 list 내에서 card 만 이동할 경우
-		if (sourceList.list_id === destList.list_id) {
-			const newCards = [...sourceList.cards];
-
-			const deletedCard = newCards.splice(source.index, 1)[0];
-			newCards.splice(destination.index, 0, deletedCard);
-
-			// update sequence
-			for (const index in newCards) {
-				newCards[index].seq = index;
+			if (!destination) {
+				return;
 			}
 
-			const newList = {
-				...sourceList,
-				cards: newCards,
-			};
+			if (destination.droppableId === source.droppableId && destination.index === source.index) {
+				return;
+			}
 
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			newLists[sourceListIndex] = newList;
+			// List 끼리 옮겼을때
+			if (type === 'list') {
+				const prevLists = [...lists];
+				const newLists = [...lists];
+				const deletedList = newLists.splice(source.index, 1);
+				newLists.splice(destination.index, 0, deletedList[0]);
 
-			changeCardSeq(sourceListId, destListId, source.index, destination.index, deletedCard.card_id, newLists, prevLists);
-		} else {
-			// card가 다른 list로 옮겨가는 경우
-			const newSourceCards = [...sourceList.cards];
-			const newDestCards = [...destList.cards];
+				changeListSeq(deletedList[0].list_id, source.index, destination.index, newLists, prevLists);
+				return;
+			}
 
-			const deletedCard = newSourceCards.splice(source.index, 1)[0];
-			const newSourceList = {
-				...sourceList,
-				cards: newSourceCards,
-			};
+			const sourceListId = parseDndItemId(source.droppableId);
+			const destListId = parseDndItemId(destination.droppableId);
 
-			newDestCards.splice(destination.index, 0, deletedCard);
-			const newDestList = {
-				...destList,
-				cards: newDestCards,
-			};
-			const prevLists = [...lists];
-			const newLists = [...lists];
-			newLists[sourceListIndex] = newSourceList;
-			newLists[destListIndex] = newDestList;
+			if (sourceListId === null || destListId === null) return;
 
-			changeCardSeq(sourceListId, destListId, source.index, destination.index, deletedCard.card_id, newLists, prevLists);
-		}
-	};
+			const [sourceList, sourceListIndex] = getListItem(lists, sourceListId);
+			const [destList, destListIndex] = getListItem(lists, destListId);
+
+			// 같은 list 내에서 card 만 이동할 경우
+			if (sourceList.list_id === destList.list_id) {
+				const newCards = [...sourceList.cards];
+
+				const deletedCard = newCards.splice(source.index, 1)[0];
+				newCards.splice(destination.index, 0, deletedCard);
+
+				// update sequence
+				for (const index in newCards) {
+					newCards[index].seq = index;
+				}
+
+				const newList = {
+					...sourceList,
+					cards: newCards,
+				};
+
+				const prevLists = [...lists];
+				const newLists = [...lists];
+				newLists[sourceListIndex] = newList;
+
+				changeCardSeq(
+					sourceListId,
+					destListId,
+					source.index,
+					destination.index,
+					deletedCard.card_id,
+					newLists,
+					prevLists
+				);
+			} else {
+				// card가 다른 list로 옮겨가는 경우
+				const newSourceCards = [...sourceList.cards];
+				const newDestCards = [...destList.cards];
+
+				const deletedCard = newSourceCards.splice(source.index, 1)[0];
+				const newSourceList = {
+					...sourceList,
+					cards: newSourceCards,
+				};
+
+				newDestCards.splice(destination.index, 0, deletedCard);
+				const newDestList = {
+					...destList,
+					cards: newDestCards,
+				};
+				const prevLists = [...lists];
+				const newLists = [...lists];
+				newLists[sourceListIndex] = newSourceList;
+				newLists[destListIndex] = newDestList;
+
+				changeCardSeq(
+					sourceListId,
+					destListId,
+					source.index,
+					destination.index,
+					deletedCard.card_id,
+					newLists,
+					prevLists
+				);
+			}
+		},
+		[changeCardSeq, changeListSeq, lists]
+	);
 
 	const closeCardModal = useCallback(() => dispatch(changeModalVisible(false)), [dispatch]);
 	const closeListAction = useCallback(() => dispatch(changeListActionVisible(false)), [dispatch]);

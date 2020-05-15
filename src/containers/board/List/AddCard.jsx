@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import useInput from '../../../hooks/useInput';
@@ -58,23 +58,23 @@ const AddCard = ({ onCreateCard }) => {
 	const [isAdding, setIsAdding] = useState(false);
 	const [newCardName, onChangeCardName, setNewCardName] = useInput('');
 
-	const onToggle = () => {
+	const toggleAdding = useCallback(() => {
 		setIsAdding(!isAdding);
 		if (isAdding === false) {
 			setNewCardName('');
 		}
-	};
+	}, [setIsAdding, setNewCardName, isAdding]);
 
-	const onAddClick = async () => {
+	const handleCardAdd = useCallback(async () => {
 		if (newCardName === '') return;
 
-		await onCreateCard(newCardName);
+		onCreateCard(newCardName);
 		setNewCardName('');
-	};
+	}, [newCardName, onCreateCard, setNewCardName]);
 
 	return (
 		<AddCardContainer>
-			<LabelWrapper isAdding={isAdding} onClick={onToggle}>
+			<LabelWrapper isAdding={isAdding} onClick={toggleAdding}>
 				+ Add a card
 			</LabelWrapper>
 			<InputContainer isAdding={isAdding}>
@@ -88,11 +88,11 @@ const AddCard = ({ onCreateCard }) => {
 					/>
 				</EditWrapper>
 				<ControlWrapper>
-					<Button type="primary" onClick={onAddClick}>
+					<Button type="primary" onClick={handleCardAdd}>
 						Add Card
 					</Button>
 					&nbsp;
-					<Button type="default" onClick={onToggle}>
+					<Button type="default" onClick={toggleAdding}>
 						Cancel
 					</Button>
 				</ControlWrapper>
