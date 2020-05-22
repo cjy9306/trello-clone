@@ -25,10 +25,8 @@ module.exports = {
 		port: 3000,
 		stats: 'errors-only',
 		hot: true,
-		inline: true,
 		writeToDisk: true,
 		historyApiFallback: true,
-		disableHostCheck: true,
 	},
 	node: { fs: 'empty' }, // 모듈 시스템 (commonjs 등)을 사용하기 위해 추가하는 라이브러리, 다른 라이브러리에 디펜던시가 있어 추가함
 	resolve: {
@@ -81,6 +79,7 @@ module.exports = {
 		...(process.env.NODE_ENV === 'production' ? [new MiniCssExtractPlugin({ filename: '[name].css' })] : []), // css 파일을 <style>태그가 아니라 파일로 따로 입력하기 위함
 		new CopyPlugin([
 			{
+				// 밑의 externals와 연계
 				// axios는 빌드할 필요가 없기 때문에, 이미 빌드된 min.js를 /dist에 복사만 하면됨
 				from: './node_modules/axios/dist/axios.min.js',
 				to: './axios.min.js',
@@ -92,6 +91,7 @@ module.exports = {
 			},
 		]),
 		new HtmlWebpackPlugin({
+			// bundle.js를 html에 입력해줌
 			template: path.join(__dirname, './public/index.html'),
 			inject: true,
 			filename: path.join(__dirname, './dist/index.html'),
@@ -104,6 +104,7 @@ module.exports = {
 				? [
 						new OptimizeCSSAssetsPlugin(), // css 공백 최소화
 						new TerserPlugin({
+							// output 파일 사이즈를 줄여줌, 난독화비슷
 							terserOptions: {
 								compress: {
 									drop_console: true, // 빌드시 console.log() 같은 부분 삭제
@@ -113,7 +114,7 @@ module.exports = {
 				  ]
 				: [],
 		splitChunks: {
-			// 각 컴포넌트의 중복되는 컴포넌트를 따로 빼내서 빌드함
+			// 각 컴포넌트의 중복되는 컴포넌트를 따로 빼내서 빌드함, ~vendor.js로 따로 빠짐
 			// chunks: 'all',
 		},
 	},
